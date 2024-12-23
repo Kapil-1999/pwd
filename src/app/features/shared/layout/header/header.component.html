@@ -1,125 +1,80 @@
 <header>
-    <!-- Top Bar -->
-    <div class="top-bar primary-top-bar">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="header-part d-flex justify-content-between align-items-center">
-              <!-- Logo Section -->
-              <li class="logo-part">
-                <div >
-                  <!-- <a class="admin-logo" routerLink="/vendordashboard/homepage">
-                    <h1>
-                      <img alt="" src="../../../../../assets/images/bn2.png" style="height: 40px;"
-                        class="logo-icon margin-r-10">
-                      <img alt="" src="../../../../../assets/images/skyitms.png" class="toggle-none hidden-xs">
-                    </h1>
-                  </a> -->
-                  <span class="header-tittle">Employee Tracking System</span>
-                  <!-- <h6>Employee Tracking System</h6> -->
-                </div>
-                <!-- <ng-template #elseblock>
-                  <a class="admin-logo" routerLink="/Dashboard/DashboardDMS">
-                    <h1>
-                      <img alt="" src="../../../../../assets/images/bn2.png" style="height: 40px;"
-                        class="logo-icon margin-r-10">
-                      <img alt="" src="../../../../../assets/images/skyitms.png" class="toggle-none hidden-xs">
-                    </h1>
-                  </a>
-                </ng-template> -->
-              </li>
-  
-              <!-- Notification and Profile Section -->
-              <li class="notification-part">
-                <ul class="list-inline top-right-nav mb-0 d-flex">
-                  <li class="me-3">
-                    <div class="search-1">
-                      <a ><span class="login-detail"><b>Login Name :</b> Public Works Department</span> <br><span class="login-detail"><b>Department :</b> PWD</span></a>
-                    </div>
-                    <!-- <div class="search">
-                      <a ><i class="fa fa-bell"></i></a>
-                    </div> -->
-                  </li>
-                  <!-- <li class="me-3">
-                    <div class="search">
-                      <a routerLink='/my-profile'><i class="fas fa-user"></i></a>
-                    </div>
-                  </li> -->
+  <!-- Top Bar -->
+  <div class="top-bar primary-top-bar">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="header-part d-flex justify-content-between align-items-center">
+            <!-- Logo Section -->
+            <li class="logo-part">
+              <div>
+                <span class="header-title">Employee Tracking System</span>
+              </div>
+            </li>
 
-                  <li class="me-3">
-                    <div class="search" (click)="togglePopup()">
-                      <a>
-                        <i class="fas fa-user"></i>
-                        <i class="fas fa-chevron-down arrow-icon" [class.rotate]="showPopup"></i>
-                      </a>
-                      <div class="user-popup" *ngIf="showPopup">
-                        <ul class="menu">
-                          <li><a id="profile-part" routerLink="/my-profile">My Profile</a></li>
-                          <li><a id="profile-part" routerLink="/settings">Settings</a></li>
-                          <li><a id="profile-part" routerLink="/logout">Logout</a></li>
-                        </ul>
-                      </div>
+            <!-- Notification and Profile Section -->
+            <li class="notification-part">
+              <ul class="list-inline top-right-nav mb-0 d-flex">
+                <li class="me-3">
+                  <div class="search-1">
+                    <a>
+                      <span class="login-detail"><b>Login Name :</b> Public Works Department</span>
+                      <br>
+                      <span class="login-detail"><b>Department :</b> PWD</span>
+                    </a>
+                  </div>
+                </li>
+
+                <li class="me-3">
+                  <div class="search" (click)="togglePopup()">
+                    <a>
+                      <i class="fas fa-user"></i>
+                      <i class="fas fa-chevron-down arrow-icon" [class.rotate]="showPopup"></i>
+                    </a>
+                    <div class="user-popup" *ngIf="showPopup">
+                      <ul class="menu">
+                        <li><a id="profile-part" routerLink="/my-profile">My Profile</a></li>
+                        <li><a id="profile-part" routerLink="/settings">Settings</a></li>
+                        <li><a id="profile-part" routerLink="/logout">Logout</a></li>
+                      </ul>
                     </div>
-                  </li>
-                  
-                  
-                  <!-- <li>
-                    <div class="search text-danger" >
-                      <i class="fa fa-power-off" aria-hidden="true"></i>
-                    </div>
-                  </li> -->
-                </ul>
-              </li>
-            </ul>
-          </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  
-    <!-- Menu Bar -->
-    <ul class="menubar" style="display: flex; gap: 10px; justify-content: start;">
-      @for (menuValue of menuList; track menuValue) {
-        <li class="nav-item dropdown" [class.dropdown]="menuValue.subNav?.length > 0 || menuValue.childSubmenu?.length > 0">
-          <!-- Parent Item with or without subNav -->
-          @if (menuValue.subNav?.length > 0 || menuValue.childSubmenu?.length > 0) {
-            <a class="nav-link dropdown-toggle"
-               id="navbarDropdown"
-               role="button"
-               (click)="toggleDropdown(menuValue, $event)">
-              <i [class]="menuValue.iconClass"></i> {{ menuValue.name }}
+  </div>
+
+  <!-- Menu Bar -->
+  <ul class="menubar">
+    <li class="nav-item dropdown" *ngFor="let menuValue of menuList">
+      <ng-container *ngIf="menuValue.subNav?.length > 0 || menuValue.childSubmenu?.length > 0; else noSubmenu">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" (click)="toggleDropdown(menuValue, $event)">
+          <i [class]="menuValue.iconClass"></i> {{ menuValue.name }}
+        </a>
+        <ul class="dropdown-menu" [class.show]="menuValue.isOpen">
+          <li *ngFor="let subNavValue of menuValue.subNav" (click)="toggleDropdown(subNavValue, $event)">
+            <a class="dropdown-item" [routerLink]="subNavValue.path || '#'">
+              <i [class]="subNavValue.iconClass"></i> {{ subNavValue.name }}
             </a>
-          } @else {
-            <a class="nav-link"
-               [routerLink]="menuValue.path || '/user/dashboard'">
-              <i [class]="menuValue.iconClass"></i> {{ menuValue.name }}
-            </a>
-          }
-          <!-- Submenu (subNav) -->
-          @if (menuValue.subNav?.length > 0) {
-            <ul class="dropdown-menu" [class.show]="menuValue.isOpen">
-              @for (subNavValue of menuValue.subNav; track subNavValue) {
-                <li (click)="toggleDropdown(subNavValue, $event)">
-                  <a class="dropdown-item" [routerLink]="subNavValue.path || '#'">
-                    <i [class]="subNavValue.iconClass"></i> {{ subNavValue.name }}
-                  </a>
-                  <!-- Child Submenu (childSubmenu) -->
-                  @if (subNavValue.childSubmenu?.length > 0) {
-                    <ul class="dropdown-menu" [class.show]="subNavValue.isOpen">
-                      @for (childValue of subNavValue.childSubmenu; track childValue) {
-                        <li (click)="toggleDropdown(childValue, $event)">
-                          <a class="dropdown-item" [routerLink]="childValue.path || '#'">
-                            <i [class]="childValue.iconClass"></i> {{ childValue.name }}
-                          </a>
-                        </li>
-                      }
-                    </ul>
-                  }
-                </li>
-              }
+            <ul *ngIf="subNavValue.childSubmenu?.length > 0" class="dropdown-menu" [class.show]="subNavValue.isOpen">
+              <li *ngFor="let childValue of subNavValue.childSubmenu" (click)="toggleDropdown(childValue, $event)">
+                <a class="dropdown-item" [routerLink]="childValue.path || '#'">
+                  <i [class]="childValue.iconClass"></i> {{ childValue.name }}
+                </a>
+              </li>
             </ul>
-          }
-        </li>
-      }
-    </ul>
-  </header>
-  
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #noSubmenu>
+        <a class="nav-link" [routerLink]="menuValue.path || '/user/dashboard'">
+          <i [class]="menuValue.iconClass"></i> {{ menuValue.name }}
+        </a>
+      </ng-template>
+    </li>
+  </ul>
+</header>

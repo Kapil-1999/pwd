@@ -4,28 +4,60 @@ import * as L from 'leaflet';
 @Component({
   selector: 'app-tracking-map',
   templateUrl: './tracking-map.component.html',
-  styleUrl: './tracking-map.component.css'
+  styleUrl: './tracking-map.component.scss'
 })
 export class TrackingMapComponent {
   map!: L.Map;
-  markersLayer!: L.LayerGroup;
-  lat = 28.6139;
-  lng = 77.2090
-  zoom = 12;
 
   ngOnInit(){
-    // setTimeout(() => this.initializeMap(this.lat,this.lng,this.zoom), 0);
-    this.initializeMap(this.lat,this.lng,this.zoom)
+    this.initializeMap()
    }
 
-  initializeMap(lat: any, long: any, zoomvalue: any) {
-    this.map = L.map('map').setView([lat, long], zoomvalue); // Default to Delhi, adjust as needed
+   initializeMap(){
+    const leafletModule =  import('leaflet');
+    this.map = L.map('map', {
+      center: [20.29573, 85.82476],
+      zoom: 5,
+      zoomControl: false,
+    });
+
+    const osmLayer = L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 21,
+      }
+    );
+
+    const satelliteLayer = L.tileLayer(
+      'http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
+      {
+        attribution: 'Imagery © <a href="http://maps.google.com">Google</a>',
+        maxZoom: 21,
+      }
+    );
+
+    const googleLayer = L.tileLayer(
+      'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+      {
+        maxZoom: 21,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        attribution: '&copy; Google Maps',
+      }
+    ).addTo(this.map);
+
+    // Esri Terrain and OpenTopoMap as alternatives to Stamen Terrain
   
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors',
-      }).addTo(this.map);
-  
-      this.markersLayer = L.layerGroup().addTo(this.map);
- }
+
+    const baseMaps = {
+      'Google Map': googleLayer,
+      OpenStreetMap: osmLayer,
+      Satellite: satelliteLayer,
+    };
+
+    L.control.layers(baseMaps).addTo(this.map);
+    L.control.zoom({
+      position: 'topright'
+    }).addTo(this.map);
+  }
 }

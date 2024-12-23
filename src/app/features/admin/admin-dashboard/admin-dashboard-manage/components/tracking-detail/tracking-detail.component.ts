@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-tracking-detail',
   templateUrl: './tracking-detail.component.html',
-  styleUrl: './tracking-detail.component.css'
+  styleUrl: './tracking-detail.component.scss'
 })
 export class TrackingDetailComponent {
   activeCardIndex: number | null = null;
@@ -163,7 +163,6 @@ export class TrackingDetailComponent {
   }
 
   getColor(value:any){
-    console.log("value",value);
     
     if (value?.colorId == 1) {
       return 'status-1';

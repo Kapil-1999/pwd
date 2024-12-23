@@ -1,15 +1,9 @@
-.tracking-panel {
-    background: #ffffff;
-    border-radius: 8px;
-    height: 500px;
-    /* overflow-y: auto; */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    /* scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1; */
-  
-  }
+
   .stats {
-    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem; // Adds spacing between the badges
+    align-items: center;
+    justify-content: space-between; // Aligns the badges vertically
   }
 
   .card-container {
@@ -18,7 +12,7 @@
   }
   
   .card-container.scrollable {
-    max-height: 420px; /* Adjust height as needed */
+    height: calc(100vh - 358px);
     overflow-y: auto;
   }
   
@@ -56,11 +50,11 @@
     font-size: 0.9rem;
     color: #555;
   }
-  .details-section {
+  /* .details-section {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
+justify-content: space-between;    gap: 20px;
+  } */
+  
 
   .card {
     background-color: #82818112;
@@ -177,3 +171,91 @@
   .search-box i {
     font-size: 1rem; /* Adjust icon size */
   }
+  .profile-part{
+    font-size: 13px;
+  }
+
+  .details-section {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table td {
+    padding: 10px;
+    vertical-align: middle;
+  }
+  
+  .table td:first-child {
+    font-weight: bold;
+  }
+  
+  .image-column {
+    text-align: center;
+  }
+  
+  .detail-image {
+    width: 150px;  /* Adjust size as needed */
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .profile-stats {
+    display: grid;
+    grid-template-columns: 7fr 9fr 3fr 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+  
+  @media (max-width: 768px) {
+    .details-section {
+      padding: 0 10px;
+    }
+    
+    .table td {
+      padding: 8px;
+    }
+  
+    .detail-image {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .profile-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .profile-stats h6 {
+        grid-column: 1 / span 2; /* Full-width on smaller screens */
+    }
+
+    .profile-stats .stats,
+    .profile-stats .timer,
+    .profile-stats .circle-part {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-stats {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .profile-stats h6,
+    .profile-stats .stats,
+    .profile-stats .timer,
+    .profile-stats .circle-part {
+        grid-column: span 1; /* Each item spans full width */
+        text-align: center; /* Center align for smaller devices */
+    }
+}

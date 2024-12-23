@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-employee-chart',
   templateUrl: './employee-chart.component.html',
-  styleUrl: './employee-chart.component.css'
+  styleUrl: './employee-chart.component.scss'
 })
 export class EmployeeChartComponent {
   chartData = [
@@ -22,7 +22,6 @@ export class EmployeeChartComponent {
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#FF5733'] // Custom bar colors
   };
-  view: [number, number] = [1420, 400]; // Chart size: width x height
 
 
 }

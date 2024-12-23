@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-employee-counting',
   templateUrl: './employee-counting.component.html',
-  styleUrl: './employee-counting.component.css'
+  styleUrl: './employee-counting.component.scss'
 })
 export class EmployeeCountingComponent {
   cards = [

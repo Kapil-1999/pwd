@@ -35,7 +35,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css",
                "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
@@ -96,7 +96,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css",
                "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
@@ -105,5 +105,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "40f456a9-bdb8-43bb-8263-9d63be6dc025"
   }
 }

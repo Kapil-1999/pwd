@@ -23,16 +23,8 @@
     <div class="card-body">
       <ul class="list-unstyled card-container" [class.scrollable]="trackingData.length > 6">
         <li *ngFor="let card of trackingData; let i = index" (click)="toggleDetails(i, $event)"
-          class="tracking-row d-flex flex-column p-2 mb-2">
-
-          
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="circle-part">
-              <span [class]="getColor(card)"><i
-                  class="fa fa-circle" aria-hidden="true"></i>
-                
-              </span>
-            </div>
+          class="tracking-row p-2 mb-2">          
+          <div class="profile-stats">            
             <h6 class="mb-0">{{ card.name }}</h6>
             <div class="stats">
               <span class="badge badge-red me-1">SE: {{ card.stats.SE }}</span>
@@ -44,20 +36,51 @@
               <i class="clock-icon"></i>
               <span>{{ card.timer }}</span>
             </div>
+            <div class="circle-part"> 
+              <span [class]="getColor(card)"><i
+                  class="fa fa-circle" aria-hidden="true"></i>
+                
+              </span>
+            </div>
           </div>
 
   
-          <div *ngIf="activeCardIndex === i" class="details-section mt-3 d-flex">
-            <img [src]="card.avatar" alt="Image" class="detail-image me-3">
-            <div>
-              <div><b>Time:</b> {{ card.details.time }}</div>
-              <div><b>Lat:</b> {{ card.details.lat }}</div>
-              <div><b>Lng:</b> {{ card.details.lng }}</div>
-              <div><b>GPS:</b> {{ card.details.gps }}</div>
-              <div><b>Battery:</b> {{ card.details.battery }}</div>
-              <div><b>Distance:</b> {{ card.details.distance }}</div>
-            </div>
-          </div>
+          <div *ngIf="activeCardIndex === i" class="details-section mt-3">
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <!-- Image Column -->
+                  <td class="image-column" rowspan="6">
+                    <img [src]="card.avatar" alt="Image" class="detail-image">
+                  </td>
+                  <!-- Details Column -->
+                  <td><b>Time:</b></td>
+                  <td>{{ card.details.time }}</td>
+                </tr>
+                <tr>
+                  <td><b>Lat:</b></td>
+                  <td>{{ card.details.lat }}</td>
+                </tr>
+                <tr>
+                  <td><b>Lng:</b></td>
+                  <td>{{ card.details.lng }}</td>
+                </tr>
+                <tr>
+                  <td><b>GPS:</b></td>
+                  <td>{{ card.details.gps }}</td>
+                </tr>
+                <tr>
+                  <td><b>Battery:</b></td>
+                  <td>{{ card.details.battery }}</td>
+                </tr>
+                <tr>
+                  <td><b>Distance:</b></td>
+                  <td>{{ card.details.distance }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>        
+          
         </li>
       </ul>
     </div>
