@@ -1,0 +1,256 @@
+/* Top Bar Styling */
+.top-bar {
+  background-color: #054181; /* Primary blue background */
+  color: white; /* Text color */
+  padding: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+}
+
+.top-bar .header-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.top-bar .logo-part h1 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .logo-part img {
+  height: 40px;
+  margin-right: 10px; /* Space between icons */
+}
+
+.top-bar .notification-part {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .notification-part .search {
+  margin-left: 15px; /* Space between icons */
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.top-bar .notification-part .search a {
+  /* color: white; */
+  font-size: 18px; /* Icon size */
+  text-decoration: none;
+}
+
+.top-bar .notification-part .search a:hover {
+  color: #ffd700; /* Highlight color on hover */
+}
+
+#profile-part:hover{
+  color: #fff;
+  background-color: #054181;
+}
+
+/* Ensure the navbar items are in a single row */
+.menubar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(238, 232, 232);
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Individual nav-item style */
+.nav-item {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px; /* Spacing between items */
+}
+
+.nav-item a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-item.dropdown .dropdown-menu {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 4px;
+  display: none;
+  margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item.dropdown .dropdown-menu.show {
+  display: block; /* Show the dropdown when .show is added */
+}
+
+/* Optional: Hover effects for better UI */
+.nav-link:hover, .dropdown-item:hover {
+  color: #007bff;
+  background-color: #f8f9fa;
+}
+
+/* Styling for the icons in the menu */
+.nav-link i, .dropdown-item i {
+  margin-right: 8px;
+}
+
+/* Responsive Styling */
+
+/* For medium screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .top-bar .header-part {
+      flex-wrap: wrap;
+  }
+
+  .top-bar .notification-part {
+      margin-top: 10px;
+      justify-content: flex-start;
+      width: 100%;
+  }
+
+  .menubar {
+      flex-wrap: wrap;
+      gap: 10px;
+  }
+
+  .nav-item {
+      margin-right: 10px;
+  }
+}
+
+/* For small screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .top-bar {
+      padding: 5px;
+  }
+
+  .top-bar .header-part {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .top-bar .logo-part img {
+      height: 35px;
+      margin-right: 5px;
+  }
+
+  .menubar {
+      flex-direction: column;
+      align-items: flex-start;
+      background-color: #ececec;
+      padding: 10px;
+  }
+
+  .nav-item {
+      margin-right: 0;
+      margin-bottom: 5px;
+      width: 100%;
+  }
+
+  .nav-item a {
+      display: block;
+      padding: 5px;
+  }
+}
+
+/* For very small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .top-bar .header-part {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .top-bar .logo-part img {
+      height: 30px;
+  }
+
+  .top-bar .notification-part {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+  }
+
+  .menubar {
+      gap: 5px;
+  }
+
+  .nav-item {
+      width: 100%;
+      text-align: center;
+  }
+
+  .nav-item a {
+      font-size: 14px;
+      padding: 8px;
+  }
+}
+
+.header-tittle{
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.login-detail{
+  font-size: small;
+}
+
+/* profile popup */
+
+/* .user-icon-container {
+  position: relative;
+  cursor: pointer;
+} */
+
+.user-popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 10;
+  padding: 10px;
+  width: 150px;
+}
+
+.user-popup .menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-popup .menu li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.user-popup .menu li:last-child {
+  border-bottom: none;
+}
+
+.user-popup .menu li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.user-popup .menu li a:hover {
+  background: #f5f5f5;
+  color: #000;
+}
+
+.arrow-icon {
+  font-size: 13px;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.arrow-icon.rotate {
+  transform: rotate(180deg);
+}
