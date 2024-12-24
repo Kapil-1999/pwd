@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { PrimeNG } from 'primeng/config';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,9 +6,8 @@ import { PrimeNG } from 'primeng/config';
 })
 export class AppComponent {
   title = 'PWD';
-  constructor(private primeng: PrimeNG) {}
+  constructor() {}
 
   ngOnInit() {
-      this.primeng.ripple.set(true);
   }
 }

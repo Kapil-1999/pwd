@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AdminDashboardRoutingModule } from './admin-dashboard-routing.module';
+import { LiveTrackingRoutingModule } from './live-tracking-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    AdminDashboardRoutingModule
+    LiveTrackingRoutingModule
   ]
 })
-export class AdminDashboardModule { }
+export class LiveTrackingModule { }

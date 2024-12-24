@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login/login.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -15,10 +17,13 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule  
+    RouterModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({})
   ],
-  exports : [
-  HeaderComponent
+  exports: [
+    HeaderComponent,
+    ToastrModule
   ],
 })
 export class SharedModule { }

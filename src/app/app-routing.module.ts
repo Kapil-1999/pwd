@@ -5,15 +5,24 @@ import { LoginComponent } from './features/shared/login/login/login.component';
 
 const routes: Routes = [
   {
-    path:'',component:LoginComponent
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login', component: LoginComponent
   },
   {
     path: "admin",
     component: MainLayoutComponent,
     loadChildren: () =>
-      import("./features/admin/admin.module").then(
-        (m) => m.AdminModule
+      import("./features/admin/admin-dashboard-manage/admin-dashboard-manage.module").then(
+        (m) => m.AdminDashboardManageModule
       ),
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
 

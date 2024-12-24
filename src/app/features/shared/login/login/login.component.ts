@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private tokenService: TokenService
+
   ) { }
 
   ngOnInit() {
@@ -25,6 +28,10 @@ export class LoginComponent {
       userName: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
+  }
+
+  submit(formvalue:any) {  
+    this.tokenService.generateToken(formvalue)
   }
 
 
