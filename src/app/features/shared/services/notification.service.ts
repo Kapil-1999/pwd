@@ -48,7 +48,7 @@ export class NotificationService {
       icon: "success",
       title: message,
       showConfirmButton: false,
-      timer: 3000
+      timer: 2000
     });
   }
 
@@ -58,7 +58,7 @@ export class NotificationService {
       icon: "error", 
       title: message,
       showConfirmButton: false,
-      timer: 3000
+      timer: 2000
     });
 }
 

@@ -1,5 +1,8 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { menu } from "../../../shared/constant/menu/menu";
+import { LocalStorageService } from '../../services/localstorage.service';
+import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,7 +12,13 @@ export class HeaderComponent {
 
   menuList: any;
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef) {}
+  constructor(
+    private renderer: Renderer2, 
+    private elRef: ElementRef,
+    private localStorageService: LocalStorageService,
+    private notificationService : NotificationService,
+    private router : Router
+  ) {}
   
   ngOnInit(): void {
     this.menuList = menu;
@@ -55,6 +64,12 @@ export class HeaderComponent {
 
   togglePopup() {
     this.showPopup = !this.showPopup;
+  }
+
+  logout() {
+    this.notificationService.successAlert('Logout Successfully');
+    this.localStorageService.clear();
+    this.router.navigate(['/login']);
   }
 
 }

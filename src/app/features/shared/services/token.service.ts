@@ -4,8 +4,6 @@ import { LocalStorageService } from './localstorage.service';
 import { JwtTokenService } from './jwt-token.service';
 import { NotificationService } from './notification.service';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { MenuService } from './menu.service';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -29,42 +27,36 @@ export class TokenService {
     };
 
     this.loginService.login(payload).subscribe((res: any) => {      
-      const userDetail = res.body;
-      console.log("check user details", userDetail);
-      
-      // if(userDetail?.success) {
-      //   this.notificationService.showSuccess('Login Successfully');
-      //   this.localStorageService.setItem("token", userDetail?.result?.access_token)
-      //   let token = userDetail?.result.access_token
-      //   const decodedToken = this.jwtService.decodeToken(token);        
-      //   this.storageService.setItem('userDetail', decodedToken?.user)
-      //   // this.router.navigate(['/admin/admin-home/admin-dashboard']);
-      //   this.goToDashboard() 
-      //   this.storageService.setItem('menus', userDetail?.result?.menus)
-      // } else {
-      //   this.notificationService.showError(userDetail?.message)
-      // }
+      const userDetail = res.body;      
+      if(userDetail?.statusCode == 200) {
+        this.notificationService.successAlert('Login Successfully');
+        let userData = userDetail?.result        
+        this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
+        this.localStorageService.setItem("user", JSON.stringify(userData) )
+        setTimeout(() => {          
+          this.goToDashboard(); 
+        }, 1000);
+      } else {
+        this.notificationService.errorAlert(userDetail?.message)
+      }
     });
   }
 
   goToDashboard() {
-    this.storageService.getItem('userDetail').subscribe((res) => {
-      if(res?.fk_RoleId ===32) {
-        this.router.navigate(['/user/home/dashboard']);
-      } else {
-        this.router.navigate(['/admin/admin-home/admin-dashboard']);
-
-      }
-    })
+    this.router.navigate(['/admin/home']);
+    // this.storageService.getItem('userDetail').subscribe((res) => {
+    //   if(res?.fk_RoleId ===32) {
+    //   }
+    // })
   }
 
   //**gettoken from localstorage */
   getToken() {
-    return this.localStorageService.getItem('token');
+    return this.localStorageService.getItem('pwdtoken');
   }
 
   //**check condition for token available in localstorage */
   hasToken() {
-    return this.localStorageService.getItem('token') !== null;
+    return this.localStorageService.getItem('pwdtoken') !== null;
   }
 }

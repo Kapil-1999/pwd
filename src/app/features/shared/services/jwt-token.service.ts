@@ -19,15 +19,15 @@ export class JwtTokenService {
   }
 
    storeToken(token: string): void {
-    localStorage.setItem('jwt', token);
+    localStorage.setItem('pwdtoken', token);
   }
 
    getToken(): string | null {
-    return localStorage.getItem('jwt');
+    return localStorage.getItem('pwdtoken');
   }
 
    removeToken(): void {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('pwdtoken');
   }
 
 }

@@ -45,4 +45,12 @@ export class LocalStorageService {
       localStorage.clear();
     }
   }
+
+  getToken(): string | null {
+    return this.getItem('pwdtoken'); 
+  }
+
+  isLoggedIn() {
+    return this.getToken() !== null
+  }
 }

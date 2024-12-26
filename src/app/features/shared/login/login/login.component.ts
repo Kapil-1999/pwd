@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
+import { LocalStorageService } from '../../services/localstorage.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,16 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private localStorageService : LocalStorageService
 
-  ) { }
+  ) {
+    if (this.localStorageService.isLoggedIn()) {
+      this.router.navigate(['/admin/home']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+   }
 
   ngOnInit() {
     this.setIntialvalue()
