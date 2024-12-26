@@ -1,8 +1,8 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { menu } from "../../../shared/constant/menu/menu";
 import { LocalStorageService } from '../../services/localstorage.service';
 import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
+import { ADMIN_MENU } from '../../constant/menu/menu';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -21,7 +21,7 @@ export class HeaderComponent {
   ) {}
   
   ngOnInit(): void {
-    this.menuList = menu;
+    this.menuList = ADMIN_MENU;
   }
   
   @HostListener('document:click', ['$event'])

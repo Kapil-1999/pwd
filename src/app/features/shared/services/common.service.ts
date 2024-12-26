@@ -3,6 +3,8 @@ import { catchError, Observable, of, shareReplay } from 'rxjs';
 // import { ApiService } from '../../http-services/api.service';
 // import { API_CONSTANTS } from '../constant/API.Constants';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ApiService } from '../../http-services/api.service';
+import { API_CONSTANTS } from '../constant/API.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -17,22 +19,22 @@ export class CommonService {
 
 
   constructor(
-    // private apiService : ApiService,
+     private apiService : ApiService,
     private http : HttpClient
   ) { }
 
   //**country list service here */
-//   countryList(): Observable<any> {
-//     let url = API_CONSTANTS.country
+  zoneList(): Observable<any> {
+    let url = API_CONSTANTS.zoneList
 
-//     if (!this.countryListCache$) {
-//       this.countryListCache$ = this.apiService.get(url).pipe(
-//         shareReplay(1),
-//         catchError((error: HttpErrorResponse) => of(error))
-//       );
-//     }
-//     return this.countryListCache$;
-//   }
+    if (!this.countryListCache$) {
+      this.countryListCache$ = this.apiService.get(url).pipe(
+        shareReplay(1),
+        catchError((error: HttpErrorResponse) => of(error))
+      );
+    }
+    return this.countryListCache$;
+  }
 
 //   //**state list service here */
 //   stateList(countryID:any): Observable<any> {

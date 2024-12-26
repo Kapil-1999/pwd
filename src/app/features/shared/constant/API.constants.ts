@@ -1,4 +1,5 @@
 export const API_CONSTANTS = {
-    login : 'Auth/Login'
+    login : 'Auth/Login',
+    zoneList : 'Zone'
 
 }

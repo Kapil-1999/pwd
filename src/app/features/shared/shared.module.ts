@@ -6,6 +6,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 
 
 
@@ -13,7 +14,8 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     LoginComponent,
     MainLayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   exports: [
     HeaderComponent,
-    ToastrModule
+    ToastrModule,
+    BreadcrumbComponent
   ],
 })
 export class SharedModule { }

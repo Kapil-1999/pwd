@@ -157,13 +157,22 @@ export class TrackingDetailComponent {
   ngOnInit(){}
 
 
+  /**
+   * details about user
+   * @param index 
+   * @param event 
+   */
   toggleDetails(index: number, event: Event): void {
     event.preventDefault();
     this.activeCardIndex = this.activeCardIndex === index ? null : index;
   }
 
-  getColor(value:any){
-    
+  /**
+   * colour change based on status
+   * @param value 
+   * @returns 
+   */
+  getColor(value:any){    
     if (value?.colorId == 1) {
       return 'status-1';
     } else if (value?.colorId == 2) {

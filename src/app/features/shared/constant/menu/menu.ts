@@ -1,8 +1,8 @@
-export const menu = [
+export const ADMIN_MENU = [
     {
       id: 1,
       name: "Home",
-      path: "/admin/admin-home/home",
+      path: "/admin/dashboard/home",
       iconClass: "fa fa-home",
       
     },
@@ -28,7 +28,7 @@ export const menu = [
         {
           id: 103,
           name: "Zone Master",
-          path: "/user/reports/general-report",
+          path: "/admin/master/zone-master",
           iconClass: "fa fa-pencil",
         },
         {

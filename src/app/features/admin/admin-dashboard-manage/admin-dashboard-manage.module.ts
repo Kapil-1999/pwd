@@ -10,6 +10,7 @@ import { TrackingMapComponent } from './components/tracking-map/tracking-map.com
 import { TrackingDetailComponent } from './components/tracking-detail/tracking-detail.component';
 import { EmployeeChartComponent } from './components/employee-chart/employee-chart.component';
 import { EmployeeCountingComponent } from './components/employee-counting/employee-counting.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EmployeeCountingComponent } from './components/employee-counting/employ
     CommonModule,
     NgxChartsModule  ,
     NgxGraphModule,
-    AdminDashboardManageRoutingModule
+    AdminDashboardManageRoutingModule,
+    SharedModule
   ]
 })
 export class AdminDashboardManageModule { }
