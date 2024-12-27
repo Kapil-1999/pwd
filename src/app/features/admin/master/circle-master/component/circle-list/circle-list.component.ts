@@ -1,23 +1,22 @@
 import { Component } from '@angular/core';
-import { ZoneService } from '../../services/zone.service';
-import { CommonService } from '../../../../../shared/services/common.service';
-import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { CreateZoneComponent } from '../create-zone/create-zone.component';
+import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+import { CircleService } from '../../service/circle.service';
+import { CreateCircleComponent } from '../create-circle/create-circle.component';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 
 @Component({
-  selector: 'zone-list',
-  templateUrl: './zone-list.component.html',
-  styleUrl: './zone-list.component.scss'
+  selector: 'circle-list',
+  templateUrl: './circle-list.component.html',
+  styleUrl: './circle-list.component.scss'
 })
-export class ZoneListComponent {
-  zoneList: any;
+export class CircleListComponent {
+  circleList: any;
 
   breadcrumbs = [
     { label: 'Home', path: '/admin/dashboard/home' },
     { label: 'Master', path: '/admin/master/zone-master' },
-    { label: 'Zone Master', path: '/admin/master/zone-master' }
+    { label: 'Circle Master', path: '/admin/master/Circle-master' }
   ];
   public configuration!: Config;
   public columns!: Columns[];
@@ -32,32 +31,28 @@ export class ZoneListComponent {
     this.pageIndex * this.tableItemsSize - (this.tableItemsSize - 1);
   lastValue: number = this.startValue + this.tableItemsSize - 1;
   bsModalRef!: BsModalRef;
-  searchKeyword:any
-
-
+  searchKeyword: any;
 
   constructor(
-    private commonService: CommonService,
-    private modalService : BsModalService,
-    private zoneService: ZoneService,
+    private circleService: CircleService,
+    private modalService: BsModalService,
     private notificationSerivce : NotificationService
-  ) { };
+  ) { }
 
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getZoneList()
+    this.getCircleList()
   }
 
   setInitialtable() {
     this.columns = [
       { key: 'Zone Name', title: 'Zone Name' },
-      { key: 'State Name', title: 'State Name' },
-      { key: 'Status', title: 'Status',width: "5%"},
-      { key: 'Action', title: 'Action', width: "10%"},
+      { key: 'Circle Name', title: 'Circle Name' },
+      { key: 'Status', title: 'Status', width: "5%" },
+      { key: 'Action', title: 'Action', width: "10%" },
     ];
   }
-
 
   // for table property Method here
   tableProperty() {
@@ -69,52 +64,45 @@ export class ZoneListComponent {
     this.configuration.paginationEnabled = false;
   }
 
-  getZoneList() {
+
+  getCircleList() {
     this.isLoading = true;
-    this.zoneService.zoneList().subscribe(
-      (data) => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 600);
-        this.zoneList = data?.body?.result;
-        this.totlRecords = this.zoneList.length;
-      },
-      (error) => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 600);
-        console.error("Error fetching zone list", error);
-      }
-    );
+    this.circleService.circleList().subscribe((res) => {
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 600);
+      this.circleList = res?.body?.result;
+      this.totlRecords = this.circleList.length;
+    })
   }
 
   onTablePageChange(event: number) {
-    this.page = event; 
+    this.page = event;
     this.startValue = (this.page - 1) * this.tableSize + 1;
-    this.lastValue = this.page * this.tableSize; 
+    this.lastValue = this.page * this.tableSize;
     this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
   }
 
-
-  onCreateZone(value:any) {
+  onCreateCircle(value: any) {
     const initialState: ModalOptions = {
       initialState: {
-        editData:value ? value : ''
+        editData: value ? value : ''
       },
     };
     this.bsModalRef = this.modalService.show(
-      CreateZoneComponent,
+      CreateCircleComponent,
       Object.assign(initialState, {
         class: 'modal-md modal-dialog-centered alert-popup',
       })
     );
-    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {            
-      this.getZoneList();
+    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+      this.getCircleList();
     });
   }
 
-  onDeleteZone(item:any) {
-    this.zoneService.deleteZone(item?.zone_id).subscribe((res:any)=> {
+
+  onDeleteCircle(item:any) {
+    this.circleService.deleteCircle(item?.circle_id).subscribe((res:any)=> {
       if(res?.status == 200) {
         this.notificationSerivce.successAlert(res?.body?.actionResponse);
       } else {
@@ -122,10 +110,6 @@ export class ZoneListComponent {
       }
     })
   }
-  
+
 
 }
-
-
-
-

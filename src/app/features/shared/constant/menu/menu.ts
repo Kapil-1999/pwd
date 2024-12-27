@@ -40,7 +40,7 @@ export const ADMIN_MENU = [
         {
           id: 1,
           name: 'Circle Master',
-          path: "/user/reports/vehicle-report/Distance",
+          path: "/admin/master/circle-master",
           iconClass: "fa fa-pencil",
         },
         {

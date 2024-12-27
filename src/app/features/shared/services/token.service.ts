@@ -43,7 +43,7 @@ export class TokenService {
   }
 
   goToDashboard() {
-    this.router.navigate(['/admin/home']);
+    this.router.navigate(['/admin/dashboard/home']);
     // this.storageService.getItem('userDetail').subscribe((res) => {
     //   if(res?.fk_RoleId ===32) {
     //   }

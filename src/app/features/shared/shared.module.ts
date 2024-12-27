@@ -11,8 +11,8 @@ import { TableModule } from 'ngx-easy-table';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ModalModule } from "ngx-bootstrap/modal";
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-
-
+import { SkeletonLoaderComponent } from './component/skeleton-loader/skeleton-loader.component';
+import { SearchFilterPipe } from './pipe/serach.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,8 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     MainLayoutComponent,
     HeaderComponent,
     BreadcrumbComponent,
+    SkeletonLoaderComponent,
+    SearchFilterPipe
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,9 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     ModalModule,
     SelectDropDownModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SkeletonLoaderComponent,
+    SearchFilterPipe
   ],
 })
 export class SharedModule { }
