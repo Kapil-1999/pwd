@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ManageZoneMasterComponent } from './zone-master/pages/manage-zone-master/manage-zone-master.component';
 import { Path } from 'leaflet';
 import { ManageUserMasterComponent } from './user-master/pages/manage-user-master/manage-user-master.component';
+import { ManageCircleMasterComponent } from './circle-master/pages/manage-circle-master/manage-circle-master.component';
 
 const routes: Routes = [
   {
     path: '', children: [
      { path : 'zone-master', component: ManageZoneMasterComponent},
-     { path : 'user-master', component: ManageUserMasterComponent}
+     { path : 'user-master', component: ManageUserMasterComponent},
+     { path : 'circle-master', component: ManageCircleMasterComponent}
     ]
   }
 ];

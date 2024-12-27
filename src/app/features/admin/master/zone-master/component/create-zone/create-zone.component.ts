@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonService } from '../../../../../shared/services/common.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ZoneService } from '../../services/zone.service';
@@ -11,6 +11,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./create-zone.component.scss']
 })
 export class CreateZoneComponent {
+  @Output() mapdata = new EventEmitter()
   config = {
     displayKey: "text",
     search: true,
@@ -22,7 +23,8 @@ export class CreateZoneComponent {
     { id: 0, value: "Inactive" },
   ];
   zoneForm!: FormGroup;
-  editData:any
+  editData:any;
+
 
   constructor(
     private commonService: CommonService,
@@ -71,7 +73,7 @@ export class CreateZoneComponent {
     let payload = {
       "zone_id": 0,
       "zone_name": formvalue?.name,
-      "state_id": formvalue?.state,
+      "state_id": formvalue?.state ? Number(formvalue?.state?.value) : 0,
       "is_active": formvalue?.status,
       "created_by": 1
     };
@@ -84,8 +86,9 @@ export class CreateZoneComponent {
 
     service.subscribe((res:any) => {
       if(res?.status == 200) {
+        this.bsModelService.hide();
+        this.mapdata.emit();
         this.notificationSerivce.successAlert(res?.body?.actionResponse);
-        this.bsModelService.hide()
       } else {
         this.notificationSerivce.errorAlert(res?.title);
       }

@@ -9,6 +9,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { ManageUserMasterComponent } from './user-master/pages/manage-user-master/manage-user-master.component';
 import { UserListComponent } from './user-master/component/user-list/user-list.component';
 import { CreateUserComponent } from './user-master/component/create-user/create-user.component';
+import { ManageCircleMasterComponent } from './circle-master/pages/manage-circle-master/manage-circle-master.component';
+import { CircleListComponent } from './circle-master/component/circle-list/circle-list.component';
+import { CreateCircleComponent } from './circle-master/component/create-circle/create-circle.component';
 
 
 @NgModule({
@@ -17,8 +20,11 @@ import { CreateUserComponent } from './user-master/component/create-user/create-
     ZoneListComponent,
     CreateZoneComponent,
     ManageUserMasterComponent,
-        UserListComponent,
-        CreateUserComponent
+    UserListComponent,
+    CreateUserComponent,
+    ManageCircleMasterComponent,
+    CircleListComponent,
+    CreateCircleComponent
   ],
   imports: [
     CommonModule,
