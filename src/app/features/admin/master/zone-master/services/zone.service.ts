@@ -19,4 +19,18 @@ export class ZoneService {
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
+
+  createZone(payload:any): Observable<any> {
+    let url = API_CONSTANTS.zoneList
+    return this.apiService
+      .post(url,payload)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  updateZone(payload:any, id:any): Observable<any> {
+    let url = API_CONSTANTS.updateZone.replace('{zoneId}', id)
+    return this.apiService
+      .put(url,payload)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
 }

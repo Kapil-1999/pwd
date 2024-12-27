@@ -1,5 +1,7 @@
 export const API_CONSTANTS = {
     login : 'Auth/Login',
-    zoneList : 'Zone'
+    zoneList : 'Zone',
+    stateList :'Common/GetStateList',
+    updateZone: 'Zone/{zoneId}'
 
 }

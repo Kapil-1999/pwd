@@ -37,16 +37,16 @@ export class CommonService {
   }
 
 //   //**state list service here */
-//   stateList(countryID:any): Observable<any> {
-//     let url = API_CONSTANTS.state.replace("{countryID}", countryID)
+  stateList(): Observable<any> {
+    let url = API_CONSTANTS.stateList
 
-//       this.stateListCache$ = this.apiService.get(url).pipe(
-//         shareReplay(1),
-//         catchError((error: HttpErrorResponse) => of(error))
-//       );
+      this.stateListCache$ = this.apiService.get(url).pipe(
+        shareReplay(1),
+        catchError((error: HttpErrorResponse) => of(error))
+      );
     
-//     return this.stateListCache$;
-//   }
+    return this.stateListCache$;
+  }
 
 
 //   cityList(countryID: any, stateID: any): Observable<any> {
