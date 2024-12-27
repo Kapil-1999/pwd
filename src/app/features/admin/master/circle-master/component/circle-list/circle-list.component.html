@@ -7,7 +7,7 @@
                 <span>
                     {{ totlRecords > 0 ? startValue : 0 }} -
                     {{ lastValue > totlRecords ? totlRecords : lastValue }}
-                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Zone
+                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Circle
                 </span>
             </div>
             <div class="row">
@@ -78,7 +78,7 @@
                         </ngx-table>
                         <ng-template #noResultsTemplate>
                             <td [attr.colspan]="columns.length" class="no-results">
-                                Company Not Found
+                                Circle Not Found
                             </td>
                         </ng-template>
                     }
