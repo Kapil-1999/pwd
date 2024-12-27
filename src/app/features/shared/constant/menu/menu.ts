@@ -1,8 +1,8 @@
-export const menu = [
+export const ADMIN_MENU = [
     {
       id: 1,
       name: "Home",
-      path: "/admin/admin-home/home",
+      path: "/admin/dashboard/home",
       iconClass: "fa fa-home",
       
     },
@@ -26,9 +26,15 @@ export const menu = [
       isOpen: false,
       subNav: [
         {
+          id: 104,
+          name: "User Master",
+          path: "/admin/master/user-master",
+          iconClass: "fa fa-pencil",
+        },
+        {
           id: 103,
           name: "Zone Master",
-          path: "/user/reports/general-report",
+          path: "/admin/master/zone-master",
           iconClass: "fa fa-pencil",
         },
         {
@@ -56,18 +62,6 @@ export const menu = [
           iconClass: "fa fa-pencil",
         },
         {
-          id: 5,
-          name: 'Chief Engineer Master',
-          path: "/user/reports/vehicle-report/Speed-Report",
-          iconClass: "fa fa-pencil",
-        },
-        {
-          id: 6,
-          name: 'Supritending Engineer Master',
-          path: "/user/reports/vehicle-report/GeoFence-Report",
-          iconClass: "fa fa-pencil",
-        },
-        {
           id: 7,
           name: 'Category Master',
           path: "/user/reports/vehicle-report/Duration-Report",
@@ -88,26 +82,6 @@ export const menu = [
         {
           id: 10,
           name: 'Work Master',
-          path: "/user/reports/vehicle-report/Alert-Report",
-          iconClass: "fa fa-pencil",
-        },
-  
-        
-        {
-          id: 11,
-          name: 'Ex. Engineer Master',
-          path: "/user/reports/vehicle-report/Alert-Report",
-          iconClass: "fa fa-pencil",
-        },
-        {
-          id: 12,
-          name: 'AE Master',
-          path: "/user/reports/vehicle-report/Alert-Report",
-          iconClass: "fa fa-pencil",
-        },
-        {
-          id: 13,
-          name: 'JE Master',
           path: "/user/reports/vehicle-report/Alert-Report",
           iconClass: "fa fa-pencil",
         },

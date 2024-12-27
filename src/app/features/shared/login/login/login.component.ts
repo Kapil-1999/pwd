@@ -20,7 +20,7 @@ export class LoginComponent {
 
   ) {
     if (this.localStorageService.isLoggedIn()) {
-      this.router.navigate(['/admin/home']);
+      this.router.navigate(['/admin/dashboard/home']);
     } else {
       this.router.navigate(['/login']);
     }
@@ -38,8 +38,12 @@ export class LoginComponent {
     });
   }
 
+  /**
+   * login button 
+   * @param formvalue 
+   */
   submit(formvalue:any) {  
-    this.tokenService.generateToken(formvalue)
+    this.tokenService.generateToken(formvalue);
   }
 
 

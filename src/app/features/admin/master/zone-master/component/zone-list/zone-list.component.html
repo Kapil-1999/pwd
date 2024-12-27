@@ -1,0 +1,83 @@
+<!-- <breadcrumb [breadcrumbItems]="breadcrumbs"></breadcrumb> -->
+<div class="card">
+    <div class="card-header">
+        <div class="header-part">
+            <span>Zone Master</span>
+            <div class="counting">
+                <span>
+                    {{ totlRecords > 0 ? startValue : 0 }} -
+                    {{ lastValue > totlRecords ? totlRecords : lastValue }}
+                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Zone
+                </span>
+            </div>
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <pagination-controls id="pg1" [maxSize]="10" [responsive]="true" [nextLabel]="''"
+                        [previousLabel]="''" (pageChange)="onTablePageChange($event)">
+                    </pagination-controls>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="header-container">
+            <div class="left-section">
+                <div class="search-form">
+                    <input placeholder="Search for..." type="text" class="form-control search-input" />
+                    <button type="button" class="btn-search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="right-section">
+                <button class="btn btn-primary" (click)="onCreateZone('')">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create Zone
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overflow-auto">
+                    <ngx-table *ngIf="!isLoading" [configuration]="configuration" [data]="zoneList
+                    | paginate
+                    : {
+                        id: 'pg1',
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                      } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
+                        <ng-template let-item let-index="index">
+                            <td>{{item?.zone_name}}</td>
+                            <td>{{item?.state_name}}</td>
+                            <td>
+                                @if (item?.is_active == true) {
+                                <span >Active</span>
+                                }@else {
+                                <span >Inactive</span>
+                                }
+                            </td>
+                            <td>
+                                <a class="icon">
+                                    <button class="btn btn-success" (click)="onCreateZone(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
+                                    <button class="btn btn-danger"  style="margin-left: 10px;"><i class="fa fa-trash"></i>  Delete</button>
+                                    
+                                </a>
+                            </td>
+                        </ng-template>
+                    </ngx-table>
+                </div>
+                <ng-template #noResultsTemplate>
+                    <td [attr.colspan]="columns.length" class="no-results">
+                        Company Not Found
+                    </td>
+                </ng-template>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

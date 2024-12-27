@@ -18,8 +18,8 @@ const routes: Routes = [
     canActivate : [AuthguardGuard],
     component: MainLayoutComponent,
     loadChildren: () =>
-      import("./features/admin/admin-dashboard-manage/admin-dashboard-manage.module").then(
-        (m) => m.AdminDashboardManageModule
+      import("./features/admin/admin.module").then(
+        (m) => m.AdminModule
       ),
   },
   {

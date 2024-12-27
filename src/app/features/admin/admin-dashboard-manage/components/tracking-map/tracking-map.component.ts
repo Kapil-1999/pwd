@@ -13,6 +13,9 @@ export class TrackingMapComponent {
     this.initializeMap()
    }
 
+   /**
+    * intialize leaflet map
+    */
    initializeMap(){
     const leafletModule =  import('leaflet');
     this.map = L.map('map', {
