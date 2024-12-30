@@ -13,7 +13,8 @@ export const API_CONSTANTS = {
     designation: 'Common/GetDesignationList',
     usertype :'Common/GetUserTypeList',
     district : 'District',
-    updateDeleteDist : 'District/{distId}'
+    updateDeleteDist : 'District/{distId}',
+    user : 'User'
 
 
 }

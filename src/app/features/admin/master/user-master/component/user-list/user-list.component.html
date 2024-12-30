@@ -1,1 +1,107 @@
-<p>user-list works!</p>
+<breadcrumb [breadcrumbItems]="breadcrumbs"></breadcrumb>
+<div class="card">
+    <div class="card-header">
+        <div class="header-part">
+            <span>User Master</span>
+            <div class="counting">
+                <span>
+                    {{ totlRecords > 0 ? startValue : 0 }} -
+                    {{ lastValue > totlRecords ? totlRecords : lastValue }}
+                    OF {{ totlRecords > 0 ? totlRecords : 0 }} User
+                </span>
+            </div>
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <pagination-controls id="pg3" [maxSize]="10" [responsive]="true" [nextLabel]="''"
+                        [previousLabel]="''" (pageChange)="onTablePageChange($event)">
+                    </pagination-controls>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="header-container-user mb-3">
+            <div class="left-section-user">
+                <div class="row">
+                    <div class="col-md-3">
+                    <ngx-select-dropdown [config]="config" [(ngModel)]="selectedDepartment"  [options]="deparmentList" >
+                    </ngx-select-dropdown>
+                    </div>
+                    <div class="col-md-3">
+                        <ngx-select-dropdown [config]="config1" [(ngModel)]="selectedDesignation"   [options]="desigantionList" >
+                        </ngx-select-dropdown>
+                    </div>
+                </div>
+            </div>
+            <div class="right-section-user">
+                <button class="btn btn-primary" (click)="onCreateuser('')">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create User
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overflow-auto">
+                    @if(isLoading) {
+                        <app-skeleton-loader [columns]="columns" [items]="userList | paginate
+                        : {
+                            id: 'pg3',
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                          }"></app-skeleton-loader>
+                    } @else {
+                        <ngx-table  [configuration]="configuration" [data]="userList | searchFilter: searchKeyword
+                        | paginate
+                        : {
+                            id: 'pg3',
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                          } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
+                            <ng-template let-item let-index="index">
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>
+                                    @if (item?.is_active == true) {
+                                    <span >Active</span>
+                                    }@else {
+                                    <span >Inactive</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="icon">
+                                        <button class="btn btn-success" (click)="onCreateuser(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
+                                        <button class="btn btn-danger" ><i class="fa fa-trash"></i>  Delete</button>
+                                        
+                                    </a>
+                                </td>
+                            </ng-template>
+                        </ngx-table>
+                        <ng-template #noResultsTemplate>
+                            <td [attr.colspan]="columns.length" class="no-results">
+                                District Not Found
+                            </td>
+                        </ng-template>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

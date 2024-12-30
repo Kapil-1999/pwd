@@ -1,1 +1,99 @@
-<p>create-user works!</p>
+<div class="modal-header text-center">
+    <h5>Create User</h5>
+    <div class="close-modal">
+        <i class="fa fa-close" style="cursor: pointer;"></i>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <!-- CE Dropdown -->
+        <div class="col-md-3 mb-2"
+            *ngIf="designation?.value !== '1' && (designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+            <label class="form-label">CE <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
+        </div>
+        <!-- Zone -->
+        <div class="col-md-3 mb-2"
+            *ngIf="designation?.value !== '1' && (designation?.value === '2' || designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+            <label class="form-label">Zone <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
+        </div>
+        <!-- SE -->
+        <div class="col-md-3 mb-2"
+            *ngIf="designation?.value !== '1' && (designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+            <label class="form-label">SE <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="deparmentList"></ngx-select-dropdown>
+        </div>
+        <!-- Circle -->
+        <div class="col-md-3 mb-2"
+            *ngIf="designation?.value !== '1' && (designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+            <label class="form-label">Circle <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
+        </div>
+        <!-- EE -->
+        <div class="col-md-3 mb-2" *ngIf="designation?.value !== '1' && (designation?.value === '5' || designation?.value === '6')">
+            <label class="form-label">EE <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
+        </div>
+        <!-- City -->
+        <div class="col-md-3 mb-2"
+            *ngIf="designation?.value !== '1' && (designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+            <label class="form-label">City <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
+        </div>
+        <!-- AE -->
+        <div class="col-md-3 mb-2" *ngIf="designation?.value !== '1' && designation?.value === '6'">
+            <label class="form-label">AE <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="deparmentList"></ngx-select-dropdown>
+        </div>
+        <!-- Division -->
+        <div class="col-md-3 mb-2" *ngIf="designation?.value !== '1' && (designation?.value === '5' || designation?.value === '6')">
+            <label class="form-label">Division <span class="text-danger">*</span></label>
+            <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
+        </div>
+        <!-- Common Fields -->
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter Name" />
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Contact No.</label>
+            <input type="number" class="form-control" placeholder="Enter Contact No." />
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Enter Email" />
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control" placeholder="Enter Address" />
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Login Id <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter Login Id" />
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Login Password <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter Login Password" />
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Remarks</label>
+            <input type="text" class="form-control" placeholder="Enter Remarks" />
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Status <span class="text-danger">*</span></label>
+            <select class="form-control">
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-2">
+            <label class="form-label">Photo</label>
+            <input class="form-control" type="file" />
+        </div>
+        <!-- Submit Button -->
+        <div class="col-md-3 mb-2 mt-4">
+            <button class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</div>

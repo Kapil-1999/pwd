@@ -7,7 +7,16 @@ import { CommonService } from '../../../../../shared/services/common.service';
   styleUrl: './create-user.component.scss'
 })
 export class CreateUserComponent {
-
+  config = {
+    displayKey: "text",
+    search: true,
+    height: '300px',
+    placeholder: `Select`,
+  };
+  deparmentList: any;
+  desigantionList: any;
+  department:any;
+  designation:any
   constructor(
     private commonService: CommonService
   ) {}
@@ -17,10 +26,11 @@ export class CreateUserComponent {
 
   getStateList () {
     this.commonService.stateList().subscribe((res) => {
-      console.log("check res", res);
+      console.log("check res", this.designation);
       
     })
   }
+
 
 
 }
