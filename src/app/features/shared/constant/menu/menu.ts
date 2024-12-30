@@ -46,7 +46,7 @@ export const ADMIN_MENU = [
         {
           id: 2,
           name: 'District Entry',
-          path: "/user/reports/vehicle-report/Stop",
+          path: "/admin/master/district-master",
           iconClass: "fa fa-pencil",
         },
         {

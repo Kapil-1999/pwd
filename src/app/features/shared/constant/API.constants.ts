@@ -11,7 +11,9 @@ export const API_CONSTANTS = {
     circleBasedcity: 'Common/GetDistrictList?circleId={circleId}',
     cityBasedDivision:'Common/GetDivisionList?districtId={cityId}',
     designation: 'Common/GetDesignationList',
-    usertype :'Common/GetUserTypeList'
+    usertype :'Common/GetUserTypeList',
+    district : 'District',
+    updateDeleteDist : 'District/{distId}'
 
 
 }

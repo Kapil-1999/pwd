@@ -1,0 +1,120 @@
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonService } from '../../../../../shared/services/common.service';
+import { NotificationService } from '../../../../../shared/services/notification.service';
+import { circle } from 'leaflet';
+import { DistrictService } from '../../services/district.service';
+
+@Component({
+  selector: 'app-create-district',
+  templateUrl: './create-district.component.html',
+  styleUrl: './create-district.component.scss'
+})
+export class CreateDistrictComponent {
+  districtForm!: FormGroup;
+  @Output() mapdata = new EventEmitter()
+
+  config = {
+    displayKey: "text",
+    search: true,
+    height: '300px'
+  };
+
+  editData: any;
+  zoneList: any;
+  status = [
+    { id: 1, value: "Active" },
+    { id: 0, value: "Inactive" },
+  ];
+  circleList: any
+
+  constructor(
+    private bsModelService: BsModalService,
+    private commonService: CommonService,
+    private notificationSerivce: NotificationService,
+    private fb: FormBuilder,
+    private districtService : DistrictService
+
+  ) { }
+
+  ngOnInit() {
+    this.setInitialvalue()
+    this.getZoneList();
+    console.log("check dist", this.editData);
+    
+  }
+
+  setInitialvalue() {
+    if (this.editData) {
+      this.districtForm = this.fb.group({
+        name: [this.editData?.district_name, [Validators.required]],
+        zone: [null],
+        circle: [null, [Validators.required]],
+        status: [this.editData?.is_active, [Validators.required]],
+      });
+    } else {
+      this.districtForm = this.fb.group({
+        name: ['', [Validators.required]],
+        zone: [null],
+        circle: [null, [Validators.required]],
+        status: [1, [Validators.required]],
+      });
+    }
+  }
+
+  getZoneList() {
+    this.commonService.zoneList(30).subscribe((res) => {
+      this.zoneList = res?.body?.result;
+      this.districtForm.controls['zone'].setValue(this.zoneList[0]);
+      this.getCircleList(this.zoneList[0].value)
+    });
+  }
+
+  getCircleList(id: any) {
+    this.commonService.circleList(id).subscribe((res) => {
+      this.circleList = res?.body?.result;
+      if (this.editData && this.editData?.circle_id) {
+        const selectCompany = this.circleList.find(
+          (ele: any) => ele.value == this.editData?.circle_id
+        );
+        this.districtForm.controls['circle'].setValue(selectCompany);
+      }
+    });
+  }
+
+  onChangeZone(event: any) {
+    if (event?.value?.value) {
+      this.getCircleList(event.value.value)
+    } else {
+      this.circleList = [];
+    }
+  }
+
+  submit(formvalue: any) {
+    let payload = {
+      "district_id": 0,
+      "district_name": formvalue?.name,
+      "circle_id": formvalue?.circle ? Number(formvalue.circle.value) : 0,
+      "is_active": formvalue?.status,
+      "created_by": 1
+    }
+
+    let service = this.districtService.createDistrict(payload)
+
+    service.subscribe((res) => {
+      if(res?.status == 200) {
+        this.bsModelService.hide();
+        this.mapdata.emit();
+        this.notificationSerivce.successAlert(res?.body?.actionResponse);
+      } else {
+        this.notificationSerivce.errorAlert(res?.title);
+      }
+      
+    })
+  }
+
+  close() {
+    this.bsModelService.hide();
+  }
+}

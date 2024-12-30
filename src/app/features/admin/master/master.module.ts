@@ -12,6 +12,9 @@ import { CreateUserComponent } from './user-master/component/create-user/create-
 import { ManageCircleMasterComponent } from './circle-master/pages/manage-circle-master/manage-circle-master.component';
 import { CircleListComponent } from './circle-master/component/circle-list/circle-list.component';
 import { CreateCircleComponent } from './circle-master/component/create-circle/create-circle.component';
+import { ManageDistrictMasterComponent } from './district-master/pages/manage-district-master/manage-district-master.component';
+import { DistrictListComponent } from './district-master/component/district-list/district-list.component';
+import { CreateDistrictComponent } from './district-master/component/create-district/create-district.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { CreateCircleComponent } from './circle-master/component/create-circle/c
     CreateUserComponent,
     ManageCircleMasterComponent,
     CircleListComponent,
-    CreateCircleComponent
+    CreateCircleComponent,
+    ManageDistrictMasterComponent,
+    DistrictListComponent,
+    CreateDistrictComponent
   ],
   imports: [
     CommonModule,

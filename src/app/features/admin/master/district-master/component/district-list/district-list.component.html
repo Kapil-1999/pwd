@@ -2,17 +2,17 @@
 <div class="card">
     <div class="card-header">
         <div class="header-part">
-            <span>Circle Master</span>
+            <span>District Master</span>
             <div class="counting">
                 <span>
                     {{ totlRecords > 0 ? startValue : 0 }} -
                     {{ lastValue > totlRecords ? totlRecords : lastValue }}
-                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Circle
+                    OF {{ totlRecords > 0 ? totlRecords : 0 }} District
                 </span>
             </div>
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    <pagination-controls id="pg2" [maxSize]="10" [responsive]="true" [nextLabel]="''"
+                    <pagination-controls id="pg3" [maxSize]="10" [responsive]="true" [nextLabel]="''"
                         [previousLabel]="''" (pageChange)="onTablePageChange($event)">
                     </pagination-controls>
                 </div>
@@ -32,8 +32,8 @@
                 </div>
             </div>
             <div class="right-section">
-                <button class="btn btn-primary" (click)="onCreateCircle('')">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create Circle
+                <button class="btn btn-primary" (click)="onCreateDistrict('')">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create District
                 </button>
             </div>
         </div>
@@ -41,25 +41,25 @@
             <div class="col-md-12">
                 <div class="overflow-auto">
                     @if(isLoading) {
-                        <app-skeleton-loader [columns]="columns" [items]="circleList | paginate
+                        <app-skeleton-loader [columns]="columns" [items]="districtList | paginate
                         : {
-                            id: 'pg2',
+                            id: 'pg3',
                             itemsPerPage: tableSize,
                             currentPage: page,
                             totalItems: count
                           }"></app-skeleton-loader>
                     } @else {
-                        <ngx-table  [configuration]="configuration" [data]="circleList | searchFilter: searchKeyword
+                        <ngx-table  [configuration]="configuration" [data]="districtList | searchFilter: searchKeyword
                         | paginate
                         : {
-                            id: 'pg2',
+                            id: 'pg3',
                             itemsPerPage: tableSize,
                             currentPage: page,
                             totalItems: count
                           } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
-                                <td>{{item?.zone_name}}</td>
                                 <td>{{item?.circle_name}}</td>
+                                <td>{{item?.district_name}}</td>
                                 <td>
                                     @if (item?.is_active == true) {
                                     <span >Active</span>
@@ -69,8 +69,8 @@
                                 </td>
                                 <td>
                                     <a class="icon">
-                                        <button class="btn btn-success" (click)="onCreateCircle(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
-                                        <button class="btn btn-danger"  style="margin-left: 10px;" (click)="onDeleteCircle(item)"><i class="fa fa-trash"></i>  Delete</button>
+                                        <button class="btn btn-success" (click)="onCreateDistrict(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
+                                        <button class="btn btn-danger"  style="margin-left: 10px;" ><i class="fa fa-trash"></i>  Delete</button>
                                         
                                     </a>
                                 </td>
@@ -78,7 +78,7 @@
                         </ngx-table>
                         <ng-template #noResultsTemplate>
                             <td [attr.colspan]="columns.length" class="no-results">
-                                Circle Not Found
+                                District Not Found
                             </td>
                         </ng-template>
                     }
@@ -91,4 +91,3 @@
 
 
 </div>
-
