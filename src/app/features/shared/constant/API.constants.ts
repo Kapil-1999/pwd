@@ -12,7 +12,8 @@ export const API_CONSTANTS = {
     cityBasedDivision:'Common/GetDivisionList?districtId={cityId}',
     designation: 'Common/GetDesignationList',
     usertype :'Common/GetUserTypeList',
-    district : 'District'
+    district : 'District',
+    updateDeleteDist : 'District/{distId}'
 
 
 }

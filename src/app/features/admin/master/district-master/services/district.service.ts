@@ -26,5 +26,22 @@ export class DistrictService {
         .post(url,payload)
         .pipe(catchError((error: HttpErrorResponse) => of(error)));
     }
+
+    updateDistrict(payload:any): Observable<any> {
+      let url = API_CONSTANTS.updateDeleteDist
+      return this.apiService
+        .put(url,payload)
+        .pipe(catchError((error: HttpErrorResponse) => of(error)));
+    }
+
+    deleteDistrict(payload:any): Observable<any> {
+      let url = API_CONSTANTS.updateDeleteDist
+      return this.apiService
+        .delete(url,payload)
+        .pipe(catchError((error: HttpErrorResponse) => of(error)));
+    }
+
+
+    
   
 }

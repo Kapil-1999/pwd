@@ -4,6 +4,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { CommonService } from '../../../../../shared/services/common.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { circle } from 'leaflet';
+import { DistrictService } from '../../services/district.service';
 
 @Component({
   selector: 'app-create-district',
@@ -32,27 +33,30 @@ export class CreateDistrictComponent {
     private bsModelService: BsModalService,
     private commonService: CommonService,
     private notificationSerivce: NotificationService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private districtService : DistrictService
 
   ) { }
 
   ngOnInit() {
     this.setInitialvalue()
-    this.getZoneList()
+    this.getZoneList();
+    console.log("check dist", this.editData);
+    
   }
 
   setInitialvalue() {
     if (this.editData) {
       this.districtForm = this.fb.group({
-        name: [this.editData?.circle_name, [Validators.required]],
-        zone: [null, [Validators.required]],
+        name: [this.editData?.district_name, [Validators.required]],
+        zone: [null],
         circle: [null, [Validators.required]],
         status: [this.editData?.is_active, [Validators.required]],
       });
     } else {
       this.districtForm = this.fb.group({
         name: ['', [Validators.required]],
-        zone: [null, [Validators.required]],
+        zone: [null],
         circle: [null, [Validators.required]],
         status: [1, [Validators.required]],
       });
@@ -70,11 +74,17 @@ export class CreateDistrictComponent {
   getCircleList(id: any) {
     this.commonService.circleList(id).subscribe((res) => {
       this.circleList = res?.body?.result;
+      if (this.editData && this.editData?.circle_id) {
+        const selectCompany = this.circleList.find(
+          (ele: any) => ele.value == this.editData?.circle_id
+        );
+        this.districtForm.controls['circle'].setValue(selectCompany);
+      }
     });
   }
 
   onChangeZone(event: any) {
-    if (event.value.value) {
+    if (event?.value?.value) {
       this.getCircleList(event.value.value)
     } else {
       this.circleList = [];
@@ -82,11 +92,29 @@ export class CreateDistrictComponent {
   }
 
   submit(formvalue: any) {
-    console.log("check", formvalue);
-    
+    let payload = {
+      "district_id": 0,
+      "district_name": formvalue?.name,
+      "circle_id": formvalue?.circle ? Number(formvalue.circle.value) : 0,
+      "is_active": formvalue?.status,
+      "created_by": 1
+    }
+
+    let service = this.districtService.createDistrict(payload)
+
+    service.subscribe((res) => {
+      if(res?.status == 200) {
+        this.bsModelService.hide();
+        this.mapdata.emit();
+        this.notificationSerivce.successAlert(res?.body?.actionResponse);
+      } else {
+        this.notificationSerivce.errorAlert(res?.title);
+      }
+      
+    })
   }
 
   close() {
-
+    this.bsModelService.hide();
   }
 }

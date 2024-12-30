@@ -13,12 +13,12 @@
                         <label class="form-label">District Name</label>
                         <div class="input-group mb-2">
                             <input type="text" class="form-control" formControlName="name"
-                                placeholder="Enter Circle Name" aria-describedby="button-addon2" />
+                                placeholder="Enter District Name" aria-describedby="button-addon2" />
                         </div>
                         <span *ngIf="districtForm?.get('name')?.invalid &&
                                     (districtForm?.get('name')?.dirty || districtForm?.get('name')?.touched)"
                             class="text-danger">
-                            Circle Name is Required
+                            District Name is Required
                         </span>
                     </div>
                     <div class="col-md-6 mb-2">
