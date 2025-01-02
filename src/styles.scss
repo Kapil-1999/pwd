@@ -1,6 +1,9 @@
 @import "./styles/ngx-easy-table";
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import "./styles/colors";
+@import "./styles//mixins/breakpoints";
+@import 'ngx-toastr/toastr';
+
 
 * {
   padding: 0;
@@ -170,4 +173,16 @@ pagination-controls {
   align-items: center;
   justify-content: end;
   gap: 10px; /* Space between buttons */
+}
+
+.icon {
+  display: flex;
+  gap: 5px;
+}
+
+.modal-xl.modal-dialog,
+.modal-lg.modal-dialog {
+  @include breakpoint-range($min: md, $max: lg) {
+    max-width: 90%;
+  }
 }

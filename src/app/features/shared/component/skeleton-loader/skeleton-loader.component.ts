@@ -7,5 +7,6 @@ import { Component, input, Input } from '@angular/core';
 })
 export class SkeletonLoaderComponent {
   @Input() columns: Array<{ key: string; title: string; width?: string; }> | any;
-  @Input()  items : any
+  @Input()  items : any;
+  @Input() isLoading:any
 }

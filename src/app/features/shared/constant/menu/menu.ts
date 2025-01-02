@@ -3,26 +3,26 @@ export const ADMIN_MENU = [
       id: 1,
       name: "Home",
       path: "/admin/dashboard/home",
-      iconClass: "fa fa-home",
+      iconClass: "assets/images/house.png",
       
     },
     {
       id: 2,
       name: "Live Track",
-      path: "",
-      iconClass: "fa fa-map",
+      path: "/admin/live/track",
+      iconClass: "assets/images/location.png",
     },
     {
       id: 3,
       name: "History Playback",
       path: "/user/history/play-back",
-      iconClass: "fa fa-history",
+      iconClass: "assets/images/road-map.png",
     },
     {
       id: 4,
       name: "Masters",
       path: "",
-      iconClass: "fa fa-file",
+      iconClass: "assets/images/master-data.png",
       isOpen: false,
       subNav: [
         {
@@ -52,7 +52,7 @@ export const ADMIN_MENU = [
         {
           id: 3,
           name: 'Division Entry',
-          path: "/user/reports/vehicle-report/Idle",
+          path: "/admin/master/division-master",
           iconClass: "fa fa-pencil",
         },
         {
@@ -97,7 +97,7 @@ export const ADMIN_MENU = [
       id: 5,
       name: "Allocation",
       path: "",
-      iconClass: "fa fa-tasks",
+      iconClass: "/assets/images/resource.png",
       isOpen: false,
       subNav: [
         {
@@ -118,7 +118,7 @@ export const ADMIN_MENU = [
       id: 6,
       name: "Report",
       path: "user/geofacne/list-geofence",
-      iconClass: "fa fa-file-text",
+      iconClass: "assets/images/report.png",
       isOpen: false,
       subNav: [
         {

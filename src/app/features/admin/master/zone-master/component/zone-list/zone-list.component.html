@@ -40,15 +40,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="overflow-auto">
-                    @if(isLoading) {
-                        <app-skeleton-loader [columns]="columns" [items]="zoneList | paginate
-                        : {
-                            id: 'pg1',
-                            itemsPerPage: tableSize,
-                            currentPage: page,
-                            totalItems: count
-                          }"></app-skeleton-loader>
-                    } @else {
+                    <ng-container *ngIf="isLoading; else content">
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
+                            [items]="zoneList | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: count }"></app-skeleton-loader>
+                    </ng-container>
+                    <ng-template #content>
                         <ngx-table  [configuration]="configuration" [data]="zoneList | searchFilter: searchKeyword
                         | paginate
                         : {
@@ -70,7 +66,7 @@
                                 <td>
                                     <a class="icon">
                                         <button class="btn btn-success" (click)="onCreateZone(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
-                                        <button class="btn btn-danger"  style="margin-left: 10px;" (click)="onDeleteZone(item)"><i class="fa fa-trash"></i>  Delete</button>
+                                        <button class="btn btn-danger"  (click)="onDeleteZone(item)"><i class="fa fa-trash"></i>  Delete</button>
                                         
                                     </a>
                                 </td>
@@ -81,7 +77,7 @@
                                 Zone Not Found
                             </td>
                         </ng-template>
-                    }
+                    </ng-template>
                 </div>
             </div>
 
