@@ -16,9 +16,8 @@
                         [previousLabel]="''" (pageChange)="onTablePageChange($event)">
                     </pagination-controls>
                 </div>
-
+    
             </div>
-
         </div>
     </div>
     <div class="card-body">
@@ -40,15 +39,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="overflow-auto">
-                    @if(isLoading) {
-                        <app-skeleton-loader [columns]="columns" [items]="circleList | paginate
-                        : {
-                            id: 'pg2',
-                            itemsPerPage: tableSize,
-                            currentPage: page,
-                            totalItems: count
-                          }"></app-skeleton-loader>
-                    } @else {
+                    <ng-container *ngIf="isLoading; else content">
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
+                            [items]="circleList | paginate: { id: 'pg2', itemsPerPage: tableSize, currentPage: page, totalItems: count }"></app-skeleton-loader>
+                    </ng-container>
+                    <ng-template #content>
                         <ngx-table  [configuration]="configuration" [data]="circleList | searchFilter: searchKeyword
                         | paginate
                         : {
@@ -81,7 +76,7 @@
                                 Circle Not Found
                             </td>
                         </ng-template>
-                    }
+                    </ng-template>
                 </div>
             </div>
 

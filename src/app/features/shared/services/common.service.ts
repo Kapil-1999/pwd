@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, shareReplay } from 'rxjs';
-// import { ApiService } from '../../http-services/api.service';
-// import { API_CONSTANTS } from '../constant/API.Constants';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../../http-services/api.service';
 import { API_CONSTANTS } from '../constant/API.constants';
 
@@ -10,119 +8,105 @@ import { API_CONSTANTS } from '../constant/API.constants';
   providedIn: 'root'
 })
 export class CommonService {
-  zoneListCache$!: Observable<any>;
-  stateListCache$!: Observable<any>;
-  circleListCache$!: Observable<any>;
-  cityListCache$!: Observable<any>;
-  divisionListCache$!: Observable<any>;
-  companyListCache$!: Observable<any>;
-  designationListCache$!: Observable<any>;
-  usertypeListCache$!:Observable<any>;
-
-
   constructor(
-    private apiService: ApiService,
-    private http: HttpClient
+    private apiService: ApiService
   ) { }
 
-  //**zone list service here */
   zoneList(stateId: any): Observable<any> {
-    let url = API_CONSTANTS.stateBasedZone.replace("{stateId}", stateId)
-
-    if (!this.zoneListCache$) {
-      this.zoneListCache$ = this.apiService.get(url).pipe(
-        shareReplay(1),
-        catchError((error: HttpErrorResponse) => of(error))
-      );
-    }
-    return this.zoneListCache$;
+    let url = API_CONSTANTS.stateBasedZone.replace("{stateId}", stateId);
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
   }
 
-  //   //**state list service here */
   stateList(): Observable<any> {
     let url = API_CONSTANTS.stateList;
-    if (!this.stateListCache$) {
-      this.stateListCache$ = this.apiService.get(url).pipe(
-        shareReplay(1),
-        catchError((error: HttpErrorResponse) => of(error))
-      );
-    }
-
-    return this.stateListCache$;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
   }
 
   circleList(zoneId: any): Observable<any> {
-    let url = API_CONSTANTS.zoneBasedCircle.replace("{zoneId}", zoneId)
-
-    if (!this.circleListCache$) {
-      this.circleListCache$ = this.apiService.get(url).pipe(
-        shareReplay(1),
-        catchError((error: HttpErrorResponse) => of(error))
-      );
-    }
-    return this.circleListCache$;
+    let url = API_CONSTANTS.zoneBasedCircle.replace("{zoneId}", zoneId);
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
   }
-
 
   cityList(circleId: any): Observable<any> {
     let url = API_CONSTANTS.circleBasedcity.replace("{circleId}", circleId);
-    if (!this.cityListCache$) {
-      this.cityListCache$ = this.apiService.get(url).pipe(
-        shareReplay(1),
-        catchError((error: HttpErrorResponse) => of(error))
-      );
-    }
-
-    return this.cityListCache$;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
   }
 
   divisionList(cityId: any): Observable<any> {
     let url = API_CONSTANTS.cityBasedDivision.replace("{cityId}", cityId);
-    if (!this.divisionListCache$) {
-      this.divisionListCache$ = this.apiService.get(url).pipe(
-        shareReplay(1),
-        catchError((error: HttpErrorResponse) => of(error))
-      );
-    }
-
-    return this.divisionListCache$;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
   }
 
-
-  //   //**company list service here */
   departmentList(): Observable<any> {
-      let url = API_CONSTANTS.department
+    let url = API_CONSTANTS.department;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
 
-      if (!this.companyListCache$) {
-        this.companyListCache$ = this.apiService.get(url).pipe(
-          shareReplay(1),
-          catchError((error: HttpErrorResponse) => of(error))
-        );
-      }
-      return this.companyListCache$;
-    }
+  designationList(): Observable<any> {
+    let url = API_CONSTANTS.designation;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
 
-     designationList(): Observable<any> {
-      let url = API_CONSTANTS.designation
+  usertypeList(): Observable<any> {
+    let url = API_CONSTANTS.usertype;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
 
-      if (!this.designationListCache$) {
-        this.designationListCache$ = this.apiService.get(url).pipe(
-          shareReplay(1),
-          catchError((error: HttpErrorResponse) => of(error))
-        );
-      }
-      return this.designationListCache$;
-    }
+  chiefEngList(): Observable<any> {
+    let url = API_CONSTANTS.chiefEngList;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
 
-    usertypeList(): Observable<any> {
-      let url = API_CONSTANTS.usertype
+  supritendingEngList(): Observable<any> {
+    let url = API_CONSTANTS.sEngList;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
 
-      if (!this.usertypeListCache$) {
-        this.usertypeListCache$ = this.apiService.get(url).pipe(
-          shareReplay(1),
-          catchError((error: HttpErrorResponse) => of(error))
-        );
-      }
-      return this.usertypeListCache$;
-    }
+  executiveEngList(): Observable<any> {
+    let url = API_CONSTANTS.eeList;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+
+  assistantEngList(): Observable<any> {
+    let url = API_CONSTANTS.aeList;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+
+  juniorEngList(): Observable<any> {
+    let url = API_CONSTANTS.jeList;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+
+  districtList(): Observable<any> {
+    let url = API_CONSTANTS.district;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
 }

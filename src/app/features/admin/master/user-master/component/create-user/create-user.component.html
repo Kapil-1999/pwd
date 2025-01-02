@@ -9,7 +9,7 @@
         <!-- CE Dropdown -->
         <div class="col-md-3 mb-2"
             *ngIf="designation?.value !== '1' && (designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
-            <label class="form-label">CE <span class="text-danger">*</span></label>
+            <label class="form-label">Chief Engineer <span class="text-danger">*</span></label>
             <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
         </div>
         <!-- Zone -->
@@ -21,7 +21,7 @@
         <!-- SE -->
         <div class="col-md-3 mb-2"
             *ngIf="designation?.value !== '1' && (designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
-            <label class="form-label">SE <span class="text-danger">*</span></label>
+            <label class="form-label">Supritending Engineer <span class="text-danger">*</span></label>
             <ngx-select-dropdown [config]="config" [options]="deparmentList"></ngx-select-dropdown>
         </div>
         <!-- Circle -->
@@ -32,7 +32,7 @@
         </div>
         <!-- EE -->
         <div class="col-md-3 mb-2" *ngIf="designation?.value !== '1' && (designation?.value === '5' || designation?.value === '6')">
-            <label class="form-label">EE <span class="text-danger">*</span></label>
+            <label class="form-label">Executive Engineer <span class="text-danger">*</span></label>
             <ngx-select-dropdown [config]="config" [options]="desigantionList"></ngx-select-dropdown>
         </div>
         <!-- City -->
@@ -43,7 +43,7 @@
         </div>
         <!-- AE -->
         <div class="col-md-3 mb-2" *ngIf="designation?.value !== '1' && designation?.value === '6'">
-            <label class="form-label">AE <span class="text-danger">*</span></label>
+            <label class="form-label">Assistant Engineer <span class="text-danger">*</span></label>
             <ngx-select-dropdown [config]="config" [options]="deparmentList"></ngx-select-dropdown>
         </div>
         <!-- Division -->
@@ -83,8 +83,7 @@
         <div class="col-md-3 mb-2">
             <label class="form-label">Status <span class="text-danger">*</span></label>
             <select class="form-control">
-                <option>Active</option>
-                <option>Inactive</option>
+                <option *ngFor="let value of status" [ngValue]="value.id">{{ value.value }}</option>
             </select>
         </div>
         <div class="col-md-3 mb-2">

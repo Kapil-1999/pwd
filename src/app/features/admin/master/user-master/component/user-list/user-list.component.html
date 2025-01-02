@@ -44,15 +44,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="overflow-auto">
-                    @if(isLoading) {
-                        <app-skeleton-loader [columns]="columns" [items]="userList | paginate
-                        : {
-                            id: 'pg3',
-                            itemsPerPage: tableSize,
-                            currentPage: page,
-                            totalItems: count
-                          }"></app-skeleton-loader>
-                    } @else {
+                    <ng-container *ngIf="isLoading; else content">
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
+                            [items]="userList | paginate: { id: 'pg3', itemsPerPage: tableSize, currentPage: page, totalItems: count }"></app-skeleton-loader>
+                    </ng-container>
+                    <ng-template #content>
                         <ngx-table  [configuration]="configuration" [data]="userList | searchFilter: searchKeyword
                         | paginate
                         : {
@@ -62,18 +58,18 @@
                             totalItems: count
                           } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
+                                <td>{{item?.chief_eng_name || "NA"}}</td>
+                                <td>{{item?.zone || "NA"}}</td>
+                                <td>{{item?.sup_eng_name || "NA"}}</td>
+                                <td>{{item?.circle || "NA"}}</td>
+                                <td>{{item?.exec_eng_name || "NA"}}</td>
+                                <td>{{item?.district || "NA"}}</td>
+                                <td>{{item?.ass_eng_name || "NA"}}</td>
+                                <td>{{item?.division || "NA"}}</td>
                                 <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.contact_no || "NA"}}</td>
+                                <td>{{item?.email_id || "NA"}}</td>
+                                <td>{{item?.img_path || "NA"}}</td>
                                 <td>
                                     @if (item?.is_active == true) {
                                     <span >Active</span>
@@ -92,10 +88,10 @@
                         </ngx-table>
                         <ng-template #noResultsTemplate>
                             <td [attr.colspan]="columns.length" class="no-results">
-                                District Not Found
+                                User Not Found
                             </td>
                         </ng-template>
-                    }
+                    </ng-template>
                 </div>
             </div>
 

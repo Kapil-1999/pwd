@@ -8,6 +8,9 @@
             <!-- Logo Section -->
             <li class="logo-part">
               <div>
+                <a href="http://">
+                  <img src="assets/images/pie-chart.png" alt="">
+                </a> &nbsp;&nbsp;
                 <span class="header-title">Employee Tracking System</span>
               </div>
             </li>
@@ -33,9 +36,9 @@
                     </a>
                     <div class="user-popup" *ngIf="showPopup">
                       <ul class="menu">
-                        <li><a id="profile-part" routerLink="/my-profile">My Profile</a></li>
-                        <li><a id="profile-part" routerLink="/settings">Settings</a></li>
-                        <li><a id="profile-part" (click)="logout()">Logout</a></li>
+                        <li class="menu-link"><a id="profile-part" routerLink="/my-profile">My Profile</a></li>
+                        <li class="menu-link"><a id="profile-part" routerLink="/settings">Settings</a></li>
+                        <li class="menu-link"><a id="profile-part" (click)="logout()">Logout</a></li>
                       </ul>
                     </div>
                   </div>
@@ -53,7 +56,7 @@
     <li class="nav-item dropdown" *ngFor="let menuValue of menuList">
       <ng-container *ngIf="menuValue.subNav?.length > 0 || menuValue.childSubmenu?.length > 0; else noSubmenu">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" (click)="toggleDropdown(menuValue, $event)">
-          <i [class]="menuValue.iconClass"></i> {{ menuValue.name }}
+          <img class="header-logo" [src]="menuValue.iconClass"> {{ menuValue.name }}
         </a>
         <ul class="dropdown-menu" [class.show]="menuValue.isOpen">
           <li *ngFor="let subNavValue of menuValue.subNav" (click)="toggleDropdown(subNavValue, $event)">
@@ -72,7 +75,7 @@
       </ng-container>
       <ng-template #noSubmenu>
         <a class="nav-link" [routerLink]="menuValue.path || '/user/dashboard'">
-          <i [class]="menuValue.iconClass"></i> {{ menuValue.name }}
+          <img class="header-logo" [src]="menuValue.iconClass"> {{ menuValue.name }}
         </a>
       </ng-template>
     </li>

@@ -7,6 +7,9 @@ const routes: Routes = [
   },
   {
     path :'master', loadChildren : () => import('./master/master.module').then(m => m.MasterModule)
+  },
+  {
+    path :'live', loadChildren : () => import('./live-tracking/live-tracking.module').then(m => m.LiveTrackingModule)
   }
 ];
 

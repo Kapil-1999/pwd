@@ -104,7 +104,7 @@ export class UserListComponent {
   }
 
   getUserList() {
-    this.isLoading = false;
+    this.isLoading = true;
     this.userService.userList().subscribe((res) => {
       setTimeout(() => {
         this.isLoading = false;

@@ -4,7 +4,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* Ensure it stays on top of other elements */
+  z-index: 999;
 }
 .top-bar {
   background-color: #054181; // Primary blue background
@@ -33,7 +33,6 @@ header {
     }
 
     img {
-      height: 40px;
       margin-right: 10px; // Space between icons
     }
   }
@@ -77,11 +76,13 @@ header {
       li {
         padding: 10px;
         border-bottom: 1px solid #eee;
+        outline: none;
 
         &:hover {
           background-color: #054181;
 
           a {
+            outline: none; 
             color: #fff !important;
           }
         }
@@ -95,9 +96,14 @@ header {
           color: #333;
           display: block;
         }
+
       }
     }
   }
+  li.menu-link::marker {
+     display: none;
+     content: '';
+   }
 
   .arrow-icon {
     font-size: 13px;
@@ -170,4 +176,8 @@ header {
     flex-wrap: wrap;
     gap: 10px;
   }
+}
+
+img.header-logo {
+  max-width: 20px;
 }

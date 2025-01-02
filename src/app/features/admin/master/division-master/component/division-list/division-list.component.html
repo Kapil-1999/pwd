@@ -1,13 +1,13 @@
- <breadcrumb [breadcrumbItems]="breadcrumbs"></breadcrumb>
+<breadcrumb [breadcrumbItems]="breadcrumbs"></breadcrumb>
 <div class="card">
     <div class="card-header">
         <div class="header-part">
-            <span>Zone Master</span>
+            <span>Division Master</span>
             <div class="counting">
                 <span>
                     {{ totlRecords > 0 ? startValue : 0 }} -
                     {{ lastValue > totlRecords ? totlRecords : lastValue }}
-                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Zone
+                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Division
                 </span>
             </div>
             <div class="row">
@@ -25,15 +25,16 @@
         <div class="header-container">
             <div class="left-section">
                 <div class="search-form">
-                    <input placeholder="Search for..." type="text" [(ngModel)]="searchKeyword" class="form-control search-input" />
-                    <button type="button" class="btn-search"  >
+                    <input placeholder="Search for..." type="text" [(ngModel)]="searchKeyword"
+                        class="form-control search-input" />
+                    <button type="button" class="btn-search">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
             <div class="right-section">
-                <button class="btn btn-primary" (click)="onCreateZone('')">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create Zone
+                <button class="btn btn-primary" (click)="onCreateDivision('')">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Create Division
                 </button>
             </div>
         </div>
@@ -42,39 +43,38 @@
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
                         <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
-                            [items]="zoneList | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: count }"></app-skeleton-loader>
+                            [items]="divisionListData | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: totlRecords }"></app-skeleton-loader>
                     </ng-container>
                     <ng-template #content>
-                        <ngx-table  [configuration]="configuration" [data]="zoneList | searchFilter: searchKeyword
-                        | paginate
-                        : {
-                            id: 'pg1',
-                            itemsPerPage: tableSize,
-                            currentPage: page,
-                            totalItems: count
-                          } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
+                        <ngx-table [configuration]="configuration"
+                            [data]="divisionListData | searchFilter: searchKeyword | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: totlRecords }"
+                            [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
                                 <td>{{item?.zone_name}}</td>
-                                <td>{{item?.state_name}}</td>
+                                <td>{{item?.circle_name}}</td>
+                                <td>{{item?.district_name}}</td>
+                                <td>{{item?.division_name}}</td>
                                 <td>
                                     @if (item?.is_active == true) {
-                                    <span >Active</span>
+                                    <span>Active</span>
                                     }@else {
-                                    <span >Inactive</span>
+                                    <span>Inactive</span>
                                     }
                                 </td>
                                 <td>
                                     <a class="icon">
-                                        <button class="btn btn-success" (click)="onCreateZone(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
-                                        <button class="btn btn-danger"  (click)="onDeleteZone(item)"><i class="fa fa-trash"></i>  Delete</button>
-                                        
+                                        <button class="btn btn-success" (click)="onCreateDivision(item)"><i
+                                                class="fa fa-pencil"></i> Edit</button>
+                                        <button class="btn btn-danger" (click)="onDeleteZone(item)"><i
+                                                class="fa fa-trash"></i> Delete</button>
+
                                     </a>
                                 </td>
                             </ng-template>
                         </ngx-table>
                         <ng-template #noResultsTemplate>
                             <td [attr.colspan]="columns.length" class="no-results">
-                                Zone Not Found
+                                Division Not Found
                             </td>
                         </ng-template>
                     </ng-template>
