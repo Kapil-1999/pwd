@@ -23,6 +23,11 @@ import { CrateSupritendingEngComponent } from './user-master/component/crate-sup
 import { CrateExecutiveEngComponent } from './user-master/component/crate-executive-eng/crate-executive-eng.component';
 import { CrateAssitantEngComponent } from './user-master/component/crate-assitant-eng/crate-assitant-eng.component';
 import { CrateJuniorEngComponent } from './user-master/component/crate-junior-eng/crate-junior-eng.component';
+import { ManageCategoryComponent } from './category-master/pages/manage-category/manage-category.component';
+import { CategoryListComponent } from './category-master/component/category-list/category-list.component';
+import { AddCategoryComponent } from './category-master/component/add-category/add-category.component';
+import { ManageSubcategoryComponent } from './subcategory-master/pages/manage-subcategory/manage-subcategory.component';
+import { SubcategoryListComponent } from './subcategory-master/component/subcategory-list/subcategory-list.component';
 
 
 @NgModule({
@@ -46,7 +51,12 @@ import { CrateJuniorEngComponent } from './user-master/component/crate-junior-en
     CrateSupritendingEngComponent,
     CrateExecutiveEngComponent,
     CrateAssitantEngComponent,
-    CrateJuniorEngComponent
+    CrateJuniorEngComponent,
+    ManageCategoryComponent,
+    CategoryListComponent,
+    AddCategoryComponent,
+    ManageSubcategoryComponent,
+    SubcategoryListComponent
   ],
   imports: [
     CommonModule,

@@ -27,5 +27,11 @@ export const API_CONSTANTS = {
     GetCircleBySupEng :'Common/GetCircleBySupEng?supEngId={supEngId}',
     GetDistrictByExecEng :'Common/GetDistrictByExecEng?execEngId={execEngId}',
     GetDivisionByAssEng :'Common/GetDivisionByAssEng?assEngId={assEngId}',
-    userById : 'User/{userId}'
+    userById : 'User/{userId}',
+    category : 'Category?pageNo={pageNo}&pageSize={pageSize}',
+    addcategory : 'Category',
+    updateDelgetCat : "Category/{id}",
+    SubCategory : "SubCategory?pageNo={pageNo}&pageSize={pageSize}",
+    addSubcategory : 'SubCategory',
+    updateDelgetSubCat : "SubCategory/{id}",
 }
