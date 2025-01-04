@@ -24,7 +24,7 @@ export class CreateZoneComponent {
   ];
   zoneForm!: FormGroup;
   editData:any;
-
+  label :string = 'Create'
 
   constructor(
     private commonService: CommonService,
@@ -35,14 +35,13 @@ export class CreateZoneComponent {
   ) {}
 
   ngOnInit() {
+    console.log("check edit", this.editData);
     this.setInitialvalue();
-    this.getStateList();        
   }
 
   getStateList() {
     this.commonService.stateList().subscribe((res) => {
       this.stateList = res?.body?.result;
-
       if (this.editData && this.editData?.state_id) {
         const selectCompany = this.stateList.find(
           (ele: any) => ele.value == this.editData?.state_id
@@ -54,18 +53,21 @@ export class CreateZoneComponent {
 
   setInitialvalue() {
     if(this.editData) {
+      this.getStateList();
+      this.label = 'Update'      
       this.zoneForm = this.fb.group({
         name: [this.editData?.zone_name, [Validators.required]],
         state: [null, [Validators.required]],
         status: [this.editData?.is_active, [Validators.required]],
       });
     } else {
-
       this.zoneForm = this.fb.group({
         name: ['', [Validators.required]],
         state: [null, [Validators.required]],
         status: [1, [Validators.required]],
       });
+      this.getStateList();        
+
     }
   }
 

@@ -20,9 +20,12 @@ export const API_CONSTANTS = {
     eeList: "Common/GetExecutiveEngList?supEngId={supEngId}",
     aeList: "Common/GetAssistantEngList?execEngId={execEngId}",
     jeList: "Common/GetJuniorEngList?assEngId={assEngId}",
-     getDivisionDetails : 'Division?pageNo={pageNo}&pageSize={pageSize}',
+    getDivisionDetails : 'Division?pageNo={pageNo}&pageSize={pageSize}',
     createDivision : 'Division',
-    updateDivision : 'Division/{divisionId}'
-
-
+    updateDivision : 'Division/{divisionId}',
+    getZoneByChiefEng :'Common/GetZoneByChiefEng?chiefEngId={chiefEngId}',
+    GetCircleBySupEng :'Common/GetCircleBySupEng?supEngId={supEngId}',
+    GetDistrictByExecEng :'Common/GetDistrictByExecEng?execEngId={execEngId}',
+    GetDivisionByAssEng :'Common/GetDivisionByAssEng?assEngId={assEngId}',
+    userById : 'User/{userId}'
 }

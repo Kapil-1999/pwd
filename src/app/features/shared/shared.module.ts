@@ -13,6 +13,7 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { SkeletonLoaderComponent } from './component/skeleton-loader/skeleton-loader.component';
 import { SearchFilterPipe } from './pipe/serach.pipe';
+import { DeleteConfirmationComponent } from './component/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SearchFilterPipe } from './pipe/serach.pipe';
     HeaderComponent,
     BreadcrumbComponent,
     SkeletonLoaderComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    DeleteConfirmationComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { SearchFilterPipe } from './pipe/serach.pipe';
     ReactiveFormsModule,
     FormsModule,
     SkeletonLoaderComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    DeleteConfirmationComponent
   ],
 })
 export class SharedModule { }

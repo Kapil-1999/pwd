@@ -5,6 +5,13 @@ import { UserMasterService } from '../../services/user-master.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { CommonService } from '../../../../../shared/services/common.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { CrateChiefEngComponent } from '../crate-chief-eng/crate-chief-eng.component';
+import { CrateSupritendingEngComponent } from '../crate-supritending-eng/crate-supritending-eng.component';
+import { CrateExecutiveEngComponent } from '../crate-executive-eng/crate-executive-eng.component';
+import { CrateAssitantEngComponent } from '../crate-assitant-eng/crate-assitant-eng.component';
+import { CrateJuniorEngComponent } from '../crate-junior-eng/crate-junior-eng.component';
+import { IMG_URL } from '../../../../../shared/constant/menu/menu';
+import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 
 
 @Component({
@@ -34,7 +41,7 @@ export class UserListComponent {
   lastValue: number = this.startValue + this.tableItemsSize - 1;
   bsModalRef!: BsModalRef;
   searchKeyword: any;
-  deparmentList:any
+  deparmentList: any
   config = {
     displayKey: "text",
     search: true,
@@ -47,15 +54,17 @@ export class UserListComponent {
     height: '300px',
     placeholder: `Select Designation`,
   };
-  desigantionList:any;
+  desigantionList: any;
   selectedDepartment: any;
   selectedDesignation: any;
+  imgeUrl = IMG_URL
 
   constructor(
     private userService: UserMasterService,
     private modalService: BsModalService,
-    private commonservice : CommonService,
-    private tosterService : NotificationService
+    private commonservice: CommonService,
+    private tosterService: NotificationService,
+
   ) { };
 
   ngOnInit() {
@@ -69,6 +78,8 @@ export class UserListComponent {
 
   setInitialtable() {
     this.columns = [
+      { key: 'Department', title: 'Department' },
+      { key: 'Designation', title: 'Designation' },
       { key: 'Chief Engineer', title: 'Chief Engineer' },
       { key: 'Zone', title: 'Zone' },
       { key: 'Supritending', title: 'Supritending' },
@@ -77,11 +88,11 @@ export class UserListComponent {
       { key: 'City', title: 'City' },
       { key: 'Assistant Engineer', title: 'Assistant Engineer' },
       { key: 'Division', title: 'Division' },
-      { key: 'Junior Engineer', title: 'Junior Engineer' },
+      { key: 'Name', title: 'Name' },
       { key: 'Contact No.', title: 'Contact No.' },
       { key: 'Email', title: 'Email' },
       { key: 'Image', title: 'Image' },
-      { key: 'Status', title: 'Status'},
+      { key: 'Status', title: 'Status' },
       { key: 'Action', title: 'Action' },
     ];
   }
@@ -97,7 +108,7 @@ export class UserListComponent {
   }
 
   getDepartmentList() {
-    this.commonservice.departmentList().subscribe((res)=> {
+    this.commonservice.departmentList().subscribe((res) => {
       this.deparmentList = res?.body?.result;
       this.selectedDepartment = this.deparmentList[0]
     })
@@ -115,7 +126,7 @@ export class UserListComponent {
   }
 
   getDesignationList() {
-    this.commonservice.designationList().subscribe((res)=> {
+    this.commonservice.designationList().subscribe((res) => {
       this.desigantionList = res?.body?.result
     })
   }
@@ -128,23 +139,36 @@ export class UserListComponent {
     this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
   }
 
- 
+
   onCreateuser(value: any) {
-    
     if (this.selectedDepartment.length == 0 || this.selectedDesignation.length == 0) {
       this.tosterService.showWarning('Please select both Department and Designation before creating a user.');
-      return; // Prevent further execution
+      return;
     } else {
+      let createCompenent: any;
+      if (this.selectedDesignation?.value === '1') {
+        createCompenent = CreateUserComponent
+      } else if (this.selectedDesignation?.value === '2') {
+        createCompenent = CrateChiefEngComponent
+      } else if (this.selectedDesignation?.value === '3') {
+        createCompenent = CrateSupritendingEngComponent
+      } else if (this.selectedDesignation?.value === '4') {
+        createCompenent = CrateExecutiveEngComponent
+      } else if (this.selectedDesignation?.value == "5") {
+        createCompenent = CrateAssitantEngComponent;
+      } else if (this.selectedDesignation?.value == "6") {
+        createCompenent = CrateJuniorEngComponent;
+      }
 
       const initialState: ModalOptions = {
         initialState: {
           editData: value ? value : '',
-          department : this.selectedDepartment,
-          designation : this.selectedDesignation
+          department: this.selectedDepartment,
+          designation: this.selectedDesignation
         },
       };
       this.bsModalRef = this.modalService.show(
-        CreateUserComponent,
+        createCompenent,
         Object.assign(initialState, {
           class: 'modal-lg modal-dialog-centered alert-popup',
         })
@@ -153,5 +177,35 @@ export class UserListComponent {
         this.getUserList();
       });
     }
+  }
+
+  deleteUser(item: any) {
+    let url = this.userService.deleteUser(item?.user_id)
+    const initialState: ModalOptions = {
+      initialState: {
+        title: item?.full_name,
+        content: 'Are you sure you want to delete?',
+        primaryActionLabel: 'Delete',
+        secondaryActionLabel: 'Cancel',
+        service: url
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      DeleteConfirmationComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: "modal-md modal-dialog-centered",
+      })
+    );
+    this.bsModalRef?.content.mapdata.subscribe(
+      (value: any) => {
+        if (value?.status == 200) {
+          this.tosterService.successAlert(value?.body?.actionResponse);
+          this.getUserList();
+        } else {
+          this.tosterService.errorAlert(value?.title);
+        }
+      }
+    );
   }
 }

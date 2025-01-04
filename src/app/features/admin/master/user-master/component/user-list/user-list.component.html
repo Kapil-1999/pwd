@@ -58,6 +58,8 @@
                             totalItems: count
                           } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
+                                <td>{{item?.department_name || "NA"}}</td>
+                                <td>{{item?.designation_name || "NA"}}</td>
                                 <td>{{item?.chief_eng_name || "NA"}}</td>
                                 <td>{{item?.zone || "NA"}}</td>
                                 <td>{{item?.sup_eng_name || "NA"}}</td>
@@ -66,10 +68,22 @@
                                 <td>{{item?.district || "NA"}}</td>
                                 <td>{{item?.ass_eng_name || "NA"}}</td>
                                 <td>{{item?.division || "NA"}}</td>
-                                <td>{{item?.circle_name || "NA"}}</td>
+                                <td>{{item?.full_name || "NA"}}</td>
                                 <td>{{item?.contact_no || "NA"}}</td>
                                 <td>{{item?.email_id || "NA"}}</td>
-                                <td>{{item?.img_path || "NA"}}</td>
+                                <td>
+                                    <ng-container *ngIf="item?.img_path; else noImage">
+                                        <img 
+                                          class="user-image" 
+                                          [src]="imgeUrl + item?.img_path" 
+                                          alt=""
+                                        />
+                                      </ng-container>
+                                      <ng-template #noImage>
+                                        NA
+                                      </ng-template>
+                                    
+                                </td>
                                 <td>
                                     @if (item?.is_active == true) {
                                     <span >Active</span>
@@ -80,7 +94,7 @@
                                 <td>
                                     <a class="icon">
                                         <button class="btn btn-success" (click)="onCreateuser(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
-                                        <button class="btn btn-danger" ><i class="fa fa-trash"></i>  Delete</button>
+                                        <button class="btn btn-danger" (click)="deleteUser(item)"><i class="fa fa-trash"></i>  Delete</button>
                                         
                                     </a>
                                 </td>
