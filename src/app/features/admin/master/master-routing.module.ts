@@ -6,6 +6,8 @@ import { ManageUserMasterComponent } from './user-master/pages/manage-user-maste
 import { ManageCircleMasterComponent } from './circle-master/pages/manage-circle-master/manage-circle-master.component';
 import { ManageDistrictMasterComponent } from './district-master/pages/manage-district-master/manage-district-master.component';
 import { ManageDivisionMasterComponent } from './division-master/pages/manage-division-master/manage-division-master.component';
+import { ManageCategoryComponent } from './category-master/pages/manage-category/manage-category.component';
+import { ManageSubcategoryComponent } from './subcategory-master/pages/manage-subcategory/manage-subcategory.component';
 
 const routes: Routes = [
   {
@@ -14,7 +16,10 @@ const routes: Routes = [
      { path : 'user-master', component: ManageUserMasterComponent},
      { path : 'circle-master', component: ManageCircleMasterComponent},
      { path : 'district-master', component: ManageDistrictMasterComponent},
-     { path : 'division-master', component: ManageDivisionMasterComponent}
+     { path : 'division-master', component: ManageDivisionMasterComponent},
+     { path : 'category-master', component: ManageCategoryComponent},
+     { path : 'subcategory-master', component: ManageSubcategoryComponent}
+     
     ]
   }
 ];

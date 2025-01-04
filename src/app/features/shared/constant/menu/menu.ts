@@ -58,13 +58,13 @@ export const ADMIN_MENU = [
         {
           id: 7,
           name: 'Category Master',
-          path: "/user/reports/vehicle-report/Duration-Report",
+          path: "/admin/master/category-master",
           iconClass: "fa fa-pencil",
         },
         {
           id: 8,
           name: 'Sub Category Master',
-          path: "/user/reports/vehicle-report/AC-Report",
+          path: "/admin/master/subcategory-master",
           iconClass: "fa fa-pencil",
         },
         {
