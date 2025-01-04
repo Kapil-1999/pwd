@@ -7,13 +7,13 @@ import { UserMasterService } from '../../services/user-master.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrl: './create-user.component.scss'
+  selector: 'app-crate-executive-eng',
+  templateUrl: './crate-executive-eng.component.html',
+  styleUrl: './crate-executive-eng.component.scss'
 })
-export class CreateUserComponent {
-    @Output() mapdata = new EventEmitter()
-  
+export class CrateExecutiveEngComponent {
+  @Output() mapdata = new EventEmitter()
+
   config = {
     displayKey: "text",
     search: true,
@@ -45,14 +45,14 @@ export class CreateUserComponent {
   divisionData: any;
   userData: any;
   editData: any;
-  label: string = 'Create';
+  label :string = 'Create';
 
   constructor(
     private commonService: CommonService,
     private fb: FormBuilder,
     private bsModelService: BsModalService,
     private UserMasterService: UserMasterService,
-    private notificationSerivce : NotificationService
+    private notificationSerivce: NotificationService
   ) { }
 
   ngOnInit() {
@@ -81,6 +81,14 @@ export class CreateUserComponent {
     });
 
     this.updateValidators();
+
+    if (this.editData) {
+      this.getChiefBasedOnId(this.editData?.user_id);
+      this.label = 'Update';
+
+    } else {
+      this.getChiefEngList();
+    }
 
   }
 
@@ -126,11 +134,6 @@ export class CreateUserComponent {
     }
 
     this.userForm.updateValueAndValidity();
-
-    if (this.editData) {
-      this.getChiefBasedOnId(this.editData?.user_id);
-      this.label = 'Update';
-    }
   }
 
   getChiefBasedOnId(id: any) {
@@ -148,183 +151,88 @@ export class CreateUserComponent {
           status: this.userData?.is_active,
           photo: this.userData?.img_path
         });
+        this.getChiefEngList();
       }
     })
   }
 
 
   getChiefEngList() {
-    this.commonService.chiefEngList().subscribe({
-      next: (res) => {
-        this.chiefEngData = res?.body?.result || [];
-        if (this.chiefEngData.length > 0 && this.chiefEngData.length === 1) {
-          const chiefEngId = this.chiefEngData[0].value;
-          this.userForm.controls['chiefEngineer'].setValue(this.chiefEngData[0]);
-          if (this.designation?.value !== '3') {
-            this.getSupritendingEngList(chiefEngId);
-          } else {            
-            this.getZoneBasedOnCE(chiefEngId)
-          }
-        } else {
-          this.supritendingEngList = [];
-          this.zoneList = [];
-          this.userForm.controls['zone'].setValue(null);
-          this.userForm.controls['chiefEngineer'].setValue(null);
-          this.userForm.controls['supritendingEngineer'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Chief Engineer List:", err);
+    this.commonService.chiefEngList().subscribe((res:any) => {
+      this.chiefEngData = res?.body?.result || [];
+      if (this.userData) {
+        let matchingCE = this.chiefEngData?.find((zone: any) => zone?.value == this.userData?.chief_eng_id);
+        this.userForm.controls['chiefEngineer'].setValue(matchingCE);
+        this.getZoneBasedOnCE(matchingCE?.value)
+        this.getSupritendingEngList(matchingCE?.value);
+      } else if (this.chiefEngData.length > 0 && this.chiefEngData.length === 1) {
+        const chiefEngId = this.chiefEngData[0].value;
+        this.userForm.controls['chiefEngineer'].setValue(this.chiefEngData[0]);
+        this.getZoneBasedOnCE(chiefEngId)
+        this.getSupritendingEngList(chiefEngId);
+      } else {
+        this.supritendingEngList = [];
+        this.zoneList = [];
+        this.circleList = [];
+        this.cityList = [];
+        this.userForm.controls['zone'].setValue(null);
+        this.userForm.controls['chiefEngineer'].setValue(null);
+        this.userForm.controls['supritendingEngineer'].setValue(null);
+        this.userForm.controls['circle'].setValue(null);
+        this.userForm.controls['city'].setValue(null);
       }
     });
   }
 
   onChiefEngineerChange(event: any) {
-    this.getZoneBasedOnCE(event.value.value);
-    if (this.designation?.value === '3') return;
-    if (event?.value?.value) {      
+    if (event?.value?.value) {
+      this.getZoneBasedOnCE(event.value.value);
       this.getSupritendingEngList(event.value.value)
     } else {
       this.supritendingEngList = [];
-      this.zoneList=[];
+      this.zoneList = [];
       this.userForm.controls['zone'].setValue(null);
       this.userForm.controls['supritendingEngineer'].setValue(null);
+      this.circleList = [];
+      this.cityList = [];
+      this.userForm.controls['zone'].setValue(null);
+      this.userForm.controls['chiefEngineer'].setValue(null);
+      this.userForm.controls['circle'].setValue(null);
+      this.userForm.controls['city'].setValue(null);
 
     }
   }
 
   getSupritendingEngList(chiefEngId: any) {
-    this.commonService.supritendingEngList(chiefEngId).subscribe({
-      next: (res) => {
-        this.supritendingEngList = res?.body?.result || [];
-        if (this.supritendingEngList.length > 0 && this.supritendingEngList.length === 1) {
+    this.commonService.supritendingEngList(chiefEngId).subscribe((res)=>{
+      this.supritendingEngList = res?.body?.result || [];
+      if (this.userData) {
+        let matichSe = this.supritendingEngList?.find((sup:any) => sup.value == this.userData?.sup_eng_id);        
+        this.userForm.controls['supritendingEngineer'].setValue(matichSe);
+          this.getCircleBasedOnSE(matichSe.value);
+      } else if (this.supritendingEngList.length > 0 && this.supritendingEngList.length === 1) {
           const supritendingEngId = this.supritendingEngList[0].value;
           this.userForm.controls['supritendingEngineer'].setValue(this.supritendingEngList[0]);
-          if (this.designation?.value !== '4') {
-            this.getExecutiveEngList(supritendingEngId);
-          }
+          this.getCircleBasedOnSE(supritendingEngId);
         } else {
-          this.executiveEngList = [];
-          this.assistantEngList = [];
+          this.circleList = [];
+          this.cityList = [];
+          this.userForm.controls['circle'].setValue(null);
+          this.userForm.controls['city'].setValue(null);
           this.userForm.controls['supritendingEngineer'].setValue(null);
-          this.userForm.controls['executiveEngineer'].setValue(null);
-          this.userForm.controls['assistantEngineer'].setValue(null);
         }
-      },
-      error: (err) => {
-        console.error("Error fetching Supritending Engineer List:", err);
-      }
     });
   }
 
   onSupritendingEngineerChange(event: any) {
-    if (this.designation?.value === '4') return;
     if (event?.value?.value) {
-      this.getExecutiveEngList(event.value.value)
-    } else {
-      this.executiveEngList = [];
-      this.assistantEngList = [];
-      this.userForm.controls['executiveEngineer'].setValue(null);
-      this.userForm.controls['assistantEngineer'].setValue(null);
-    }
-  }
-
-  getExecutiveEngList(supritendingEngId: any) {
-    this.commonService.executiveEngList(supritendingEngId).subscribe({
-      next: (res) => {
-        this.executiveEngList = res?.body?.result || [];
-        if (this.executiveEngList.length > 0 && this.executiveEngList.length === 1) {
-          const executiveEngId = this.executiveEngList[0].value;
-          this.userForm.controls['executiveEngineer'].setValue(this.executiveEngList[0]);
-          this.getAssistantEngList(executiveEngId);
-        } else {
-          this.assistantEngList = [];
-          this.userForm.controls['executiveEngineer'].setValue(null);
-          this.userForm.controls['assistantEngineer'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Executive Engineer List:", err);
-      }
-    });
-  }
-
-  onExecutiveEngineerChange(event: any) {
-    if (event?.value?.value) {
-      this.getAssistantEngList(event.value.value)
-    } else {
-      this.assistantEngList = [];
-      this.userForm.controls['assistantEngineer'].setValue(null);
-    }
-  }
-
-  getAssistantEngList(executiveEngId: any) {
-    this.commonService.assistantEngList(executiveEngId).subscribe({
-      next: (res) => {
-        this.assistantEngList = res?.body?.result || [];
-        if (this.assistantEngList.length > 0 && this.assistantEngList.length === 1) {
-          this.userForm.controls['assistantEngineer'].setValue(this.assistantEngList[0]);
-        } else {
-          this.userForm.controls['assistantEngineer'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Assistant Engineer List:", err);
-      }
-    });
-  }
-
-  getZoneList() {
-    this.commonService.zoneList(30).subscribe({
-      next: (res) => {
-        this.zoneList = res?.body?.result || [];
-        if (this.zoneList.length > 0 && this.zoneList.length === 1) {
-          this.userForm.controls['zone'].setValue(this.zoneList[0]);
-        } else {
-          this.userForm.controls['zone'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Zone List:", err);
-      }
-    });
-  }
-
-  onZoneChange(event: any) {
-    if (this.designation?.value === '2') return;
-    if (event?.value?.value) {
-      this.getCircleList(event.value.value)
+      this.getCircleBasedOnSE(event.value.value)
     } else {
       this.circleList = [];
       this.cityList = [];
-      this.divisionData = [];
       this.userForm.controls['circle'].setValue(null);
       this.userForm.controls['city'].setValue(null);
-      this.userForm.controls['division'].setValue(null);
     }
-  }
-
-  getCircleList(zoneId: any) {
-    this.circleList=[];
-    this.commonService.circleList(zoneId).subscribe({
-      next: (res) => {
-        this.circleList = res?.body?.result || [];
-        if (this.circleList.length > 0 && this.circleList.length === 1) {
-          const circleId = this.circleList[0].value;
-          this.userForm.controls['circle'].setValue(this.circleList[0]);
-          if (this.designation?.value !== '3') {
-            this.getCityList(circleId);
-          }
-        } else {
-          this.cityList = [];
-          this.userForm.controls['circle'].setValue(null);
-          this.userForm.controls['city'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Circle List:", err);
-      }
-    });
   }
 
   onCircleChange(event: any) {
@@ -340,57 +248,38 @@ export class CreateUserComponent {
   }
 
   getCityList(circleId: any) {
-    this.commonService.cityList(circleId).subscribe({
-      next: (res) => {
-        this.cityList = res?.body?.result || [];
-        if (this.cityList.length > 0 && this.cityList.length === 1) {
-          const cityId = this.cityList[0].value;
-          this.userForm.controls['city'].setValue(this.cityList[0]);
-          if (this.designation?.value !== '4') {
-            this.getDivisionList(cityId);
+    this.commonService.cityList(circleId).subscribe((res:any) =>{
+      this.cityList = res?.body?.result || [];
+      if (this.userData) {
+        let cityValue = this.userData?.district;
+        if (cityValue) {
+          let matchingCE;
+          if (cityValue.includes(",")) {
+            let formatValue = cityValue.split(",").map((val: any) => val.trim());
+            matchingCE = this.cityList.filter((zone: any) =>
+              formatValue.includes(zone?.value.toString())
+            );
+          } else {
+            matchingCE = this.cityList?.find((zone: any) =>
+              zone?.value.toString() === cityValue.toString()
+            );
           }
-        } else {
-          this.userForm.controls['city'].setValue(null);
-          this.divisionData = [];
-          this.userForm.controls['division'].setValue(null);
+          this.userForm.controls['city'].setValue(matchingCE || null);
         }
-      },
-      error: (err) => {
-        console.error("Error fetching City List:", err);
+      } else if (this.cityList.length > 0 && this.cityList.length === 1) {
+        this.userForm.controls['city'].setValue(this.cityList[0]);
+      } else {
+        this.userForm.controls['city'].setValue(null);
       }
+      
     });
   }
 
-  onCityChange(event: any) {
-    if (this.designation?.value === '4') return;
-    if (event?.value?.value) {
-      this.getDivisionList(event.value.value)
-    } else {
-      this.divisionData = [];
-      this.userForm.controls['division'].setValue(null);
+  getSelectedValues(data: any): string | null {
+    if (!Array.isArray(data)) {
+      return data?.value; 
     }
-  }
-
-  getDivisionList(cityId: any) {
-    this.commonService.divisionList(cityId).subscribe({
-      next: (res) => {
-        this.divisionData = res?.body?.result || [];
-        if (this.divisionData.length > 0 && this.divisionData.length === 1) {
-          this.userForm.controls['division'].setValue(this.divisionData[0]);
-        } else {
-          this.userForm.controls['division'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Division List:", err);
-      }
-    });
-  }
-
-  getSelectedValues(data: any) {
-    console.log(data);
-
-    return data?.map((item: any) => item.value).join(',');
+    return data.map((item: any) => item.value).join(',');
   }
 
   close() {
@@ -456,7 +345,7 @@ export class CreateUserComponent {
       service = this.UserMasterService.updateUser(paylaod, this.userData?.user_id)
     }
     service.subscribe((res: any) => {
-      if(res?.status == 200) {
+      if (res?.status == 200) {
         this.bsModelService.hide();
         this.mapdata.emit();
         this.notificationSerivce.successAlert(res?.body?.actionResponse);
@@ -466,50 +355,37 @@ export class CreateUserComponent {
     })
   }
 
-  getZoneBasedOnCE(id:any) {
-    this.commonService.getZoneByChiefEng(id).subscribe({
-      next: (res) => {
-        this.zoneList = res?.body?.result || [];
-        if (this.zoneList.length > 0 && this.zoneList.length === 1) {
-          const zoneId = this.zoneList[0].value;
-          this.userForm.controls['zone'].setValue(this.zoneList[0]);
-          this.getCircleList(zoneId);
-        } else {
-          this.circleList = [];
-          this.userForm.controls['zone'].setValue(null);
-          this.userForm.controls['circle'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Zone List:", err);
+  getZoneBasedOnCE(id: any) {
+    this.commonService.getZoneByChiefEng(id).subscribe((res) => {
+      this.zoneList = res?.body?.result || [];
+      if (this.userData) {
+        let matichZone = this.zoneList?.find((sup:any) => sup.value == this.userData?.zone);
+        this.userForm.controls['zone'].setValue(matichZone);
+      } else if (this.zoneList.length > 0 && this.zoneList.length === 1) {
+        this.userForm.controls['zone'].setValue(this.zoneList[0]);
+      } else {
+        this.userForm.controls['zone'].setValue(null);
       }
-      
     })
   }
 
 
   getCircleBasedOnSE(zoneId: any) {
-    this.commonService.getCircleBySupEng(zoneId).subscribe({
-      next: (res) => {
-        this.circleList = res?.body?.result || [];
-        if (this.circleList.length > 0 && this.circleList.length === 1) {
-          const circleId = this.circleList[0].value;
-          this.userForm.controls['circle'].setValue(this.circleList[0]);
-          this.getCityList(circleId);
-        } else {
-          this.cityList = [];
-          this.divisionData = [];
-          this.userForm.controls['circle'].setValue(null);
-          this.userForm.controls['city'].setValue(null);
-          this.userForm.controls['division'].setValue(null);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching Circle List:", err);
+    this.commonService.getCircleBySupEng(zoneId).subscribe((res:any) => {
+      this.circleList = res?.body?.result || [];
+      if (this.userData) {
+        let matichCircle = this.circleList?.find((sup:any) => sup.value == this.userData?.circle);
+        this.userForm.controls['circle'].setValue(matichCircle);
+        this.getCityList(matichCircle.value);
+      } else  if (this.circleList.length > 0 && this.circleList.length === 1) {
+        const circleId = this.circleList[0].value;
+        this.userForm.controls['circle'].setValue(this.circleList[0]);
+        this.getCityList(circleId);
+      } else {
+        this.cityList = [];
+        this.userForm.controls['circle'].setValue(null);
+        this.userForm.controls['city'].setValue(null);
       }
     });
   }
-
-
-
 }

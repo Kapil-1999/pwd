@@ -27,7 +27,8 @@ export class CreateDistrictComponent {
     { id: 1, value: "Active" },
     { id: 0, value: "Inactive" },
   ];
-  circleList: any
+  circleList: any;
+  label : string = 'Create'
 
   constructor(
     private bsModelService: BsModalService,
@@ -41,12 +42,12 @@ export class CreateDistrictComponent {
   ngOnInit() {
     this.setInitialvalue()
     this.getZoneList();
-    console.log("check dist", this.editData);
-    
+    console.log("check dist", this.editData);  
   }
 
   setInitialvalue() {
     if (this.editData) {
+      this.label = 'Update';
       this.districtForm = this.fb.group({
         name: [this.editData?.district_name, [Validators.required]],
         zone: [null],
@@ -66,8 +67,13 @@ export class CreateDistrictComponent {
   getZoneList() {
     this.commonService.zoneList(30).subscribe((res) => {
       this.zoneList = res?.body?.result;
-      this.districtForm.controls['zone'].setValue(this.zoneList[0]);
-      this.getCircleList(this.zoneList[0].value)
+      if (this.editData && this.editData?.zone_id) {
+        const selectCompany = this.zoneList.find(
+          (ele: any) => ele.value == this.editData?.zone_id
+        );
+        this.districtForm.controls['zone'].setValue(selectCompany);
+        this.getCircleList(selectCompany.value)
+      }
     });
   }
 
@@ -100,7 +106,11 @@ export class CreateDistrictComponent {
       "created_by": 1
     }
 
-    let service = this.districtService.createDistrict(payload)
+    let service = this.districtService.createDistrict(payload);
+    if(this.editData) {
+      payload['district_id'] = this.editData?.district_id
+      service = this.districtService.updateDistrict(this.editData?.district_id, payload)
+    }
 
     service.subscribe((res) => {
       if(res?.status == 200) {
@@ -109,8 +119,7 @@ export class CreateDistrictComponent {
         this.notificationSerivce.successAlert(res?.body?.actionResponse);
       } else {
         this.notificationSerivce.errorAlert(res?.title);
-      }
-      
+      }      
     })
   }
 

@@ -18,6 +18,11 @@ import { CreateDistrictComponent } from './district-master/component/create-dist
 import { ManageDivisionMasterComponent } from './division-master/pages/manage-division-master/manage-division-master.component';
 import { DivisionListComponent } from './division-master/component/division-list/division-list.component';
 import { CreateDivisionComponent } from './division-master/component/create-division/create-division.component';
+import { CrateChiefEngComponent } from './user-master/component/crate-chief-eng/crate-chief-eng.component';
+import { CrateSupritendingEngComponent } from './user-master/component/crate-supritending-eng/crate-supritending-eng.component';
+import { CrateExecutiveEngComponent } from './user-master/component/crate-executive-eng/crate-executive-eng.component';
+import { CrateAssitantEngComponent } from './user-master/component/crate-assitant-eng/crate-assitant-eng.component';
+import { CrateJuniorEngComponent } from './user-master/component/crate-junior-eng/crate-junior-eng.component';
 
 
 @NgModule({
@@ -36,7 +41,12 @@ import { CreateDivisionComponent } from './division-master/component/create-divi
     CreateDistrictComponent,
     DivisionListComponent,
     CreateDivisionComponent,
-    ManageDivisionMasterComponent
+    ManageDivisionMasterComponent,
+    CrateChiefEngComponent,
+    CrateSupritendingEngComponent,
+    CrateExecutiveEngComponent,
+    CrateAssitantEngComponent,
+    CrateJuniorEngComponent
   ],
   imports: [
     CommonModule,

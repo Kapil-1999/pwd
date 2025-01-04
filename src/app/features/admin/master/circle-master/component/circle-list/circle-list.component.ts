@@ -4,6 +4,7 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import { CircleService } from '../../service/circle.service';
 import { CreateCircleComponent } from '../create-circle/create-circle.component';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'circle-list',
@@ -101,14 +102,34 @@ export class CircleListComponent {
   }
 
 
-  onDeleteCircle(item:any) {
-    this.circleService.deleteCircle(item?.circle_id).subscribe((res:any)=> {
-      if(res?.status == 200) {
-        this.notificationSerivce.successAlert(res?.body?.actionResponse);
-      } else {
-        this.notificationSerivce.errorAlert(res?.title);
+  onDeleteCircle(item: any) {
+    let url = this.circleService.deleteCircle(item?.circle_id)
+    const initialState: ModalOptions = {
+      initialState: {
+        title: item?.circle_name,
+        content: 'Are you sure you want to delete?',
+        primaryActionLabel: 'Delete',
+        secondaryActionLabel: 'Cancel',
+        service: url
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      DeleteConfirmationComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: "modal-md modal-dialog-centered",
+      })
+    );
+    this.bsModalRef?.content.mapdata.subscribe(
+      (value: any) => {
+        if (value?.status == 200) {
+          this.notificationSerivce.successAlert(value?.body?.actionResponse);
+          this.getCircleList();
+        } else {
+          this.notificationSerivce.errorAlert(value?.title);
+        }
       }
-    })
+    );
   }
 
 

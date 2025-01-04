@@ -26,6 +26,7 @@ export class CreateCircleComponent {
     { id: 1, value: "Active" },
     { id: 0, value: "Inactive" },
   ];
+  label : string = 'Create'
 
   constructor(
     private fb: FormBuilder,
@@ -43,13 +44,13 @@ export class CreateCircleComponent {
 
   setInitialvalue() {
     if (this.editData) {
+      this.label = 'Update'
       this.circleForm = this.fb.group({
         name: [this.editData?.circle_name, [Validators.required]],
         zone: [null, [Validators.required]],
         status: [this.editData?.is_active, [Validators.required]],
       });
     } else {
-
       this.circleForm = this.fb.group({
         name: ['', [Validators.required]],
         zone: [null, [Validators.required]],

@@ -5,6 +5,7 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { CreateZoneComponent } from '../create-zone/create-zone.component';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'zone-list',
@@ -113,14 +114,34 @@ export class ZoneListComponent {
     });
   }
 
-  onDeleteZone(item:any) {
-    this.zoneService.deleteZone(item?.zone_id).subscribe((res:any)=> {
-      if(res?.status == 200) {
-        this.notificationSerivce.successAlert(res?.body?.actionResponse);
-      } else {
-        this.notificationSerivce.errorAlert(res?.title);
+  onDeleteZone(item:any) {        
+    let url = this.zoneService.deleteZone(item?.zone_id);
+    const initialState: ModalOptions = {
+      initialState: {
+        title: item?.zone_name,
+        content: 'Are you sure you want to delete?',
+        primaryActionLabel: 'Delete',
+        secondaryActionLabel: 'Cancel',
+        service: url
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      DeleteConfirmationComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: "modal-md modal-dialog-centered",
+      })
+    );
+    this.bsModalRef?.content.mapdata.subscribe(
+      (value: any) => {        
+        if (value?.status == 200) {
+          this.notificationSerivce.successAlert(value?.body?.actionResponse);
+          this.getZoneList()
+        } else {
+          this.notificationSerivce.errorAlert(value?.title);
+        }
       }
-    })
+    );
   }
   
 

@@ -19,17 +19,17 @@
                 </div>
             </div>
 
-              <!-- Zone -->
-              <div class="col-md-3 mb-2"
-              *ngIf="designation?.value !== '1' && (designation?.value === '2' || designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
-              <label class="form-label">Zone <span class="text-danger">*</span></label>
-              <ngx-select-dropdown [config]="config" [multiple]="designation?.value === '2'" [options]="zoneList" formControlName="zone"
-                  (change)="onZoneChange($event)">
-              </ngx-select-dropdown>
-              <div *ngIf="userForm.get('zone')?.invalid && userForm.get('zone')?.touched">
-                  <span class="text-danger">Zone is required.</span>
-              </div>
-          </div>
+            <!-- Zone -->
+            <div class="col-md-3 mb-2"
+                *ngIf="designation?.value !== '1' && (designation?.value === '2' || designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+                <label class="form-label">Zone <span class="text-danger">*</span></label>
+                <ngx-select-dropdown [config]="config" [multiple]="designation?.value === '2'" [options]="zoneList"
+                    formControlName="zone">
+                </ngx-select-dropdown>
+                <div *ngIf="userForm.get('zone')?.invalid && userForm.get('zone')?.touched">
+                    <span class="text-danger">Zone is required.</span>
+                </div>
+            </div>
 
             <!-- SE -->
             <div class="col-md-3 mb-2"
@@ -38,41 +38,30 @@
                 <ngx-select-dropdown [config]="config" [options]="supritendingEngList"
                     formControlName="supritendingEngineer" (change)="onSupritendingEngineerChange($event)">
                 </ngx-select-dropdown>
-                <div *ngIf="userForm.get('supritendingEngineer')?.invalid && userForm.get('supritendingEngineer')?.touched">
+                <div
+                    *ngIf="userForm.get('supritendingEngineer')?.invalid && userForm.get('supritendingEngineer')?.touched">
                     <span class="text-danger">Supritending Engineer is required.</span>
                 </div>
             </div>
 
-             <!-- Circle -->
-             <div class="col-md-3 mb-2"
-             *ngIf="designation?.value !== '1' && (designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
-             <label class="form-label">Circle <span class="text-danger">*</span></label>
-             <ngx-select-dropdown [config]="config" [multiple]="designation?.value === '3'" [options]="circleList" formControlName="circle"
-                 (change)="onCircleChange($event)">
-             </ngx-select-dropdown>
-             <div *ngIf="userForm.get('circle')?.invalid && userForm.get('circle')?.touched">
-                 <span class="text-danger">Circle is required.</span>
-             </div>
-         </div>
-
-            <!-- EE -->
+            <!-- Circle -->
             <div class="col-md-3 mb-2"
-                *ngIf="designation?.value !== '1' && (designation?.value === '5' || designation?.value === '6')">
-                <label class="form-label">Executive Engineer <span class="text-danger">*</span></label>
-                <ngx-select-dropdown [config]="config" [options]="executiveEngList" formControlName="executiveEngineer"
-                    (change)="onExecutiveEngineerChange($event)">
+                *ngIf="designation?.value !== '1' && (designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+                <label class="form-label">Circle <span class="text-danger">*</span></label>
+                <ngx-select-dropdown [config]="config" [multiple]="designation?.value === '3'" [options]="circleList"
+                    formControlName="circle" (change)="onCircleChange($event)">
                 </ngx-select-dropdown>
-                <div *ngIf="userForm.get('executiveEngineer')?.invalid && userForm.get('executiveEngineer')?.touched">
-                    <span class="text-danger">Executive Engineer is required.</span>
+                <div *ngIf="userForm.get('circle')?.invalid && userForm.get('circle')?.touched">
+                    <span class="text-danger">Circle is required.</span>
                 </div>
             </div>
 
-                <!-- City -->
-                <div class="col-md-3 mb-2"
+            <!-- City -->
+            <div class="col-md-3 mb-2"
                 *ngIf="designation?.value !== '1' && (designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
                 <label class="form-label">City <span class="text-danger">*</span></label>
-                <ngx-select-dropdown [config]="config" [options]="cityList" [multiple]="designation?.value === '4'" formControlName="city"
-                    (change)="onCityChange($event)">
+                <ngx-select-dropdown [config]="config" [options]="cityList" [multiple]="designation?.value === '4'"
+                    formControlName="city">
                 </ngx-select-dropdown>
                 <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched">
                     <span class="text-danger">City is required.</span>
@@ -80,26 +69,6 @@
             </div>
 
             <!-- AE -->
-            <div class="col-md-3 mb-2" *ngIf="designation?.value !== '1' && designation?.value === '6'">
-                <label class="form-label">Assistant Engineer <span class="text-danger">*</span></label>
-                <ngx-select-dropdown [config]="config" [options]="assistantEngList" formControlName="assistantEngineer">
-                </ngx-select-dropdown>
-                <div *ngIf="userForm.get('assistantEngineer')?.invalid && userForm.get('assistantEngineer')?.touched">
-                    <span class="text-danger">Assistant Engineer is required.</span>
-                </div>
-            </div>       
-
-           
-            <!-- Division -->
-            <div class="col-md-3 mb-2"
-                *ngIf="designation?.value !== '1' && (designation?.value === '5' || designation?.value === '6')">
-                <label class="form-label">Division <span class="text-danger">*</span></label>
-                <ngx-select-dropdown [config]="config" [options]="divisionData" [multiple]="designation?.value === '5'" formControlName="division">
-                </ngx-select-dropdown>
-                <div *ngIf="userForm.get('division')?.invalid && userForm.get('division')?.touched">
-                    <span class="text-danger">Division is required.</span>
-                </div>
-            </div>
             <!-- Common Fields -->
             <div class="col-md-3 mb-2">
                 <label class="form-label">Name <span class="text-danger">*</span></label>
@@ -110,13 +79,14 @@
             <div class="col-md-3 mb-2">
                 <label class="form-label">Contact No.</label>
                 <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="Enter Contact No." formControlName="contactNo" />
+                    <input type="text" class="form-control" placeholder="Enter Contact No."
+                        formControlName="contactNo" />
                 </div>
                 <div *ngIf="userForm.get('contactNo')?.invalid && userForm.get('contactNo')?.touched">
                     <span class="text-danger">Contact No. must be a 10-digit number.</span>
                 </div>
             </div>
-            
+
             <div class="col-md-3 mb-2">
                 <label class="form-label">Email</label>
                 <div class="input-group mb-2">
@@ -159,7 +129,8 @@
             </div>
             <!-- Submit Button -->
             <div class="col-md-3 mb-2 mt-4">
-                <button class="btn btn-success" [disabled]="userForm.invalid" (click)="submit(userForm.value)">Submit</button>
+                <button class="btn btn-success" [disabled]="userForm.invalid"
+                    (click)="submit(userForm.value)">Submit</button>
             </div>
         </div>
     </form>

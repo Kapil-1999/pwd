@@ -10,13 +10,43 @@ import { ApiService } from '../../../../http-services/api.service';
 export class UserMasterService {
 
   constructor(
-    private apiService : ApiService
+    private apiService: ApiService
   ) { }
 
   userList(): Observable<any> {
-        let url = API_CONSTANTS.user;
-        return this.apiService
-          .get(url)
-          .pipe(catchError((error: HttpErrorResponse) => of(error)));
-      }
+    let url = API_CONSTANTS.user;
+    return this.apiService
+      .get(url)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  createUser(payload:any): Observable<any> {
+    let url = API_CONSTANTS.user
+    return this.apiService
+      .post(url,payload)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+
+  userById(id:any): Observable<any> {
+    let url = API_CONSTANTS.userById.replace('{userId}', id);
+    return this.apiService
+      .get(url)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  updateUser(payload:any, id:any): Observable<any> {
+    let url = API_CONSTANTS.userById.replace('{userId}', id);
+    return this.apiService
+      .put(url,payload)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  deleteUser(id:any): Observable<any> {
+    let url = API_CONSTANTS.userById.replace('{userId}', id);
+    return this.apiService
+      .delete(url)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
 }

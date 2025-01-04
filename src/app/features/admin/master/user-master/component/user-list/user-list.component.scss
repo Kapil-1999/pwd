@@ -6,3 +6,18 @@
         width: 100%;
     }
 }
+
+img.user-image {
+    max-width: 100%;
+}
+
+.user-image {
+    width: 50px; /* Adjust to your default size */
+    height: 50px; /* Adjust to your default size */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transformation */
+  }
+  
+  .user-image:hover {
+    -webkit-transform: scale(3.5);
+    transform: scale(3.5); /* Scale up and slightly rotate */
+  }

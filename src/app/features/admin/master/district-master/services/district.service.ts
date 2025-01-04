@@ -27,17 +27,17 @@ export class DistrictService {
         .pipe(catchError((error: HttpErrorResponse) => of(error)));
     }
 
-    updateDistrict(payload:any): Observable<any> {
-      let url = API_CONSTANTS.updateDeleteDist
+    updateDistrict(distId:any,payload:any): Observable<any> {
+      let url = API_CONSTANTS.updateDeleteDist.replace('{distId}', distId)
       return this.apiService
         .put(url,payload)
         .pipe(catchError((error: HttpErrorResponse) => of(error)));
     }
 
-    deleteDistrict(payload:any): Observable<any> {
-      let url = API_CONSTANTS.updateDeleteDist
+    deleteDistrict(distId:any): Observable<any> {
+      let url = API_CONSTANTS.updateDeleteDist.replace('{distId}', distId)
       return this.apiService
-        .delete(url,payload)
+        .delete(url)
         .pipe(catchError((error: HttpErrorResponse) => of(error)));
     }
 

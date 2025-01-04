@@ -3,6 +3,8 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import { DistrictService } from '../../services/district.service';
 import { CreateDistrictComponent } from '../create-district/create-district.component';
+import { NotificationService } from '../../../../../shared/services/notification.service';
+import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'district-list',
@@ -33,9 +35,10 @@ export class DistrictListComponent {
   searchKeyword: any;
 
   constructor(
-    private districtService : DistrictService,
-    private modalService : BsModalService
-  ){};
+    private districtService: DistrictService,
+    private modalService: BsModalService,
+    private notificationSerivce: NotificationService
+  ) { };
 
   ngOnInit() {
     this.tableProperty();
@@ -81,20 +84,51 @@ export class DistrictListComponent {
     this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
   }
 
-   onCreateDistrict(value: any) {
-      const initialState: ModalOptions = {
-        initialState: {
-          editData: value ? value : ''
-        },
-      };
-      this.bsModalRef = this.modalService.show(
-        CreateDistrictComponent,
-        Object.assign(initialState, {
-          class: 'modal-md modal-dialog-centered alert-popup',
-        })
-      );
-      this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
-        this.getDistrictList();
-      });
-    }
+  onCreateDistrict(value: any) {
+    const initialState: ModalOptions = {
+      initialState: {
+        editData: value ? value : ''
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      CreateDistrictComponent,
+      Object.assign(initialState, {
+        class: 'modal-md modal-dialog-centered alert-popup',
+      })
+    );
+    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+      this.getDistrictList();
+    });
+  }
+
+
+  onDeleteDistrict(item: any) {
+    let url = this.districtService.deleteDistrict(item?.circle_id)
+    const initialState: ModalOptions = {
+      initialState: {
+        title: item?.district_name,
+        content: 'Are you sure you want to delete?',
+        primaryActionLabel: 'Delete',
+        secondaryActionLabel: 'Cancel',
+        service: url
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      DeleteConfirmationComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: "modal-md modal-dialog-centered",
+      })
+    );
+    this.bsModalRef?.content.mapdata.subscribe(
+      (value: any) => {
+        if (value?.status == 200) {
+          this.notificationSerivce.successAlert(value?.body?.actionResponse);
+          this.getDistrictList();
+        } else {
+          this.notificationSerivce.errorAlert(value?.title);
+        }
+      }
+    );
+  }
 }

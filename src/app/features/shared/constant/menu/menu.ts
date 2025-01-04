@@ -56,12 +56,6 @@ export const ADMIN_MENU = [
           iconClass: "fa fa-pencil",
         },
         {
-          id: 4,
-          name: 'Master Entry',
-          path: "/user/reports/vehicle-report/Trip-Report",
-          iconClass: "fa fa-pencil",
-        },
-        {
           id: 7,
           name: 'Category Master',
           path: "/user/reports/vehicle-report/Duration-Report",
@@ -154,4 +148,6 @@ export const ADMIN_MENU = [
       ]
     },
   ];
+
+export const IMG_URL = 'http://103.109.7.173:7604/'
   

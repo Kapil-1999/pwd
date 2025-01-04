@@ -75,29 +75,29 @@ export class CommonService {
     );
   }
 
-  supritendingEngList(): Observable<any> {
-    let url = API_CONSTANTS.sEngList;
+  supritendingEngList(chiefEngId:any): Observable<any> {
+    let url = API_CONSTANTS.sEngList.replace("{chiefEngId}", chiefEngId);
     return this.apiService.get(url).pipe(
       catchError((error: HttpErrorResponse) => of(error))
     );
   }
 
-  executiveEngList(): Observable<any> {
-    let url = API_CONSTANTS.eeList;
+  executiveEngList(supEngId:any): Observable<any> {
+    let url = API_CONSTANTS.eeList.replace("{supEngId}", supEngId);
     return this.apiService.get(url).pipe(
       catchError((error: HttpErrorResponse) => of(error))
     );
   }
 
-  assistantEngList(): Observable<any> {
-    let url = API_CONSTANTS.aeList;
+  assistantEngList(execEngId:any): Observable<any> {
+    let url = API_CONSTANTS.aeList.replace("{execEngId}", execEngId);
     return this.apiService.get(url).pipe(
       catchError((error: HttpErrorResponse) => of(error))
     );
   }
 
-  juniorEngList(): Observable<any> {
-    let url = API_CONSTANTS.jeList;
+  juniorEngList(assEngId:any): Observable<any> {
+    let url = API_CONSTANTS.jeList.replace("{assEngId}", assEngId);
     return this.apiService.get(url).pipe(
       catchError((error: HttpErrorResponse) => of(error))
     );
@@ -109,4 +109,35 @@ export class CommonService {
       catchError((error: HttpErrorResponse) => of(error))
     );
   }
+
+  getZoneByChiefEng(chiefEngId: any): Observable<any> {
+    const url = API_CONSTANTS.getZoneByChiefEng.replace("{chiefEngId}", chiefEngId);
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+  
+  getCircleBySupEng(supEngId: any): Observable<any> {
+    const url = API_CONSTANTS.GetCircleBySupEng.replace("{supEngId}", supEngId);
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+
+  getDistrictByExecEng(execEngId: any): Observable<any> {
+    const url = API_CONSTANTS.GetDistrictByExecEng.replace("{execEngId}", execEngId);
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+  
+  getDivisionByAssEng(assEngId: any): Observable<any> {
+    const url = API_CONSTANTS.GetDivisionByAssEng.replace("{assEngId}", assEngId);
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+  
+
+
 }

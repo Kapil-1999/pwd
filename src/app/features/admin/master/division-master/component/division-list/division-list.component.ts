@@ -5,6 +5,7 @@ import { DivisionService } from '../../service/division.service';
 import { CommonService } from '../../../../../shared/services/common.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { CreateDivisionComponent } from '../create-division/create-division.component';
+import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'division-list',
@@ -117,14 +118,34 @@ export class DivisionListComponent {
     });
   }
 
-  onDeleteZone(item:any) {
-    this.divisionService.deleteDivision(item?.zone_id).subscribe((res:any)=> {
-      if(res?.status == 200) {
-        this.notificationSerivce.successAlert(res?.body?.actionResponse);
-      } else {
-        this.notificationSerivce.errorAlert(res?.title);
-      }
-    })
-  }
+  onDeleteZone(item: any) {
+      let url = this.divisionService.deleteDivision(item?.zone_id)
+      const initialState: ModalOptions = {
+        initialState: {
+          title: item?.division_name,
+          content: 'Are you sure you want to delete?',
+          primaryActionLabel: 'Delete',
+          secondaryActionLabel: 'Cancel',
+          service: url
+        },
+      };
+      this.bsModalRef = this.modalService.show(
+        DeleteConfirmationComponent,
+        Object.assign(initialState, {
+          id: "confirmation",
+          class: "modal-md modal-dialog-centered",
+        })
+      );
+      this.bsModalRef?.content.mapdata.subscribe(
+        (value: any) => {
+          if (value?.status == 200) {
+            this.notificationSerivce.successAlert(value?.body?.actionResponse);
+            this.getDivisionList(this.page, this.tableSize)
+          } else {
+            this.notificationSerivce.errorAlert(value?.title);
+          }
+        }
+      );
+    }
 }
 
