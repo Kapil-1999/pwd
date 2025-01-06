@@ -3,20 +3,12 @@
     <div class="card-header">
         <div class="header-part">
             <span>Division Master</span>
-            <div class="counting">
-                <span>
-                    {{ totlRecords > 0 ? startValue : 0 }} -
-                    {{ lastValue > totlRecords ? totlRecords : lastValue }}
-                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Division
-                </span>
-            </div>
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    <pagination-controls id="pg1" [maxSize]="10" [responsive]="true" [nextLabel]="''"
-                        [previousLabel]="''" (pageChange)="onTablePageChange($event)">
-                    </pagination-controls>
+                    <button class="btn btn-primary" (click)="onCreateDivision('')">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Create Division
+                    </button>
                 </div>
-
             </div>
 
         </div>
@@ -33,23 +25,28 @@
                 </div>
             </div>
             <div class="right-section">
-                <button class="btn btn-primary" (click)="onCreateDivision('')">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create Division
-                </button>
+                <mat-paginator [length]="pagesize.count" [pageSize]="pagesize.limit" [pageIndex]="pagesize.offset - 1"
+                    (page)="paginationEvent($event)" [pageSizeOptions]="[10, 25, 50]" aria-label="Select page">
+                </mat-paginator>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
-                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
-                            [items]="divisionListData | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: totlRecords }"></app-skeleton-loader>
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="divisionListData | paginate: {
+                                id: 'divisionID',
+                                itemsPerPage: pagesize.limit,
+                                currentPage: pagesize.offset,
+                                totalItems: pagesize.count
+                              } "></app-skeleton-loader>
                     </ng-container>
                     <ng-template #content>
-                        <ngx-table [configuration]="configuration"
-                            [data]="divisionListData | searchFilter: searchKeyword | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: totlRecords }"
+                        <ngx-table #table [configuration]="configuration" [pagination]="pagesize"
+                            [data]="divisionListData | searchFilter: searchKeyword | paginate: {id: 'divisionID', itemsPerPage: pagesize.limit, currentPage: pagesize.offset, totalItems: pagesize.count}"
                             [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
+                                <td>{{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}</td>
                                 <td>{{item?.zone_name}}</td>
                                 <td>{{item?.circle_name}}</td>
                                 <td>{{item?.district_name}}</td>

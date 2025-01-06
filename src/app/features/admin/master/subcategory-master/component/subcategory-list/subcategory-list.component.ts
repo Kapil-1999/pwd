@@ -5,6 +5,7 @@ import { CommonService } from '../../../../../shared/services/common.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 import { SubcategoryService } from '../../services/subcategory.service';
+import { CreateSubcategoryComponent } from '../create-subcategory/create-subcategory.component';
 
 @Component({
   selector: 'subcategory-list',
@@ -12,7 +13,7 @@ import { SubcategoryService } from '../../services/subcategory.service';
   styleUrl: './subcategory-list.component.scss'
 })
 export class SubcategoryListComponent {
-  categoryList:any;
+  categoryList: any;
 
   breadcrumbs = [
     { label: 'Home', path: '/admin/dashboard/home' },
@@ -23,36 +24,34 @@ export class SubcategoryListComponent {
   public configuration!: Config;
   public columns!: Columns[];
   isLoading: boolean = false;
-  page = 1;
-  count = 0;
-  tableSize = 10;
-  totlRecords: any;
-  pageIndex: number = 1;
-  tableItemsSize: number = 10;
-  startValue: number = this.pageIndex * this.tableItemsSize - (this.tableItemsSize - 1);
-  lastValue: number = this.startValue + this.tableItemsSize - 1;
+  pagesize = {
+    limit: 10,
+    offset: 1,
+    count: 0,
+  };
   bsModalRef!: BsModalRef;
-  searchKeyword:any
+  searchKeyword: any
 
   constructor(
-    private modalService : BsModalService,
+    private modalService: BsModalService,
     private subcategoryService: SubcategoryService,
-    private notificationSerivce : NotificationService,
+    private notificationSerivce: NotificationService,
     private zone: NgZone
-  ){}
+  ) { }
 
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getSubategoryList(this.page, this.tableSize)
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
   }
 
   setInitialtable() {
     this.columns = [
+      { key: 'S No.', title: 'S No.', width: "5%" },
       { key: 'Category Name', title: 'Category Name' },
       { key: 'Category Name', title: 'Subcategory Name' },
-      { key: 'Status', title: 'Status',width: "5%"},
-      { key: 'Action', title: 'Action', width: "10%"},
+      { key: 'Status', title: 'Status', width: "5%" },
+      { key: 'Action', title: 'Action', width: "10%" },
     ];
   }
 
@@ -73,14 +72,12 @@ export class SubcategoryListComponent {
       pageNo: pagedata,
       pageSize: tableSize,
     };
-  
+
     this.subcategoryService.subcategoryList(page).subscribe(
       (data: any) => {
         this.isLoading = false;
         this.categoryList = data?.body?.result;
-        console.log("check cate", this.categoryList);
-        
-        this.totlRecords = data?.body?.rowCount;
+        this.pagesize.count = data?.body?.rowCount;
       },
       (error) => {
         console.error("Error fetching division list", error);
@@ -92,11 +89,68 @@ export class SubcategoryListComponent {
   }
 
   onTablePageChange(event: number) {
-    this.page = event; 
-    this.startValue = (this.page - 1) * this.tableSize + 1;
-    this.lastValue = this.page * this.tableSize; 
-    this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
-    this.getSubategoryList( this.page, this.tableSize)
+    this.pagesize.offset = event;
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+  }
+
+  paginationEvent($event: any): void {
+    this.pagesize = {
+      ...this.pagesize,
+      limit: $event.pageSize,
+      offset: $event.pageIndex + 1,
+    };
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+  }
+
+  onCreateCate(value: any) {
+    const initialState: ModalOptions = {
+      initialState: {
+        editData: value ? value : ''
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      CreateSubcategoryComponent,
+      Object.assign(initialState, {
+        class: 'modal-md modal-dialog-centered alert-popup',
+      })
+    );
+    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+      this.pagesize.offset = 1;
+      this.pagesize.limit = 10;
+      this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+    });
+  }
+
+  onDeletesub(item:any) {
+    let url = this.subcategoryService.deleteSubCategory(item?.sub_category_id)
+    const initialState: ModalOptions = {
+      initialState: {
+        title: item?.sub_category_name,
+        content: 'Are you sure you want to delete?',
+        primaryActionLabel: 'Delete',
+        secondaryActionLabel: 'Cancel',
+        service: url
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      DeleteConfirmationComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: "modal-md modal-dialog-centered",
+      })
+    );
+    this.bsModalRef?.content.mapdata.subscribe(
+      (value: any) => {
+        if (value?.status == 200) {
+          this.notificationSerivce.successAlert(value?.body?.actionResponse);
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 10;
+          this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+        } else {
+          this.notificationSerivce.errorAlert(value?.title);
+        }
+      }
+    );
   }
 
 }

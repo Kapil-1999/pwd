@@ -4,17 +4,12 @@
         <div class="header-part">
             <span>Subcategory Master</span>
             <div class="counting">
-                <span>
-                    {{ totlRecords > 0 ? startValue : 0 }} -
-                    {{ lastValue > totlRecords ? totlRecords : lastValue }}
-                    OF {{ totlRecords > 0 ? totlRecords : 0 }} Subcategory
-                </span>
             </div>
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    <pagination-controls id="pg1" [maxSize]="10" [responsive]="true" [nextLabel]="''"
-                        [previousLabel]="''" (pageChange)="onTablePageChange($event)">
-                    </pagination-controls>
+                    <button class="btn btn-primary" (click)="onCreateCate('')">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Create Subcategory
+                    </button>
                 </div>
 
             </div>
@@ -33,9 +28,9 @@
                 </div>
             </div>
             <div class="right-section">
-                <button class="btn btn-primary">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create Subcategory
-                </button>
+                <mat-paginator [length]="pagesize.count" [pageSize]="pagesize.limit" [pageIndex]="pagesize.offset - 1"
+                (page)="paginationEvent($event)" [pageSizeOptions]="[10, 25, 50]" aria-label="Select page">
+            </mat-paginator>
             </div>
         </div>
         <div class="row">
@@ -43,13 +38,24 @@
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
                         <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
-                            [items]="categoryList | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: totlRecords }"></app-skeleton-loader>
+                            [items]="categoryList | paginate: {
+                                id: 'subcatID',
+                                itemsPerPage: pagesize.limit,
+                                currentPage: pagesize.offset,
+                                totalItems: pagesize.count
+                              } "></app-skeleton-loader>
                     </ng-container>
                     <ng-template #content>
-                        <ngx-table [configuration]="configuration"
-                            [data]="categoryList | searchFilter: searchKeyword | paginate: { id: 'pg1', itemsPerPage: tableSize, currentPage: page, totalItems: totlRecords }"
+                        <ngx-table #table [configuration]="configuration" [pagination]="pagesize"
+                            [data]="categoryList | searchFilter: searchKeyword | paginate: {
+                                id: 'subcatID',
+                                itemsPerPage: pagesize.limit,
+                                currentPage: pagesize.offset,
+                                totalItems: pagesize.count
+                              }"
                             [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
+                                <td>{{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}</td>
                                 <td>{{item?.category_name}}</td>
                                 <td>{{item?.sub_category_name}}</td>
                                 <td>
@@ -61,9 +67,9 @@
                                 </td>
                                 <td>
                                     <a class="icon">
-                                        <button class="btn btn-success" ><i
+                                        <button class="btn btn-success" (click)="onCreateCate(item)"><i
                                                 class="fa fa-pencil"></i> Edit</button>
-                                        <button class="btn btn-danger" ><i
+                                        <button class="btn btn-danger" (click)="onDeletesub(item)"><i
                                                 class="fa fa-trash"></i> Delete</button>
 
                                     </a>

@@ -35,7 +35,6 @@ export class CreateZoneComponent {
   ) {}
 
   ngOnInit() {
-    console.log("check edit", this.editData);
     this.setInitialvalue();
   }
 

@@ -3,18 +3,11 @@
     <div class="card-header">
         <div class="header-part">
             <span>User Master</span>
-            <div class="counting">
-                <span>
-                    {{ totlRecords > 0 ? startValue : 0 }} -
-                    {{ lastValue > totlRecords ? totlRecords : lastValue }}
-                    OF {{ totlRecords > 0 ? totlRecords : 0 }} User
-                </span>
-            </div>
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    <pagination-controls id="pg3" [maxSize]="10" [responsive]="true" [nextLabel]="''"
-                        [previousLabel]="''" (pageChange)="onTablePageChange($event)">
-                    </pagination-controls>
+                    <button class="btn btn-primary" (click)="onCreateuser('')">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Create District
+                    </button>
                 </div>
 
             </div>
@@ -22,42 +15,41 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="header-container-user mb-3">
-            <div class="left-section-user">
-                <div class="row">
-                    <div class="col-md-3">
-                    <ngx-select-dropdown [config]="config" [(ngModel)]="selectedDepartment"  [options]="deparmentList" >
-                    </ngx-select-dropdown>
-                    </div>
-                    <div class="col-md-3">
-                        <ngx-select-dropdown [config]="config1" [(ngModel)]="selectedDesignation"   [options]="desigantionList" >
-                        </ngx-select-dropdown>
-                    </div>
-                </div>
+        <div class="row mb-2">
+            <div class="col-md-3">
+                <ngx-select-dropdown [config]="config" [(ngModel)]="selectedDepartment" [options]="deparmentList">
+                </ngx-select-dropdown>
             </div>
-            <div class="right-section-user">
-                <button class="btn btn-primary" (click)="onCreateuser('')">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create User
-                </button>
+            <div class="col-md-3">
+                <ngx-select-dropdown [config]="config1" [(ngModel)]="selectedDesignation"
+                    [options]="desigantionList">
+                </ngx-select-dropdown>
+            </div>
+            <div class="col-md-6">
+                <mat-paginator [length]="pagesize.count" [pageSize]="pagesize.limit"
+                    [pageIndex]="pagesize.offset - 1" (page)="paginationEvent($event)"
+                    [pageSizeOptions]="[10, 25, 50]" aria-label="Select page">
+                </mat-paginator>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
-                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
-                            [items]="userList | paginate: { id: 'pg3', itemsPerPage: tableSize, currentPage: page, totalItems: count }"></app-skeleton-loader>
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="userList | paginate: {  id: 'userID',
+                            itemsPerPage: pagesize.limit,
+                            currentPage: pagesize.offset,
+                            totalItems: pagesize.count}"></app-skeleton-loader>
                     </ng-container>
                     <ng-template #content>
-                        <ngx-table  [configuration]="configuration" [data]="userList | searchFilter: searchKeyword
+                        <ngx-table #table [configuration]="configuration" [pagination]="pagesize" [data]="userList | searchFilter: searchKeyword
                         | paginate
-                        : {
-                            id: 'pg3',
-                            itemsPerPage: tableSize,
-                            currentPage: page,
-                            totalItems: count
-                          } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
+                        : {  id: 'userID',
+                            itemsPerPage: pagesize.limit,
+                            currentPage: pagesize.offset,
+                            totalItems: pagesize.count} " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
+                                <td>{{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}</td>
                                 <td>{{item?.department_name || "NA"}}</td>
                                 <td>{{item?.designation_name || "NA"}}</td>
                                 <td>{{item?.chief_eng_name || "NA"}}</td>
@@ -73,29 +65,27 @@
                                 <td>{{item?.email_id || "NA"}}</td>
                                 <td>
                                     <ng-container *ngIf="item?.img_path; else noImage">
-                                        <img 
-                                          class="user-image" 
-                                          [src]="imgeUrl + item?.img_path" 
-                                          alt=""
-                                        />
-                                      </ng-container>
-                                      <ng-template #noImage>
+                                        <img class="user-image" [src]="imgeUrl + item?.img_path" alt="" />
+                                    </ng-container>
+                                    <ng-template #noImage>
                                         NA
-                                      </ng-template>
-                                    
+                                    </ng-template>
+
                                 </td>
                                 <td>
                                     @if (item?.is_active == true) {
-                                    <span >Active</span>
+                                    <span>Active</span>
                                     }@else {
-                                    <span >Inactive</span>
+                                    <span>Inactive</span>
                                     }
                                 </td>
                                 <td>
                                     <a class="icon">
-                                        <button class="btn btn-success" (click)="onCreateuser(item)"><i class="fa fa-pencil"></i>  Edit</button>                                
-                                        <button class="btn btn-danger" (click)="deleteUser(item)"><i class="fa fa-trash"></i>  Delete</button>
-                                        
+                                        <button class="btn btn-success" (click)="onCreateuser(item)"><i
+                                                class="fa fa-pencil"></i> Edit</button>
+                                        <button class="btn btn-danger" (click)="deleteUser(item)"><i
+                                                class="fa fa-trash"></i> Delete</button>
+
                                     </a>
                                 </td>
                             </ng-template>

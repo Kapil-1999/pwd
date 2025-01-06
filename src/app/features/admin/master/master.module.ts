@@ -28,6 +28,7 @@ import { CategoryListComponent } from './category-master/component/category-list
 import { AddCategoryComponent } from './category-master/component/add-category/add-category.component';
 import { ManageSubcategoryComponent } from './subcategory-master/pages/manage-subcategory/manage-subcategory.component';
 import { SubcategoryListComponent } from './subcategory-master/component/subcategory-list/subcategory-list.component';
+import { CreateSubcategoryComponent } from './subcategory-master/component/create-subcategory/create-subcategory.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { SubcategoryListComponent } from './subcategory-master/component/subcate
     CategoryListComponent,
     AddCategoryComponent,
     ManageSubcategoryComponent,
-    SubcategoryListComponent
+    SubcategoryListComponent,
+    CreateSubcategoryComponent
   ],
   imports: [
     CommonModule,
