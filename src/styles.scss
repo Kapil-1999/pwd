@@ -1,3 +1,5 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css'; 
+
 @import "./styles/ngx-easy-table";
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import "./styles/colors";
@@ -185,4 +187,9 @@ pagination-controls {
   @include breakpoint-range($min: md, $max: lg) {
     max-width: 90%;
   }
+}
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 100 !important;
 }

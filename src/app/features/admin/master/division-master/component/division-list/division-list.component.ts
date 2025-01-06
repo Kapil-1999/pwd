@@ -13,7 +13,7 @@ import { DeleteConfirmationComponent } from '../../../../../shared/component/del
   styleUrl: './division-list.component.scss'
 })
 export class DivisionListComponent {
-  divisionListData:any;
+  divisionListData: any;
 
   breadcrumbs = [
     { label: 'Home', path: '/admin/dashboard/home' },
@@ -24,38 +24,36 @@ export class DivisionListComponent {
   public configuration!: Config;
   public columns!: Columns[];
   isLoading: boolean = false;
-  page = 1;
-  count = 0;
-  tableSize = 10;
-  totlRecords: any;
-  pageIndex: number = 1;
-  tableItemsSize: number = 10;
-  startValue: number = this.pageIndex * this.tableItemsSize - (this.tableItemsSize - 1);
-  lastValue: number = this.startValue + this.tableItemsSize - 1;
+  pagesize = {
+    limit: 10,
+    offset: 1,
+    count: 0,
+  };
   bsModalRef!: BsModalRef;
-  searchKeyword:any
+  searchKeyword: any
 
   constructor(
-    private modalService : BsModalService,
+    private modalService: BsModalService,
     private divisionService: DivisionService,
-    private notificationSerivce : NotificationService,
+    private notificationSerivce: NotificationService,
     private zone: NgZone
-  ){}
+  ) { }
 
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getDivisionList(this.page, this.tableSize)
+    this.getDivisionList(this.pagesize.offset, this.pagesize.limit)
   }
 
   setInitialtable() {
     this.columns = [
+      { key: 'S No.', title: 'S No.' },
       { key: 'Zone Name', title: 'Zone Name' },
       { key: 'Circle Name', title: 'Circle Name' },
       { key: 'City Name', title: 'City Name' },
       { key: 'Division Name', title: 'Division Name' },
-      { key: 'Status', title: 'Status',width: "5%"},
-      { key: 'Action', title: 'Action', width: "10%"},
+      { key: 'Status', title: 'Status', width: "5%" },
+      { key: 'Action', title: 'Action', width: "10%" },
     ];
   }
 
@@ -76,12 +74,12 @@ export class DivisionListComponent {
       pageNo: pagedata,
       pageSize: tableSize,
     };
-  
+
     this.divisionService.divisionList(page).subscribe(
       (data) => {
         this.isLoading = false;
         this.divisionListData = data?.body?.result;
-        this.totlRecords = data?.body?.rowCount;
+        this.pagesize.count = data?.body?.rowCount;
       },
       (error) => {
         console.error("Error fetching division list", error);
@@ -93,18 +91,15 @@ export class DivisionListComponent {
   }
 
   onTablePageChange(event: number) {
-    this.page = event; 
-    this.startValue = (this.page - 1) * this.tableSize + 1;
-    this.lastValue = this.page * this.tableSize; 
-    this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
-    this.getDivisionList( this.page, this.tableSize)
+    this.pagesize.offset = event;
+    this.getDivisionList(this.pagesize.offset, this.pagesize.limit)
   }
-  
-  
-  onCreateDivision(value:any) {
+
+
+  onCreateDivision(value: any) {
     const initialState: ModalOptions = {
       initialState: {
-        editData:value ? value : ''
+        editData: value ? value : ''
       },
     };
     this.bsModalRef = this.modalService.show(
@@ -113,39 +108,53 @@ export class DivisionListComponent {
         class: 'modal-md modal-dialog-centered alert-popup',
       })
     );
-    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {            
-      this.getDivisionList(this.page, this.tableSize);
+    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+      this.pagesize.offset = 1;
+      this.pagesize.limit = 10;
+      this.getDivisionList(this.pagesize.offset, this.pagesize.limit);
     });
   }
 
   onDeleteZone(item: any) {
-      let url = this.divisionService.deleteDivision(item?.zone_id)
-      const initialState: ModalOptions = {
-        initialState: {
-          title: item?.division_name,
-          content: 'Are you sure you want to delete?',
-          primaryActionLabel: 'Delete',
-          secondaryActionLabel: 'Cancel',
-          service: url
-        },
-      };
-      this.bsModalRef = this.modalService.show(
-        DeleteConfirmationComponent,
-        Object.assign(initialState, {
-          id: "confirmation",
-          class: "modal-md modal-dialog-centered",
-        })
-      );
-      this.bsModalRef?.content.mapdata.subscribe(
-        (value: any) => {
-          if (value?.status == 200) {
-            this.notificationSerivce.successAlert(value?.body?.actionResponse);
-            this.getDivisionList(this.page, this.tableSize)
-          } else {
-            this.notificationSerivce.errorAlert(value?.title);
-          }
+    let url = this.divisionService.deleteDivision(item?.zone_id)
+    const initialState: ModalOptions = {
+      initialState: {
+        title: item?.division_name,
+        content: 'Are you sure you want to delete?',
+        primaryActionLabel: 'Delete',
+        secondaryActionLabel: 'Cancel',
+        service: url
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      DeleteConfirmationComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: "modal-md modal-dialog-centered",
+      })
+    );
+    this.bsModalRef?.content.mapdata.subscribe(
+      (value: any) => {
+        if (value?.status == 200) {
+          this.notificationSerivce.successAlert(value?.body?.actionResponse);
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 10;
+          this.getDivisionList(this.pagesize.offset, this.pagesize.limit)
+        } else {
+          this.notificationSerivce.errorAlert(value?.title);
         }
-      );
-    }
+      }
+    );
+  }
+
+  paginationEvent($event: any): void {
+    this.pagesize = {
+      ...this.pagesize,
+      limit: $event.pageSize,
+      offset: $event.pageIndex + 1,
+    };
+    this.getDivisionList(this.pagesize.offset, this.pagesize.limit)
+
+  }
 }
 

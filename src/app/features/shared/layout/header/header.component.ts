@@ -11,6 +11,7 @@ import { ADMIN_MENU } from '../../constant/menu/menu';
 export class HeaderComponent {
 
   menuList: any;
+  userDetails:any
 
   constructor(
     private renderer: Renderer2, 
@@ -22,6 +23,14 @@ export class HeaderComponent {
   
   ngOnInit(): void {
     this.menuList = ADMIN_MENU;
+    this.getUserDetails()
+  }
+
+  getUserDetails() {
+   let user = this.localStorageService.getItem('user');
+   if (user) {
+    this.userDetails = JSON.parse(user);
+  }    
   }
   
   @HostListener('document:click', ['$event'])

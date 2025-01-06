@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login/login.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
@@ -14,6 +14,8 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { SkeletonLoaderComponent } from './component/skeleton-loader/skeleton-loader.component';
 import { SearchFilterPipe } from './pipe/serach.pipe';
 import { DeleteConfirmationComponent } from './component/delete-confirmation/delete-confirmation.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { DeleteConfirmationComponent } from './component/delete-confirmation/del
     ModalModule.forRoot(),
     SelectDropDownModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],
   exports: [
     HeaderComponent,
@@ -48,7 +51,9 @@ import { DeleteConfirmationComponent } from './component/delete-confirmation/del
     FormsModule,
     SkeletonLoaderComponent,
     SearchFilterPipe,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+    MatPaginatorModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class SharedModule { }

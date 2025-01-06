@@ -22,15 +22,11 @@ export class CircleListComponent {
   public configuration!: Config;
   public columns!: Columns[];
   isLoading: boolean = false;
-  page = 1;
-  count = 0;
-  tableSize = 10;
-  totlRecords: any;
-  pageIndex: number = 1;
-  tableItemsSize: number = 10;
-  startValue: number =
-    this.pageIndex * this.tableItemsSize - (this.tableItemsSize - 1);
-  lastValue: number = this.startValue + this.tableItemsSize - 1;
+  pagesize = {
+    limit: 10,
+    offset: 1,
+    count: 0,
+  };
   bsModalRef!: BsModalRef;
   searchKeyword: any;
 
@@ -48,6 +44,7 @@ export class CircleListComponent {
 
   setInitialtable() {
     this.columns = [
+      { key: 'S No.', title: 'S No.' },
       { key: 'Zone Name', title: 'Zone Name' },
       { key: 'Circle Name', title: 'Circle Name' },
       { key: 'Status', title: 'Status', width: "5%" },
@@ -73,15 +70,12 @@ export class CircleListComponent {
         this.isLoading = false;
       }, 600);
       this.circleList = res?.body?.result;
-      this.totlRecords = this.circleList.length;
+      this.pagesize.count = this.circleList?.length;
     })
   }
 
   onTablePageChange(event: number) {
-    this.page = event;
-    this.startValue = (this.page - 1) * this.tableSize + 1;
-    this.lastValue = this.page * this.tableSize;
-    this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
+    this.pagesize.offset = event;
   }
 
   onCreateCircle(value: any) {
@@ -97,6 +91,8 @@ export class CircleListComponent {
       })
     );
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+      this.pagesize.offset = 1;
+      this.pagesize.limit = 10;
       this.getCircleList();
     });
   }
@@ -124,12 +120,22 @@ export class CircleListComponent {
       (value: any) => {
         if (value?.status == 200) {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 10;
           this.getCircleList();
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
       }
     );
+  }
+
+  paginationEvent($event: any): void {
+    this.pagesize = {
+      ...this.pagesize,
+      limit: $event.pageSize,
+      offset: $event.pageIndex + 1,
+    };
   }
 
 

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ZoneService } from '../../services/zone.service';
 import { CommonService } from '../../../../../shared/services/common.service';
-import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+import { APIDefinition, Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { CreateZoneComponent } from '../create-zone/create-zone.component';
 import { NotificationService } from '../../../../../shared/services/notification.service';
@@ -14,6 +14,8 @@ import { DeleteConfirmationComponent } from '../../../../../shared/component/del
 })
 export class ZoneListComponent {
   zoneList: any;
+  @ViewChild('table', { static: true }) table!: APIDefinition;
+
 
   breadcrumbs = [
     { label: 'Home', path: '/admin/dashboard/home' },
@@ -23,25 +25,19 @@ export class ZoneListComponent {
   public configuration!: Config;
   public columns!: Columns[];
   isLoading: boolean = false;
-  page = 1;
-  count = 0;
-  tableSize = 10;
-  totlRecords: any;
-  pageIndex: number = 1;
-  tableItemsSize: number = 10;
-  startValue: number =
-    this.pageIndex * this.tableItemsSize - (this.tableItemsSize - 1);
-  lastValue: number = this.startValue + this.tableItemsSize - 1;
+  pagesize = {
+    limit: 10,
+    offset: 1,
+    count: 0,
+  };
+
   bsModalRef!: BsModalRef;
-  searchKeyword:any
-
-
-
+  searchKeyword: any
   constructor(
     private commonService: CommonService,
-    private modalService : BsModalService,
+    private modalService: BsModalService,
     private zoneService: ZoneService,
-    private notificationSerivce : NotificationService
+    private notificationSerivce: NotificationService
   ) { };
 
   ngOnInit() {
@@ -52,10 +48,11 @@ export class ZoneListComponent {
 
   setInitialtable() {
     this.columns = [
+      { key: 'S No.', title: 'S No.' },
       { key: 'Zone Name', title: 'Zone Name' },
       { key: 'State Name', title: 'State Name' },
-      { key: 'Status', title: 'Status',width: "5%"},
-      { key: 'Action', title: 'Action', width: "10%"},
+      { key: 'Status', title: 'Status', width: "5%" },
+      { key: 'Action', title: 'Action', width: "10%" },
     ];
   }
 
@@ -78,7 +75,7 @@ export class ZoneListComponent {
           this.isLoading = false;
         }, 600);
         this.zoneList = data?.body?.result;
-        this.totlRecords = this.zoneList.length;
+        this.pagesize.count = this.zoneList?.length;
       },
       (error) => {
         setTimeout(() => {
@@ -90,17 +87,14 @@ export class ZoneListComponent {
   }
 
   onTablePageChange(event: number) {
-    this.page = event; 
-    this.startValue = (this.page - 1) * this.tableSize + 1;
-    this.lastValue = this.page * this.tableSize; 
-    this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
+    this.pagesize.offset = event;
   }
 
 
-  onCreateZone(value:any) {
+  onCreateZone(value: any) {
     const initialState: ModalOptions = {
       initialState: {
-        editData:value ? value : ''
+        editData: value ? value : ''
       },
     };
     this.bsModalRef = this.modalService.show(
@@ -109,12 +103,14 @@ export class ZoneListComponent {
         class: 'modal-md modal-dialog-centered alert-popup',
       })
     );
-    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {            
+    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+      this.pagesize.offset = 1;
+      this.pagesize.limit = 10;
       this.getZoneList();
     });
   }
 
-  onDeleteZone(item:any) {        
+  onDeleteZone(item: any) {
     let url = this.zoneService.deleteZone(item?.zone_id);
     const initialState: ModalOptions = {
       initialState: {
@@ -133,9 +129,11 @@ export class ZoneListComponent {
       })
     );
     this.bsModalRef?.content.mapdata.subscribe(
-      (value: any) => {        
+      (value: any) => {
         if (value?.status == 200) {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 10;
           this.getZoneList()
         } else {
           this.notificationSerivce.errorAlert(value?.title);
@@ -143,10 +141,14 @@ export class ZoneListComponent {
       }
     );
   }
-  
+
+  paginationEvent($event: any): void {
+    this.pagesize = {
+      ...this.pagesize,
+      limit: $event.pageSize,
+      offset: $event.pageIndex + 1,
+    };
+  }
+
 
 }
-
-
-
-

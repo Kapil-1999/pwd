@@ -3,18 +3,11 @@
     <div class="card-header">
         <div class="header-part">
             <span>District Master</span>
-            <div class="counting">
-                <span>
-                    {{ totlRecords > 0 ? startValue : 0 }} -
-                    {{ lastValue > totlRecords ? totlRecords : lastValue }}
-                    OF {{ totlRecords > 0 ? totlRecords : 0 }} District
-                </span>
-            </div>
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    <pagination-controls id="pg3" [maxSize]="10" [responsive]="true" [nextLabel]="''"
-                        [previousLabel]="''" (pageChange)="onTablePageChange($event)">
-                    </pagination-controls>
+                    <button class="btn btn-primary" (click)="onCreateDistrict('')">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Create District
+                    </button>
                 </div>
 
             </div>
@@ -32,9 +25,9 @@
                 </div>
             </div>
             <div class="right-section">
-                <button class="btn btn-primary" (click)="onCreateDistrict('')">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create District
-                </button>
+                <mat-paginator [length]="pagesize.count" [pageSize]="pagesize.limit" [pageIndex]="pagesize.offset - 1"
+                (page)="paginationEvent($event)" [pageSizeOptions]="[10, 25, 50]" aria-label="Select page">
+            </mat-paginator>
             </div>
         </div>
         <div class="row">
@@ -42,18 +35,21 @@
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
                         <app-skeleton-loader [isLoading]="isLoading" [columns]="columns"
-                            [items]="districtList | paginate: { id: 'pg3', itemsPerPage: tableSize, currentPage: page, totalItems: count }"></app-skeleton-loader>
+                            [items]="districtList | paginate: {  id: 'distID',
+                            itemsPerPage: pagesize.limit,
+                            currentPage: pagesize.offset,
+                            totalItems: pagesize.count}"></app-skeleton-loader>
                     </ng-container>
                     <ng-template #content>
-                        <ngx-table  [configuration]="configuration" [data]="districtList | searchFilter: searchKeyword
+                        <ngx-table #table  [configuration]="configuration" [pagination]="pagesize" [data]="districtList | searchFilter: searchKeyword
                         | paginate
                         : {
-                            id: 'pg3',
-                            itemsPerPage: tableSize,
-                            currentPage: page,
-                            totalItems: count
-                          } " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
+                            id: 'distID',
+                            itemsPerPage: pagesize.limit,
+                            currentPage: pagesize.offset,
+                            totalItems: pagesize.count} " [columns]="columns" [noResultsTemplate]="noResultsTemplate">
                             <ng-template let-item let-index="index">
+                                <td>{{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}</td>
                                 <td>{{item?.circle_name}}</td>
                                 <td>{{item?.district_name}}</td>
                                 <td>

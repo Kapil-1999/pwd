@@ -30,15 +30,11 @@ export class UserListComponent {
   public configuration!: Config;
   public columns!: Columns[];
   isLoading: boolean = false;
-  page = 1;
-  count = 0;
-  tableSize = 10;
-  totlRecords: any;
-  pageIndex: number = 1;
-  tableItemsSize: number = 10;
-  startValue: number =
-    this.pageIndex * this.tableItemsSize - (this.tableItemsSize - 1);
-  lastValue: number = this.startValue + this.tableItemsSize - 1;
+  pagesize = {
+    limit: 10,
+    offset: 1,
+    count: 0,
+  };
   bsModalRef!: BsModalRef;
   searchKeyword: any;
   deparmentList: any
@@ -78,6 +74,7 @@ export class UserListComponent {
 
   setInitialtable() {
     this.columns = [
+      { key: 'S No.', title: 'S No' },
       { key: 'Department', title: 'Department' },
       { key: 'Designation', title: 'Designation' },
       { key: 'Chief Engineer', title: 'Chief Engineer' },
@@ -121,7 +118,7 @@ export class UserListComponent {
         this.isLoading = false;
       }, 600);
       this.userList = res?.body?.result;
-      this.totlRecords = this.userList.length;
+      this.pagesize.count = res?.body?.rowCount;
     })
   }
 
@@ -133,10 +130,7 @@ export class UserListComponent {
 
 
   onTablePageChange(event: number) {
-    this.page = event;
-    this.startValue = (this.page - 1) * this.tableSize + 1;
-    this.lastValue = this.page * this.tableSize;
-    this.lastValue = this.lastValue > this.totlRecords ? this.totlRecords : this.lastValue;
+    this.pagesize.offset = event;
   }
 
 
@@ -174,6 +168,8 @@ export class UserListComponent {
         })
       );
       this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+        this.pagesize.offset = 1;
+        this.pagesize.limit = 10;
         this.getUserList();
       });
     }
@@ -201,11 +197,21 @@ export class UserListComponent {
       (value: any) => {
         if (value?.status == 200) {
           this.tosterService.successAlert(value?.body?.actionResponse);
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 10;
           this.getUserList();
         } else {
           this.tosterService.errorAlert(value?.title);
         }
       }
     );
+  }
+
+  paginationEvent($event: any): void {
+    this.pagesize = {
+      ...this.pagesize,
+      limit: $event.pageSize,
+      offset: $event.pageIndex + 1,
+    };
   }
 }
