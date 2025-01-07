@@ -76,7 +76,7 @@ export class SubcategoryListComponent {
     this.subcategoryService.subcategoryList(page).subscribe(
       (data: any) => {
         this.isLoading = false;
-        this.categoryList = data?.body?.result;
+        this.categoryList = data?.body?.result || [];
         this.pagesize.count = data?.body?.rowCount;
       },
       (error) => {

@@ -1,23 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
+import { Config, Columns, DefaultConfig, APIDefinition } from 'ngx-easy-table';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
-import { DistrictService } from '../../services/district.service';
-import { CreateDistrictComponent } from '../create-district/create-district.component';
+import { CommonService } from '../../../../../shared/services/common.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
+import { DesignationService } from '../../services/designation.service';
+import { CreateDesignationComponent } from '../create-designation/create-designation.component';
 
 @Component({
-  selector: 'district-list',
-  templateUrl: './district-list.component.html',
-  styleUrl: './district-list.component.scss'
+  selector: 'designation-list',
+  templateUrl: './designation-list.component.html',
+  styleUrl: './designation-list.component.scss'
 })
-export class DistrictListComponent {
-  districtList: any;
+export class DesignationListComponent {
+  designationList: any[] = [];
+  @ViewChild('table', { static: true }) table!: APIDefinition;
+
 
   breadcrumbs = [
     { label: 'Home', path: '/admin/dashboard/home' },
     { label: 'Master', path: '/admin/master/zone-master' },
-    { label: 'District Master', path: '/admin/master/disrict-master' }
+    { label: 'Designation Master', path: '/admin/master/designation-master' }
   ];
   public configuration!: Config;
   public columns!: Columns[];
@@ -27,30 +30,31 @@ export class DistrictListComponent {
     offset: 1,
     count: 0,
   };
-  bsModalRef!: BsModalRef;
-  searchKeyword: any;
 
+  bsModalRef!: BsModalRef;
+  searchKeyword: any
   constructor(
-    private districtService: DistrictService,
     private modalService: BsModalService,
+    private designationService: DesignationService,
     private notificationSerivce: NotificationService
   ) { };
 
   ngOnInit() {
     this.tableProperty();
-    this.setInitialtable();
-    this.getDistrictList()
+    this.setInitialtable()
+    this.getDesignationList()
   }
 
   setInitialtable() {
     this.columns = [
-      { key: 'S No.', title: 'S No.' },
-      { key: 'Circle Name', title: 'Circle Name' },
-      { key: 'District Name', title: 'District Name' },
+      { key: 'S No.', title: 'S No.', width: "5%" },
+      { key: 'Designation Name', title: 'Designation Name' },
+      { key: 'Description', title: 'Description' },
       { key: 'Status', title: 'Status', width: "5%" },
       { key: 'Action', title: 'Action', width: "10%" },
     ];
   }
+
 
   // for table property Method here
   tableProperty() {
@@ -62,30 +66,42 @@ export class DistrictListComponent {
     this.configuration.paginationEnabled = false;
   }
 
-  getDistrictList() {
+  getDesignationList() {
     this.isLoading = true;
-    this.districtService.districtList().subscribe((res) => {
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 600);
-      this.districtList = res?.body?.result || [];
-      this.pagesize.count = this.districtList?.length;
-    })
+    const page = {
+      pageNo: 1,
+      pageSize: 5000,
+    };
+    this.designationService.desigantion(page).subscribe(
+      (data) => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 600);
+        this.designationList = data?.body?.result || [];
+        this.pagesize.count = data?.body?.rowCount;
+      },
+      (error) => {
+        setTimeout(() => {
+          this.isLoading = false;
+          this.designationList = []
+        }, 600);
+        console.error("Error fetching Designation list", error);
+      }
+    );
   }
-
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
   }
 
-  onCreateDistrict(value: any) {
+  onCreateDesignation(value: any) {
     const initialState: ModalOptions = {
       initialState: {
         editData: value ? value : ''
       },
     };
     this.bsModalRef = this.modalService.show(
-      CreateDistrictComponent,
+      CreateDesignationComponent,
       Object.assign(initialState, {
         class: 'modal-md modal-dialog-centered alert-popup',
       })
@@ -93,16 +109,15 @@ export class DistrictListComponent {
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
       this.pagesize.limit = 10;
-      this.getDistrictList();
+      this.getDesignationList()
     });
   }
 
-
-  onDeleteDistrict(item: any) {
-    let url = this.districtService.deleteDistrict(item?.circle_id)
+  onDeleteDesignation(item: any) {
+    let url = this.designationService.deleteDesigantion(item?.dept_id)
     const initialState: ModalOptions = {
       initialState: {
-        title: item?.district_name,
+        title: item?.department_name,
         content: 'Are you sure you want to delete?',
         primaryActionLabel: 'Delete',
         secondaryActionLabel: 'Cancel',
@@ -122,7 +137,7 @@ export class DistrictListComponent {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
           this.pagesize.limit = 10;
-          this.getDistrictList();
+          this.getDesignationList()
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
@@ -137,4 +152,8 @@ export class DistrictListComponent {
       offset: $event.pageIndex + 1,
     };
   }
+
+
 }
+
+

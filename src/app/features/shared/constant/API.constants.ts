@@ -34,4 +34,10 @@ export const API_CONSTANTS = {
     SubCategory : "SubCategory?pageNo={pageNo}&pageSize={pageSize}",
     addSubcategory : 'SubCategory',
     updateDelgetSubCat : "SubCategory/{id}",
+    departmentData : 'Department?pageNo={pageNo}&pageSize={pageSize}',
+    createDepartment : 'Department',
+    getUpdateDeleteDepartment : 'Department/{id}',
+    desigantion : 'Designation?pageNo={pageNo}&pageSize={pageSize}',
+    createDesigantion : 'Designation',
+    getUpdateDeleteDes : 'Designation/{id}'
 }
