@@ -31,6 +31,17 @@
                             Subcategory Name is Required
                         </span>
                     </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Form Code</label>
+                        <select class="form-control" formControlName="formCode">
+                            <option *ngFor="let value of formCodeList" [ngValue]="value.id">{{ value.value }}</option>
+                        </select>
+                        <span *ngIf="subcateForm?.get('formCode')?.invalid &&
+                                    (subcateForm?.get('formCode')?.dirty || subcateForm?.get('formCode')?.touched)"
+                            class="text-danger">
+                            Form Code is Required
+                        </span>
+                    </div>
                  
                     <div class="col-md-6 mb-2">
                         <label class="form-label">Status</label>
