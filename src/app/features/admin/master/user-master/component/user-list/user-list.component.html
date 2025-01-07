@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 <mat-paginator [length]="pagesize.count" [pageSize]="pagesize.limit"
                     [pageIndex]="pagesize.offset - 1" (page)="paginationEvent($event)"
-                    [pageSizeOptions]="[10, 25, 50]" aria-label="Select page">
+                    [pageSizeOptions]="[10, 25, 50,100]" aria-label="Select page">
                 </mat-paginator>
             </div>
         </div>

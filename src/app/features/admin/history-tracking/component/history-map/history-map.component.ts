@@ -4,14 +4,14 @@ import * as L from 'leaflet';
 
 
 @Component({
-  selector: 'live-map-tracking',
-  templateUrl: './live-map-tracking.component.html',
-  styleUrl: './live-map-tracking.component.scss'
+  selector: 'history-map',
+  templateUrl: './history-map.component.html',
+  styleUrl: './history-map.component.scss'
 })
-export class LiveMapTrackingComponent {
+export class HistoryMapComponent {
   breadcrumbs = [
     { label: 'Home', path: '/admin/dashboard/home' },
-    { label: 'Live Tracking', path: '/admin/live/track' },
+    { label: 'History', path: '/admin/history/play-back' },
   ];
 
   map: L.Map | any;
@@ -31,12 +31,12 @@ export class LiveMapTrackingComponent {
     const L = leafletModule.default;
 
     // Initialize the map with specified center and zoom level
-    this.map = L.map('map_canvas', {
+    this.map = L.map('history_map', {
       center: [28.6139, 77.2088],
       zoom: 6
     });
 
-    const mapElement = document.getElementById('map_canvas');
+    const mapElement = document.getElementById('history_map');
     if (mapElement) {
       mapElement.style.zIndex = '100'; // Adjust the z-index as needed
     }
@@ -67,5 +67,6 @@ export class LiveMapTrackingComponent {
 
     // Add layers control to the map
     L.control.layers(baseMaps).addTo(this.map);
+
   }
 }

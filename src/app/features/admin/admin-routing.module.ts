@@ -10,6 +10,9 @@ const routes: Routes = [
   },
   {
     path :'live', loadChildren : () => import('./live-tracking/live-tracking.module').then(m => m.LiveTrackingModule)
+  },
+  {
+    path :'history', loadChildren : () => import('./history-tracking/history-tracking.module').then(m => m.HistoryTrackingModule)
   }
 ];
 

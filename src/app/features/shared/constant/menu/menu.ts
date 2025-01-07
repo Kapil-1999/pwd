@@ -15,7 +15,7 @@ export const ADMIN_MENU = [
     {
       id: 3,
       name: "History Playback",
-      path: "/user/history/play-back",
+      path: "/admin/history/play-back",
       iconClass: "assets/images/road-map.png",
     },
     {
