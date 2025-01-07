@@ -77,7 +77,7 @@ export class CategoryListComponent {
         setTimeout(() => {
           this.isLoading = false;
         }, 600);
-        this.categoryList = data?.body?.result;
+        this.categoryList = data?.body?.result || [];
         this.pagesize.count = data?.body?.rowCount;
       },
       (error) => {

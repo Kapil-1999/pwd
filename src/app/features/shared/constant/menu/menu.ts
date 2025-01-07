@@ -26,6 +26,18 @@ export const ADMIN_MENU = [
       isOpen: false,
       subNav: [
         {
+          id: 110,
+          name: "Department Master",
+          path: "/admin/master/department-master",
+          iconClass: "fa fa-pencil",
+        },
+        {
+          id: 111,
+          name: "Designation Master",
+          path: "/admin/master/designation-master",
+          iconClass: "fa fa-pencil",
+        },
+        {
           id: 104,
           name: "User Master",
           path: "/admin/master/user-master",

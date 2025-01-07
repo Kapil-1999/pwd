@@ -78,7 +78,7 @@ export class DivisionListComponent {
     this.divisionService.divisionList(page).subscribe(
       (data) => {
         this.isLoading = false;
-        this.divisionListData = data?.body?.result;
+        this.divisionListData = data?.body?.result || [];
         this.pagesize.count = data?.body?.rowCount;
       },
       (error) => {

@@ -69,7 +69,7 @@ export class CircleListComponent {
       setTimeout(() => {
         this.isLoading = false;
       }, 600);
-      this.circleList = res?.body?.result;
+      this.circleList = res?.body?.result || [];
       this.pagesize.count = this.circleList?.length;
     })
   }

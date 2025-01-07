@@ -74,7 +74,7 @@ export class ZoneListComponent {
         setTimeout(() => {
           this.isLoading = false;
         }, 600);
-        this.zoneList = data?.body?.result;
+        this.zoneList = data?.body?.result || [];
         this.pagesize.count = this.zoneList?.length;
       },
       (error) => {

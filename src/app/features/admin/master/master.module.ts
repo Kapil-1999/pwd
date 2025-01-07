@@ -29,6 +29,12 @@ import { AddCategoryComponent } from './category-master/component/add-category/a
 import { ManageSubcategoryComponent } from './subcategory-master/pages/manage-subcategory/manage-subcategory.component';
 import { SubcategoryListComponent } from './subcategory-master/component/subcategory-list/subcategory-list.component';
 import { CreateSubcategoryComponent } from './subcategory-master/component/create-subcategory/create-subcategory.component';
+import { ManageDepartmentComponent } from './department-master/pages/manage-department/manage-department.component';
+import { DepartmentListComponent } from './department-master/component/department-list/department-list.component';
+import { CreateDepartmentComponent } from './department-master/component/create-department/create-department.component';
+import { ManageDesignationComponent } from './designation-master/pages/manage-designation/manage-designation.component';
+import { DesignationListComponent } from './designation-master/component/designation-list/designation-list.component';
+import { CreateDesignationComponent } from './designation-master/component/create-designation/create-designation.component';
 
 
 @NgModule({
@@ -58,7 +64,13 @@ import { CreateSubcategoryComponent } from './subcategory-master/component/creat
     AddCategoryComponent,
     ManageSubcategoryComponent,
     SubcategoryListComponent,
-    CreateSubcategoryComponent
+    CreateSubcategoryComponent,
+    ManageDepartmentComponent,
+    DepartmentListComponent,
+    CreateDepartmentComponent,
+    ManageDesignationComponent,
+    DesignationListComponent,
+    CreateDesignationComponent
   ],
   imports: [
     CommonModule,

@@ -8,10 +8,14 @@ import { ManageDistrictMasterComponent } from './district-master/pages/manage-di
 import { ManageDivisionMasterComponent } from './division-master/pages/manage-division-master/manage-division-master.component';
 import { ManageCategoryComponent } from './category-master/pages/manage-category/manage-category.component';
 import { ManageSubcategoryComponent } from './subcategory-master/pages/manage-subcategory/manage-subcategory.component';
+import { ManageDepartmentComponent } from './department-master/pages/manage-department/manage-department.component';
+import { ManageDesignationComponent } from './designation-master/pages/manage-designation/manage-designation.component';
 
 const routes: Routes = [
   {
     path: '', children: [
+     { path : 'department-master', component: ManageDepartmentComponent},
+     { path : 'designation-master', component: ManageDesignationComponent},
      { path : 'zone-master', component: ManageZoneMasterComponent},
      { path : 'user-master', component: ManageUserMasterComponent},
      { path : 'circle-master', component: ManageCircleMasterComponent},

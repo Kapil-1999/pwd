@@ -117,7 +117,7 @@ export class UserListComponent {
       setTimeout(() => {
         this.isLoading = false;
       }, 600);
-      this.userList = res?.body?.result;
+      this.userList = res?.body?.result || [];
       this.pagesize.count = res?.body?.rowCount;
     })
   }
