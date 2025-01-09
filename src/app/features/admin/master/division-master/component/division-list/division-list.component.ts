@@ -88,7 +88,7 @@ export class DivisionListComponent {
       (data) => {
         this.isLoading = false;
         this.divisionListData = data?.body?.result || [];
-        this.pagesize.count = data?.body?.rowCount;
+        this.pagesize.count = data?.body?.totalRow;
       },
       (error) => {
         console.error("Error fetching division list", error);

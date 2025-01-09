@@ -85,7 +85,7 @@ export class DesignationListComponent {
           this.isLoading = false;
         }, 600);
         this.designationList = data?.body?.result || [];
-        this.pagesize.count = data?.body?.rowCount;
+        this.pagesize.count = data?.body?.totalRow;
       },
       (error) => {
         setTimeout(() => {
@@ -121,10 +121,10 @@ export class DesignationListComponent {
   }
 
   onDeleteDesignation(item: any) {
-    let url = this.designationService.deleteDesigantion(item?.dept_id)
+    let url = this.designationService.deleteDesigantion(item?.designation_id)
     const initialState: ModalOptions = {
       initialState: {
-        title: item?.department_name,
+        title: item?.designation_name,
         content: 'Are you sure you want to delete?',
         primaryActionLabel: 'Delete',
         secondaryActionLabel: 'Cancel',

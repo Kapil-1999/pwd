@@ -98,12 +98,13 @@ export class CreateDistrictComponent {
   }
 
   submit(formvalue: any) {
+    let user = this.commonService.getUserDetails();
     let payload = {
       "district_id": 0,
       "district_name": formvalue?.name,
       "circle_id": formvalue?.circle ? Number(formvalue.circle.value) : 0,
       "is_active": formvalue?.status,
-      "created_by": 1
+      "created_by": user?.user_id
     }
 
     let service = this.districtService.createDistrict(payload);

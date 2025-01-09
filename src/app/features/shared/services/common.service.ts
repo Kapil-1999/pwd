@@ -3,13 +3,15 @@ import { catchError, Observable, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../../http-services/api.service';
 import { API_CONSTANTS } from '../constant/API.constants';
+import { LocalStorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private localStorageService : LocalStorageService
   ) { }
 
   zoneList(stateId: any): Observable<any> {
@@ -136,6 +138,13 @@ export class CommonService {
     return this.apiService.get(url).pipe(
       catchError((error: HttpErrorResponse) => of(error))
     );
+  }
+
+  getUserDetails() {
+    let user = this.localStorageService.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
   }
   
 

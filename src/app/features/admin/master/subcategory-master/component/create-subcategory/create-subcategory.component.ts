@@ -4,6 +4,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { CategoryService } from '../../../category-master/services/category.service';
 import { SubcategoryService } from '../../services/subcategory.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { CommonService } from '../../../../../shared/services/common.service';
 
 @Component({
   selector: 'app-create-subcategory',
@@ -52,7 +53,8 @@ export class CreateSubcategoryComponent {
     private fb: FormBuilder,
     private CategoryService: CategoryService,
     private SubcategoryService: SubcategoryService,
-    private notificationSerivce : NotificationService
+    private notificationSerivce : NotificationService,
+    private commonService : CommonService
 
   ) { }
 
@@ -104,6 +106,8 @@ export class CreateSubcategoryComponent {
   }
 
   submit(formvalue: any) {
+    let user = this.commonService.getUserDetails();
+
     let payload = {
       "sub_category_id": 0,
       "sub_category_name": formvalue?.subcateName,
@@ -111,7 +115,7 @@ export class CreateSubcategoryComponent {
       "category_name": formvalue?.catId?.category_name,
       "form_code": formvalue?.formCode,
       "is_active": formvalue?.status,
-      "created_by": 0
+      "created_by": user?.user_id
     }    
     let service = this.SubcategoryService.createsubCategory(payload);
     if(this.editData) {

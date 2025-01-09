@@ -214,6 +214,8 @@ export class CrateChiefEngComponent {
 
 
   submit(formvalue: any) {
+    let user = this.commonService.getUserDetails()
+
     let paylaod = {
       "user_id": 0,
       "department_id": this.department ? Number(this.department?.value) : null,
@@ -245,7 +247,7 @@ export class CrateChiefEngComponent {
       "remarks": formvalue?.remarks,
       "img_path": this.photoBase64,
       "is_active": formvalue?.status,
-      "created_by": 1
+      "created_by": user?.user_id
     }
     let service = this.UserMasterService.createUser(paylaod);
     if (this.userData) {

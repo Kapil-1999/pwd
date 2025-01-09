@@ -85,9 +85,9 @@ export class DepartmentListComponent {
       (data) => {
         setTimeout(() => {
           this.isLoading = false;
-        }, 600);
+        }, 600);        
         this.departmentList = data?.body?.result || [];
-        this.pagesize.count = data?.body?.rowCount;
+        this.pagesize.count = data?.body?.totalRow;
       },
       (error) => {
         setTimeout(() => {
@@ -123,7 +123,7 @@ export class DepartmentListComponent {
   }
 
   onDeleteDepartment(item: any) {
-    let url = this.departmentService.deletedepartment(item?.dept_id)
+    let url = this.departmentService.deletedepartment(item?.department_id)
     const initialState: ModalOptions = {
       initialState: {
         title: item?.department_name,
