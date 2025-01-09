@@ -1,5 +1,7 @@
 #history_map {
     width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 89px);
     border-radius: 11px;
+    z-index: 0 !important;
+
   }

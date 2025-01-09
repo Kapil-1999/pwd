@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { LocalStorageService } from '../../services/localstorage.service';
 import { NotificationService } from '../../services/notification.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ADMIN_MENU } from '../../constant/menu/menu';
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ import { ADMIN_MENU } from '../../constant/menu/menu';
 })
 export class HeaderComponent {
 
-  menuList: any;
+  menuList: any = ADMIN_MENU;
   userDetails:any
 
   constructor(
@@ -19,10 +19,29 @@ export class HeaderComponent {
     private localStorageService: LocalStorageService,
     private notificationService : NotificationService,
     private router : Router
-  ) {}
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.updateActiveMenu(this.router.url);
+      }
+    });
+  }
+
+  updateActiveMenu(currentPath: string) {    
+    this.menuList?.forEach((menu: any) => {      
+      menu.isActive = menu.path === currentPath;
+      if (menu.subNav) {
+        menu.subNav.forEach((subMenu:any) => {
+          subMenu.isActive = subMenu.path === currentPath; 
+          if (subMenu.isActive) {
+            menu.isActive = true; 
+          }
+        });
+      }
+    });
+  }
   
   ngOnInit(): void {
-    this.menuList = ADMIN_MENU;
     this.getUserDetails()
   }
 
@@ -34,22 +53,19 @@ export class HeaderComponent {
   }
   
   @HostListener('document:click', ['$event'])
-  onClickOutside(event: MouseEvent): void {
-    if (!this.elRef.nativeElement.contains(event.target)) {
-      // Close all menus if the click is outside
+  closeMenus(event: Event): void {
+    const clickedInside = (event.target as HTMLElement).closest('.relative');
+    if (!clickedInside) {
       this.closeAllMenus(this.menuList);
-      this.showPopup = false
+      this.showPopup = false;
+
     }
   }
   
-  toggleDropdown(item: any, event: MouseEvent): void {
-    event.stopPropagation();
-    
-    // Close all other menus
-    this.closeAllMenus(this.menuList, item);
-  
-    // Toggle current item's menu
-    if (item.subNav?.length > 0 || item.childSubmenu?.length > 0) {
+  toggleDropdown(item: any, event: MouseEvent): void {    
+    this.closeAllMenus(this.menuList, item); 
+    this.showPopup = false;
+    if (item.subNav?.length > 0 || item.childSubmenu?.length > 0) {      
       item.isOpen = !item.isOpen;
     }
   }
@@ -73,6 +89,7 @@ export class HeaderComponent {
 
   togglePopup() {
     this.showPopup = !this.showPopup;
+    this.closeAllMenus(this.menuList);
   }
 
   logout() {

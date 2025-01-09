@@ -26,10 +26,19 @@ export class DepartmentListComponent {
   public columns!: Columns[];
   isLoading: boolean = false;
   pagesize = {
-    limit: 10,
+    limit: 25,
     offset: 1,
     count: 0,
   };
+  get startValue(): number {
+    return this.pagesize.offset * this.pagesize.limit - (this.pagesize.limit - 1);
+  }
+
+  get lastValue(): number {
+    const calculatedLastValue = this.startValue + this.pagesize.limit - 1;
+    return Math.min(calculatedLastValue, this.pagesize.count);
+  }
+
 
   bsModalRef!: BsModalRef;
   searchKeyword: any
@@ -42,7 +51,7 @@ export class DepartmentListComponent {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getDepartmentList()
+    this.getDepartmentList(this.pagesize.offset, this.pagesize.limit)
   }
 
   setInitialtable() {
@@ -66,11 +75,11 @@ export class DepartmentListComponent {
     this.configuration.paginationEnabled = false;
   }
 
-  getDepartmentList() {
+  getDepartmentList(pagedata: any, tableSize: any) {
     this.isLoading = true;
     const page = {
-      pageNo: 1,
-      pageSize: 5000,
+      pageNo: pagedata,
+      pageSize: tableSize,
     };
     this.departmentService.departmentList(page).subscribe(
       (data) => {
@@ -108,8 +117,8 @@ export class DepartmentListComponent {
     );
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
-      this.pagesize.limit = 10;
-      this.getDepartmentList()
+      this.pagesize.limit = 25;
+      this.getDepartmentList(this.pagesize.offset, this.pagesize.limit)
     });
   }
 
@@ -136,8 +145,8 @@ export class DepartmentListComponent {
         if (value?.status == 200) {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
-          this.pagesize.limit = 10;
-          this.getDepartmentList()
+          this.pagesize.limit = 25;
+          this.getDepartmentList(this.pagesize.offset, this.pagesize.limit)
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
@@ -145,14 +154,11 @@ export class DepartmentListComponent {
     );
   }
 
-  paginationEvent($event: any): void {
-    this.pagesize = {
-      ...this.pagesize,
-      limit: $event.pageSize,
-      offset: $event.pageIndex + 1,
-    };
+  onPageSizeChange(event: Event): void {
+    const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
+    this.pagesize.limit = selectedSize;
+    this.getDepartmentList(this.pagesize.offset, this.pagesize.limit)
   }
-
 
 }
 

@@ -5,6 +5,9 @@
 @import "./styles/colors";
 @import "./styles//mixins/breakpoints";
 @import 'ngx-toastr/toastr';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 
 * {
@@ -13,6 +16,14 @@
   box-sizing: border-box;
   font-family: Outfit;
   font-size: 13px;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 .main-section {
@@ -121,9 +132,7 @@ pagination-controls {
   -moz-box-shadow: none;
   -ms-box-shadow: none;
   box-shadow: none;
-  height: 34px;
   border-radius: 30px;
-  font-size: 15px;
 }
 
 .search-form .form-control::-webkit-input-placeholder,
@@ -191,5 +200,33 @@ pagination-controls {
 
 .cdk-overlay-container {
   position: fixed;
-  z-index: 100 !important;
+  z-index: 0 !important;
+}
+
+
+.table>tbody>tr>td {
+  padding: 6px 10px;
+}
+
+.table>tbody>tr:nth-of-type(odd) {
+  background: #f2f4f8;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th {
+  border: 1px solid #e9ecef;
+  vertical-align: inherit;
+}
+
+.table>tfoot>tr>td,
+.table>tfoot>tr>th {
+  border: 1px solid #e9ecef;
+  vertical-align: inherit;
+}
+
+.table>thead>tr>td,
+.table>thead>tr>th {
+  border: 1px solid #e9ecef;
+  vertical-align: inherit;
+  font-weight: 500;
 }
