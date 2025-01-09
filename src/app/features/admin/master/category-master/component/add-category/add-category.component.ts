@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { CategoryService } from '../../services/category.service';
+import { CommonService } from '../../../../../shared/services/common.service';
 
 @Component({
   selector: 'app-add-category',
@@ -24,7 +25,8 @@ export class AddCategoryComponent {
     private bsModelService: BsModalService,
     private fb: FormBuilder,
     private notificationSerivce: NotificationService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private commonService : CommonService
 
   ) { };
 
@@ -47,11 +49,12 @@ export class AddCategoryComponent {
   }
 
   submit(formvalue: any) {
+    let user = this.commonService.getUserDetails();
     let payload = {
       "category_id": 0,
       "category_name": formvalue?.name,
       "is_active": formvalue?.status,
-      "created_by": 0
+      "created_by": user?.user_id
     }
 
     let service = this.categoryService.createCategory(payload);

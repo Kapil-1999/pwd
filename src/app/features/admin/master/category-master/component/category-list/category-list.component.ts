@@ -86,7 +86,7 @@ export class CategoryListComponent {
           this.isLoading = false;
         }, 600);
         this.categoryList = data?.body?.result || [];
-        this.pagesize.count = data?.body?.rowCount;
+        this.pagesize.count = data?.body?.totalRow;
       },
       (error) => {
         setTimeout(() => {

@@ -151,11 +151,9 @@
                 *ngIf="showPopup" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
                 tabindex="-1">
                 <!-- Active: "bg-gray-100 outline-none", Not Active: "" -->
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                <a class="block px-4 py-2  text-gray-700" role="menuitem" tabindex="-1" style="cursor: pointer;"
                   id="user-menu-item-0">Your Profile</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                  id="user-menu-item-1">Settings</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                <a class="block px-4 py-2  text-gray-700" role="menuitem" tabindex="-1" style="cursor: pointer;" (click)="logout()"
                   id="user-menu-item-2">Sign out</a>
               </div>
             </div>
@@ -163,7 +161,7 @@
         </div>
         <div class="-mr-2 flex md:hidden">
           <!-- Mobile menu button -->
-          <button type="button"
+          <button type="button" (click)="onShowMobileMewnu()"
             class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
             aria-controls="mobile-menu" aria-expanded="false">
             <span class="absolute -inset-0.5"></span>
@@ -184,7 +182,7 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
+    <div id="mobile-menu" *ngIf="showMobileMenu">
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base  text-white"

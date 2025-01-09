@@ -56,12 +56,13 @@ export class CreateDesignationComponent {
   }
 
   submit(formvalue: any) {
+    let user = this.commonService.getUserDetails();
     let payload = {
       "designation_id": 0,
       "designation_name": formvalue?.name,
       "designation_desc": formvalue?.remark,
       "is_active": formvalue?.status,
-      "created_by": 0
+      "created_by": user?.user_id
     };
     let service = this.DesignationService.createDesigantion(payload);
     if (this.editData?.designation_id) {

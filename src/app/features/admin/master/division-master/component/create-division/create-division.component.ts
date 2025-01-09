@@ -141,12 +141,13 @@ export class CreateDivisionComponent {
   }
 
   submit(formvalue: any) {
+    let user = this.commonService.getUserDetails();
     let payload = {
       "division_id": 0,
       "division_name": formvalue?.divisionName,
       "district_id": formvalue?.city ? Number(formvalue?.city?.value) : 0,
       "is_active": formvalue?.status,
-      "created_by": 0
+      "created_by": user?.user_id
     }
     let service = this.divisionService.createDivision(payload);
     if (this.editData) {

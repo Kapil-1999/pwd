@@ -35,7 +35,7 @@ export class CreateDepartmentComponent {
   ) {}
 
   ngOnInit() {
-    this.setInitialvalue();
+    this.setInitialvalue()
   }
 
   setInitialvalue() {
@@ -58,12 +58,13 @@ export class CreateDepartmentComponent {
   }
 
   submit(formvalue:any) {
+    let user = this.commonService.getUserDetails()
     let payload = {
       "department_id": 0,
       "department_name": formvalue?.name,
       "department_desc": formvalue?.remark,
       "is_active": formvalue?.status,
-      "created_by": 1
+      "created_by": user?.user_id
     };
     let service = this.departmentService.createDepartment(payload)
 

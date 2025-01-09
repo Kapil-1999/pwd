@@ -77,12 +77,13 @@ export class CreateCircleComponent {
   }
 
   submit(formvalue:any) {
+    let user = this.commonService.getUserDetails();
     let payload = {
       "circle_id": 0,
       "circle_name": formvalue?.name,
       "zone_id": formvalue?.zone ? Number(formvalue?.zone?.value) : 0,
       "is_active": formvalue?.status,
-      "created_by": 1
+      "created_by": user?.user_id
     };
     let service = this.circleService.createCircle(payload)
 

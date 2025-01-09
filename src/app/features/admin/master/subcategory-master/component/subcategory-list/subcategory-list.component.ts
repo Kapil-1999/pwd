@@ -59,6 +59,7 @@ export class SubcategoryListComponent {
       { key: 'S No.', title: 'S No.', width: "5%" },
       { key: 'Category Name', title: 'Category Name' },
       { key: 'Category Name', title: 'Subcategory Name' },
+      {key:'Form Code', title: 'Form Code'},
       { key: 'Status', title: 'Status', width: "5%" },
       { key: 'Action', title: 'Action', width: "10%" },
     ];
@@ -86,7 +87,7 @@ export class SubcategoryListComponent {
       (data: any) => {
         this.isLoading = false;
         this.categoryList = data?.body?.result || [];
-        this.pagesize.count = data?.body?.rowCount;
+        this.pagesize.count = data?.body?.totalRow;
       },
       (error) => {
         console.error("Error fetching division list", error);

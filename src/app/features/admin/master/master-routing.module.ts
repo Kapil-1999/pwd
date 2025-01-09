@@ -10,6 +10,8 @@ import { ManageCategoryComponent } from './category-master/pages/manage-category
 import { ManageSubcategoryComponent } from './subcategory-master/pages/manage-subcategory/manage-subcategory.component';
 import { ManageDepartmentComponent } from './department-master/pages/manage-department/manage-department.component';
 import { ManageDesignationComponent } from './designation-master/pages/manage-designation/manage-designation.component';
+import { ManageAreaComponent } from './area-master/pages/manage-area/manage-area.component';
+import { MaangeWorkComponent } from './work-master/pages/maange-work/maange-work.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,9 @@ const routes: Routes = [
      { path : 'district-master', component: ManageDistrictMasterComponent},
      { path : 'division-master', component: ManageDivisionMasterComponent},
      { path : 'category-master', component: ManageCategoryComponent},
-     { path : 'subcategory-master', component: ManageSubcategoryComponent}
+     { path : 'subcategory-master', component: ManageSubcategoryComponent},
+     { path : 'area-master', component: ManageAreaComponent},
+     { path : 'work-master', component: MaangeWorkComponent}
      
     ]
   }

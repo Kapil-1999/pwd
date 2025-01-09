@@ -13,6 +13,12 @@ const routes: Routes = [
   },
   {
     path :'history', loadChildren : () => import('./history-tracking/history-tracking.module').then(m => m.HistoryTrackingModule)
+  },
+  {
+    path :'allocation', loadChildren : () => import('./allocation/allocation.module').then(m => m.AllocationModule)
+  },
+  {
+    path :'report', loadChildren : () => import('./report/report.module').then(m => m.ReportModule)
   }
 ];
 

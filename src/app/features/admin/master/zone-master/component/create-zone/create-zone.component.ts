@@ -71,12 +71,14 @@ export class CreateZoneComponent {
   }
 
   submit(formvalue:any) {
+    let user = this.commonService.getUserDetails()
+
     let payload = {
       "zone_id": 0,
       "zone_name": formvalue?.name,
       "state_id": formvalue?.state ? Number(formvalue?.state?.value) : 0,
       "is_active": formvalue?.status,
-      "created_by": 1
+      "created_by": user?.user_id
     };
     let service = this.zoneService.createZone(payload)
 

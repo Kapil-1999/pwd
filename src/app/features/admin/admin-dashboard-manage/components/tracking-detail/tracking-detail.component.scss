@@ -27,7 +27,7 @@
 
   .profile-stats {
     display: grid;
-    grid-template-columns: 7fr 9fr 3fr ;
+    grid-template-columns: 5fr 6fr 3fr ;
     gap: 1rem;
     align-items: center;
 }
@@ -50,7 +50,7 @@
   
   @media (max-width: 992px) {
     .profile-stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 0.5rem;
     }
 
@@ -80,11 +80,8 @@
     }
 }
 
-// .user-image {
-//   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transformation */
-// }
 
-// .user-image:hover {
-//   -webkit-transform: scale(3.5);
-//   transform: scale(3.5); /* Scale up and slightly rotate */
-// }
+.profile-button {
+  display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

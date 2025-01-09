@@ -82,19 +82,13 @@ export const ADMIN_MENU = [
         {
           id: 9,
           name: 'Area Master',
-          path: "/user/reports/vehicle-report/Temperature-Report",
+          path: "/admin/master/area-master",
           iconClass: "fa fa-pencil",
         },
         {
           id: 10,
           name: 'Work Master',
-          path: "/user/reports/vehicle-report/Alert-Report",
-          iconClass: "fa fa-pencil",
-        },
-        {
-          id: 14,
-          name: 'Member Master',
-          path: "/user/reports/vehicle-report/Alert-Report",
+          path: "/admin/master/work-master",
           iconClass: "fa fa-pencil",
         }
       ]
@@ -109,13 +103,13 @@ export const ADMIN_MENU = [
         {
           id: 103,
           name: "POI Allocation",
-          path: "/user/manage/vehicles",
+          path: "/admin/allocation/POIAllocatedArea",
           iconClass: "fa fa-address-book",
         },
         {
           id: 1,
           name: 'Duty Allocation',
-          path: "/user/reports/vehicle-report/Distance",
+          path: "/admin/allocation/DutyAllocatedArea",
           iconClass: "fa fa-address-book",
         }
       ]
@@ -123,38 +117,38 @@ export const ADMIN_MENU = [
     {
       id: 6,
       name: "Report",
-      path: "user/geofacne/list-geofence",
+      path: "",
       iconClass: "assets/images/report.png",
       isOpen: false,
       subNav: [
         {
           id: 103,
           name: "District Report",
-          path: "/user/manage/vehicles",
+          path: "/admin/report/district-report",
           iconClass: "fa fa-bars",
         },
         {
           id: 1,
           name: 'General Report',
-          path: "/user/reports/vehicle-report/Distance",
+          path: "/admin/report/general-report",
           iconClass: "fa fa-bars",
         },
         {
           id: 1,
           name: 'Attendance Report',
-          path: "/user/reports/vehicle-report/Distance",
+          path: "/admin/report/attendance-report",
           iconClass: "fa fa-bars",
         },
         {
           id: 1,
           name: 'View Report',
-          path: "/user/reports/vehicle-report/Distance",
+          path: "/admin/report/view-report",
           iconClass: "fa fa-bars",
         },
         {
           id: 1,
           name: 'Area Activity',
-          path: "/user/reports/vehicle-report/Distance",
+          path: "/admin/report/area-view",
           iconClass: "fa fa-bars",
         }
       ]

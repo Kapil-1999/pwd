@@ -35,6 +35,10 @@ import { CreateDepartmentComponent } from './department-master/component/create-
 import { ManageDesignationComponent } from './designation-master/pages/manage-designation/manage-designation.component';
 import { DesignationListComponent } from './designation-master/component/designation-list/designation-list.component';
 import { CreateDesignationComponent } from './designation-master/component/create-designation/create-designation.component';
+import { ManageAreaComponent } from './area-master/pages/manage-area/manage-area.component';
+import { AreaListComponent } from './area-master/component/area-list/area-list.component';
+import { MaangeWorkComponent } from './work-master/pages/maange-work/maange-work.component';
+import { WorkListComponent } from './work-master/component/work-list/work-list.component';
 
 
 @NgModule({
@@ -70,7 +74,11 @@ import { CreateDesignationComponent } from './designation-master/component/creat
     CreateDepartmentComponent,
     ManageDesignationComponent,
     DesignationListComponent,
-    CreateDesignationComponent
+    CreateDesignationComponent,
+    ManageAreaComponent,
+    AreaListComponent,
+    MaangeWorkComponent,
+    WorkListComponent
   ],
   imports: [
     CommonModule,

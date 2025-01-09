@@ -11,14 +11,15 @@ import { ADMIN_MENU } from '../../constant/menu/menu';
 export class HeaderComponent {
 
   menuList: any = ADMIN_MENU;
-  userDetails:any
+  userDetails: any;
+  showMobileMenu: boolean = false
 
   constructor(
-    private renderer: Renderer2, 
+    private renderer: Renderer2,
     private elRef: ElementRef,
     private localStorageService: LocalStorageService,
-    private notificationService : NotificationService,
-    private router : Router
+    private notificationService: NotificationService,
+    private router: Router
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -27,31 +28,31 @@ export class HeaderComponent {
     });
   }
 
-  updateActiveMenu(currentPath: string) {    
-    this.menuList?.forEach((menu: any) => {      
+  updateActiveMenu(currentPath: string) {
+    this.menuList?.forEach((menu: any) => {
       menu.isActive = menu.path === currentPath;
       if (menu.subNav) {
-        menu.subNav.forEach((subMenu:any) => {
-          subMenu.isActive = subMenu.path === currentPath; 
+        menu.subNav.forEach((subMenu: any) => {
+          subMenu.isActive = subMenu.path === currentPath;
           if (subMenu.isActive) {
-            menu.isActive = true; 
+            menu.isActive = true;
           }
         });
       }
     });
   }
-  
+
   ngOnInit(): void {
     this.getUserDetails()
   }
 
   getUserDetails() {
-   let user = this.localStorageService.getItem('user');
-   if (user) {
-    this.userDetails = JSON.parse(user);
-  }    
+    let user = this.localStorageService.getItem('user');
+    if (user) {
+      this.userDetails = JSON.parse(user);
+    }
   }
-  
+
   @HostListener('document:click', ['$event'])
   closeMenus(event: Event): void {
     const clickedInside = (event.target as HTMLElement).closest('.relative');
@@ -61,16 +62,16 @@ export class HeaderComponent {
 
     }
   }
-  
-  toggleDropdown(item: any, event: MouseEvent): void {    
-    this.closeAllMenus(this.menuList, item); 
+
+  toggleDropdown(item: any, event: MouseEvent): void {
+    this.closeAllMenus(this.menuList, item);
     this.showPopup = false;
-    if (item.subNav?.length > 0 || item.childSubmenu?.length > 0) {      
+    if (item.subNav?.length > 0 || item.childSubmenu?.length > 0) {
       item.isOpen = !item.isOpen;
     }
   }
-  
-  
+
+
   private closeAllMenus(menuList: any[], exception?: any): void {
     menuList.forEach((menu: any) => {
       if (menu !== exception) {
@@ -84,7 +85,7 @@ export class HeaderComponent {
       }
     });
   }
-  
+
   showPopup: boolean = false;
 
   togglePopup() {
@@ -96,6 +97,10 @@ export class HeaderComponent {
     this.notificationService.successAlert('Logout Successfully');
     this.localStorageService.clear();
     this.router.navigate(['/login']);
+  }
+
+  onShowMobileMewnu() {
+    this.showMobileMenu = !this.showMobileMenu
   }
 
 }
