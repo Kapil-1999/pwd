@@ -26,11 +26,18 @@ export class DesignationListComponent {
   public columns!: Columns[];
   isLoading: boolean = false;
   pagesize = {
-    limit: 10,
+    limit: 25,
     offset: 1,
     count: 0,
   };
+  get startValue(): number {
+    return this.pagesize.offset * this.pagesize.limit - (this.pagesize.limit - 1);
+  }
 
+  get lastValue(): number {
+    const calculatedLastValue = this.startValue + this.pagesize.limit - 1;
+    return Math.min(calculatedLastValue, this.pagesize.count);
+  }
   bsModalRef!: BsModalRef;
   searchKeyword: any
   constructor(
@@ -42,7 +49,7 @@ export class DesignationListComponent {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getDesignationList()
+    this.getDesignationList(this.pagesize.offset, this.pagesize.limit)
   }
 
   setInitialtable() {
@@ -66,11 +73,11 @@ export class DesignationListComponent {
     this.configuration.paginationEnabled = false;
   }
 
-  getDesignationList() {
+  getDesignationList(pagedata: any, tableSize: any) {
     this.isLoading = true;
     const page = {
-      pageNo: 1,
-      pageSize: 5000,
+      pageNo: pagedata,
+      pageSize: tableSize,
     };
     this.designationService.desigantion(page).subscribe(
       (data) => {
@@ -108,8 +115,8 @@ export class DesignationListComponent {
     );
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
-      this.pagesize.limit = 10;
-      this.getDesignationList()
+      this.pagesize.limit = 25;
+      this.getDesignationList(this.pagesize.offset, this.pagesize.limit)
     });
   }
 
@@ -136,8 +143,8 @@ export class DesignationListComponent {
         if (value?.status == 200) {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
-          this.pagesize.limit = 10;
-          this.getDesignationList()
+          this.pagesize.limit = 25;
+          this.getDesignationList(this.pagesize.offset, this.pagesize.limit)
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
@@ -145,12 +152,10 @@ export class DesignationListComponent {
     );
   }
 
-  paginationEvent($event: any): void {
-    this.pagesize = {
-      ...this.pagesize,
-      limit: $event.pageSize,
-      offset: $event.pageIndex + 1,
-    };
+  onPageSizeChange(event: Event): void {
+    const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
+    this.pagesize.limit = selectedSize;
+    this.getDesignationList(this.pagesize.offset, this.pagesize.limit)
   }
 
 

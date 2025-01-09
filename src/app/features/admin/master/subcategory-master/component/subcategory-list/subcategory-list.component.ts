@@ -25,10 +25,19 @@ export class SubcategoryListComponent {
   public columns!: Columns[];
   isLoading: boolean = false;
   pagesize = {
-    limit: 10,
+    limit: 25,
     offset: 1,
     count: 0,
   };
+
+  get startValue(): number {
+    return this.pagesize.offset * this.pagesize.limit - (this.pagesize.limit - 1);
+  }
+
+  get lastValue(): number {
+    const calculatedLastValue = this.startValue + this.pagesize.limit - 1;
+    return Math.min(calculatedLastValue, this.pagesize.count);
+  }
   bsModalRef!: BsModalRef;
   searchKeyword: any
 
@@ -116,7 +125,7 @@ export class SubcategoryListComponent {
     );
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
-      this.pagesize.limit = 10;
+      this.pagesize.limit = 25;
       this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
     });
   }
@@ -144,13 +153,20 @@ export class SubcategoryListComponent {
         if (value?.status == 200) {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
-          this.pagesize.limit = 10;
+          this.pagesize.limit = 25;
           this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
       }
     );
+  }
+
+
+  onPageSizeChange(event: Event): void {
+    const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
+    this.pagesize.limit = selectedSize;
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
   }
 
 }

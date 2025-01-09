@@ -31,7 +31,7 @@ export class UserListComponent {
   public columns!: Columns[];
   isLoading: boolean = false;
   pagesize = {
-    limit: 10,
+    limit: 25,
     offset: 1,
     count: 0,
   };
@@ -53,7 +53,15 @@ export class UserListComponent {
   desigantionList: any;
   selectedDepartment: any;
   selectedDesignation: any;
-  imgeUrl = IMG_URL
+  imgeUrl = IMG_URL;
+  get startValue(): number {
+    return this.pagesize.offset * this.pagesize.limit - (this.pagesize.limit - 1);
+  }
+
+  get lastValue(): number {
+    const calculatedLastValue = this.startValue + this.pagesize.limit - 1;
+    return Math.min(calculatedLastValue, this.pagesize.count);
+  }
 
   constructor(
     private userService: UserMasterService,
@@ -118,7 +126,7 @@ export class UserListComponent {
         this.isLoading = false;
       }, 600);
       this.userList = res?.body?.result || [];
-      this.pagesize.count = res?.body?.rowCount;
+      this.pagesize.count = this.userList?.length;
     })
   }
 
@@ -131,6 +139,11 @@ export class UserListComponent {
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+  }
+
+  onPageSizeChange(event: Event): void {
+    const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
+    this.pagesize.limit = selectedSize;
   }
 
 
@@ -169,7 +182,7 @@ export class UserListComponent {
       );
       this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
         this.pagesize.offset = 1;
-        this.pagesize.limit = 10;
+        this.pagesize.limit = 25;
         this.getUserList();
       });
     }
@@ -198,7 +211,7 @@ export class UserListComponent {
         if (value?.status == 200) {
           this.tosterService.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
-          this.pagesize.limit = 10;
+          this.pagesize.limit = 25;
           this.getUserList();
         } else {
           this.tosterService.errorAlert(value?.title);

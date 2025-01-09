@@ -12,7 +12,7 @@ export class TrackingDetailComponent {
     {
       colorId:1,
       name: 'CE Agra',
-      avatar: 'assets/images/dummy-man.png',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       active: true,
       stats: { SE: 1, EE: 4, AE: 5, JE: 3 },
       timer: '00h 00m',
@@ -28,7 +28,7 @@ export class TrackingDetailComponent {
     {
       colorId:2,
       name: 'CE Aligarh',
-      avatar: 'assets/images/dummy-man.png',
+      avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       active: true,
       stats: { SE: 2, EE: 13, AE: 1, JE: 1 },
       timer: '00h 00m',
@@ -44,7 +44,7 @@ export class TrackingDetailComponent {
     {
       colorId:3,
       name: 'CE Ayodhya',
-      avatar: 'assets/images/dummy-man.png',
+      avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       active: true,
       stats: { SE: 2, EE: 12, AE: 0, JE: 0 },
       timer: '00h 00m',
@@ -60,7 +60,7 @@ export class TrackingDetailComponent {
     {
       colorId:4,
       name: 'CE Lucknow',
-      avatar: 'assets/images/dummy-man.png',
+      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       active: true,
       stats: { SE: 3, EE: 7, AE: 2, JE: 1 },
       timer: '00h 00m',
@@ -76,7 +76,7 @@ export class TrackingDetailComponent {
     {
       colorId:4,
       name: 'CE Lucknow',
-      avatar: 'assets/images/dummy-man.png',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       active: true,
       stats: { SE: 3, EE: 7, AE: 2, JE: 1 },
       timer: '00h 00m',
@@ -92,55 +92,7 @@ export class TrackingDetailComponent {
     {
       colorId:4,
       name: 'CE Lucknow',
-      avatar: 'assets/images/dummy-man.png',
-      active: true,
-      stats: { SE: 3, EE: 7, AE: 2, JE: 1 },
-      timer: '00h 00m',
-      details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
-        gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
-      }
-    },
-    {
-      colorId:4,
-      name: 'CE Lucknow',
-      avatar: 'assets/images/dummy-man.png',
-      active: true,
-      stats: { SE: 3, EE: 7, AE: 2, JE: 1 },
-      timer: '00h 00m',
-      details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
-        gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
-      }
-    },
-    {
-      colorId:4,
-      name: 'CE Lucknow',
-      avatar: 'assets/images/dummy-man.png',
-      active: true,
-      stats: { SE: 3, EE: 7, AE: 2, JE: 1 },
-      timer: '00h 00m',
-      details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
-        gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
-      }
-    },
-    {
-      colorId:4,
-      name: 'CE Lucknow',
-      avatar: 'assets/images/dummy-man.png',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       active: true,
       stats: { SE: 3, EE: 7, AE: 2, JE: 1 },
       timer: '00h 00m',
@@ -154,6 +106,7 @@ export class TrackingDetailComponent {
       }
     },
   ];
+  
   ngOnInit(){}
 
 
