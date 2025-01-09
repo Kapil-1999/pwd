@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { APIDefinition, Columns, Config } from 'ngx-easy-table';
+import { CreateAreaComponent } from '../create-area/create-area.component';
 
 @Component({
   selector: 'area-list',
@@ -36,6 +37,10 @@ export class AreaListComponent {
   bsModalRef!: BsModalRef;
   searchKeyword: any;
 
+  constructor(
+    private modalService: BsModalService
+  ) { }
+
   ngOnInit() {
     this.setInitialtable()
   }
@@ -45,8 +50,8 @@ export class AreaListComponent {
       { key: 'S No.', title: 'S No.', width: "5%" },
       { key: 'City', title: 'City' },
       { key: 'Area', title: 'Area' },
-      { key: 'Latitude', title: 'Latitude'},
-      { key: 'Longitude', title: 'Longitude'},
+      { key: 'Latitude', title: 'Latitude' },
+      { key: 'Longitude', title: 'Longitude' },
       { key: 'Shape', title: 'Shape' },
       { key: 'Radius', title: 'Radius' },
       { key: 'Action', title: 'Action', width: "10%" },
@@ -60,5 +65,20 @@ export class AreaListComponent {
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
+  }
+
+  onCreateArea(value: any) {
+    const initialState: ModalOptions = {
+      initialState: {
+        editData: value ? value : ''
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      CreateAreaComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: 'modal-xl modal-dialog-centered alert-popup',
+      })
+    );
   }
 }

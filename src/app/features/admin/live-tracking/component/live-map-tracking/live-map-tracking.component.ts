@@ -30,7 +30,6 @@ export class LiveMapTrackingComponent {
     const leafletModule = await import('leaflet');
     const L = leafletModule.default;
 
-    // Initialize the map with specified center and zoom level
     this.map = L.map('map_canvas', {
       center: [28.6139, 77.2088],
       zoom: 6
@@ -38,10 +37,9 @@ export class LiveMapTrackingComponent {
 
     const mapElement = document.getElementById('map_canvas');
     if (mapElement) {
-      mapElement.style.zIndex = '100'; // Adjust the z-index as needed
+      mapElement.style.zIndex = '100';
     }
 
-    // Define the base layers
     const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       maxZoom: 21
@@ -56,16 +54,14 @@ export class LiveMapTrackingComponent {
       maxZoom: 21,
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       attribution: '&copy; Google Maps'
-    }).addTo(this.map); // Add Google layer to the map to set it as default
+    }).addTo(this.map); 
 
-    // Create an object for base layers
     const baseMaps = {
-      "Google Map": googleLayer, // Google Map as the default layer
+      "Google Map": googleLayer, 
       "OpenStreetMap": osmLayer,
       "Satellite": satelliteLayer
     };
 
-    // Add layers control to the map
     L.control.layers(baseMaps).addTo(this.map);
   }
 }

@@ -9,18 +9,15 @@ import * as L from 'leaflet';
 export class TrackingMapComponent {
   map!: L.Map;
 
-  ngOnInit(){
+  ngOnInit() {
     this.initializeMap()
-   }
+  }
 
-   /**
-    * intialize leaflet map
-    */
-   initializeMap(){
-    const leafletModule =  import('leaflet');
+  initializeMap() {
+    const leafletModule = import('leaflet');
     this.map = L.map('map', {
-      center: [20.29573, 85.82476],
-      zoom: 5,
+      center: [28.5821, 77.3109],
+      zoom: 12,
       zoomControl: false,
     });
 
@@ -49,9 +46,6 @@ export class TrackingMapComponent {
       }
     ).addTo(this.map);
 
-    // Esri Terrain and OpenTopoMap as alternatives to Stamen Terrain
-  
-
     const baseMaps = {
       'Google Map': googleLayer,
       OpenStreetMap: osmLayer,
@@ -59,6 +53,21 @@ export class TrackingMapComponent {
     };
 
     L.control.layers(baseMaps).addTo(this.map);
+
+    const pointA = L.latLng(28.5821, 77.3109);
+    const pointB = L.latLng(28.5703, 77.3218);
+    const customIconA = L.icon({
+      iconUrl: 'assets/images/rp_marker_person_green.png', 
+      iconSize: [35, 75], 
+    });
+  
+    const customIconB = L.icon({
+      iconUrl: 'assets/images/rp_marker_person_red.png',
+      iconSize: [35, 75],
+    });
+
+    L.marker(pointA, { icon: customIconA }).addTo(this.map);
+    L.marker(pointB, { icon: customIconB }).addTo(this.map);
     L.control.zoom({
       position: 'topright'
     }).addTo(this.map);
