@@ -11,7 +11,7 @@
             </div>
             <div class="row" *ngIf="pagesize.count && pagesize.count > 0">
                 <div class="d-flex justify-content-center">
-                    <pagination-controls id="deptID" [maxSize]="10" [responsive]="true" [nextLabel]="''"
+                    <pagination-controls id="workID" [maxSize]="10" [responsive]="true" [nextLabel]="''"
                         [previousLabel]="''" (pageChange)="onTablePageChange($event)">
                     </pagination-controls>
                 </div>
@@ -38,7 +38,7 @@
                         <option *ngFor="let size of [25, 50, 100]" [value]="size">{{ size }}</option>
                     </select>
                 </div>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" (click)="onCreateWork('')">
                     <i class="fa fa-plus" aria-hidden="true"></i> Create Work
                 </button>
             </div>
@@ -48,7 +48,7 @@
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
                         <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="workList | paginate: {
-                                id: 'deptID',
+                                id: 'workID',
                                 itemsPerPage: pagesize.limit,
                                 currentPage: pagesize.offset,
                                 totalItems: pagesize.count
@@ -67,10 +67,12 @@
                                 </thead>
                                 <tbody>
                                     <tr
-                                        *ngFor="let item of workList | searchFilter: searchKeyword | paginate: {id: 'deptID', itemsPerPage: pagesize.limit, currentPage: pagesize.offset, totalItems: pagesize.count}; let index = index">
+                                        *ngFor="let item of workList | searchFilter: searchKeyword | paginate: {id: 'workID', itemsPerPage: pagesize.limit, currentPage: pagesize.offset, totalItems: pagesize.count}; let index = index">
                                         <td>{{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}</td>
-                                        <td>{{item?.department_name}}</td>
-                                        <td>{{item?.department_desc}}</td>
+                                        <td>{{item?.nowtype_name}}</td>
+                                        <td>{{item?.work_unique_code}}</td>
+                                        <td>{{item?.mobile_no}}</td>
+                                        <td>{{item?.road_id}}</td>
                                         <td>
                                             <span *ngIf="item?.is_active; else inactive"
                                                 class="text-green-600 font-medium">Active</span>
@@ -79,7 +81,7 @@
                                             </ng-template>
                                         </td>
                                         <td class="flex space-x-2">
-                                            <button class="btn btn-success" >
+                                            <button class="btn btn-success" (click)="onCreateWork(item)">
                                                 <i class="fa fa-pencil"></i>
                                             </button>
                                             <button class="btn btn-danger" >

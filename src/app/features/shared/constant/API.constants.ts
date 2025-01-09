@@ -39,5 +39,10 @@ export const API_CONSTANTS = {
     getUpdateDeleteDepartment : 'Department/{id}',
     desigantion : 'Designation?pageNo={pageNo}&pageSize={pageSize}',
     createDesigantion : 'Designation',
-    getUpdateDeleteDes : 'Designation/{id}'
+    getUpdateDeleteDes : 'Designation/{id}',
+    workList : 'Work?pageNo={pageNo}&pageSize={pageSize}',
+    addWork : 'Work',
+    getUpdateDeleteWork : 'Work/{id}',
+    natureWorkList: 'Common/GetNatureOfWorkList'
+
 }

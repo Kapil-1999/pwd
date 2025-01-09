@@ -99,6 +99,7 @@ export class DesignationListComponent {
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+    this.getDesignationList(this.pagesize.offset, this.pagesize.limit)
   }
 
   onCreateDesignation(value: any) {

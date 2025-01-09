@@ -39,6 +39,9 @@ import { ManageAreaComponent } from './area-master/pages/manage-area/manage-area
 import { AreaListComponent } from './area-master/component/area-list/area-list.component';
 import { MaangeWorkComponent } from './work-master/pages/maange-work/maange-work.component';
 import { WorkListComponent } from './work-master/component/work-list/work-list.component';
+import { CreateAreaComponent } from './area-master/component/create-area/create-area.component';
+import { AreaMapComponent } from './area-master/component/area-map/area-map.component';
+import { CreateWorkComponent } from './work-master/component/create-work/create-work.component';
 
 
 @NgModule({
@@ -78,7 +81,10 @@ import { WorkListComponent } from './work-master/component/work-list/work-list.c
     ManageAreaComponent,
     AreaListComponent,
     MaangeWorkComponent,
-    WorkListComponent
+    WorkListComponent,
+    CreateAreaComponent,
+    AreaMapComponent,
+    CreateWorkComponent
   ],
   imports: [
     CommonModule,

@@ -101,6 +101,7 @@ export class DepartmentListComponent {
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+    this.getDepartmentList(this.pagesize.offset, this.pagesize.limit)
   }
 
   onCreateDepartment(value: any) {
