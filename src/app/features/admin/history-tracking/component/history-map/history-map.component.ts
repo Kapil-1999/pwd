@@ -13,7 +13,16 @@ export class HistoryMapComponent {
     { label: 'Home', path: '/admin/dashboard/home' },
     { label: 'History', path: '/admin/history/play-back' },
   ];
-
+  historylist:any;
+  isPlaying:boolean= false;
+  sliderValue: number = 0;
+  speed = [
+    { id: 1, value: '1x' },
+    { id: 2, value: '2x' },
+    { id: 4, value: '3x' },
+    { id: 16, value: '4x' },
+    { id: 32, value: '5x' }
+  ];
   map: L.Map | any;
 
   constructor(
@@ -68,5 +77,9 @@ export class HistoryMapComponent {
     // Add layers control to the map
     L.control.layers(baseMaps).addTo(this.map);
 
+  }
+
+  togglePlayPause(event: any): void {
+    this.isPlaying = !this.isPlaying;
   }
 }

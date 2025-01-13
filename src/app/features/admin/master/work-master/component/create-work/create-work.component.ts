@@ -77,6 +77,10 @@ export class CreateWorkComponent {
   }
 
   submit(formvalue: any) {
+    if (this.workForm.invalid) {
+      this.workForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails()
     let payload = {
       "work_id": 0,
@@ -84,7 +88,7 @@ export class CreateWorkComponent {
       "mobile_no": formvalue.mobile,
       "road_id": formvalue.roadId,
       "nowtype_id": formvalue?.nof ? Number(formvalue?.nof?.value) : null,
-      "nowtype_name": formvalue.workId,
+      "nowtype_name": formvalue?.nof ? formvalue?.nof?.text : null,
       "is_active": formvalue?.status,
       "created_by": user.user_id
     };

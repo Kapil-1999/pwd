@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { LoginComponent } from './login/login/login.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -15,6 +15,13 @@ import { SkeletonLoaderComponent } from './component/skeleton-loader/skeleton-lo
 import { SearchFilterPipe } from './pipe/serach.pipe';
 import { DeleteConfirmationComponent } from './component/delete-confirmation/delete-confirmation.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+
 
 
 @NgModule({
@@ -37,7 +44,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SelectDropDownModule,
     ReactiveFormsModule,
     FormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    BsDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
   ],
   exports: [
     HeaderComponent,
@@ -52,8 +67,17 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SkeletonLoaderComponent,
     SearchFilterPipe,
     DeleteConfirmationComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    BsDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  providers: [DatePipe]
 })
 export class SharedModule { }

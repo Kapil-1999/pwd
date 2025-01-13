@@ -1,9 +1,11 @@
 export const API_CONSTANTS = {
     login: 'Auth/Login',
-    zoneList: 'Zone',
+    zoneList: 'Zone?pageNo={pageNo}&pageSize={pageSize}',
+    addZone : 'Zone',
     stateList: 'Common/GetStateList',
     updateZone: 'Zone/{zoneId}',
-    circle: 'Circle',
+    circle: 'Circle?pageNo={pageNo}&pageSize={pageSize}',
+    addCircle: 'Circle',
     deleteUpdateCircle: 'Circle/{circleId}',
     department: 'Common/GetDepartmentList',
     stateBasedZone: 'Common/GetZoneList?stateId={stateId}',
@@ -12,7 +14,8 @@ export const API_CONSTANTS = {
     cityBasedDivision: 'Common/GetDivisionList?districtId={cityId}',
     designation: 'Common/GetDesignationList',
     usertype: 'Common/GetUserTypeList',
-    district: 'District',
+    district: 'District?pageNo={pageNo}&pageSize={pageSize}',
+    addDistrict: 'District',
     updateDeleteDist: 'District/{distId}',
     user: 'User',
     chiefEngList: "Common/GetChiefEngList",
@@ -43,6 +46,16 @@ export const API_CONSTANTS = {
     workList : 'Work?pageNo={pageNo}&pageSize={pageSize}',
     addWork : 'Work',
     getUpdateDeleteWork : 'Work/{id}',
-    natureWorkList: 'Common/GetNatureOfWorkList'
+    natureWorkList: 'Common/GetNatureOfWorkList',
+    areaList : 'Area?pageNo={pageNo}&pageSize={pageSize}',
+    addArea : 'Area',
+    getDeletUpdateArea : 'Area/{id}',
+    travelMode : 'Common/GetTravelModeList',
+    POIAllocation : 'POIAllocation?pageNo={pageNo}&pageSize={pageSize}',
+    addPOIAllocation : 'POIAllocation',
+    getUpdateDeleteAllocation : 'POIAllocation/{id}',
+    GetUserByDesig :'Common/GetUserByDesig?selectedDesig={id}',
+    formCodeList : 'Common/GetFormCodeList'
+
 
 }

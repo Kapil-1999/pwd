@@ -14,8 +14,8 @@ export class CircleService {
 
   ) { }
 
-  circleList(): Observable<any> {
-    let url = API_CONSTANTS.circle;
+  circleList(data:any): Observable<any> {
+    let url = API_CONSTANTS.circle.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize);
     return this.apiService
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
@@ -23,7 +23,7 @@ export class CircleService {
 
   
   createCircle(payload:any): Observable<any> {
-    let url = API_CONSTANTS.circle
+    let url = API_CONSTANTS.addCircle
     return this.apiService
       .post(url,payload)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));

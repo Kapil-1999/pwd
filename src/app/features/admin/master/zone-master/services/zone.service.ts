@@ -13,15 +13,15 @@ export class ZoneService {
     private apiService : ApiService
   ) { }
 
-  zoneList(): Observable<any> {
-    let url = API_CONSTANTS.zoneList;
+  zoneList(data: any): Observable<any> {
+    let url = API_CONSTANTS.zoneList.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize);
     return this.apiService
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   createZone(payload:any): Observable<any> {
-    let url = API_CONSTANTS.zoneList
+    let url = API_CONSTANTS.addZone
     return this.apiService
       .post(url,payload)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));

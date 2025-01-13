@@ -141,13 +141,23 @@ export class CreateDivisionComponent {
   }
 
   submit(formvalue: any) {
+    if (this.divisionForm.invalid) {
+      this.divisionForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails();
     let payload = {
       "division_id": 0,
       "division_name": formvalue?.divisionName,
-      "district_id": formvalue?.city ? Number(formvalue?.city?.value) : 0,
+      "district_id": formvalue?.city ? Number(formvalue?.city?.value) : null,
       "is_active": formvalue?.status,
-      "created_by": user?.user_id
+      "created_by": user?.user_id,
+      "zone_id": formvalue?.zone ? Number(formvalue?.zone?.value) : null,
+      "zone_name": formvalue?.zone ? formvalue?.zone?.text : null,
+      "circle_id": formvalue?.circle ? Number(formvalue?.circle?.value) : null,
+      "circle_name": formvalue?.circle ? formvalue?.circle?.text : null,
+      "district_name": formvalue?.city ? formvalue?.city?.text : null,
+
     }
     let service = this.divisionService.createDivision(payload);
     if (this.editData) {

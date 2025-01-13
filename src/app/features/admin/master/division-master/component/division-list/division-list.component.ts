@@ -125,7 +125,7 @@ export class DivisionListComponent {
   }
 
   onDeleteZone(item: any) {
-    let url = this.divisionService.deleteDivision(item?.zone_id)
+    let url = this.divisionService.deleteDivision(item?.division_id)
     const initialState: ModalOptions = {
       initialState: {
         title: item?.division_name,

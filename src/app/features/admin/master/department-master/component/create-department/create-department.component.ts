@@ -58,6 +58,10 @@ export class CreateDepartmentComponent {
   }
 
   submit(formvalue:any) {
+    if (this.departmentForm.invalid) {
+      this.departmentForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails()
     let payload = {
       "department_id": 0,

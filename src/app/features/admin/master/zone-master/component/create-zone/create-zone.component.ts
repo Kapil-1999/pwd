@@ -71,12 +71,16 @@ export class CreateZoneComponent {
   }
 
   submit(formvalue:any) {
-    let user = this.commonService.getUserDetails()
-
+    if (this.zoneForm.invalid) {
+      this.zoneForm.markAllAsTouched();
+      return;
+    }
+    let user = this.commonService.getUserDetails();
     let payload = {
       "zone_id": 0,
       "zone_name": formvalue?.name,
-      "state_id": formvalue?.state ? Number(formvalue?.state?.value) : 0,
+      "state_id": formvalue?.state ? Number(formvalue?.state?.value) : null,
+      "state_name": formvalue?.state ? formvalue?.state?.text : null,
       "is_active": formvalue?.status,
       "created_by": user?.user_id
     };
