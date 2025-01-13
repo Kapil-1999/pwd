@@ -13,15 +13,15 @@ export class DistrictService {
     private apiService : ApiService
   ) { }
 
-   districtList(): Observable<any> {
-      let url = API_CONSTANTS.district;
+   districtList(data:any): Observable<any> {
+      let url = API_CONSTANTS.district.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize);
       return this.apiService
         .get(url)
         .pipe(catchError((error: HttpErrorResponse) => of(error)));
     }
   
     createDistrict(payload:any): Observable<any> {
-      let url = API_CONSTANTS.district
+      let url = API_CONSTANTS.addDistrict
       return this.apiService
         .post(url,payload)
         .pipe(catchError((error: HttpErrorResponse) => of(error)));

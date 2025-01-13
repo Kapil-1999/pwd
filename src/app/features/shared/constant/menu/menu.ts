@@ -105,12 +105,6 @@ export const ADMIN_MENU = [
           name: "POI Allocation",
           path: "/admin/allocation/POIAllocatedArea",
           iconClass: "fa fa-address-book",
-        },
-        {
-          id: 1,
-          name: 'Duty Allocation',
-          path: "/admin/allocation/DutyAllocatedArea",
-          iconClass: "fa fa-address-book",
         }
       ]
     },

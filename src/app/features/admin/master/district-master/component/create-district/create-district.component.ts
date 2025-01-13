@@ -42,7 +42,6 @@ export class CreateDistrictComponent {
   ngOnInit() {
     this.setInitialvalue()
     this.getZoneList();
-    console.log("check dist", this.editData);  
   }
 
   setInitialvalue() {
@@ -50,14 +49,14 @@ export class CreateDistrictComponent {
       this.label = 'Update';
       this.districtForm = this.fb.group({
         name: [this.editData?.district_name, [Validators.required]],
-        zone: [null],
+        zone: [null, [Validators.required]],
         circle: [null, [Validators.required]],
         status: [this.editData?.is_active, [Validators.required]],
       });
     } else {
       this.districtForm = this.fb.group({
         name: ['', [Validators.required]],
-        zone: [null],
+        zone: [null, [Validators.required]],
         circle: [null, [Validators.required]],
         status: [1, [Validators.required]],
       });
@@ -98,13 +97,20 @@ export class CreateDistrictComponent {
   }
 
   submit(formvalue: any) {
+    if (this.districtForm.invalid) {
+      this.districtForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails();
     let payload = {
       "district_id": 0,
       "district_name": formvalue?.name,
-      "circle_id": formvalue?.circle ? Number(formvalue.circle.value) : 0,
+      "circle_id": formvalue?.circle ? Number(formvalue.circle.value) : null,
       "is_active": formvalue?.status,
-      "created_by": user?.user_id
+      "created_by": user?.user_id,
+      "zone_id": formvalue?.zone ? Number(formvalue.zone.value) : null,
+      "zone_name": formvalue?.zone ? formvalue.zone.text : null,
+      "circle_name": formvalue?.circle ? (formvalue.circle.text) : null,
     }
 
     let service = this.districtService.createDistrict(payload);

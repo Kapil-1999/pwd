@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { APIDefinition, Columns, Config } from 'ngx-easy-table';
 import { CreateAreaComponent } from '../create-area/create-area.component';
+import { AreaService } from '../../services/area.service';
+import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
+import { NotificationService } from '../../../../../shared/services/notification.service';
 
 @Component({
   selector: 'area-list',
@@ -9,7 +12,7 @@ import { CreateAreaComponent } from '../create-area/create-area.component';
   styleUrl: './area-list.component.scss'
 })
 export class AreaListComponent {
-  areaList: any[] = [];
+  areaData: any[] = [];
   @ViewChild('table', { static: true }) table!: APIDefinition;
 
 
@@ -20,7 +23,7 @@ export class AreaListComponent {
   ];
   public configuration!: Config;
   public columns!: Columns[];
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   pagesize = {
     limit: 25,
     offset: 1,
@@ -38,11 +41,15 @@ export class AreaListComponent {
   searchKeyword: any;
 
   constructor(
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private areaService: AreaService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
-    this.setInitialtable()
+    this.setInitialtable();
+    this.getAreaList(this.pagesize.offset, this.pagesize.limit)
+
   }
 
   setInitialtable() {
@@ -54,17 +61,35 @@ export class AreaListComponent {
       { key: 'Longitude', title: 'Longitude' },
       { key: 'Shape', title: 'Shape' },
       { key: 'Radius', title: 'Radius' },
+      { key: 'Status', title: 'Status' },
       { key: 'Action', title: 'Action', width: "10%" },
     ];
   }
 
+  getAreaList(pagedata: any, tableSize: any) {
+    this.isLoading = true;
+    const page = {
+      pageNo: pagedata,
+      pageSize: tableSize,
+    };
+    this.areaService.areaList(page).subscribe((res: any) => {
+      this.isLoading = false;
+      this.areaData = res?.body?.result || [];
+      this.pagesize.count = res?.body?.totalRow
+    });
+  }
+
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+    this.getAreaList(this.pagesize.offset, this.pagesize.limit)
+
   }
 
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
+    this.getAreaList(this.pagesize.offset, this.pagesize.limit)
+
   }
 
   onCreateArea(value: any) {
@@ -79,6 +104,44 @@ export class AreaListComponent {
         id: "confirmation",
         class: 'modal-xl modal-dialog-centered alert-popup',
       })
+    );
+
+    this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+      this.pagesize.offset = 1;
+      this.pagesize.limit = 25;
+      this.getAreaList(this.pagesize.offset, this.pagesize.limit);
+    });
+  }
+
+  deleteArea(item: any) {
+    let url = this.areaService.deleteArea(item?.area_id)
+    const initialState: ModalOptions = {
+      initialState: {
+        title: item?.area_name,
+        content: 'Are you sure you want to delete?',
+        primaryActionLabel: 'Delete',
+        secondaryActionLabel: 'Cancel',
+        service: url
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      DeleteConfirmationComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: "modal-md modal-dialog-centered",
+      })
+    );
+    this.bsModalRef?.content.mapdata.subscribe(
+      (value: any) => {
+        if (value?.status == 200) {
+          this.notificationService.successAlert(value?.body?.actionResponse);
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 25;
+          this.getAreaList(this.pagesize.offset, this.pagesize.limit)
+        } else {
+          this.notificationService.errorAlert(value?.title);
+        }
+      }
     );
   }
 }

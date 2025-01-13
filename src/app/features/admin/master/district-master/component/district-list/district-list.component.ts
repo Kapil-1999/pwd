@@ -47,7 +47,7 @@ export class DistrictListComponent {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable();
-    this.getDistrictList()
+    this.getDistrictList(this.pagesize.offset, this.pagesize.limit)
   }
 
   setInitialtable() {
@@ -70,20 +70,26 @@ export class DistrictListComponent {
     this.configuration.paginationEnabled = false;
   }
 
-  getDistrictList() {
+  getDistrictList(pagedata: any, tableSize: any) {
     this.isLoading = true;
-    this.districtService.districtList().subscribe((res) => {
+    const page = {
+      pageNo: pagedata,
+      pageSize: tableSize,
+    };
+    this.districtService.districtList(page).subscribe((res) => {
       setTimeout(() => {
         this.isLoading = false;
       }, 600);
       this.districtList = res?.body?.result || [];
-      this.pagesize.count = this.districtList?.length;
+      this.pagesize.count = res?.body?.totalRow;
     })
   }
 
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+    this.getDistrictList(this.pagesize.offset, this.pagesize.limit)
+
   }
 
   onCreateDistrict(value: any) {
@@ -101,7 +107,7 @@ export class DistrictListComponent {
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
       this.pagesize.limit = 25;
-      this.getDistrictList();
+      this.getDistrictList(this.pagesize.offset, this.pagesize.limit);
     });
   }
 
@@ -130,7 +136,7 @@ export class DistrictListComponent {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getDistrictList();
+          this.getDistrictList(this.pagesize.offset, this.pagesize.limit);
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
@@ -141,5 +147,7 @@ export class DistrictListComponent {
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
+    this.getDistrictList(this.pagesize.offset, this.pagesize.limit);
+
   }
 }

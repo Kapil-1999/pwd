@@ -13,8 +13,8 @@
                         <label class="form-label">Category</label>
                         <ngx-select-dropdown [config]="config" formControlName="catId" [options]="categoryList">
                         </ngx-select-dropdown>
-                        <span *ngIf="subcateForm?.get('state')?.invalid &&
-                                    (subcateForm?.get('state')?.dirty || subcateForm?.get('state')?.touched)"
+                        <span *ngIf="subcateForm?.get('catId')?.invalid &&
+                                    (subcateForm?.get('catId')?.dirty || subcateForm?.get('catId')?.touched)"
                             class="text-danger mt-2">
                             Category is Required
                         </span>
@@ -33,9 +33,8 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <label class="form-label">Form Code</label>
-                        <select class="form-control" formControlName="formCode">
-                            <option *ngFor="let value of formCodeList" [ngValue]="value.id">{{ value.value }}</option>
-                        </select>
+                        <ngx-select-dropdown [config]="config1" formControlName="formCode" [options]="formCodeList">
+                        </ngx-select-dropdown>
                         <span *ngIf="subcateForm?.get('formCode')?.invalid &&
                                     (subcateForm?.get('formCode')?.dirty || subcateForm?.get('formCode')?.touched)"
                             class="text-danger">
@@ -58,7 +57,7 @@
             </div>
             <div class="footer">
                 <div class="button-container">
-                  <button class="btn btn-success" type="submit" [disabled]="!subcateForm.valid" (click)="submit(subcateForm.value)">Submit</button>
+                  <button class="btn btn-success" type="submit"  (click)="submit(subcateForm.value)">Submit</button>
                   <button class="btn btn-danger" type="button"  (click)="close()">Cancel</button>
                 </div>
             </div>

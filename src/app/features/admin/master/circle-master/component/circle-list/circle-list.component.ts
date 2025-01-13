@@ -47,7 +47,7 @@ get startValue(): number {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getCircleList()
+    this.getCircleList(this.pagesize.offset, this.pagesize.limit)
   }
 
   setInitialtable() {
@@ -71,19 +71,25 @@ get startValue(): number {
   }
 
 
-  getCircleList() {
+  getCircleList(pagedata: any, tableSize: any) {
     this.isLoading = true;
-    this.circleService.circleList().subscribe((res) => {
+    const page = {
+      pageNo: pagedata,
+      pageSize: tableSize,
+    };
+    this.circleService.circleList(page).subscribe((res) => {
       setTimeout(() => {
         this.isLoading = false;
       }, 600);
       this.circleList = res?.body?.result || [];
-      this.pagesize.count = this.circleList?.length;
+      this.pagesize.count = res?.body?.totalRow;
     })
   }
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+    this.getCircleList(this.pagesize.offset, this.pagesize.limit);
+
   }
 
   onCreateCircle(value: any) {
@@ -101,7 +107,7 @@ get startValue(): number {
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
       this.pagesize.limit = 25;
-      this.getCircleList();
+      this.getCircleList(this.pagesize.offset, this.pagesize.limit);
     });
   }
 
@@ -130,7 +136,7 @@ get startValue(): number {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getCircleList();
+          this.getCircleList(this.pagesize.offset, this.pagesize.limit);
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
@@ -141,6 +147,8 @@ get startValue(): number {
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
+    this.getCircleList(this.pagesize.offset, this.pagesize.limit);
+
   }
 
 

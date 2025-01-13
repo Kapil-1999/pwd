@@ -49,6 +49,10 @@ export class AddCategoryComponent {
   }
 
   submit(formvalue: any) {
+    if (this.cateForm.invalid) {
+      this.cateForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails();
     let payload = {
       "category_id": 0,

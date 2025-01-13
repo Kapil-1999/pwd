@@ -56,6 +56,10 @@ export class CreateDesignationComponent {
   }
 
   submit(formvalue: any) {
+    if (this.departmentForm.invalid) {
+      this.departmentForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails();
     let payload = {
       "designation_id": 0,

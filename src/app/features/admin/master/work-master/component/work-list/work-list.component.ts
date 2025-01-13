@@ -108,7 +108,7 @@ export class WorkListComponent {
   }
 
 
-  onDeleteDistrict(item: any) {
+  deleteWork(item: any) {
       let url = this.workService.deleteWork(item?.work_id)
       const initialState: ModalOptions = {
         initialState: {

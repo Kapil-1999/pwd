@@ -20,6 +20,11 @@ export class CreateSubcategoryComponent {
     search: true,
     height: '300px'
   };
+  config1 = {
+    displayKey: "text",
+    search: true,
+    height: '300px'
+  };
   categoryList: any;
   editData: any;
   label: string = 'Create'
@@ -28,25 +33,7 @@ export class CreateSubcategoryComponent {
     { id: 0, value: "Inactive" },
   ];
 
-  formCodeList = [
-    { id: 1, value: "01" },
-    { id: 2, value: "02" },
-    { id: 3, value: "03" },
-    { id: 4, value: "04" },
-    { id: 5, value: "05" },
-    { id: 6, value: "06" },
-    { id: 7, value: "07" },
-    { id: 8, value: "08" },
-    { id: 9, value: "09" },
-    { id: 10, value: "10" },
-    { id: 11, value: "11" },
-    { id: 12, value: "12" },
-    { id: 13, value: "13" },
-    { id: 14, value: "14" },
-    { id: 15, value: "15" },
-    { id: 16, value: "16" },
-
-  ]
+  formCodeList :any
   selectedSub: any;
   constructor(
     private bsModelService: BsModalService,
@@ -82,30 +69,46 @@ export class CreateSubcategoryComponent {
     this.subcateForm = this.fb.group({
       catId: [null, [Validators.required]],
       subcateName: ['', [Validators.required]],
-      formCode : [1, [Validators.required]],
+      formCode : ['', [Validators.required]],
       status: [1, [Validators.required]]
     })
     if(this.editData) {
       this.label = 'Update'
       this.getSubBasedOnId(this.editData?.sub_category_id);
     } else {
-      this.getCateGory()
+      this.getCateGory();
+      this.getFormCodeList()
     }
   }
 
   getSubBasedOnId(id:any) {
     this.SubcategoryService.getsubCatById(id).subscribe((res:any) => {
-     this.selectedSub = res?.body?.result
+     this.selectedSub = res?.body?.result;
      this.subcateForm.patchValue({
       subcateName:this.selectedSub?.sub_category_name,
-      formCode : this.selectedSub?.form_code,
       status: this.editData?.is_active
     })
-    this.getCateGory()
+    this.getCateGory();
+    this.getFormCodeList()
     })
   }
 
-  submit(formvalue: any) {
+  getFormCodeList() {
+    this.SubcategoryService.formCodeList().subscribe((res:any) => {
+      this.formCodeList = res?.body?.result;
+      console.log(this.formCodeList);      
+      if(this.selectedSub) {
+        let selectedForm = this.formCodeList?.find((val:any) => val?.value == this.selectedSub?.form_code)        
+        this.subcateForm.controls['formCode'].setValue(selectedForm)
+      }
+    })
+  }
+
+  submit(formvalue: any) {    
+    if (this.subcateForm.invalid) {
+      this.subcateForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails();
 
     let payload = {
@@ -113,13 +116,15 @@ export class CreateSubcategoryComponent {
       "sub_category_name": formvalue?.subcateName,
       "category_id": formvalue?.catId?.category_id,
       "category_name": formvalue?.catId?.category_name,
-      "form_code": formvalue?.formCode,
+      "form_code": formvalue?.formCode ? Number(formvalue?.formCode?.value) : null,
+      "form_code_text":formvalue?.formCode ? formvalue?.formCode?.text : null,
       "is_active": formvalue?.status,
       "created_by": user?.user_id
-    }    
+    }   
     let service = this.SubcategoryService.createsubCategory(payload);
     if(this.editData) {
       payload['sub_category_id'] = this.editData?.sub_category_id;
+
       service = this.SubcategoryService.updateSubCategory(payload, this.editData?.sub_category_id)
     }
 

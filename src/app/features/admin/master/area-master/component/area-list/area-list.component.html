@@ -47,7 +47,7 @@
             <div class="col-md-12">
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
-                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="areaList | paginate: {
+                        <app-skeleton-loader  [columns]="columns" [items]="areaData | paginate: {
                                 id: 'deptID',
                                 itemsPerPage: pagesize.limit,
                                 currentPage: pagesize.offset,
@@ -67,10 +67,14 @@
                                 </thead>
                                 <tbody>
                                     <tr
-                                        *ngFor="let item of areaList | searchFilter: searchKeyword | paginate: {id: 'deptID', itemsPerPage: pagesize.limit, currentPage: pagesize.offset, totalItems: pagesize.count}; let index = index">
+                                        *ngFor="let item of areaData | searchFilter: searchKeyword | paginate: {id: 'deptID', itemsPerPage: pagesize.limit, currentPage: pagesize.offset, totalItems: pagesize.count}; let index = index">
                                         <td>{{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}</td>
-                                        <td>{{item?.department_name}}</td>
-                                        <td>{{item?.department_desc}}</td>
+                                        <td>{{item?.district_name}}</td>
+                                        <td>{{item?.area_name}}</td>
+                                        <td>{{item?.source_lat}}</td>
+                                        <td>{{item?.source_lon}}</td>
+                                        <td>{{ item?.shape_type === 1 ? 'Circle' : item?.shape_type === 2 ? 'Polygon' : '' }}</td>
+                                        <td>{{item?.radius}}</td>
                                         <td>
                                             <span *ngIf="item?.is_active; else inactive"
                                                 class="text-green-600 font-medium">Active</span>
@@ -79,10 +83,10 @@
                                             </ng-template>
                                         </td>
                                         <td class="flex space-x-2">
-                                            <button class="btn btn-success" >
+                                            <button class="btn btn-success" (click)="onCreateArea(item)">
                                                 <i class="fa fa-pencil"></i>
                                             </button>
-                                            <button class="btn btn-danger" >
+                                            <button class="btn btn-danger" (click)="deleteArea(item)">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
@@ -90,7 +94,7 @@
                                 </tbody>
                             </table>
                             <div class="text-center py-4 text-gray-500"
-                                *ngIf="!areaList?.length || !(areaList | searchFilter: searchKeyword)?.length">
+                                *ngIf="!areaData?.length || !(areaData | searchFilter: searchKeyword)?.length">
                                 No area Available
                             </div>
                         </div>

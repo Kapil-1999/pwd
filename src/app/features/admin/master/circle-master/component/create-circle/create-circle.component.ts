@@ -77,11 +77,16 @@ export class CreateCircleComponent {
   }
 
   submit(formvalue:any) {
+    if (this.circleForm.invalid) {
+      this.circleForm.markAllAsTouched();
+      return;
+    }
     let user = this.commonService.getUserDetails();
     let payload = {
       "circle_id": 0,
       "circle_name": formvalue?.name,
-      "zone_id": formvalue?.zone ? Number(formvalue?.zone?.value) : 0,
+      "zone_id": formvalue?.zone ? Number(formvalue?.zone?.value) : null,
+      "zone_name": formvalue?.zone ? formvalue?.zone?.text : null,
       "is_active": formvalue?.status,
       "created_by": user?.user_id
     };

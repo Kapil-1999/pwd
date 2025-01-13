@@ -7,6 +7,7 @@ import { PoiAllocationListComponent } from './poi-allocation/component/poi-alloc
 import { SharedModule } from '../../shared/shared.module';
 import { MangeDutyAllocationComponent } from './duty-allocation/pages/mange-duty-allocation/mange-duty-allocation.component';
 import { DutyAllocationListComponent } from './duty-allocation/component/duty-allocation-list/duty-allocation-list.component';
+import { CreatePoiComponent } from './poi-allocation/component/create-poi/create-poi.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { DutyAllocationListComponent } from './duty-allocation/component/duty-al
     ManagePoiComponent,
     PoiAllocationListComponent,
     MangeDutyAllocationComponent,
-    DutyAllocationListComponent
+    DutyAllocationListComponent,
+    CreatePoiComponent
   ],
   imports: [
     CommonModule,

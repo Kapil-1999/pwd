@@ -51,7 +51,7 @@ export class ZoneListComponent {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getZoneList()
+    this.getZoneList(this.pagesize.offset, this.pagesize.limit)
   }
 
   setInitialtable() {
@@ -75,15 +75,19 @@ export class ZoneListComponent {
     this.configuration.paginationEnabled = false;
   }
 
-  getZoneList() {
+  getZoneList(pagedata: any, tableSize: any) {
     this.isLoading = true;
-    this.zoneService.zoneList().subscribe(
+    const page = {
+      pageNo: pagedata,
+      pageSize: tableSize,
+    };
+    this.zoneService.zoneList(page).subscribe(
       (data) => {
         setTimeout(() => {
           this.isLoading = false;
         }, 600);
         this.zoneList = data?.body?.result || [];
-        this.pagesize.count = this.zoneList?.length;
+        this.pagesize.count = data?.body?.totalRow;
       },
       (error) => {
         setTimeout(() => {
@@ -96,6 +100,7 @@ export class ZoneListComponent {
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+    this.getZoneList(this.pagesize.offset, this.pagesize.limit)
   }
 
 
@@ -114,7 +119,8 @@ export class ZoneListComponent {
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
       this.pagesize.limit = 25;
-      this.getZoneList();
+      this.getZoneList(this.pagesize.offset, this.pagesize.limit)
+
     });
   }
 
@@ -142,7 +148,8 @@ export class ZoneListComponent {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getZoneList()
+          this.getZoneList(this.pagesize.offset, this.pagesize.limit)
+
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
@@ -153,6 +160,8 @@ export class ZoneListComponent {
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
+    this.getZoneList(this.pagesize.offset, this.pagesize.limit)
+
   }
 
 
