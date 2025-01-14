@@ -144,6 +144,9 @@
             </div>
             <div class="col-md-3 mb-2">
                 <label class="form-label">Photo</label>
+                <div *ngIf="imagePath">
+                    <img [src]="getImageUrl(imagePath)" alt="Profile Photo" class="w-10 h-10 rounded-full profile-image mb-2" />
+                  </div>
                 <input type="file" class="form-control" formControlName="photo" (change)="onFileChange($event)"/>
             </div>
             <!-- Submit Button -->

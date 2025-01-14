@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { LocalStorageService } from '../../services/localstorage.service';
 import { NotificationService } from '../../services/notification.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { ADMIN_MENU } from '../../constant/menu/menu';
+import { ADMIN_MENU, IMG_URL } from '../../constant/menu/menu';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,7 +12,8 @@ export class HeaderComponent {
 
   menuList: any = ADMIN_MENU;
   userDetails: any;
-  showMobileMenu: boolean = false
+  showMobileMenu: boolean = false;
+  imgUrl = IMG_URL
 
   constructor(
     private renderer: Renderer2,
@@ -101,6 +102,12 @@ export class HeaderComponent {
 
   onShowMobileMewnu() {
     this.showMobileMenu = !this.showMobileMenu
+  }
+
+  goToProfile() {
+    this.closeAllMenus(this.menuList);
+    this.showPopup = false;
+    this.router.navigateByUrl('/admin/profile')
   }
 
 }

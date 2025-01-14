@@ -74,7 +74,7 @@ export class UserListComponent {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable();
-    this.getUserList();
+    this.getUserList(this.pagesize.offset, this.pagesize.limit);
     this.getDepartmentList();
     this.getDesignationList()
   }
@@ -119,9 +119,13 @@ export class UserListComponent {
     })
   }
 
-  getUserList() {
+  getUserList(pagedata: any, tableSize: any) {
     this.isLoading = true;
-    this.userService.userList().subscribe((res) => {
+    const page = {
+      pageNo: pagedata,
+      pageSize: tableSize,
+    };
+    this.userService.userList(page).subscribe((res) => {
       setTimeout(() => {
         this.isLoading = false;
       }, 600);
@@ -139,52 +143,100 @@ export class UserListComponent {
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
+    this.getUserList(this.pagesize.offset, this.pagesize.limit);
+
   }
 
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
+    this.getUserList(this.pagesize.offset, this.pagesize.limit);
+
   }
 
 
-  onCreateuser(value: any) {
-    if (this.selectedDepartment.length == 0 || this.selectedDesignation.length == 0) {
-      this.tosterService.showWarning('Please select both Department and Designation before creating a user.');
-      return;
+  onCreateuser(value: any) {    
+    if(value === '') {
+      if (this.selectedDepartment.length == 0 || this.selectedDesignation.length == 0) {
+        this.tosterService.showWarning('Please select both Department and Designation before creating a user.');
+        return;
+      } else {
+        let createCompenent: any;
+        if (this.selectedDesignation?.value === '1') {
+          createCompenent = CreateUserComponent
+        } else if (this.selectedDesignation?.value === '2') {
+          createCompenent = CrateChiefEngComponent
+        } else if (this.selectedDesignation?.value === '3') {
+          createCompenent = CrateSupritendingEngComponent
+        } else if (this.selectedDesignation?.value === '4') {
+          createCompenent = CrateExecutiveEngComponent
+        } else if (this.selectedDesignation?.value == "5") {
+          createCompenent = CrateAssitantEngComponent;
+        } else if (this.selectedDesignation?.value == "6") {
+          createCompenent = CrateJuniorEngComponent;
+        }
+  
+        const initialState: ModalOptions = {
+          initialState: {
+            editData: value ? value : '',
+            department: this.selectedDepartment,
+            designation: this.selectedDesignation
+          },
+        };
+        this.bsModalRef = this.modalService.show(
+          createCompenent,
+          Object.assign(initialState, {
+            class: 'modal-lg modal-dialog-centered alert-popup',
+          })
+        );
+        this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 25;
+          this.getUserList(this.pagesize.offset, this.pagesize.limit);
+
+        });
+      }
     } else {
       let createCompenent: any;
-      if (this.selectedDesignation?.value === '1') {
-        createCompenent = CreateUserComponent
-      } else if (this.selectedDesignation?.value === '2') {
-        createCompenent = CrateChiefEngComponent
-      } else if (this.selectedDesignation?.value === '3') {
-        createCompenent = CrateSupritendingEngComponent
-      } else if (this.selectedDesignation?.value === '4') {
-        createCompenent = CrateExecutiveEngComponent
-      } else if (this.selectedDesignation?.value == "5") {
-        createCompenent = CrateAssitantEngComponent;
-      } else if (this.selectedDesignation?.value == "6") {
-        createCompenent = CrateJuniorEngComponent;
-      }
+    
+        if (value?.designation_id === 1) {
+          createCompenent = CreateUserComponent
+        } else if (value?.designation_id === 2) {
+          createCompenent = CrateChiefEngComponent
+        } else if (value?.designation_id === 3) {
+          createCompenent = CrateSupritendingEngComponent
+        } else if (value?.designation_id === 4) {
+          createCompenent = CrateExecutiveEngComponent
+        } else if (value?.designation_id == 5) {
+          createCompenent = CrateAssitantEngComponent;
+        } else if (value?.designation_id == 6) {
+          createCompenent = CrateJuniorEngComponent;
+        }
+        let designation = {
+          value : value?.designation_id.toString()
+        }
+        let department = {
+          value : value?.department_id.toString()
+        }
+        const initialState: ModalOptions = {
+          initialState: {
+            editData: value ? value : '',
+            department: department,
+            designation: designation
+          },
+        };
+        this.bsModalRef = this.modalService.show(
+          createCompenent,
+          Object.assign(initialState, {
+            class: 'modal-lg modal-dialog-centered alert-popup',
+          })
+        );
+        this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
+          this.pagesize.offset = 1;
+          this.pagesize.limit = 25;
+          this.getUserList(this.pagesize.offset, this.pagesize.limit);
 
-      const initialState: ModalOptions = {
-        initialState: {
-          editData: value ? value : '',
-          department: this.selectedDepartment,
-          designation: this.selectedDesignation
-        },
-      };
-      this.bsModalRef = this.modalService.show(
-        createCompenent,
-        Object.assign(initialState, {
-          class: 'modal-lg modal-dialog-centered alert-popup',
-        })
-      );
-      this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
-        this.pagesize.offset = 1;
-        this.pagesize.limit = 25;
-        this.getUserList();
-      });
+        });
     }
   }
 
@@ -212,19 +264,12 @@ export class UserListComponent {
           this.tosterService.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getUserList();
+          this.getUserList(this.pagesize.offset, this.pagesize.limit);
+
         } else {
           this.tosterService.errorAlert(value?.title);
         }
       }
     );
-  }
-
-  paginationEvent($event: any): void {
-    this.pagesize = {
-      ...this.pagesize,
-      limit: $event.pageSize,
-      offset: $event.pageIndex + 1,
-    };
   }
 }

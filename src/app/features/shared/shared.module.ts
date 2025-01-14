@@ -32,7 +32,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
     BreadcrumbComponent,
     SkeletonLoaderComponent,
     SearchFilterPipe,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
 import { LocalStorageService } from '../../services/localstorage.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,14 @@ import { LocalStorageService } from '../../services/localstorage.service';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  ipAddress: string = '';
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private tokenService: TokenService,
-    private localStorageService : LocalStorageService
+    private localStorageService : LocalStorageService,
+    private http : HttpClient
 
   ) {
     if (this.localStorageService.isLoggedIn()) {
@@ -27,7 +30,19 @@ export class LoginComponent {
    }
 
   ngOnInit() {
-    this.setIntialvalue()
+    this.setIntialvalue();
+    this.getPublicIP()
+  }
+
+  getPublicIP(): void {
+    this.http.get<{ ip: string }>('https://api.ipify.org?format=json').subscribe(
+      (response) => {
+        this.ipAddress = response.ip;
+      },
+      (error) => {
+        console.error('Failed to fetch IP address:', error);
+      }
+    );
   }
 
   /**setinitial value on login form */
@@ -43,7 +58,7 @@ export class LoginComponent {
    * @param formvalue 
    */
   submit(formvalue:any) {  
-    this.tokenService.generateToken(formvalue);
+    this.tokenService.generateToken(formvalue, this.ipAddress);
   }
 
 

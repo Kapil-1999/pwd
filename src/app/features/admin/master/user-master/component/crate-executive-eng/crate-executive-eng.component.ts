@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { retry } from 'rxjs';
 import { UserMasterService } from '../../services/user-master.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { IMG_URL } from '../../../../../shared/constant/menu/menu';
 
 @Component({
   selector: 'app-crate-executive-eng',
@@ -46,6 +47,8 @@ export class CrateExecutiveEngComponent {
   userData: any;
   editData: any;
   label :string = 'Create';
+  imgeUrl = IMG_URL;
+  imagePath: any;
 
   constructor(
     private commonService: CommonService,
@@ -56,6 +59,8 @@ export class CrateExecutiveEngComponent {
   ) { }
 
   ngOnInit() {
+    console.log(this.department, this.designation);
+
     this.initializeForm();
   }
 
@@ -149,11 +154,15 @@ export class CrateExecutiveEngComponent {
           loginPassword: this.userData?.login_pass,
           remarks: this.userData?.remarks,
           status: this.userData?.is_active,
-          photo: this.userData?.img_path
         });
+        this.imagePath = this.userData?.img_path;
         this.getChiefEngList();
       }
     })
+  }
+
+  getImageUrl(path: string): string {
+    return path ? `${this.imgeUrl}${path.replace(/\\/g, '/')}` : '';
   }
 
 
@@ -293,8 +302,8 @@ export class CrateExecutiveEngComponent {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.photoBase64 = reader.result as string;
-        console.log("Base64 image:", this.photoBase64);
+        let imageValue = reader.result as string
+        this.photoBase64 = imageValue.split(',')[1];
       };
       reader.onerror = (error) => {
         console.error("Error reading file:", error);
@@ -320,19 +329,19 @@ export class CrateExecutiveEngComponent {
       "designation_id": this.designation ? Number(this.designation?.value) : null,
       "level_id": this.designation ? Number(this.designation?.value) : null,
       "chief_eng_id": formvalue?.chiefEngineer ? Number(formvalue?.chiefEngineer?.value) : null,
-      "zone": this.designation?.value === '2'
+      "zone": this.designation?.value == '2'
         ? (formvalue?.zone ? this.getSelectedValues(formvalue.zone) : null)
         : (formvalue?.zone ? formvalue.zone.value : null),
       "sup_eng_id": formvalue?.supritendingEngineer ? Number(formvalue?.supritendingEngineer?.value) : null,
-      "circle": this.designation?.value === '3'
+      "circle": this.designation?.value == '3'
         ? (formvalue?.circle ? this.getSelectedValues(formvalue?.circle) : null)
         : (formvalue?.circle ? formvalue?.circle.value : null),
       "exec_eng_id": formvalue?.executiveEngineer ? Number(formvalue?.executiveEngineer?.value) : null,
-      "district": this.designation?.value === '4'
+      "district": this.designation?.value == '4'
         ? (formvalue?.city ? this.getSelectedValues(formvalue?.city) : null)
         : (formvalue?.city ? formvalue?.city.value : null),
       "ass_eng_id": formvalue?.assistantEngineer ? Number(formvalue?.assistantEngineer?.value) : null,
-      "division": this.designation?.value === '5'
+      "division": this.designation?.value == '5'
         ? (formvalue?.division ? this.getSelectedValues(formvalue?.division) : null)
         : (formvalue?.division ? formvalue?.division.value : null),
       "remarks": formvalue?.remarks,
