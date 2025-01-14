@@ -73,6 +73,25 @@ export class CreateAreaComponent {
       "is_active": [1, [Validators.required]],
     });
     this.areaForm.get('shape_type')?.valueChanges.subscribe((value) => this.onShapeChange(value));
+    this.areaForm.get('shape_type')?.valueChanges.subscribe((shapeType) => {
+      if (shapeType === '1') { // If Circle is selected
+        this.updateDestinationCoordinates();
+      }
+    });
+  
+    // Subscribe to source_lat changes
+    this.areaForm.get('source_lat')?.valueChanges.subscribe(() => {
+      if (this.areaForm.get('shape_type')?.value === '1') {
+        this.updateDestinationCoordinates();
+      }
+    });
+  
+    // Subscribe to source_lon changes
+    this.areaForm.get('source_lon')?.valueChanges.subscribe(() => {
+      if (this.areaForm.get('shape_type')?.value === '1') {
+        this.updateDestinationCoordinates();
+      }
+    });
 
     if (this.editData) {
       this.label = 'Update'
@@ -82,6 +101,18 @@ export class CreateAreaComponent {
     } else {
       this.getWorkList();
       this.getCityList()
+    }
+  }
+
+  updateDestinationCoordinates() {
+    const sourceLat = this.areaForm.get('source_lat')?.value;
+    const sourceLon = this.areaForm.get('source_lon')?.value;
+  
+    if (sourceLat !== null || sourceLon !== null) {
+      this.areaForm.patchValue({
+        destination_lat: sourceLat,
+        destination_lon: sourceLon,
+      });
     }
   }
 
@@ -141,11 +172,11 @@ export class CreateAreaComponent {
   }
 
   onShapeChange(value: string) {
-    if (value == '1') {
+    if (value === '1') { 
       const sourceLat = this.areaForm.get('source_lat')?.value;
       const sourceLon = this.areaForm.get('source_lon')?.value;
-
-      if (sourceLat && sourceLon) {
+  
+      if (sourceLat !== null && sourceLon !== null) {
         this.areaForm.patchValue({
           destination_lat: sourceLat,
           destination_lon: sourceLon,

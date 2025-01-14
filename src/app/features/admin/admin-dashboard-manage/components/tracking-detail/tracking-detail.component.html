@@ -1,24 +1,31 @@
 <div class="card">
   <div class="card-header">
-    <!-- di
-    <span>Tracking</span> -->
     <div class="flex justify-between items-center">
       <div class="min-w-0 flex-auto">
         <p class="">Tracking</p>
       </div>
-      <div class="hidden  sm:flex sm:flex-col sm:items-end">
+      <div class="hidden sm:flex sm:flex-col sm:items-end">
         <div class="search-form">
           <input placeholder="Search for..." type="text" 
               class="form-control search-input" />
           <button type="button" class="btn-search">
               <i class="fa fa-search" aria-hidden="true"></i>
           </button>
-      </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="p-2">
+    <div class="flex justify-between mb-2">
+
+      <button class="px-3 py-1 bg-gray-300 text-black rounded-md" 
+              (click)="previousCard()" 
+              *ngIf="isPrevious">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i>  Previous
+      </button>
+    </div>
+
     <ul role="list" class="card-container" [class.scrollable]="trackingData.length > 6">
       <li class="p-2 mt-1 tracking-row" *ngFor="let card of trackingData; let i = index">
         <div class="profile-stats p">
@@ -28,11 +35,11 @@
               <p class="text-sm/6 font-semibold text-gray-900">{{card.name}}</p>
             </div>
           </div>
-          <div class="flex gap-x-2 profile-button">
-            <button class="px-3 py-1 bg-blue-500 text-white rounded-md">{{card?.stats?.SE}}</button>
-            <button class="px-3 py-1 bg-green-500 text-white rounded-md">{{card?.stats?.EE}}</button>
-            <button class="px-3 py-1 bg-yellow-500 text-white rounded-md">{{card?.stats?.AE}}</button>
-            <button class="px-3 py-1 bg-red-500 text-white rounded-md">{{card?.stats?.JE}}</button>
+          <div class="flex profile-button">
+            <button class="px-3 py-1 bg-blue-500 text-white rounded-md" *ngIf="card?.stats?.SE" (click)="onGetUserBeasedOnId(card?.stats?.SE, card)">SE : {{card?.stats?.SE?.value}}</button>
+            <button class="px-3 py-1 bg-green-500 text-white rounded-md" *ngIf="card?.stats?.EE" (click)="onGetUserBeasedOnId(card?.stats?.EE, card)">EE : {{card?.stats?.EE?.value}}</button>
+            <button class="px-3 py-1 bg-yellow-500 text-white rounded-md" *ngIf="card?.stats?.AE" (click)="onGetUserBeasedOnId(card?.stats?.AE, card)">AE : {{card?.stats?.AE?.value}}</button>
+            <button class="px-3 py-1 bg-red-500 text-white rounded-md" *ngIf="card?.stats?.JE" (click)="onGetUserBeasedOnId(card?.stats?.JE, card)">JE : {{card?.stats?.JE?.value}}</button>
           </div>
           <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
             <p class="mt-1 text-xs/5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>
@@ -74,7 +81,5 @@
         </div>
       </li>
     </ul>
-
-
   </div>
 </div>
