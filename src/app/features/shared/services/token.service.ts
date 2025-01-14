@@ -20,10 +20,11 @@ export class TokenService {
   ) { }
 
   //**generate token and redirect to dashboard page and after decode save token in indexdb */
-  generateToken(data: any) {
+  generateToken(data: any, ip:any) {
     let payload = {
       "UserName": data.userName,
-      "Password": data.password
+      "Password": data.password,
+      "login_from" : ip ? ip : 'Web'
     };
 
     this.loginService.login(payload).subscribe((res: any) => {      

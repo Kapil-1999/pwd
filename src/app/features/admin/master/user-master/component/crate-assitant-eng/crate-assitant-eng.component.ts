@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { retry } from 'rxjs';
 import { UserMasterService } from '../../services/user-master.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { IMG_URL } from '../../../../../shared/constant/menu/menu';
 
 @Component({
   selector: 'app-crate-assitant-eng',
@@ -46,6 +47,8 @@ export class CrateAssitantEngComponent {
   editData: any;
   userData: any;
   label :string = 'Create';
+  imgeUrl = IMG_URL;
+  imagePath: any;
 
   constructor(
     private commonService: CommonService,
@@ -148,11 +151,16 @@ export class CrateAssitantEngComponent {
           loginPassword: this.userData?.login_pass,
           remarks: this.userData?.remarks,
           status: this.userData?.is_active,
-          photo: this.userData?.img_path
         });
+        this.imagePath = this.userData?.img_path;
+
         this.getChiefEngList();
       }
     })
+  }
+
+  getImageUrl(path: string): string {
+    return path ? `${this.imgeUrl}${path.replace(/\\/g, '/')}` : '';
   }
 
 
@@ -256,11 +264,11 @@ export class CrateAssitantEngComponent {
   getExecutiveEngList(supritendingEngId: any) {
     this.commonService.executiveEngList(supritendingEngId).subscribe((res:any) =>{
       this.executiveEngList = res?.body?.result || [];
-      if (this.userData) {
+      if (this.userData) {        
         let matichSe = this.executiveEngList?.find((sup: any) => sup.value == this.userData?.exec_eng_id);
         this.userForm.controls['executiveEngineer'].setValue(matichSe);
         this.getDistrictByExecEng(matichSe.value)
-      } else if (this.executiveEngList.length > 0 && this.executiveEngList.length === 1) {
+      } else if (!this.userData && this.executiveEngList.length > 0 && this.executiveEngList.length === 1) {
         const executiveEngId = this.executiveEngList[0].value;
         this.userForm.controls['executiveEngineer'].setValue(this.executiveEngList[0]);
         this.getDistrictByExecEng(executiveEngId)
@@ -297,7 +305,7 @@ export class CrateAssitantEngComponent {
   getDivisionList(cityId: any) {
     this.commonService.divisionList(cityId).subscribe((res:any) =>{
       this.divisionData = res?.body?.result || [];
-      if (this.userData) {
+      if (this.userData) {        
         let divisionValue = this.userData?.division;
         if (divisionValue) {
           let matchingCE;
@@ -313,8 +321,7 @@ export class CrateAssitantEngComponent {
           }
           this.userForm.controls['division'].setValue(matchingCE || null);
         }
-      }
-      if (this.divisionData.length > 0 && this.divisionData.length === 1) {
+      } else if ((!this.userData) && this.divisionData.length > 0 && this.divisionData.length === 1) {
         this.userForm.controls['division'].setValue(this.divisionData[0]);
       } else {
         this.userForm.controls['division'].setValue(null);
@@ -340,8 +347,8 @@ export class CrateAssitantEngComponent {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.photoBase64 = reader.result as string;
-        console.log("Base64 image:", this.photoBase64);
+        let imageValue = reader.result as string
+        this.photoBase64 = imageValue.split(',')[1];
       };
       reader.onerror = (error) => {
         console.error("Error reading file:", error);

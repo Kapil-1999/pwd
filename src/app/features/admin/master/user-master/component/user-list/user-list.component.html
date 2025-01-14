@@ -89,20 +89,20 @@
                                             "NA" }}</td>
                                         <td>{{ item?.designation_name
                                             || "NA" }}</td>
-                                        <td>{{ item?.chief_eng_name ||
+                                        <td>{{ item?.ce_name ||
                                             "NA" }}</td>
                                         <td [ngClass]="{ 'w-zone': true }"
                                         >{{ item?.zone || "NA" }}
                                         </td>
-                                        <td>{{ item?.sup_eng_name ||
+                                        <td>{{ item?.se_name ||
                                             "NA" }}</td>
                                         <td [ngClass]="{ 'w-circle': true }">{{ item?.circle || "NA" }}
                                         </td>
-                                        <td>{{ item?.exec_eng_name ||
+                                        <td>{{ item?.ee_name ||
                                             "NA" }}</td>
                                         <td>{{ item?.district || "NA"
                                             }}</td>
-                                        <td>{{ item?.ass_eng_name ||
+                                        <td>{{ item?.ae_name ||
                                             "NA" }}</td>
                                         <td>{{ item?.division || "NA"
                                             }}</td>
@@ -128,15 +128,17 @@
                                                 <span class="text-red-600 font-medium">Inactive</span>
                                             </ng-template>
                                         </td>
-                                        <td class="flex space-x-2">
-                                            <button class="btn btn-success"
-                                                (click)="onCreateuser(item)">
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                            <button class="btn btn-danger"
-                                                (click)="deleteUser(item)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                                        <td >
+                                            <div class="btn-edit">
+                                                <button class="btn btn-success"
+                                                    (click)="onCreateuser(item)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-danger"
+                                                    (click)="deleteUser(item)">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

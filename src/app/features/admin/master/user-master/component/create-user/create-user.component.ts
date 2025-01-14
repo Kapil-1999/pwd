@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { retry } from 'rxjs';
 import { UserMasterService } from '../../services/user-master.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { IMG_URL } from '../../../../../shared/constant/menu/menu';
 
 @Component({
   selector: 'app-create-user',
@@ -46,6 +47,8 @@ export class CreateUserComponent {
   userData: any;
   editData: any;
   label: string = 'Create';
+  imagePath: any;
+  imgeUrl = IMG_URL;
 
   constructor(
     private commonService: CommonService,
@@ -146,10 +149,15 @@ export class CreateUserComponent {
           loginPassword: this.userData?.login_pass,
           remarks: this.userData?.remarks,
           status: this.userData?.is_active,
-          photo: this.userData?.img_path
         });
+        this.imagePath = this.userData?.img_path;
       }
     })
+  }
+
+  
+  getImageUrl(path: string): string {
+    return path ? `${this.imgeUrl}${path.replace(/\\/g, '/')}` : '';
   }
 
 
@@ -404,8 +412,8 @@ export class CreateUserComponent {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.photoBase64 = reader.result as string;
-        console.log("Base64 image:", this.photoBase64);
+        let imageValue = reader.result as string
+        this.photoBase64 = imageValue.split(',')[1];
       };
       reader.onerror = (error) => {
         console.error("Error reading file:", error);

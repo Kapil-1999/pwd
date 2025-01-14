@@ -13,15 +13,15 @@ export class UserMasterService {
     private apiService: ApiService
   ) { }
 
-  userList(): Observable<any> {
-    let url = API_CONSTANTS.user;
+  userList(data:any): Observable<any> {
+    let url = API_CONSTANTS.user.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize);
     return this.apiService
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   createUser(payload:any): Observable<any> {
-    let url = API_CONSTANTS.user
+    let url = API_CONSTANTS.adduser
     return this.apiService
       .post(url,payload)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));

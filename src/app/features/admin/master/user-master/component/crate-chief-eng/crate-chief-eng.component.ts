@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { retry } from 'rxjs';
 import { UserMasterService } from '../../services/user-master.service';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { IMG_URL } from '../../../../../shared/constant/menu/menu';
 @Component({
   selector: 'app-crate-chief-eng',
   templateUrl: './crate-chief-eng.component.html',
@@ -35,7 +36,8 @@ export class CrateChiefEngComponent {
   designation: any;
   desigantionList: any;
   deparmentList: any;
-  editData: any
+  editData: any;
+  imgeUrl = IMG_URL;
 
   userForm!: FormGroup;
   status = [
@@ -45,6 +47,7 @@ export class CrateChiefEngComponent {
   divisionData: any;
   userData: any;
   label :string = 'Create';
+  imagePath: any;
 
   constructor(
     private commonService: CommonService,
@@ -54,9 +57,7 @@ export class CrateChiefEngComponent {
     private notificationSerivce: NotificationService
   ) { }
 
-  ngOnInit() {
-    console.log("check edit", this.designation);
-    
+  ngOnInit() {       
     this.initializeForm();
   }
 
@@ -147,11 +148,16 @@ export class CrateChiefEngComponent {
           loginPassword: this.userData?.login_pass,
           remarks: this.userData?.remarks,
           status: this.userData?.is_active,
-          photo: this.userData?.img_path
         });
+        this.imagePath = this.userData?.img_path;
+
         this.getZoneList();
       }
     })
+  }
+
+  getImageUrl(path: string): string {
+    return path ? `${this.imgeUrl}${path.replace(/\\/g, '/')}` : '';
   }
 
   getZoneList() {
@@ -201,8 +207,8 @@ export class CrateChiefEngComponent {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.photoBase64 = reader.result as string;
-        console.log("Base64 image:", this.photoBase64);
+        let imageValue = reader.result as string
+        this.photoBase64 = imageValue.split(',')[1];
       };
       reader.onerror = (error) => {
         console.error("Error reading file:", error);
@@ -210,7 +216,7 @@ export class CrateChiefEngComponent {
       };
       reader.readAsDataURL(file);
     }
-  }
+  } 
 
 
   submit(formvalue: any) {

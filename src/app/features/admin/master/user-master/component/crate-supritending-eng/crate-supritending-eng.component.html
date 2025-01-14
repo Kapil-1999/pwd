@@ -20,7 +20,7 @@
 
               <!-- Zone -->
               <div class="col-md-3 mb-2"
-              *ngIf="designation?.value !== '1' && (designation?.value === '2' || designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+             >
               <label class="form-label">Zone <span class="text-danger">*</span></label>
               <ngx-select-dropdown [config]="config" [multiple]="designation?.value === '2'" [options]="zoneList" formControlName="zone"
                   (change)="onZoneChange($event)">
@@ -28,12 +28,10 @@
               <div *ngIf="userForm.get('zone')?.invalid && userForm.get('zone')?.touched">
                   <span class="text-danger">Zone is required.</span>
               </div>
-          </div>
-            
+          </div>           
 
              <!-- Circle -->
-             <div class="col-md-3 mb-2"
-             *ngIf="designation?.value !== '1' && (designation?.value === '3' || designation?.value === '4' || designation?.value === '5' || designation?.value === '6')">
+             <div class="col-md-3 mb-2">
              <label class="form-label">Circle <span class="text-danger">*</span></label>
              <ngx-select-dropdown [config]="config" [multiple]="designation?.value === '3'" [options]="circleList" formControlName="circle"
                 >
@@ -98,6 +96,9 @@
             </div>
             <div class="col-md-3 mb-2">
                 <label class="form-label">Photo</label>
+                <div *ngIf="imagePath">
+                    <img [src]="getImageUrl(imagePath)" alt="Profile Photo" class="w-10 h-10 rounded-full profile-image mb-2" />
+                  </div>
                 <input type="file" class="form-control" formControlName="photo" (change)="onFileChange($event)"/>
             </div>
             <!-- Submit Button -->

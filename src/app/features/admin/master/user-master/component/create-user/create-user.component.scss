@@ -1,3 +1,14 @@
 button.btn.btn-success {
     width: 100%;
 }
+
+.profile-image {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transformation */
+  }
+  
+  .profile-image:hover {
+    -webkit-transform: scale(3.5);
+    transform: scale(3.5);
+    /* Scale up and slightly rotate */
+  }
