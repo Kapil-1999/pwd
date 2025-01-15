@@ -13,7 +13,7 @@ export class HeaderComponent {
   menuList: any = ADMIN_MENU;
   userDetails: any;
   showMobileMenu: boolean = false;
-  imgUrl = IMG_URL
+  imgUrl = IMG_URL;
 
   constructor(
     private renderer: Renderer2,
