@@ -12,6 +12,9 @@ import { ViewReportListComponent } from './view-report/component/view-report-lis
 import { ManageViewReportComponent } from './view-report/pages/manage-view-report/manage-view-report.component';
 import { ManageActivityComponent } from './area-activity/pages/manage-activity/manage-activity.component';
 import { AreaActivityListComponent } from './area-activity/component/area-activity-list/area-activity-list.component';
+import { SharedModule } from '../../shared/shared.module';
+import { GeneralFilterReportComponent } from './general-report/component/general-filter-report/general-filter-report.component';
+import { GeneralUserDetailsComponent } from './general-report/component/general-user-details/general-user-details.component';
 
 
 @NgModule({
@@ -25,11 +28,14 @@ import { AreaActivityListComponent } from './area-activity/component/area-activi
     ViewReportListComponent,
     ManageViewReportComponent,
     ManageActivityComponent,
-    AreaActivityListComponent
+    AreaActivityListComponent,
+    GeneralFilterReportComponent,
+    GeneralUserDetailsComponent
   ],
   imports: [
     CommonModule,
-    ReportRoutingModule
+    ReportRoutingModule,
+    SharedModule
   ]
 })
 export class ReportModule { }

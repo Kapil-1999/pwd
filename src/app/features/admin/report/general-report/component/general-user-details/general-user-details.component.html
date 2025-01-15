@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h5>User Details</h5>
+    <div class="close-modal" (click)="cancel()">
+        <i class="fa fa-close" style="cursor: pointer;"></i>
+    </div>
+</div>
+
+<div class="modal-body">
+    <div class="overflow-auto">
+        <div id="datatable_wrapper">
+            <table id="datatable" class="table table-striped nowrap dataTable no-footer dtr-inline" role="grid"
+            #TABLE aria-describedby="datatable_info" style="width: 100%" width="100%">
+                <thead>
+                    <tr role="row">
+                        <th *ngFor="let vehicleHeading of columns"
+                           >
+                            <span>{{ vehicleHeading?.title }}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of generalUserList | searchFilter: searchKeyword  let index = index"
+                        >
+                        <td >
+                           
+                        </td>
+                        <td >{{
+                            item?.zone_name ||
+                            "NA" }}</td>
+                        <td >{{
+                            item?.state_name
+                            || "NA" }}</td>
+
+                        <td >
+                            <span *ngIf="item?.is_active; else inactive"
+                                class="text-green-600 font-medium">Active</span>
+                            <ng-template #inactive>
+                                <span class="text-red-600 font-medium">Inactive</span>
+                            </ng-template>
+                        </td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center py-4 text-gray-500"
+                *ngIf="!generalUserList?.length || !(generalUserList | searchFilter: searchKeyword)?.length">
+                No data Available
+            </div>
+        </div>
+    </div>
+</div>

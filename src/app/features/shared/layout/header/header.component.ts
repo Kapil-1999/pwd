@@ -60,6 +60,7 @@ export class HeaderComponent {
     if (!clickedInside) {
       this.closeAllMenus(this.menuList);
       this.showPopup = false;
+      this.showMobileMenu = false
 
     }
   }
@@ -92,12 +93,6 @@ export class HeaderComponent {
   togglePopup() {
     this.showPopup = !this.showPopup;
     this.closeAllMenus(this.menuList);
-  }
-
-  logout() {
-    this.notificationService.successAlert('Logout Successfully');
-    this.localStorageService.clear();
-    this.router.navigate(['/login']);
   }
 
   onShowMobileMewnu() {
