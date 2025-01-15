@@ -1,5 +1,5 @@
 <div class="card-data">
-    <div *ngFor="let card of cards" class="card status {{ card.status }} header-card">
+    <div *ngFor="let card of cards" class="card status {{ card.status }} header-card" (click)="goToDetails(card)">
         <div class="card-content">
             <div class="card-left">
                 <span class="card-count">{{ card.count }}</span>

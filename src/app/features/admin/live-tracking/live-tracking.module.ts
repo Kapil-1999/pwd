@@ -12,7 +12,7 @@ import { UserInMapComponent } from './component/user-in-map/user-in-map.componen
   declarations: [
     ManageLiveTrackingComponent,
     LiveMapTrackingComponent,
-    UserInMapComponent
+    UserInMapComponent,
   ],
   imports: [
     CommonModule,

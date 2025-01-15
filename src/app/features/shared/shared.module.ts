@@ -21,6 +21,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { SwiperComponent } from './component/swiper/swiper.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
 
@@ -33,6 +35,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
     SkeletonLoaderComponent,
     SearchFilterPipe,
     DeleteConfirmationComponent,
+    SwiperComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +56,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    CarouselModule
   ],
   exports: [
     HeaderComponent,
@@ -76,6 +80,8 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    CarouselModule,
+    SwiperComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [DatePipe]

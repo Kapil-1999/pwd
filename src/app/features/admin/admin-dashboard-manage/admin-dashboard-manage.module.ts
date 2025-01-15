@@ -9,6 +9,8 @@ import { TrackingDetailComponent } from './components/tracking-detail/tracking-d
 import { EmployeeChartComponent } from './components/employee-chart/employee-chart.component';
 import { EmployeeCountingComponent } from './components/employee-counting/employee-counting.component';
 import { SharedModule } from '../../shared/shared.module';
+import { DashboardUserDetailsComponent } from './pages/dashboard-user-details/dashboard-user-details.component';
+import { ManageUserDetailsComponent } from './components/manage-user-details/manage-user-details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SharedModule } from '../../shared/shared.module';
     TrackingMapComponent,
     TrackingDetailComponent,
     EmployeeChartComponent,
-    EmployeeCountingComponent
+    EmployeeCountingComponent,
+    DashboardUserDetailsComponent,
+    ManageUserDetailsComponent
   ],
   imports: [
     CommonModule,
