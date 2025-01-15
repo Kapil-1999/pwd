@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-general-report-list',
-  templateUrl: './general-report-list.component.html',
-  styleUrl: './general-report-list.component.scss'
+  selector: 'app-general-user-details',
+  templateUrl: './general-user-details.component.html',
+  styleUrl: './general-user-details.component.scss'
 })
-export class GeneralReportListComponent {
-  isLoading : boolean = false;
-  generalReportList: any;
+export class GeneralUserDetailsComponent {
   columns: any;
   searchKeyword:any;
+  generalUserList :any
+  constructor(
+    private bsmoodalService: BsModalService
+  ){}
 
   ngOnInit() {
     this.setInitialtable()
-  };
+  }
 
   setInitialtable() {
     this.columns = [
@@ -25,5 +28,9 @@ export class GeneralReportListComponent {
       { key: 'Distance', title: 'Distance' },
       { key: 'Working Hours', title: 'Working Hours' }
     ];
+  }
+
+  cancel() {
+    this.bsmoodalService.hide()
   }
 }

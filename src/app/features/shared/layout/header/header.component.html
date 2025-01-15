@@ -1,82 +1,3 @@
-<!-- <header>
-  <div class="top-bar primary-top-bar">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <ul class="header-part d-flex justify-content-between align-items-center">
-            <li class="logo-part">
-              <div>
-                <a href="http://">
-                  <img src="assets/images/pie-chart.png" alt="">
-                </a> &nbsp;&nbsp;
-                <span class="header-title">Employee Tracking System</span>
-              </div>
-            </li>
-
-            <li class="notification-part">
-              <ul class="list-inline top-right-nav mb-0 d-flex">
-                <li class="me-3">
-                  <div class="search-1">
-                    <a>
-                      <span class="login-detail"><b>Login Name :</b> {{userDetails.full_name}}</span>
-                      <br>
-                      <span class="login-detail"><b>Department :</b> PWD</span>
-                    </a>
-                  </div>
-                </li>
-
-                <li class="me-3">
-                  <div class="search" (click)="togglePopup()">
-                    <a>
-                      <i class="fas fa-user"></i>
-                      <i class="fas fa-chevron-down arrow-icon" [class.rotate]="showPopup"></i>
-                    </a>
-                    <div class="user-popup" *ngIf="showPopup">
-                      <ul class="menu">
-                        <li class="menu-link"><a id="profile-part" routerLink="/my-profile">My Profile</a></li>
-                        <li class="menu-link"><a id="profile-part" routerLink="/settings">Settings</a></li>
-                        <li class="menu-link"><a id="profile-part" (click)="logout()">Logout</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <ul class="menubar">
-    <li class="nav-item dropdown" *ngFor="let menuValue of menuList">
-      <ng-container *ngIf="menuValue.subNav?.length > 0 || menuValue.childSubmenu?.length > 0; else noSubmenu">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" (click)="toggleDropdown(menuValue, $event)">
-          <img class="header-logo" [src]="menuValue.iconClass"> {{ menuValue.name }}
-        </a>
-        <ul class="dropdown-menu" [class.show]="menuValue.isOpen">
-          <li *ngFor="let subNavValue of menuValue.subNav" (click)="toggleDropdown(subNavValue, $event)">
-            <a class="dropdown-item" [routerLink]="subNavValue.path || '#'">
-              <i [class]="subNavValue.iconClass"></i> {{ subNavValue.name }}
-            </a>
-            <ul *ngIf="subNavValue.childSubmenu?.length > 0" class="dropdown-menu" [class.show]="subNavValue.isOpen">
-              <li *ngFor="let childValue of subNavValue.childSubmenu" (click)="toggleDropdown(childValue, $event)">
-                <a class="dropdown-item" [routerLink]="childValue.path || '#'">
-                  <i [class]="childValue.iconClass"></i> {{ childValue.name }}
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </ng-container>
-      <ng-template #noSubmenu>
-        <a class="nav-link" [routerLink]="menuValue.path || '/user/dashboard'">
-          <img class="header-logo" [src]="menuValue.iconClass"> {{ menuValue.name }}
-        </a>
-      </ng-template>
-    </li>
-  </ul>
-</header> -->
 <div class="min-h-full">
   <nav class="bg-blue-500 text-white">
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,7 +43,6 @@
         </div>
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
-
             <div class="text-white mr-4">
               <div class="text-base font-medium">
                 Login Name : {{userDetails.full_name}}
@@ -145,58 +65,7 @@
               <div *ngIf="showPopup"
                 class="absolute right-0 z-10 mt-2 w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-
-                <div class="profile-part">
-                  <div class="login bg-white shadow-lg rounded-lg overflow-hidden">
-                    <div class="d-flex items-center justify-center">
-                      <img
-                        class="w-32 h-32 rounded-full border-4 border-white mt-2"
-                        [src]="imgUrl + userDetails?.img_path" alt="Profile Picture" />
-                    </div>
-
-                    <!-- User Details -->
-                    <div class="text-center p-6 mt-4">
-                      <h1 class="text-xl font-semibold text-gray-800">{{userDetails?.full_name}}</h1>
-                      <p class="text-gray-600">{{userDetails?.designation_name}}</p>
-                      <p class="text-sm text-gray-500 mt-2">
-                        Department: {{userDetails?.department_name}}
-                      </p>
-                    </div>
-
-                    <!-- User Info -->
-                    <div class="px-6 pb-6">
-                      <div class="flex items-center justify-between text-gray-700 mb-4">
-                        <div>
-                          <p class="text-sm">Phone</p>
-                          <p class="font-medium">{{userDetails?.contact_no}}</p>
-                        </div>
-                        <div>
-                          <p class="text-sm">Email</p>
-                          <p class="font-medium">{{userDetails?.email_id}}</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center justify-between text-gray-700 mb-4">
-                        <div>
-                          <p class="text-sm">Last Login</p>
-                          <p class="font-medium">{{userDetails?.contact_no}}</p>
-                          <p class="font-medium">{{userDetails?.contact_no}}</p>
-                        </div>
-                        <div>
-                          <p class="text-sm">Account Status</p>
-                          <p class="font-medium">Valid Upto</p>
-                          <p class="font-medium">{{userDetails?.contact_no}}</p>
-                        </div>
-                      </div>
-                      <div class="flex justify-center space-x-4">
-                        <button class="px-4 py-2 bg-red-500 text-white text-sm rounded-md hover:bg-red-600"
-                          (click)="logout()">
-                          Logout
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+               <profile></profile>
               </div>
             </div>
 
@@ -224,50 +93,50 @@
       </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
     <div id="mobile-menu" *ngIf="showMobileMenu">
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base  text-white"
-          aria-current="page">Dashboard</a>
-        <a href="#"
-          class="block rounded-md px-3 py-2 text-base text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-        <a href="#"
-          class="block rounded-md px-3 py-2 text-base text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-        <a href="#"
-          class="block rounded-md px-3 py-2 text-base text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
-        <a href="#"
-          class="block rounded-md px-3 py-2 text-base text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>
+        <div *ngFor="let menuValue of menuList" class="relative group">
+          <a *ngIf="!menuValue.subNav?.length" [routerLink]="menuValue.path"
+            class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white"
+            [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
+            (click)="toggleDropdown(menuValue, $event)">
+            {{ menuValue.name }}
+          </a>
+          <div *ngIf="menuValue.subNav?.length">
+            <a class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white cursor-pointer flex items-center"
+              [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
+              (click)="toggleDropdown(menuValue, $event)">
+              <span class="flex-1">{{ menuValue.name }}</span>
+              <span class="ml-2 transition-transform" [ngClass]="{ 'rotate-180': menuValue.isOpen }">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+              </span>
+            </a>
+            <div class="absolute left-0 z-10  mt-2 w-48 rounded-md bg-gray-800 shadow-lg"
+              [ngClass]="{ 'hidden': !menuValue.isOpen }">
+              <a *ngFor="let subNav of menuValue.subNav" [routerLink]="subNav.path"
+                class="block px-4 py-2  hover:bg-gray-700 hover:text-white"
+                [ngClass]="{'bg-gray-700 text-white': subNav.isActive, 'hover:bg-gray-700 hover:text-white': !subNav.isActive}"
+                (click)="toggleDropdown(subNav, $event)">
+                {{ subNav.name }}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="border-t border-gray-700 pb-3 pt-4">
         <div class="flex items-center px-5">
           <div class="shrink-0">
             <img class="size-10 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            [src]="imgUrl + userDetails.img_path"
               alt="">
           </div>
           <div class="ml-3">
-            <div class="text-base/5 text-white">Tom Cook</div>
-            <div class="text-sm text-gray-400">tom.com</div>
+            <div class="text-base/5 text-white"> Login Name : {{userDetails.full_name}}</div>
+            <div class="text-sm">Department : {{userDetails.department_name}}</div>
           </div>
-          <button type="button"
-            class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">View notifications</span>
-            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-              aria-hidden="true" data-slot="icon">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-            </svg>
-          </button>
-        </div>
-        <div class="mt-3 space-y-1 px-2">
-          <a href="#" class="block rounded-md px-3 py-2 text-base text-gray-400 hover:bg-gray-700 hover:text-white">
-            Profile</a>
-          <a href="#"
-            class="block rounded-md px-3 py-2 text-base text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-          <a href="#" class="block rounded-md px-3 py-2 text-base text-gray-400 hover:bg-gray-700 hover:text-white">Sign
-            out</a>
         </div>
       </div>
     </div>

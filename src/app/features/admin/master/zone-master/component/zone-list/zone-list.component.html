@@ -47,77 +47,64 @@
             <div class="col-md-12">
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
-                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="zoneList | paginate
-                            : {
-                                id: 'zoneID',
-                                itemsPerPage: pagesize.limit,
-                                currentPage: pagesize.offset,
-                                totalItems: pagesize.count
-                              } "></app-skeleton-loader>
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="zoneList | paginate: {  id: 'zoneID',
+                            itemsPerPage: pagesize.limit,
+                            currentPage: pagesize.offset,
+                            totalItems: pagesize.count}"></app-skeleton-loader>
                     </ng-container>
                     <ng-template #content>
-                        <div class="overflow-auto">
-                            <ng-container *ngIf="isLoading; else content">
-                                <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="zoneList | paginate: {  id: 'zoneID',
-                                    itemsPerPage: pagesize.limit,
-                                    currentPage: pagesize.offset,
-                                    totalItems: pagesize.count}"></app-skeleton-loader>
-                            </ng-container>
-                            <ng-template #content>
-                                <div id="datatable_wrapper">
-                                    <table id="datatable" class="table table-striped nowrap dataTable no-footer dtr-inline" role="grid"
-                                    #TABLE aria-describedby="datatable_info" style="width: 100%" width="100%">
-                                        <thead>
-                                            <tr role="row">
-                                                <th *ngFor="let vehicleHeading of columns"
-                                                   >
-                                                    <span>{{ vehicleHeading?.title }}</span>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let item of zoneList | searchFilter: searchKeyword | paginate: {id: 'zoneID', itemsPerPage: pagesize.limit, currentPage: pagesize.offset, totalItems: pagesize.count}; let index = index"
-                                                >
-                                                <td >
-                                                    {{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}
-                                                </td>
-                                                <td >{{
-                                                    item?.zone_name ||
-                                                    "NA" }}</td>
-                                                <td >{{
-                                                    item?.state_name
-                                                    || "NA" }}</td>
+                        <div id="datatable_wrapper">
+                            <table id="datatable" class="table table-striped nowrap dataTable no-footer dtr-inline" role="grid"
+                            #TABLE aria-describedby="datatable_info" style="width: 100%" width="100%">
+                                <thead>
+                                    <tr role="row">
+                                        <th *ngFor="let vehicleHeading of columns"
+                                           >
+                                            <span>{{ vehicleHeading?.title }}</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of zoneList | searchFilter: searchKeyword | paginate: {id: 'zoneID', itemsPerPage: pagesize.limit, currentPage: pagesize.offset, totalItems: pagesize.count}; let index = index"
+                                        >
+                                        <td >
+                                            {{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}
+                                        </td>
+                                        <td >{{
+                                            item?.zone_name ||
+                                            "NA" }}</td>
+                                        <td >{{
+                                            item?.state_name
+                                            || "NA" }}</td>
 
-                                                <td >
-                                                    <span *ngIf="item?.is_active; else inactive"
-                                                        class="text-green-600 font-medium">Active</span>
-                                                    <ng-template #inactive>
-                                                        <span class="text-red-600 font-medium">Inactive</span>
-                                                    </ng-template>
-                                                </td>
-                                                <td class="flex space-x-2">
-                                                    <button
-                                                        class="btn btn-success"
-                                                        (click)="onCreateZone(item)">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </button>
-                                                    <button
-                                                        class="btn btn-danger"
-                                                        (click)="onDeleteZone(item)">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="text-center py-4 text-gray-500"
-                                        *ngIf="!zoneList?.length || !(zoneList | searchFilter: searchKeyword)?.length">
-                                        No zone Available
-                                    </div>
-                                </div>
-
-                            </ng-template>
+                                        <td >
+                                            <span *ngIf="item?.is_active; else inactive"
+                                                class="text-green-600 font-medium">Active</span>
+                                            <ng-template #inactive>
+                                                <span class="text-red-600 font-medium">Inactive</span>
+                                            </ng-template>
+                                        </td>
+                                        <td class="flex space-x-2">
+                                            <button
+                                                class="btn btn-success"
+                                                (click)="onCreateZone(item)">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button
+                                                class="btn btn-danger"
+                                                (click)="onDeleteZone(item)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center py-4 text-gray-500"
+                                *ngIf="!zoneList?.length || !(zoneList | searchFilter: searchKeyword)?.length">
+                                No zone Available
+                            </div>
                         </div>
+
                     </ng-template>
                 </div>
             </div>

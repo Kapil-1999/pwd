@@ -23,6 +23,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { SwiperComponent } from './component/swiper/swiper.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ProfileComponent } from './layout/profile/profile.component';
 
 
 
@@ -36,6 +37,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     SearchFilterPipe,
     DeleteConfirmationComponent,
     SwiperComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
