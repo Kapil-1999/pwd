@@ -56,7 +56,7 @@ export const API_CONSTANTS = {
     addPOIAllocation : 'POIAllocation',
     getUpdateDeleteAllocation : 'POIAllocation/{id}',
     GetUserByDesig :'Common/GetUserByDesig?selectedDesig={id}',
-    formCodeList : 'Common/GetFormCodeList'
-
-
+    formCodeList : 'Common/GetFormCodeList',
+    dashboardCount : 'Dashboard',
+    districtReport : 'Report?pageNo={pageNo}&pageSize={pageSize}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}'
 }

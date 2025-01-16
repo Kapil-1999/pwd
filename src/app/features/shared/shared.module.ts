@@ -24,9 +24,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
 import { SwiperComponent } from './component/swiper/swiper.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ProfileComponent } from './layout/profile/profile.component';
-
-
-
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -58,7 +56,8 @@ import { ProfileComponent } from './layout/profile/profile.component';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    CarouselModule
+    CarouselModule,
+    NgChartsModule
   ],
   exports: [
     HeaderComponent,
@@ -83,7 +82,8 @@ import { ProfileComponent } from './layout/profile/profile.component';
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
     CarouselModule,
-    SwiperComponent
+    SwiperComponent,
+    NgChartsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [DatePipe]
