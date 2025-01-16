@@ -21,7 +21,7 @@ import { ManageUserDetailsComponent } from './components/manage-user-details/man
     EmployeeChartComponent,
     EmployeeCountingComponent,
     DashboardUserDetailsComponent,
-    ManageUserDetailsComponent
+    ManageUserDetailsComponent,
   ],
   imports: [
     CommonModule,

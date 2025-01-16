@@ -38,7 +38,7 @@ export class TokenService {
           this.goToDashboard(); 
         }, 1000);
       } else {
-        this.notificationService.errorAlert(userDetail?.message)
+        this.notificationService.errorAlert(userDetail?.actionResponse)
       }
     });
   }

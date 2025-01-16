@@ -15,6 +15,7 @@ import { AreaActivityListComponent } from './area-activity/component/area-activi
 import { SharedModule } from '../../shared/shared.module';
 import { GeneralFilterReportComponent } from './general-report/component/general-filter-report/general-filter-report.component';
 import { GeneralUserDetailsComponent } from './general-report/component/general-user-details/general-user-details.component';
+import { DistrictFilterComponent } from './district-reprot/compont/district-filter/district-filter.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { GeneralUserDetailsComponent } from './general-report/component/general-
     ManageActivityComponent,
     AreaActivityListComponent,
     GeneralFilterReportComponent,
-    GeneralUserDetailsComponent
+    GeneralUserDetailsComponent,
+    DistrictFilterComponent
   ],
   imports: [
     CommonModule,

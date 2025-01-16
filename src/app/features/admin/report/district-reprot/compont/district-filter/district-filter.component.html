@@ -1,0 +1,19 @@
+<form [formGroup]="districtForm">
+    <div class="district-filter">
+        <div class="zone">
+            <ngx-select-dropdown formControlName="zone" [config]="config" [options]="zoneList" (change)="onChangeZone($event)">
+        </ngx-select-dropdown>
+        </div>
+        <div class="circle">
+            <ngx-select-dropdown formControlName="circle" [config]="config1" [options]="circleList" (change)="onChangeCircle($event)">
+            </ngx-select-dropdown>
+        </div>
+        <div class="city">
+            <ngx-select-dropdown formControlName="city" [config]="config2" [options]="cityList" >
+            </ngx-select-dropdown>
+        </div>
+        <div class="district-button" style="text-align: right;">
+            <button class="btn btn-primary" (click)="onSubmit(districtForm.value)">Search</button>
+        </div>    
+    </div>
+</form>

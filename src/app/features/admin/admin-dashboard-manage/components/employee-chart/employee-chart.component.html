@@ -1,13 +1,41 @@
-<div class="col-md-12">
-    <div class="card">
+<div class="grid-container">
+  <div class="card">
+    <div class="card-item">
       <div class="card-header">
-        <span>Activity Check</span>
-
+        Activity Check
       </div>
-      <div class="card-body">
-        <!-- <ngx-charts-bar-vertical [results]="chartData" [gradient]="gradient" [xAxis]="showXAxis"
-          [yAxis]="showYAxis" [legend]="showLegend" [showDataLabel]="showDataLabel" [roundEdges]="true">
-        </ngx-charts-bar-vertical> -->
+      <div class="card-body" *ngIf="dashboardData">
+        <div class="total-count">
+          <div class="count">
+            <div>
+              <p>Total User : {{ getTotalUserSum() }}</p>
+            </div>
+            <div>
+              Total Present : {{ getTotalSum() }}
+            </div>
+            <div>
+              Total Absent : {{ getTotalUpsentSum() }}
+            </div>
+
+          </div>
+        </div>
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+          [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+        </canvas>
       </div>
     </div>
   </div>
+
+  <div class="card">
+    <div class="card-item">
+      <div class="card-header">
+        Users
+      </div>
+      <div class="card-body pie" *ngIf="dashboardData">
+        <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
+          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
