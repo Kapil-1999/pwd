@@ -31,9 +31,11 @@ export class TokenService {
       const userDetail = res.body;      
       if(userDetail?.statusCode == 200) {
         this.notificationService.successAlert('Login Successfully');
-        let userData = userDetail?.result        
+        let userData = userDetail?.result;
+        let menuData = userDetail?.moduleList;               
         this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
-        this.localStorageService.setItem("user", JSON.stringify(userData) )
+        this.localStorageService.setItem("user", JSON.stringify(userData));
+        this.localStorageService.setItem('menu', JSON.stringify(menuData) )
         setTimeout(() => {          
           this.goToDashboard(); 
         }, 1000);
