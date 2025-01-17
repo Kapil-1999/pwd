@@ -106,8 +106,12 @@ pagination-controls {
     }
   }
 }
-
-
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 0;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
 .card-header {
   .header-part {
     display: flex;

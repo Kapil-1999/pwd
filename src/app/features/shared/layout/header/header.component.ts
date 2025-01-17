@@ -10,7 +10,7 @@ import { ADMIN_MENU, IMG_URL } from '../../constant/menu/menu';
 })
 export class HeaderComponent {
 
-  menuList: any = ADMIN_MENU;
+  menuListData: any;
   userDetails: any;
   showMobileMenu: boolean = false;
   imgUrl = IMG_URL;
@@ -22,6 +22,8 @@ export class HeaderComponent {
     private notificationService: NotificationService,
     private router: Router
   ) {
+    this.getMenuList();
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateActiveMenu(this.router.url);
@@ -30,11 +32,11 @@ export class HeaderComponent {
   }
 
   updateActiveMenu(currentPath: string) {
-    this.menuList?.forEach((menu: any) => {
-      menu.isActive = menu.path === currentPath;
-      if (menu.subNav) {
-        menu.subNav.forEach((subMenu: any) => {
-          subMenu.isActive = subMenu.path === currentPath;
+    this.menuListData?.forEach((menu: any) => {      
+      menu.isActive = menu.url === currentPath;
+      if (menu.menuList) {
+        menu.menuList.forEach((subMenu: any) => {
+          subMenu.isActive = subMenu.url === currentPath;
           if (subMenu.isActive) {
             menu.isActive = true;
           }
@@ -44,7 +46,12 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.getUserDetails()
+    this.getUserDetails();
+  }
+
+  getMenuList() {
+    let menu:any = this.localStorageService.getItem('menu');
+    this.menuListData = JSON.parse(menu);    
   }
 
   getUserDetails() {
@@ -58,18 +65,17 @@ export class HeaderComponent {
   closeMenus(event: Event): void {
     const clickedInside = (event.target as HTMLElement).closest('.relative');
     if (!clickedInside) {
-      this.closeAllMenus(this.menuList);
+      this.closeAllMenus(this.menuListData);
       this.showPopup = false;
       this.showMobileMenu = false
-
     }
   }
 
-  toggleDropdown(item: any, event: MouseEvent): void {
-    this.closeAllMenus(this.menuList, item);
+  toggleDropdown(item: any, event: MouseEvent): void {    
+    this.closeAllMenus(this.menuListData, item);
     this.showPopup = false;
-    if (item.subNav?.length > 0 || item.childSubmenu?.length > 0) {
-      item.isOpen = !item.isOpen;
+    if (item.menuList?.length > 0) {
+      item.is_open = !item.is_open;
     }
   }
 
@@ -77,10 +83,9 @@ export class HeaderComponent {
   private closeAllMenus(menuList: any[], exception?: any): void {
     menuList.forEach((menu: any) => {
       if (menu !== exception) {
-        menu.isOpen = false;
-      }
-      if (menu.subNav?.length) {
-        this.closeAllMenus(menu.subNav, exception);
+        menu.is_open = false;      }
+      if (menu.menuList?.length) {
+        this.closeAllMenus(menu.menuList, exception);
       }
       if (menu.childSubmenu?.length) {
         this.closeAllMenus(menu.childSubmenu, exception);
@@ -92,7 +97,7 @@ export class HeaderComponent {
 
   togglePopup() {
     this.showPopup = !this.showPopup;
-    this.closeAllMenus(this.menuList);
+    this.closeAllMenus(this.menuListData);
   }
 
   onShowMobileMewnu() {
@@ -100,7 +105,7 @@ export class HeaderComponent {
   }
 
   goToProfile() {
-    this.closeAllMenus(this.menuList);
+    this.closeAllMenus(this.menuListData);
     this.showPopup = false;
     this.router.navigateByUrl('/admin/profile')
   }

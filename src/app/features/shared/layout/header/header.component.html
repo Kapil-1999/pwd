@@ -1,5 +1,5 @@
 <div class="min-h-full">
-  <nav class="bg-blue-500 text-white">
+  <nav class="bg-blue-500 text-white fixed top-0 left-0 w-full z-50 shadow-md">
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
@@ -8,19 +8,19 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              <div *ngFor="let menuValue of menuList" class="relative group">
-                <a *ngIf="!menuValue.subNav?.length" [routerLink]="menuValue.path"
+              <div *ngFor="let menuValue of menuListData" class="relative group">
+                <a *ngIf="!menuValue.menuList?.length" [routerLink]="menuValue.url"
                   class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white"
                   [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
                   (click)="toggleDropdown(menuValue, $event)">
-                  {{ menuValue.name }}
+                  {{ menuValue.module_name }}
                 </a>
-                <div *ngIf="menuValue.subNav?.length">
+                <div *ngIf="menuValue.menuList?.length">
                   <a class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white cursor-pointer flex items-center"
                     [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
                     (click)="toggleDropdown(menuValue, $event)">
-                    <span class="flex-1">{{ menuValue.name }}</span>
-                    <span class="ml-2 transition-transform" [ngClass]="{ 'rotate-180': menuValue.isOpen }">
+                    <span class="flex-1">{{ menuValue.module_name }}</span>
+                    <span class="ml-2 transition-transform" [ngClass]="{ 'rotate-180': menuValue.is_open }">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -28,12 +28,12 @@
                     </span>
                   </a>
                   <div class="absolute left-0 z-10  mt-2 w-48 rounded-md bg-gray-800 shadow-lg"
-                    [ngClass]="{ 'hidden': !menuValue.isOpen }">
-                    <a *ngFor="let subNav of menuValue.subNav" [routerLink]="subNav.path"
+                    [ngClass]="{ 'hidden': !menuValue.is_open }">
+                    <a *ngFor="let subNav of menuValue?.menuList" [routerLink]="subNav.url"
                       class="block px-4 py-2  hover:bg-gray-700 hover:text-white"
-                      [ngClass]="{'bg-gray-700 text-white': subNav.isActive, 'hover:bg-gray-700 hover:text-white': !subNav.isActive}"
+                      [ngClass]="{'bg-blue-500 text-white': subNav.isActive, 'hover:bg-gray-700 hover:text-white': !subNav.isActive}"
                       (click)="toggleDropdown(subNav, $event)">
-                      {{ subNav.name }}
+                      {{ subNav.menu_name }}
                     </a>
                   </div>
                 </div>
@@ -95,8 +95,8 @@
 
     <div id="mobile-menu" *ngIf="showMobileMenu">
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-        <div *ngFor="let menuValue of menuList" class="relative group">
-          <a *ngIf="!menuValue.subNav?.length" [routerLink]="menuValue.path"
+        <div *ngFor="let menuValue of menuListData" class="relative group">
+          <a *ngIf="!menuValue.subNav?.length" [routerLink]="menuValue.url"
             class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white"
             [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
             (click)="toggleDropdown(menuValue, $event)">
@@ -107,7 +107,7 @@
               [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
               (click)="toggleDropdown(menuValue, $event)">
               <span class="flex-1">{{ menuValue.name }}</span>
-              <span class="ml-2 transition-transform" [ngClass]="{ 'rotate-180': menuValue.isOpen }">
+              <span class="ml-2 transition-transform" [ngClass]="{ 'rotate-180': menuValue.is_open }">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="size-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -115,8 +115,8 @@
               </span>
             </a>
             <div class="absolute left-0 z-10  mt-2 w-48 rounded-md bg-gray-800 shadow-lg"
-              [ngClass]="{ 'hidden': !menuValue.isOpen }">
-              <a *ngFor="let subNav of menuValue.subNav" [routerLink]="subNav.path"
+              [ngClass]="{ 'hidden': !menuValue.is_open }">
+              <a *ngFor="let subNav of menuValue.subNav" [routerLink]="subNav.url"
                 class="block px-4 py-2  hover:bg-gray-700 hover:text-white"
                 [ngClass]="{'bg-gray-700 text-white': subNav.isActive, 'hover:bg-gray-700 hover:text-white': !subNav.isActive}"
                 (click)="toggleDropdown(subNav, $event)">
@@ -142,7 +142,7 @@
     </div>
   </nav>
   <main>
-    <div class="">
+    <div class="pt-16">
       <router-outlet></router-outlet>
     </div>
   </main>

@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent {
   loginForm!: FormGroup;
   ipAddress: string = '';
+  showPassword: boolean = false;
 
   constructor(
     private router: Router,
@@ -57,7 +58,11 @@ export class LoginComponent {
    * login button 
    * @param formvalue 
    */
-  submit(formvalue:any) {  
+  submit(formvalue:any) {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    } 
     this.tokenService.generateToken(formvalue, this.ipAddress);
   }
 
