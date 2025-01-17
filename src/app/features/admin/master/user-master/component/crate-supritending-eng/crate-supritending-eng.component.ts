@@ -47,6 +47,8 @@ export class CrateSupritendingEngComponent {
   label :string = 'Create';
   imgeUrl = IMG_URL;
   imagePath: any;
+  showPassword: boolean = false;
+
 
   constructor(
     private commonService: CommonService,
@@ -233,6 +235,8 @@ export class CrateSupritendingEngComponent {
 
 
   getSelectedValues(data: any) {
+    console.log(data);
+    
     if (!Array.isArray(data)) {
       return data?.value;
     }
@@ -263,8 +267,7 @@ export class CrateSupritendingEngComponent {
   }
 
   submit(formvalue: any) {
-    let user = this.commonService.getUserDetails()
-
+    let user = this.commonService.getUserDetails();
     let paylaod = {
       "user_id": 0,
       "department_id": this.department ? Number(this.department?.value) : null,
@@ -278,19 +281,19 @@ export class CrateSupritendingEngComponent {
       "designation_id": this.designation ? Number(this.designation?.value) : null,
       "level_id": this.designation ? Number(this.designation?.value) : null,
       "chief_eng_id": formvalue?.chiefEngineer ? Number(formvalue?.chiefEngineer?.value) : null,
-      "zone": this.designation?.value === 2
+      "zone": this.designation?.value === '2'
         ? (formvalue?.zone ? this.getSelectedValues(formvalue.zone) : null)
         : (formvalue?.zone ? formvalue.zone.value : null),
       "sup_eng_id": formvalue?.supritendingEngineer ? Number(formvalue?.supritendingEngineer?.value) : null,
-      "circle": this.designation?.value === 3
+      "circle": this.designation?.value === '3'
         ? (formvalue?.circle ? this.getSelectedValues(formvalue?.circle) : null)
         : (formvalue?.circle ? formvalue?.circle.value : null),
       "exec_eng_id": formvalue?.executiveEngineer ? Number(formvalue?.executiveEngineer?.value) : null,
-      "district": this.designation?.value === 4
+      "district": this.designation?.value === '4'
         ? (formvalue?.city ? this.getSelectedValues(formvalue?.city) : null)
         : (formvalue?.city ? formvalue?.city.value : null),
       "ass_eng_id": formvalue?.assistantEngineer ? Number(formvalue?.assistantEngineer?.value) : null,
-      "division": this.designation?.value === 5
+      "division": this.designation?.value === '5'
         ? (formvalue?.division ? this.getSelectedValues(formvalue?.division) : null)
         : (formvalue?.division ? formvalue?.division.value : null),
       "remarks": formvalue?.remarks,
@@ -304,6 +307,7 @@ export class CrateSupritendingEngComponent {
       paylaod['user_id'] = this.userData?.user_id;
       service = this.UserMasterService.updateUser(paylaod, this.userData?.user_id)
     }
+
     service.subscribe((res: any) => {
       if (res?.status == 200) {
         this.bsModelService.hide();

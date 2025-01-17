@@ -49,6 +49,8 @@ export class CreateUserComponent {
   label: string = 'Create';
   imagePath: any;
   imgeUrl = IMG_URL;
+  showPassword: boolean = false;
+
 
   constructor(
     private commonService: CommonService,

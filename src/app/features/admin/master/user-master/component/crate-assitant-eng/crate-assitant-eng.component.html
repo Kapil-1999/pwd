@@ -127,9 +127,16 @@
             </div>
             <div class="col-md-3 mb-2">
                 <label class="form-label">Login Password <span class="text-danger">*</span></label>
-                <div class="input-group mb-2">
-                    <input type="password" class="form-control" placeholder="Enter Login Password"
+                <div class="input-group mb-2 password-container">
+                    <input  type="{{ showPassword ? 'text' : 'password' }}" class="form-control password" placeholder="Enter Login Password"
                         formControlName="loginPassword" />
+                        <i
+                        class="fa"
+                        id="visiblePassword"
+                        (click)="showPassword = !showPassword"
+                        [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"
+                        style="cursor: pointer;"
+                      ></i>
                 </div>
             </div>
             <div class="col-md-3 mb-2">

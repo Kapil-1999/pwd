@@ -18,12 +18,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 1}, EE: {id: 3, value: 2}, AE: {id: 4, value: 6}, JE: {id: 5, value: 4} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -34,12 +32,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 6}, EE: {id: 3, value: 7}, AE: {id: 4, value: 3}, JE: {id: 5, value: 1} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -50,12 +46,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 3}, EE: {id: 3, value: 5}, AE: {id: 4, value: 3}, JE: {id: 5, value: 10} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -66,12 +60,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 2}, EE: {id: 3, value: 8}, AE: {id: 4, value: 5}, JE: {id: 5, value: 2} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -82,12 +74,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 3}, EE: {id: 3, value: 5}, AE: {id: 4, value: 3}, JE: {id: 5, value: 10} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -98,12 +88,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 6}, EE: {id: 3, value: 2}, AE: {id: 4, value: 8}, JE: {id: 5, value: 2} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
+        status: 'Online',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        address: ''
       }
     },
   ];
@@ -166,12 +154,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 1}, EE: {id: 3, value: 2}, AE: {id: 4, value: 6}, JE: {id: 5, value: 4} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -182,12 +168,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 6}, EE: {id: 3, value: 7}, AE: {id: 4, value: 3}, JE: {id: 5, value: 1} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -198,12 +182,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 3}, EE: {id: 3, value: 5}, AE: {id: 4, value: 3}, JE: {id: 5, value: 10} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -214,12 +196,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 2}, EE: {id: 3, value: 8}, AE: {id: 4, value: 5}, JE: {id: 5, value: 2} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -230,12 +210,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 3}, EE: {id: 3, value: 5}, AE: {id: 4, value: 3}, JE: {id: 5, value: 10} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        status: 'Online',
+        address: ''
       }
     },
     {
@@ -246,12 +224,10 @@ export class TrackingDetailComponent {
       stats: { SE: {id: 2, value: 6}, EE: {id: 3, value: 2}, AE: {id: 4, value: 8}, JE: {id: 5, value: 2} },
       timer: '00h 00m',
       details: {
-        time: '2024-12-16 18:07:02',
-        lat: '28.5785341',
-        lng: '77.3138334',
+        mobile: '1234567890',
+        status: 'Online',
         gps: 'On',
-        battery: '16%',
-        distance: '0 KM'
+        address: ''
       }
     },
   ]

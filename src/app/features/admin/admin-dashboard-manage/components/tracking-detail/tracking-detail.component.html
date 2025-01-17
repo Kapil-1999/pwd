@@ -50,31 +50,23 @@
           <table class="table table-bordered">
             <tbody>
               <tr>
-                <td class="image-column" rowspan="6">
+                <td class="image-column" rowspan="4" style="width: 140px;">
                   <img [src]="card.avatar" alt="Image" class="detail-image">
                 </td>
-                <td><b>Time:</b></td>
-                <td>{{ card.details.time }}</td>
+                <td><b>Mobile:</b></td>
+                <td>{{ card.details.mobile }}</td>
               </tr>
               <tr>
-                <td><b>Lat:</b></td>
-                <td>{{ card.details.lat }}</td>
-              </tr>
-              <tr>
-                <td><b>Lng:</b></td>
-                <td>{{ card.details.lng }}</td>
+                <td><b>Status:</b></td>
+                <td>{{ card.details.status }}</td>
               </tr>
               <tr>
                 <td><b>GPS:</b></td>
                 <td>{{ card.details.gps }}</td>
               </tr>
               <tr>
-                <td><b>Battery:</b></td>
-                <td>{{ card.details.battery }}</td>
-              </tr>
-              <tr>
-                <td><b>Distance:</b></td>
-                <td>{{ card.details.distance }}</td>
+                <td><b>Address:</b></td>
+                <td>{{ card.details.address }}</td>
               </tr>
             </tbody>
           </table>

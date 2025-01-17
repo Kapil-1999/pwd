@@ -48,6 +48,8 @@ export class CrateChiefEngComponent {
   userData: any;
   label :string = 'Create';
   imagePath: any;
+  showPassword: boolean = false;
+
 
   constructor(
     private commonService: CommonService,

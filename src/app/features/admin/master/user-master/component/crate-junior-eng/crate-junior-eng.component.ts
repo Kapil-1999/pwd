@@ -48,6 +48,7 @@ export class CrateJuniorEngComponent {
   label :string = 'Create';
   imgeUrl = IMG_URL;
   imagePath: any;
+  showPassword: boolean = false;
 
   constructor(
     private commonService: CommonService,

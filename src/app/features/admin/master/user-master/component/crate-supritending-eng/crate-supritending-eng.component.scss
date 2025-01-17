@@ -8,3 +8,20 @@
     transform: scale(3.5);
     /* Scale up and slightly rotate */
   }
+
+  .password-container {
+    position: relative;
+  }
+  
+  .password-container .password {
+    width: 100%;
+  }
+  
+  .password-container .fa {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 16px;
+  }

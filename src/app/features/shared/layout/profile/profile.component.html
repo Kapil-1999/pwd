@@ -15,22 +15,21 @@
       <div class="px-6 pb-6">
         <div class="flex items-center justify-between text-gray-700 mb-4">
           <div>
-            <p class="text-sm">Phone</p>
+            <p class="text-sm font-semibold">Contact No.</p>
             <p class="font-medium">{{userDetails?.contact_no}}</p>
           </div>
           <div>
-            <p class="text-sm">Email</p>
+            <p class="text-sm font-semibold">Email Id</p>
             <p class="font-medium">{{userDetails?.email_id}}</p>
           </div>
         </div>
         <div class="flex items-center justify-between text-gray-700 mb-4">
           <div>
-            <p class="text-sm">Last Login</p>
+            <p class="text-sm font-semibold">Last Login</p>
             <p class="font-medium">{{userDetails?.last_login | date : 'dd-MM-yyyy HH:mm:ss'}}</p>
           </div>
           <div>
-            <p class="text-sm">Account Status</p>
-            <p class="font-medium">Valid Upto</p>
+            <p class="text-sm font-semibold">Valid Upto</p>
             <p class="font-medium">{{userDetails?.acc_valid_to | date : 'dd-MM-yyyy HH:mm:ss'}}</p>
           </div>
         </div>
