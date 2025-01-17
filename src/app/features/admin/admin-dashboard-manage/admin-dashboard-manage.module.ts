@@ -11,6 +11,7 @@ import { EmployeeCountingComponent } from './components/employee-counting/employ
 import { SharedModule } from '../../shared/shared.module';
 import { DashboardUserDetailsComponent } from './pages/dashboard-user-details/dashboard-user-details.component';
 import { ManageUserDetailsComponent } from './components/manage-user-details/manage-user-details.component';
+import { JeDetailsComponent } from './components/je-details/je-details.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ManageUserDetailsComponent } from './components/manage-user-details/man
     EmployeeCountingComponent,
     DashboardUserDetailsComponent,
     ManageUserDetailsComponent,
+    JeDetailsComponent,
   ],
   imports: [
     CommonModule,

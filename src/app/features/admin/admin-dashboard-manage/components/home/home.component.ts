@@ -17,8 +17,8 @@ export class HomeComponent {
   }
 
   getDashboardCountData () {
-    this.dashboardService.getDashboardCount().subscribe(async (res:any) => {
-      this.dashboardData = await res?.body?.result || null;
+    this.dashboardService.getDashboardCount().subscribe((res:any) => {
+      this.dashboardData =  res?.body?.result || null;
     })
   }
 }

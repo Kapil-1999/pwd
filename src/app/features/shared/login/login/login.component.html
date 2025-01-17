@@ -12,21 +12,34 @@
           Username is required
         </div>
         }
-        <input type="password" class="input" formControlName="password" placeholder="Password">
+        <div class="password-container">
+          <input
+            type="{{ showPassword ? 'text' : 'password' }}"
+            class="input password"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <i
+            class="fa"
+            id="visiblePassword"
+            (click)="showPassword = !showPassword"
+            [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"
+            style="cursor: pointer;"
+          ></i>
+        </div>
+
         @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
         @if(loginForm.get('password')?.errors?.['required']) {
         <div class="invalid-feedback">Password is required</div>
         }
         }
         <p class="page-link-forget">
-          <span class="page-link-label">Forgot Password?</span>
+          <!-- <span class="page-link-label">Forgot Password?</span> -->
         </p>
-        <button class="form-btn" (click)="submit(loginForm.value)" [disabled]="!loginForm.valid">Log in</button>
+        <button class="form-btn" (click)="submit(loginForm.value)">Log in</button>
       </form>
-      <p class="sign-up-label">
-        Don't have an account?<span class="sign-up-link">Sign up</span>
-      </p>
-      <div class="buttons-container">
+     
+      <!-- <div class="buttons-container">
         <div class="apple-login-button">
           <svg stroke="currentColor" fill="currentColor" stroke-width="0" class="apple-icon" viewBox="0 0 1024 1024"
             height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +65,7 @@
           </svg>
           <span>Log in with Google</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

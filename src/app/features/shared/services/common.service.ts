@@ -4,6 +4,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../../http-services/api.service';
 import { API_CONSTANTS } from '../constant/API.constants';
 import { LocalStorageService } from './localstorage.service';
+import * as XLSX from 'xlsx';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -146,7 +151,80 @@ export class CommonService {
       return JSON.parse(user);
     }
   }
+
+  excelService(excelData:any, reportName:any) {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(excelData);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, reportName);
+    XLSX.writeFile(wb,  `${reportName}.xlsx`);
+  }
   
+  copyTable(columns: any, row :any) {
+    if (!columns || !row) {
+      console.error('Columns or data is missing!');
+      return;
+    }
+    const headerRow = columns.map((column: any) => column.title).join('\t');
+    const rows = row;
+    const tableText = [headerRow, ...rows].join('\n');
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = tableText;
+    tempTextArea.style.position = 'fixed';
+    tempTextArea.style.opacity = '0';
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextArea);
+  }
+
+  exportToCSV(columns: any, row :any, report:any) {
+    if (!columns || !row) {
+      console.error('Columns or data is missing!');
+      return;
+    }
+    const headers = columns.map((col: any) => col.title).join(',');    const rows = row;
+    const tableText = [headers, ...rows].join('\n');
+    const blob = new Blob([tableText], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', report);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  exportToPDF(headers: any, rows :any, report:any) {
+    const doc: any = new jsPDF({ orientation: 'portrait', format: 'a4' });
+    doc.setFontSize(18);
+    doc.text(report, 14, 22);
+    const chunkSize = 50;
+
+    for (let i = 0; i < rows.length; i += chunkSize) {
+      const chunk = rows.slice(i, i + chunkSize);
+      autoTable(doc, {
+        head: [headers],
+        body: chunk,
+        startY: doc.previousAutoTable ? doc.previousAutoTable.finalY + 10 : 30,
+        tableWidth: 'auto',
+        margin: { top: 20, right: 5, bottom: 20, left: 5 },
+        styles: {
+          fontSize: 7,
+          cellPadding: 2,
+        },
+        headStyles: {
+          fillColor: [59, 130, 246],
+          textColor: [255, 255, 255],
+          fontStyle: 'bold',
+        },
+        theme: 'striped',
+        pageBreak: 'auto',
+      });
+    }
+
+    doc.save(`${report}.pdf`);
+  }
 
 
 }

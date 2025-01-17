@@ -51,9 +51,7 @@ export class HeaderComponent {
 
   getMenuList() {
     let menu:any = this.localStorageService.getItem('menu');
-    this.menuListData = JSON.parse(menu);
-    console.log(this.menuListData);
-    
+    this.menuListData = JSON.parse(menu);    
   }
 
   getUserDetails() {
