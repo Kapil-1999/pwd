@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { IMG_URL } from '../../../../shared/constant/menu/menu';
 @Component({
   selector: 'app-tracking-detail',
   templateUrl: './tracking-detail.component.html',
@@ -11,7 +12,8 @@ export class TrackingDetailComponent {
   activeCardIndex: number | any = null;
   trackingData: any;
   isPrevious: boolean = false;
-  searchKeyword:any
+  searchKeyword:any;
+  imgUrl = IMG_URL
 
   ngOnInit() {
   }
