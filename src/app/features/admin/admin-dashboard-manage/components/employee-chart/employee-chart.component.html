@@ -4,24 +4,27 @@
       <div class="card-header">
         Activity Check
       </div>
-      <div class="card-body" *ngIf="dashboardData">
-        <div class="total-count">
-          <div class="count">
-            <div>
-              <p>Total User : {{ getTotalUserSum() }}</p>
+      <div class="card-body">
+        <app-loader *ngIf="isChartLoding"></app-loader>
+        <div class="" *ngIf="!isChartLoding && dashboardData">
+          <div class="total-count">
+            <div class="count">
+              <div>
+                <p>Total User : {{ getTotalUserSum() }}</p>
+              </div>
+              <div>
+                Total Present : {{ getTotalSum() }}
+              </div>
+              <div>
+                Total Absent : {{ getTotalUpsentSum() }}
+              </div>
+  
             </div>
-            <div>
-              Total Present : {{ getTotalSum() }}
-            </div>
-            <div>
-              Total Absent : {{ getTotalUpsentSum() }}
-            </div>
-
           </div>
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+          </canvas>
         </div>
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-          [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
-        </canvas>
       </div>
     </div>
   </div>
@@ -31,10 +34,14 @@
       <div class="card-header">
         Users
       </div>
-      <div class="card-body pie" *ngIf="dashboardData">
-        <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
-          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
-        </canvas>
+      <div class="card-body pie">
+        <app-loader *ngIf="isChartLoding"></app-loader>
+        <div *ngIf="!isChartLoding && dashboardData">
+          <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+          </canvas>
+        </div>
+
       </div>
     </div>
   </div>

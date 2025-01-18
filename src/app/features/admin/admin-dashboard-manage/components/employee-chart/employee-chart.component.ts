@@ -8,6 +8,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 })
 export class EmployeeChartComponent {
   @Input() dashboardData: any;
+  @Input() isChartLoding: boolean | any;
 
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -28,7 +29,7 @@ export class EmployeeChartComponent {
   ];
 
   public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
+    responsive: true,
   };
   public pieChartLabels = ['CE', 'SE', 'EE', 'AE', 'JE'];
   public pieChartDatasets = [{

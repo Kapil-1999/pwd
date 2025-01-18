@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
@@ -7,10 +7,16 @@ import * as L from 'leaflet';
   styleUrl: './tracking-map.component.scss'
 })
 export class TrackingMapComponent {
+  @Input() allUserList: any;
+  @Input() isLoading: any;
   map!: L.Map;
-
+  markerLayer!: L.LayerGroup;
   ngOnInit() {
     this.initializeMap()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.addUserMarkers()
   }
 
   initializeMap() {
@@ -52,24 +58,50 @@ export class TrackingMapComponent {
       Satellite: satelliteLayer,
     };
 
-    L.control.layers(baseMaps).addTo(this.map);
-
-    const pointA = L.latLng(28.5821, 77.3109);
-    const pointB = L.latLng(28.5703, 77.3218);
-    const customIconA = L.icon({
-      iconUrl: 'assets/images/rp_marker_person_green.png', 
-      iconSize: [35, 75], 
-    });
-  
-    const customIconB = L.icon({
-      iconUrl: 'assets/images/rp_marker_person_red.png',
-      iconSize: [35, 75],
-    });
-
-    L.marker(pointA, { icon: customIconA }).addTo(this.map);
-    L.marker(pointB, { icon: customIconB }).addTo(this.map);
+    this.markerLayer = L.layerGroup().addTo(this.map);
     L.control.zoom({
       position: 'topright'
     }).addTo(this.map);
   }
+
+
+  addUserMarkers() {
+    this.markerLayer?.clearLayers();  
+    const markers: L.Marker[] = [];
+  
+    this.allUserList?.forEach((user: any) => {
+      const { last_lat, last_long, full_name, user_status } = user;
+  
+      if (last_lat && last_long) {
+        const lat = parseFloat(last_lat);
+        const lng = parseFloat(last_long);
+  
+        if (!isNaN(lat) && !isNaN(lng)) {
+          const markerIcon = L.icon({
+            iconUrl:
+              user_status === 'Online'
+                ? 'assets/images/rp_marker_person_green.png'
+                : 'assets/images/rp_marker_person_red.png',
+            iconSize: [35, 75],
+          });
+  
+          const marker = L.marker([lat, lng], { icon: markerIcon }).bindPopup(
+            `<b>${full_name}</b><br>Status: ${user_status || 'Unknown'}`
+          );
+  
+          marker.addTo(this.markerLayer); 
+          markers.push(marker); 
+        }
+      }
+    });
+  
+    if (markers.length > 0) {
+      const bounds = L.latLngBounds(markers.map((m) => m.getLatLng())); 
+      this.map.fitBounds(bounds); 
+    } else {
+      const defaultLatLng = L.latLng(28.5821, 77.3109); 
+      this.map.setView(defaultLatLng, 12); 
+    }
+  }
+  
 }

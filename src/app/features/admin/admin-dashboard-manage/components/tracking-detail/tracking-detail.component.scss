@@ -1,34 +1,31 @@
+.card-container {
+  height: calc(100vh - 277px);
+  ;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.card-container.scrollable {
+  height: calc(100vh - 277px);
+  overflow-y: auto;
+}
 
 
-  .card-container {
-    height:  calc(100vh - 270px);;
-    overflow-y: auto;
-  }
-  
-  .card-container.scrollable {
-    height: calc(100vh - 270px);
-    overflow-y: auto;
-  }
-  
-  .card-container {
-    scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1;
-  }
-
-  .tracking-row {
-    background: #fff;
-    border-radius: 8px;
-    transition: transform 0.2s ease;
-    cursor: pointer;
-    border: 1px solid #cecece;
-  }
-  
+.tracking-row {
+  background: #fff;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #cecece;
+}
 
 
-  .profile-stats {
-    display: grid;
-    grid-template-columns: 4fr 10fr 3fr ;
-    align-items: center;
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: 4fr 10fr 3fr;
+  align-items: center;
 }
 
 .detail-image {
@@ -36,57 +33,36 @@
   height: 120px;
 }
 
-  
-  @media (max-width: 768px) {
-    .details-section {
-      padding: 0 10px;
-    }
-    
-    .table td {
-      padding: 8px;
-    }
-  
-    .detail-image {
-      width: 120px;
-      height: 120px;
-    }
+
+@media (max-width: 1024px) {
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem; 
   }
-  
-  @media (max-width: 992px) {
-    .profile-stats {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 0.5rem;
-    }
-
-    .profile-stats h6 {
-        grid-column: 1 / span 2; /* Full-width on smaller screens */
-    }
-
-    .profile-stats .stats,
-    .profile-stats .timer,
-    .profile-stats .circle-part {
-        grid-column: span 1;
-    }
 }
 
-@media (max-width: 576px) {
-    .profile-stats {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
+@media (max-width: 768px) {
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem; 
+  }
 
-    .profile-stats h6,
-    .profile-stats .stats,
-    .profile-stats .timer,
-    .profile-stats .circle-part {
-        grid-column: span 1; /* Each item spans full width */
-        text-align: center; /* Center align for smaller devices */
-    }
+  .profile-button {
+    margin-top: 0.5rem;
+  }
+
+  .sm\\:flex {
+    display: flex !important; 
+    justify-content: flex-end;
+  }
 }
-
 
 .profile-button {
-  display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 3px;
+  display: flex;
+  justify-content: space-between;
+  gap: 3px;
+}
+
+button {
+  width: 100%;
 }

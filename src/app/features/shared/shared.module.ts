@@ -25,6 +25,9 @@ import { SwiperComponent } from './component/swiper/swiper.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ProfileComponent } from './layout/profile/profile.component';
 import { NgChartsModule } from 'ng2-charts';
+import { LoaderComponent } from './component/loader/loader.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -36,6 +39,7 @@ import { NgChartsModule } from 'ng2-charts';
     DeleteConfirmationComponent,
     SwiperComponent,
     ProfileComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +61,8 @@ import { NgChartsModule } from 'ng2-charts';
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
     CarouselModule,
-    NgChartsModule
+    NgChartsModule,
+    NgxSpinnerModule
   ],
   exports: [
     HeaderComponent,
@@ -83,7 +88,9 @@ import { NgChartsModule } from 'ng2-charts';
     NgxMatNativeDateModule,
     CarouselModule,
     SwiperComponent,
-    NgChartsModule
+    NgChartsModule,
+    NgxSpinnerModule,
+    LoaderComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [DatePipe]

@@ -19,4 +19,11 @@ export class DashboardService {
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
+
+  userDetails(data:any) : Observable<any> {
+    let url = API_CONSTANTS.userDetails.replace('{userId}', data.userId).replace('{desiId}', data.desiId).replace('{locId}', data?.locId)
+    return this.apiService
+      .get(url)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
 }

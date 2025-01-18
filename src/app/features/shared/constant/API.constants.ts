@@ -58,5 +58,6 @@ export const API_CONSTANTS = {
     GetUserByDesig :'Common/GetUserByDesig?selectedDesig={id}',
     formCodeList : 'Common/GetFormCodeList',
     dashboardCount : 'Dashboard',
-    districtReport : 'Report?pageNo={pageNo}&pageSize={pageSize}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}'
+    districtReport : 'Report?pageNo={pageNo}&pageSize={pageSize}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}',
+    userDetails : 'Dashboard/GetUserDetailsWithLoc?userId={userId}&userDesigId={desiId}&locId={locId}'
 }

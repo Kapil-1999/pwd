@@ -2,18 +2,18 @@
   <app-employee-counting [dashboardData]="dashboardData"></app-employee-counting>
 </div>
 <div class="mt-4">
-  <div class="row">
-    <div class="col-md-5">
-      <app-tracking-detail></app-tracking-detail>
+  <div class="tracking-data">
+    <div class="user-details">
+      <app-tracking-detail [allUserList]="allUserList" [isLoading]="isLoading" (mapdata)="confirm($event)"></app-tracking-detail>
     </div>
-    <div class="col-md-7">
-      <app-tracking-map></app-tracking-map>
+    <div class="map-track">
+      <app-tracking-map [allUserList]="allUserList"></app-tracking-map>
     </div>
   </div>
 </div>
 
 <div class="row mt-4">
   <div class="col-md-12">
-    <app-employee-chart [dashboardData]="dashboardData"></app-employee-chart>
+    <app-employee-chart [dashboardData]="dashboardData" [isChartLoding]="isChartLoding"></app-employee-chart>
   </div>
 </div>

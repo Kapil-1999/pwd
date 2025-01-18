@@ -35,6 +35,7 @@
     "ngx-easy-table": "^15.6.0",
     "ngx-owl-carousel-o": "^17.0.0",
     "ngx-pagination": "^6.0.3",
+    "ngx-spinner": "^14.0.0",
     "ngx-select-dropdown": "^3.3.2",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",

@@ -16,6 +16,7 @@ export class EmployeeCountingComponent {
     { count: 0, name: 'AE',status: 'idle', icon: 'assets/images/user.png', key: 'ae_count' },
     { count: 0, name: 'JE',status: 'offline', icon: 'assets/images/user.png', key: 'je_count' },
   ];
+  type = 'JE'
 
   constructor(
     private router : Router
@@ -38,5 +39,8 @@ export class EmployeeCountingComponent {
 
   goToDetails(data:any) {
     this.router.navigateByUrl('/admin/dashboard/user-details')
+    if(data.name == "JE") {
+      this.router.navigateByUrl('/admin/dashboard/area_allot_details')
+    }
   }
 }
