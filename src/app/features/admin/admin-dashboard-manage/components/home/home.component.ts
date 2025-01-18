@@ -57,7 +57,7 @@ export class HomeComponent {
   confirm(event: any) {    
     if (event.type === '') {
       this.data = {
-        userId: 0,
+        userId: event?.data?.user_id,
         desiId: event?.data?.designation_id + 1,
         locId: this.userData?.locId
       }

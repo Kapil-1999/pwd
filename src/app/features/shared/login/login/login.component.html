@@ -4,7 +4,7 @@
       <div class="logo-part">
         <img class="image-logo" src="assets/images/pwd-logo-png.png" alt="">
       </div>
-      <h3 class="title">PWD</h3>
+      <h3 class="title mb-2">PWD</h3>
       <form class="form" [formGroup]="loginForm">
         <input type="text" class="input" formControlName="userName" placeholder="Username">
         @if(loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched) {
@@ -33,9 +33,7 @@
         <div class="invalid-feedback">Password is required</div>
         }
         }
-        <p class="page-link-forget">
-          <!-- <span class="page-link-label">Forgot Password?</span> -->
-        </p>
+
         <button class="form-btn" (click)="submit(loginForm.value)">Log in</button>
       </form>
      
