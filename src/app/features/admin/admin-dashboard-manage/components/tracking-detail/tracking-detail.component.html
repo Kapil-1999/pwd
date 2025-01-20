@@ -36,7 +36,7 @@
           <div class="flex min-w-0 gap-x-4 items-center" 
                (click)="toggleDetails(i, $event)" 
                *ngIf="card?.designation_id !== 6">
-            <img class="size-12 flex-none rounded-full bg-gray-50 user-image" [src]="card.img_path" alt="">
+            <img class="size-12 flex-none rounded-full bg-gray-50 user-image" [src]="imgUrl + card.img_path" alt="">
             <div class="min-w-0 flex-auto">
               <p class="text-sm/6 font-semibold text-gray-900">{{card.full_name || 'NA'}}</p>
             </div>
@@ -80,7 +80,7 @@
             <tbody>
               <tr>
                 <td class="image-column" rowspan="4" style="width: 140px;">
-                  <img [src]="card.img_path" alt="Image" class="detail-image">
+                  <img [src]="imgUrl + card.img_path" alt="Image" class="detail-image">
                 </td>
                 <td><b>Mobile:</b></td>
                 <td>{{ card.contact_no || 'NA' }}</td>

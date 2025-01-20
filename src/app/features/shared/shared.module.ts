@@ -27,6 +27,7 @@ import { ProfileComponent } from './layout/profile/profile.component';
 import { NgChartsModule } from 'ng2-charts';
 import { LoaderComponent } from './component/loader/loader.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgxMatNativeDateModule,
     CarouselModule,
     NgChartsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AccordionModule
   ],
   exports: [
     HeaderComponent,
@@ -90,7 +92,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     SwiperComponent,
     NgChartsModule,
     NgxSpinnerModule,
-    LoaderComponent
+    LoaderComponent,
+    AccordionModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [DatePipe]

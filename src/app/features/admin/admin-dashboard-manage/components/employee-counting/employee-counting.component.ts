@@ -40,7 +40,7 @@ export class EmployeeCountingComponent {
   goToDetails(data:any) {
     this.router.navigateByUrl('/admin/dashboard/user-details')
     if(data.name == "JE") {
-      this.router.navigateByUrl('/admin/dashboard/area_allot_details')
+      this.router.navigateByUrl('/admin/dashboard/area-allot-details')
     }
   }
 }
