@@ -1,0 +1,28 @@
+<div class="modal-header text-center">
+    <h5>Area Allot Details</h5>
+    <div class="close-modal" (click)="close()">
+        <i class="fa fa-close" style="cursor: pointer;"></i>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="w-full mx-auto mt-2" *ngFor="let item of accordionItems">
+        <div class="border border-gray-300 rounded-lg mb-2">
+            <div class="w-full text-left px-4 py-2 bg-green-500 text-white flex justify-between items-center">
+                <button class=""
+                    (click)="toggleAccordion(item.id)">
+                    {{ item.heading }}
+                </button>
+                <span class="flex items-center">
+                    <span class="mr-2">Status: {{ item.status }}</span>
+                    <span class="text-blue-200 underline cursor-pointer" (click)="openAreaForm()">Form</span>
+                </span>
+            </div>
+            <div [class.max-h-0]="!item.isOpen" [class.max-h-[1000px]]="item.isOpen"
+                class="overflow-hidden transition-all duration-500 ease-in-out px-2">
+                <p class="py-2">{{ item.content }}</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { DashboardUserDetailsComponent } from './pages/dashboard-user-details/dashboard-user-details.component';
 import { JeDetailsComponent } from './components/je-details/je-details.component';
+import { AreaPlotFormComponent } from './components/area-plot-form/area-plot-form.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,10 @@ const routes: Routes = [
     path: 'user-details', component: DashboardUserDetailsComponent
   },
   {
-    path : 'area_allot_details', component : JeDetailsComponent
+    path : 'area-allot-details', component : JeDetailsComponent
+  },
+  {
+    path : 'area-plot-form' , component : AreaPlotFormComponent
   }
 ];
 

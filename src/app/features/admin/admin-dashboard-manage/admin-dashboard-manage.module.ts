@@ -12,6 +12,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { DashboardUserDetailsComponent } from './pages/dashboard-user-details/dashboard-user-details.component';
 import { ManageUserDetailsComponent } from './components/manage-user-details/manage-user-details.component';
 import { JeDetailsComponent } from './components/je-details/je-details.component';
+import { AreaAllotDetailsPopupComponent } from './components/area-allot-details-popup/area-allot-details-popup.component';
+import { AreaPlotFormComponent } from './components/area-plot-form/area-plot-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { JeDetailsComponent } from './components/je-details/je-details.component
     DashboardUserDetailsComponent,
     ManageUserDetailsComponent,
     JeDetailsComponent,
+    AreaAllotDetailsPopupComponent,
+    AreaPlotFormComponent,
   ],
   imports: [
     CommonModule,
