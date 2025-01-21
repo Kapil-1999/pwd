@@ -234,9 +234,7 @@ export class CrateSupritendingEngComponent {
   }
 
 
-  getSelectedValues(data: any) {
-    console.log(data);
-    
+  getSelectedValues(data: any) {    
     if (!Array.isArray(data)) {
       return data?.value;
     }
