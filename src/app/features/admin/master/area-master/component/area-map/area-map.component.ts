@@ -151,17 +151,17 @@ export class AreaMapComponent {
           const route = response.routes[0];
           const coordinates = route.geometry.coordinates;
           const latLngs: any = coordinates.map((coord: [number, number]) => L.latLng(coord[1], coord[0]));
-          this.polyline = L.polyline(latLngs, { color: 'blue' }).addTo(this.map);
+          this.polyline = L.polyline(latLngs, { color: this.markerData.colour || 'green' }).addTo(this.map);
           bounds.extend(this.polyline.getBounds());
           latLngs.push(latLngs[0]);
-          this.polygon = L.polygon(latLngs, {
-            color: this.markerData.colour || 'green',
-            weight: 2,
-            fillColor: this.markerData.colour || 'green',
-            fillOpacity: 0.2,
-          }).addTo(this.map);
+          // this.polygon = L.polygon(latLngs, {
+          //   color: this.markerData.colour || 'green',
+          //   weight: 2,
+          //   fillColor: this.markerData.colour || 'green',
+          //   fillOpacity: 0.2,
+          // }).addTo(this.map);
 
-          bounds.extend(this.polygon.getBounds());
+          // bounds.extend(this.polygon.getBounds());
           this.map.fitBounds(bounds, { padding: [50, 50] });
         }
       },

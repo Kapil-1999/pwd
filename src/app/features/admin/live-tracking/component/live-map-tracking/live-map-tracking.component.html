@@ -20,7 +20,7 @@
 
          <div class="main-content">
             <div class="vehicle-list" >
-               <user-in-map></user-in-map>
+               <user-in-map [userValue]="userData"  [userCountData]="userCountData" [spinnerLoading]="spinnerLoading" (mapData)="confirm($event)" (selectUserConfirm)="selectUsersPlot($event)"></user-in-map>
             </div>
          </div>
     </div>

@@ -59,5 +59,6 @@ export const API_CONSTANTS = {
     formCodeList : 'Common/GetFormCodeList',
     dashboardCount : 'Dashboard',
     districtReport : 'Report?pageNo={pageNo}&pageSize={pageSize}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}',
-    userDetails : 'Dashboard/GetUserDetailsWithLoc?userId={userId}&userDesigId={desiId}&locId={locId}'
+    userDetails : 'Dashboard/GetUserDetailsWithLoc?userId={userId}&userDesigId={desiId}&locId={locId}',
+    liveTracking : 'LiveTracking?selectedDesigId={selectedDesigId}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}'  
 }
