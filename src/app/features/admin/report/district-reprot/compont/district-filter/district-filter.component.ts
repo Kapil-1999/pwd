@@ -77,6 +77,8 @@ export class DistrictFilterComponent {
       this.districtForm.controls['circle'].setValue(null);
       this.districtForm.controls['city'].setValue(null);
     }
+    this.onSubmit(this.districtForm.value)
+
   }
 
   getCircleList(id:any) {
@@ -100,6 +102,7 @@ export class DistrictFilterComponent {
       this.cityList = []
       this.districtForm.controls['city'].setValue(null);
     }
+    this.onSubmit(this.districtForm.value)
   }
 
   getCityList(id:any) {

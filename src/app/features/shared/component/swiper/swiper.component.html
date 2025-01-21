@@ -7,7 +7,7 @@
         carouselSlide
         *ngFor="let alert of status"
       >
-      <div class="alert-content">
+      <div class="alert-content" (click)="filterData(alert)">
         <ul style="text-align: center;">
           <li class="swiper-part">
             <div class="alert-img"  [style.color]="alert.color">
