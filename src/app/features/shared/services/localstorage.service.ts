@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
-
+  constructor(
+     private cookieService : CookieService
+  ){}
   private isLocalStorageAvailable(): boolean {
     try {
       const testKey = '__test__';
@@ -41,16 +44,20 @@ export class LocalStorageService {
 
   //**clear localstorage */
   clear(): void {
-    if (this.isLocalStorageAvailable()) {
-      localStorage.clear();
-    }
+    this.cookieService.delete('token', '/'); 
+    localStorage.removeItem('menu');
+    localStorage.removeItem('user')
   }
 
-  getToken(): string | null {
-    return this.getItem('pwdtoken'); 
-  }
+  // getToken(): string | null {
+  //   return this.getItem('pwdtoken'); 
+  // }
 
   isLoggedIn() {
     return this.getToken() !== null
+  }
+
+  getToken(): string {
+    return this.cookieService.get('token');
   }
 }

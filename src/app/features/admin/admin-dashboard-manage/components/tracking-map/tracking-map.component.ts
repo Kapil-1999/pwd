@@ -96,11 +96,11 @@ export class TrackingMapComponent {
     });
   
     if (markers.length > 0) {
-      const bounds = L.latLngBounds(markers.map((m) => m.getLatLng())); 
+      const bounds = L.latLngBounds(markers?.map((m) => m.getLatLng())); 
       this.map.fitBounds(bounds); 
     } else {
       const defaultLatLng = L.latLng(28.5821, 77.3109); 
-      this.map.setView(defaultLatLng, 12); 
+      this.map?.setView(defaultLatLng, 12); 
     }
   }
   

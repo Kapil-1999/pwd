@@ -5,6 +5,7 @@ import { JwtTokenService } from './jwt-token.service';
 import { NotificationService } from './notification.service';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class TokenService {
     private jwtService: JwtTokenService,
     private notificationService: NotificationService,
     private router : Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private cookieService : CookieService
   ) { }
 
   //**generate token and redirect to dashboard page and after decode save token in indexdb */
@@ -33,9 +35,10 @@ export class TokenService {
         this.notificationService.successAlert('Login Successfully');
         let userData = userDetail?.result;
         let menuData = userDetail?.moduleList;               
-        this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
+        // this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
         this.localStorageService.setItem("user", JSON.stringify(userData));
         this.localStorageService.setItem('menu', JSON.stringify(menuData) )
+        this.cookieService.set('token', userDetail?.jwtToken,undefined, '/', undefined, true, 'Strict');
         setTimeout(() => {          
           this.goToDashboard(); 
         }, 1000);
@@ -47,19 +50,15 @@ export class TokenService {
 
   goToDashboard() {
     this.router.navigate(['/admin/dashboard/home']);
-    // this.storageService.getItem('userDetail').subscribe((res) => {
-    //   if(res?.fk_RoleId ===32) {
-    //   }
-    // })
   }
 
   //**gettoken from localstorage */
-  getToken() {
-    return this.localStorageService.getItem('pwdtoken');
+  getToken() {        
+    return this.cookieService.get('token');
   }
 
   //**check condition for token available in localstorage */
   hasToken() {
-    return this.localStorageService.getItem('pwdtoken') !== null;
+    return this.cookieService.get('token') !== null;
   }
 }

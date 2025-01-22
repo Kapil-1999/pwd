@@ -29,7 +29,7 @@
                       </svg>
                     </span>
                   </a>
-                  <div class="absolute left-0 z-10  mt-2 w-48 rounded-md bg-gray-800 shadow-lg"
+                  <div class="absolute left-0 z-10  mt-2 w-[15rem] rounded-md bg-gray-800 shadow-lg"
                     [ngClass]="{ 'hidden': !menuValue.is_open }">
                     <a *ngFor="let subNav of menuValue?.menuList" [routerLink]="subNav.url"
                       class="menu-link block px-4 py-2  hover:bg-gray-700 hover:text-white"
