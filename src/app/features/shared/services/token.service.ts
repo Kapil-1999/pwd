@@ -38,7 +38,7 @@ export class TokenService {
         // this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
         this.localStorageService.setItem("user", JSON.stringify(userData));
         this.localStorageService.setItem('menu', JSON.stringify(menuData) )
-        this.cookieService.set('token', userDetail?.jwtToken,undefined, '/', undefined, true, 'Strict');
+        this.cookieService.set('token', userDetail?.jwtToken, undefined, 'http://103.109.7.173:7605/', undefined, true, 'Strict');
         setTimeout(() => {          
           this.goToDashboard(); 
         }, 1000);

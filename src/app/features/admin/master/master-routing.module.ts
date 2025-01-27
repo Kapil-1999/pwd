@@ -26,8 +26,7 @@ const routes: Routes = [
      { path : 'category-master', component: ManageCategoryComponent},
      { path : 'subcategory-master', component: ManageSubcategoryComponent},
      { path : 'area-master', component: ManageAreaComponent},
-     { path : 'work-master', component: MaangeWorkComponent}
-     
+     { path : 'work-master', component: MaangeWorkComponent}  
     ]
   }
 ];
