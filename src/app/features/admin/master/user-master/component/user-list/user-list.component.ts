@@ -130,7 +130,7 @@ export class UserListComponent {
         this.isLoading = false;
       }, 600);
       this.userList = res?.body?.result || [];
-      this.pagesize.count = this.userList?.length;
+      this.pagesize.count = res?.body?.totalRow;
     })
   }
 
