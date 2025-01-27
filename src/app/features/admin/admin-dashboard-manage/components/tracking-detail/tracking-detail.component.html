@@ -36,7 +36,7 @@
           <div class="flex min-w-0 gap-x-4 items-center" 
                (click)="toggleDetails(i, $event)" 
                *ngIf="card?.designation_id !== 6">
-            <img class="size-12 flex-none rounded-full bg-gray-50 user-image" [src]="imgUrl + card.img_path" alt="">
+            <img class="size-12 flex-none rounded-full bg-gray-50 user-image" [src]="card.img_path !== '' ? imgUrl + card.img_path : 'assets/images/no-image-1.png'">
             <div class="min-w-0 flex-auto">
               <p class="text-sm/6 font-semibold text-gray-900">{{card.full_name || 'NA'}}</p>
             </div>
@@ -73,6 +73,12 @@
               <time datetime="2023-01-23T13:23Z">{{card?.working_status || 'NA'}}</time>
             </p>
           </div>
+          <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p class="mt-1 text-xs/5 text-gray-500">
+              <i class="fa fa-circle" aria-hidden="true" [style]="card.user_status === 'Offline' ? 'color: red' : 'color: green'"
+              ></i>
+            </p>
+          </div>
         </div>
 
         <div *ngIf="activeCardIndex === i || card?.designation_id == 6" class="details-section mt-3">
@@ -80,7 +86,10 @@
             <tbody>
               <tr>
                 <td class="image-column" rowspan="4" style="width: 140px;">
-                  <img [src]="imgUrl + card.img_path" alt="Image" class="detail-image">
+                  <img 
+                  [src]="card.img_path !== '' ? imgUrl + card.img_path : 'assets/images/no-image-1.png'" 
+                  alt="Image" 
+                  class="detail-image">
                 </td>
                 <td><b>Mobile:</b></td>
                 <td>{{ card.contact_no || 'NA' }}</td>
@@ -90,9 +99,14 @@
                 <td>{{ card.user_status || 'NA' }}</td>
               </tr>
               <tr>
-                <td><b>GPS:</b></td>
-                <td>{{ card.gps || 'NA' }}</td>
-              </tr>
+                <td><b>Present:</b></td>
+                <td [ngSwitch]="card?.designation_id">
+                  <ng-container *ngSwitchCase="2">0/0/0/0</ng-container>
+                  <ng-container *ngSwitchCase="3">0/0/0</ng-container>
+                  <ng-container *ngSwitchCase="4">0/0</ng-container>
+                  <ng-container *ngSwitchCase="5">0</ng-container>
+                </td>
+              </tr>              
               <tr>
                 <td><b>Address:</b></td>
                 <td>{{ card.last_loc || 'NA' }}</td>

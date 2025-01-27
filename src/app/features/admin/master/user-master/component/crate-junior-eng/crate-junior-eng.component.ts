@@ -453,12 +453,12 @@ export class CrateJuniorEngComponent {
 
   getDivisionByAssEng(id:any) {
     this.commonService.getDivisionByAssEng(id).subscribe((res:any) =>{
-      this.divisionData = res?.body?.result || [];
+      this.divisionData = res?.body?.result || [];    
       if(this.userData) {
         let matichCircle = this.divisionData?.find((sup:any) => sup.value == this.userData?.division);
         this.userForm.controls['division'].setValue(matichCircle);
       } else if (this.divisionData.length > 0 && this.divisionData.length === 1) {
-        this.userForm.controls['division'].setValue(this.cityList[0]);
+        this.userForm.controls['division'].setValue(this.divisionData[0]);
       } else {
         this.userForm.controls['division'].setValue(null);
       }

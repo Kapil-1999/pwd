@@ -33,8 +33,9 @@ export class TrackingDetailComponent {
   }
 
 
-  onGetUserBeasedOnId(data: any) {
+  onGetUserBeasedOnId(data: any) {    
     this.isPrevious = true;
+    this.activeCardIndex = null;
     this.mapdata.emit({
       data: data,
       type: ''

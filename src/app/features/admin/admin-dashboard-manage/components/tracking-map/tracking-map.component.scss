@@ -13,3 +13,23 @@
     border-radius: 8px;
     z-index: 0 !important;
   }
+
+
+  ::ng-deep {
+    .live-data {
+      padding: 4px;
+      padding: 4px;
+      width: 300px;
+  
+      span {
+        font-size: 13px;
+        font-weight: 400;
+        color: gray;
+  
+        strong {
+          color: black;
+        }
+      }
+  
+    }
+  }

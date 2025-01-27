@@ -69,8 +69,8 @@ export class TrackingMapComponent {
     this.markerLayer?.clearLayers();  
     const markers: L.Marker[] = [];
   
-    this.allUserList?.forEach((user: any) => {
-      const { last_lat, last_long, full_name, user_status } = user;
+    this.allUserList?.forEach((user: any) => {      
+      const { last_lat, last_long, full_name, user_status, last_loc } = user;
   
       if (last_lat && last_long) {
         const lat = parseFloat(last_lat);
@@ -86,7 +86,21 @@ export class TrackingMapComponent {
           });
   
           const marker = L.marker([lat, lng], { icon: markerIcon }).bindPopup(
-            `<b>${full_name}</b><br>Status: ${user_status || 'Unknown'}`
+            `
+            <div class="live-data pl-2 mt-1">
+              <div class="row mb-2">
+                <div class="col-md-7">
+                  <span style="font-size:16px" class="label"><strong>${full_name}</strong></span>
+                </div>
+                <div class="col-md-5">
+                  <span> <strong>Status: </strong> ${user_status}</span>
+              </div>              
+              <div class="row mb-2">
+                  <div class="col-md-12 location-part">
+                <span style="color: black" class="label">Address : ${last_loc} </span>
+              </div>
+            </div>            
+            `
           );
   
           marker.addTo(this.markerLayer); 
