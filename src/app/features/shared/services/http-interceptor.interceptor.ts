@@ -19,7 +19,9 @@ export class HeaderInterceptor implements HttpInterceptor {
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (httpRequest.url.startsWith("https://router.project-osrm.org/route/v1/driving/")) {
-      return next.handle(httpRequest);
+      return next.handle(httpRequest); 
+    } else if(httpRequest.url.startsWith("https://api.ipify.org?format=json")) {
+      return next.handle(httpRequest); 
     }
     
     if (this.tokenService.hasToken()) {
