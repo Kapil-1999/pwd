@@ -30,7 +30,15 @@
                 <ngx-select-dropdown [config]="config1" [(ngModel)]="selectedDesignation" [options]="desigantionList">
                 </ngx-select-dropdown>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="search-form">
+                    <input placeholder="Search for..." type="text" [(ngModel)]="searchKeyword" (input)="onSearch($event)"
+                        class="form-control search-input" />
+                    <button type="button" class="btn-search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
             <div class="col-md-3 flex justify-end gap-x-2">
                 <div class="flex items-center space-x-2">
                     <label for="itemsPerPage" class="text-sm text-gray-700">Items per page:</label>
@@ -51,7 +59,7 @@
             <div class="col-md-12">
                 <div class="overflow-auto">
                     <ng-container *ngIf="isLoading; else content">
-                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="userList | paginate: {  id: 'userID',
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="userList | searchFilter : searchKeyword | paginate: {  id: 'userID',
                             itemsPerPage: pagesize.limit,
                             currentPage: pagesize.offset,
                             totalItems: pagesize.count}"></app-skeleton-loader>
@@ -71,7 +79,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of userList | searchFilter: searchKeyword | paginate
+                                    <tr *ngFor="let item of userList | paginate
                                   : {
                                       id: 'userID',
                                       itemsPerPage: pagesize.limit,

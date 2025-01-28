@@ -36,9 +36,13 @@ export class TokenService {
         let userData = userDetail?.result;
         let menuData = userDetail?.moduleList;               
         // this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
-        this.localStorageService.setItem("user", JSON.stringify(userData));
-        this.localStorageService.setItem('menu', JSON.stringify(menuData) )
-        this.cookieService.set('token', userDetail?.jwtToken);
+
+        const tabId = `${userData?.user_id}_${new Date().getTime()}`;  
+        localStorage.setItem(`login-event`, tabId);
+        this.cookieService.set(`token-login-${tabId}`, userDetail?.jwtToken);        
+        this.localStorageService.setItem(`user-login-${tabId}`, JSON.stringify(userData));
+        this.localStorageService.setItem(`menu-login-${tabId}`, JSON.stringify(menuData) )
+
         setTimeout(() => {          
           this.goToDashboard(); 
         }, 1000);
@@ -54,11 +58,13 @@ export class TokenService {
 
   //**gettoken from localstorage */
   getToken() {        
-    return this.cookieService.get('token');
+    const currentTabId = localStorage.getItem('login-event');
+    return this.cookieService.get(`token-login-${currentTabId}`);
   }
 
   //**check condition for token available in localstorage */
   hasToken() {
-    return this.cookieService.get('token') !== null;
+    const currentTabId = localStorage.getItem('login-event');
+    return this.cookieService.get(`token-login-${currentTabId}`)!== null;
   }
 }

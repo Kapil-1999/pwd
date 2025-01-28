@@ -26,6 +26,7 @@ export class LoginComponent {
     if (this.localStorageService.isLoggedIn()) {
       this.router.navigate(['/admin/dashboard/home']);
     } else {
+      localStorage.removeItem('logout-event')
       this.router.navigate(['/login']);
     }
    }
