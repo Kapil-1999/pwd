@@ -36,7 +36,7 @@ export class UserListComponent {
     count: 0,
   };
   bsModalRef!: BsModalRef;
-  searchKeyword: any;
+  searchKeyword: any = null;
   deparmentList: any
   config = {
     displayKey: "text",
@@ -74,7 +74,7 @@ export class UserListComponent {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable();
-    this.getUserList(this.pagesize.offset, this.pagesize.limit);
+    this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);
     this.getDepartmentList();
     this.getDesignationList()
   }
@@ -119,11 +119,12 @@ export class UserListComponent {
     })
   }
 
-  getUserList(pagedata: any, tableSize: any) {
+  getUserList(pagedata: any, tableSize: any, searchKeyword:any) {
     this.isLoading = true;
     const page = {
       pageNo: pagedata,
       pageSize: tableSize,
+      searchText : searchKeyword
     };
     this.userService.userList(page).subscribe((res) => {
       setTimeout(() => {
@@ -143,14 +144,14 @@ export class UserListComponent {
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
-    this.getUserList(this.pagesize.offset, this.pagesize.limit);
+    this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);
 
   }
 
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
-    this.getUserList(this.pagesize.offset, this.pagesize.limit);
+    this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);
 
   }
 
@@ -192,7 +193,7 @@ export class UserListComponent {
         this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getUserList(this.pagesize.offset, this.pagesize.limit);
+          this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);
 
         });
       }
@@ -234,7 +235,7 @@ export class UserListComponent {
         this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getUserList(this.pagesize.offset, this.pagesize.limit);
+          this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);
 
         });
     }
@@ -264,12 +265,19 @@ export class UserListComponent {
           this.tosterService.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getUserList(this.pagesize.offset, this.pagesize.limit);
+          this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);
 
         } else {
           this.tosterService.errorAlert(value?.title);
         }
       }
     );
+  }
+
+  onSearch(event:any) {
+    console.log(event.target.value);
+    this.getUserList(this.pagesize.offset, this.pagesize.limit, event.target.value);
+    
+
   }
 }

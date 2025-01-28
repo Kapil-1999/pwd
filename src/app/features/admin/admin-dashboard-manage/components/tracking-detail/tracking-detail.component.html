@@ -32,7 +32,7 @@
     <ul role="list" class="card-container" *ngIf="trackingData && trackingData.length > 0" 
         [class.scrollable]="trackingData?.length > 6">
       <li class="p-2 mt-1 tracking-row" *ngFor="let card of trackingData | searchFilter : searchKeyword; let i = index">
-        <div class="profile-stats p">
+        <div class="profile-stats p" [ngClass]="card?.designation_id == 6 ? 'JE-profile': ''">
           <div class="flex min-w-0 gap-x-4 items-center" 
                (click)="toggleDetails(i, $event)" 
                *ngIf="card?.designation_id !== 6">
@@ -90,15 +90,20 @@
                   [src]="card.img_path !== '' ? imgUrl + card.img_path : 'assets/images/no-image-1.png'" 
                   alt="Image" 
                   class="detail-image">
-                </td>
+                </td>                
                 <td><b>Mobile:</b></td>
                 <td>{{ card.contact_no || 'NA' }}</td>
+              </tr>
+              <tr *ngIf="card?.designation_id == 6">
+                <td><b>Name:</b></td>
+                <td>{{ card.full_name || 'NA' }}</td>
               </tr>
               <tr>
                 <td><b>Status:</b></td>
                 <td>{{ card.user_status || 'NA' }}</td>
               </tr>
-              <tr>
+             
+              <tr *ngIf="card?.designation_id !== 6">
                 <td><b>Present:</b></td>
                 <td [ngSwitch]="card?.designation_id">
                   <ng-container *ngSwitchCase="2">0/0/0/0</ng-container>
@@ -106,7 +111,7 @@
                   <ng-container *ngSwitchCase="4">0/0</ng-container>
                   <ng-container *ngSwitchCase="5">0</ng-container>
                 </td>
-              </tr>              
+              </tr>             
               <tr>
                 <td><b>Address:</b></td>
                 <td>{{ card.last_loc || 'NA' }}</td>

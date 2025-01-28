@@ -17,7 +17,7 @@ export const API_CONSTANTS = {
     district: 'District?pageNo={pageNo}&pageSize={pageSize}',
     addDistrict: 'District',
     updateDeleteDist: 'District/{distId}',
-    user: 'User?pageNo={pageNo}&pageSize={pageSize}',
+    user: 'User?pageNo={pageNo}&pageSize={pageSize}&searchText={searchText}',
     adduser: 'User',
     chiefEngList: "Common/GetChiefEngList",
     sEngList: 'Common/GetSupritendingEngList?chiefEngId={chiefEngId}',

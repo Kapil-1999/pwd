@@ -14,7 +14,7 @@ export class UserMasterService {
   ) { }
 
   userList(data:any): Observable<any> {
-    let url = API_CONSTANTS.user.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize);
+    let url = API_CONSTANTS.user.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize).replace('{searchText}', data.searchText);
     return this.apiService
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));

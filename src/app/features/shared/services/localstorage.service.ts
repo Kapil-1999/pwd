@@ -6,8 +6,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LocalStorageService {
   constructor(
-     private cookieService : CookieService
-  ){}
+    private cookieService: CookieService,
+  ) { }
   private isLocalStorageAvailable(): boolean {
     try {
       const testKey = '__test__';
@@ -29,7 +29,8 @@ export class LocalStorageService {
   //**getitem from localstorage */
   getItem(key: string): string | null {
     if (this.isLocalStorageAvailable()) {
-      return localStorage.getItem(key);
+      const currentTabId = localStorage.getItem('login-event');      
+      return localStorage.getItem(`${key}-login-${currentTabId}`);
     } else {
       return null;
     }
@@ -43,10 +44,21 @@ export class LocalStorageService {
   }
 
   //**clear localstorage */
+  // clear(): void {
+  //   this.cookieService.delete('token', '/'); 
+  //   localStorage.removeItem('menu');
+  //   localStorage.removeItem('user')
+  // }
+
   clear(): void {
-    this.cookieService.delete('token', '/'); 
-    localStorage.removeItem('menu');
-    localStorage.removeItem('user')
+    const currentTabId = localStorage.getItem('login-event');
+    if (currentTabId) {
+      this.cookieService.delete(`token-login-${currentTabId}`, '/');
+      localStorage.removeItem(`menu-login-${currentTabId}`);
+      localStorage.removeItem(`user-login-${currentTabId}`);
+      localStorage.setItem('logout-event', currentTabId + '-' + new Date().getTime());
+      localStorage.removeItem('login-event');
+    }
   }
 
   // getToken(): string | null {
@@ -54,10 +66,14 @@ export class LocalStorageService {
   // }
 
   isLoggedIn() {
-    return this.getToken() !== null
+    const loginEvent = localStorage.getItem('login-event');
+    const logoutEvent = localStorage.getItem('logout-event');
+    const token = this.getToken();
+    return loginEvent && (!logoutEvent || loginEvent > logoutEvent) && token !== null;
   }
 
   getToken(): string {
-    return this.cookieService.get('token');
+    const currentTabId = localStorage.getItem('login-event');        
+    return this.cookieService.get(`token-login-${currentTabId}`);
   }
 }

@@ -82,7 +82,7 @@ export class TrackingMapComponent {
               user_status === 'Online'
                 ? 'assets/images/rp_marker_person_green.png'
                 : 'assets/images/rp_marker_person_red.png',
-            iconSize: [35, 75],
+            iconSize: [30, 60],
           });
   
           const marker = L.marker([lat, lng], { icon: markerIcon }).bindPopup(
