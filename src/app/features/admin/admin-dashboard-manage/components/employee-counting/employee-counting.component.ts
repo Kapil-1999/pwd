@@ -39,7 +39,7 @@ export class EmployeeCountingComponent {
 
   goToDetails(data:any) {
     console.log("check data",data);
-    return
+    // return
     
     this.router.navigateByUrl('/admin/dashboard/user-details')
     if(data.name == "JE") {
