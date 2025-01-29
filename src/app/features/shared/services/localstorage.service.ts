@@ -29,7 +29,7 @@ export class LocalStorageService {
   //**getitem from localstorage */
   getItem(key: string): string | null {
     if (this.isLocalStorageAvailable()) {
-      const currentTabId = localStorage.getItem('login-event');      
+      const currentTabId = localStorage.getItem('current-tab');      
       return localStorage.getItem(`${key}-login-${currentTabId}`);
     } else {
       return null;
@@ -43,6 +43,11 @@ export class LocalStorageService {
     }
   }
 
+  getCurrentTab(tab:any) {
+    let newTab = tab.split('_')
+    return newTab[1];    
+  }
+
   //**clear localstorage */
   // clear(): void {
   //   this.cookieService.delete('token', '/'); 
@@ -51,13 +56,13 @@ export class LocalStorageService {
   // }
 
   clear(): void {
-    const currentTabId = localStorage.getItem('login-event');
+    const currentTabId = localStorage.getItem('current-tab');
     if (currentTabId) {
       this.cookieService.delete(`token-login-${currentTabId}`, '/');
       localStorage.removeItem(`menu-login-${currentTabId}`);
       localStorage.removeItem(`user-login-${currentTabId}`);
-      localStorage.setItem('logout-event', currentTabId + '-' + new Date().getTime());
-      localStorage.removeItem('login-event');
+      localStorage.setItem('logout-event', currentTabId + '-' + new Date().getTime());  
+      localStorage.removeItem('current-tab');
     }
   }
 
@@ -66,14 +71,15 @@ export class LocalStorageService {
   // }
 
   isLoggedIn() {
-    const loginEvent = localStorage.getItem('login-event');
+    const currentTabId = localStorage.getItem('current-tab');
+    const loginEvent = localStorage.getItem(`login-event-${currentTabId}`);
     const logoutEvent = localStorage.getItem('logout-event');
     const token = this.getToken();
     return loginEvent && (!logoutEvent || loginEvent > logoutEvent) && token !== null;
   }
 
   getToken(): string {
-    const currentTabId = localStorage.getItem('login-event');        
+    const currentTabId = localStorage.getItem('current-tab');        
     return this.cookieService.get(`token-login-${currentTabId}`);
   }
 }

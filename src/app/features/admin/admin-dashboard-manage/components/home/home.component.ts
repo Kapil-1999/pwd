@@ -17,7 +17,7 @@ export class HomeComponent {
   }
   allUserList: any;
   isLoading: boolean = false;
-  isChartLoding : boolean = false
+  isChartLoding: boolean = false
   constructor(
     private dashboardService: DashboardService,
     private commonService: CommonService
@@ -54,23 +54,53 @@ export class HomeComponent {
     });
   }
 
-  confirm(event: any) {    
+  confirm(event: any) {
     if (event.type === '') {
       this.data = {
         userId: event?.data?.user_id,
         desiId: event?.data?.designation_id + 1,
         locId: this.userData?.locId
       }
-      if(event?.data?.designation_id == 2) {
-        this.data['locId'] = event?.data?.zone_id
-      } else  if(event?.data?.designation_id == 3){
-        this.data['locId'] = event?.data?.circle_id
-      } else if(event?.data?.designation_id == 4) {
-        this.data['locId'] = event?.data?.district_id
+      if (event?.data?.designation_id == 2) {
+        if (event?.id == 3) {
+          this.data['locId'] = `zone_${event?.data?.zone_id}`;
+          this.data['desiId'] = event?.id
+        } else if (event?.id == 4) {
+          this.data['locId'] = `zone_${event?.data?.zone_id}`
+          this.data['desiId'] = event?.id
+        } else if (event?.id == 5) {
+          this.data['locId'] = `zone_${event?.data?.zone_id}`
+          this.data['desiId'] = event?.id
+        } else if (event?.id == 6) {
+          this.data['locId'] = `zone_${event?.data?.zone_id}`
+          this.data['desiId'] = event?.id
+        }
+      } else if (event?.data?.designation_id == 3) {
+        if (event?.id == 4) {
+          this.data['locId'] = `circle_${event?.data?.circle_id}`
+          this.data['desiId'] = event?.id
+        } else if (event?.id == 5) {
+          this.data['locId'] = `circle_${event?.data?.circle_id}`
+          this.data['desiId'] = event?.id
+        } else if (event?.id == 6) {
+          this.data['locId'] = `circle_${event?.data?.circle_id}`
+          this.data['desiId'] = event?.id
+        }
+      } else if (event?.data?.designation_id == 4) {
+        if (event?.id == 5) {
+          this.data['locId'] = `district_${event?.data?.district_id}`
+          this.data['desiId'] = event?.id
+        } else if (event?.id == 6) {
+          this.data['locId'] = `district_${event?.data?.district_id}`
+          this.data['desiId'] = event?.id
+        }
       } else if(event?.data?.designation_id == 5) {
-        this.data['locId'] = event?.data?.division_id
-      }     
-      
+        if (event?.id == 6) {
+          this.data['locId'] = `division_${event?.data?.division_id}`
+          this.data['desiId'] = event?.id
+        }
+      }
+
       this.getAllUserDetails()
     } else {
       this.data = {
@@ -83,3 +113,4 @@ export class HomeComponent {
 
   }
 }
+ 

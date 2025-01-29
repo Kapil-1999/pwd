@@ -78,7 +78,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody *ngIf="userList">
                                     <tr *ngFor="let item of userList | paginate
                                   : {
                                       id: 'userID',

@@ -13,38 +13,44 @@ import { CookieService } from 'ngx-cookie-service';
 export class TokenService {
   constructor(
     private loginService: LoginServiceService,
-    private localStorageService : LocalStorageService,
+    private localStorageService: LocalStorageService,
     private jwtService: JwtTokenService,
     private notificationService: NotificationService,
-    private router : Router,
+    private router: Router,
     private storageService: StorageService,
-    private cookieService : CookieService
+    private cookieService: CookieService
   ) { }
 
   //**generate token and redirect to dashboard page and after decode save token in indexdb */
-  generateToken(data: any, ip:any) {
+  generateToken(data: any, ip: any) {
     let payload = {
       "UserName": data.userName,
       "Password": data.password,
-      "login_from" : ip ? ip : 'Web'
+      "login_from": ip ? ip : 'Web'
     };
 
-    this.loginService.login(payload).subscribe((res: any) => {      
-      const userDetail = res.body;      
-      if(userDetail?.statusCode == 200) {
+    this.loginService.login(payload).subscribe((res: any) => {
+      const userDetail = res.body;
+      if (userDetail?.statusCode == 200) {
         this.notificationService.successAlert('Login Successfully');
         let userData = userDetail?.result;
-        let menuData = userDetail?.moduleList;               
+        let menuData = userDetail?.moduleList;
         // this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
 
-        const tabId = `${userData?.user_id}_${new Date().getTime()}`;  
-        localStorage.setItem(`login-event`, tabId);
-        this.cookieService.set(`token-login-${tabId}`, userDetail?.jwtToken);        
+        const tabId = `${userData?.user_id}_${new Date().getTime()}`;
+        let tab = this.localStorageService.getCurrentTab(`tab-id-${tabId}`)
+        localStorage.setItem('current-tab', tabId);
+        localStorage.setItem(`tab-id-${tabId}`, tabId);
+        this.cookieService.set(`token-login-${tabId}`, userDetail?.jwtToken, {
+          path: '/',
+          secure: false,
+          sameSite: 'Lax',
+          expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24)
+        });
         this.localStorageService.setItem(`user-login-${tabId}`, JSON.stringify(userData));
-        this.localStorageService.setItem(`menu-login-${tabId}`, JSON.stringify(menuData) )
-
-        setTimeout(() => {          
-          this.goToDashboard(); 
+        this.localStorageService.setItem(`menu-login-${tabId}`, JSON.stringify(menuData));
+        setTimeout(() => {
+          this.goToDashboard();
         }, 1000);
       } else {
         this.notificationService.errorAlert(userDetail?.actionResponse)
@@ -57,14 +63,14 @@ export class TokenService {
   }
 
   //**gettoken from localstorage */
-  getToken() {        
-    const currentTabId = localStorage.getItem('login-event');
+  getToken() {
+    const currentTabId = localStorage.getItem('current-tab');
     return this.cookieService.get(`token-login-${currentTabId}`);
   }
 
   //**check condition for token available in localstorage */
   hasToken() {
-    const currentTabId = localStorage.getItem('login-event');
-    return this.cookieService.get(`token-login-${currentTabId}`)!== null;
+    const currentTabId = localStorage.getItem('current-tab');
+    return this.cookieService.get(`token-login-${currentTabId}`) !== null;
   }
 }
