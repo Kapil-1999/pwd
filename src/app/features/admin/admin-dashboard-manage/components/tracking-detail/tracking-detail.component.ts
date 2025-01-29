@@ -14,6 +14,7 @@ export class TrackingDetailComponent {
   isPrevious: boolean = false;
   searchKeyword:any;
   imgUrl = IMG_URL
+  jeshow: boolean = false;
 
   ngOnInit() {
   }
@@ -33,17 +34,24 @@ export class TrackingDetailComponent {
   }
 
 
-  onGetUserBeasedOnId(data: any) {    
+  onGetUserBeasedOnId(data: any,id:any) {     
+    if(id == 6) {
+      this.jeshow = true;
+    } else {
+      this.jeshow = false;
+    }
     this.isPrevious = true;
     this.activeCardIndex = null;
     this.mapdata.emit({
       data: data,
+      id: id,
       type: ''
     })
   }
 
   previousCard() {
     this.isPrevious = false;
+    this.jeshow = false;
     this.trackingData = [];
     this.activeCardIndex = null;
     this.mapdata.emit({

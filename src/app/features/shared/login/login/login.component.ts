@@ -23,10 +23,17 @@ export class LoginComponent {
     private http : HttpClient
 
   ) {
-    if (this.localStorageService.isLoggedIn()) {
-      this.router.navigate(['/admin/dashboard/home']);
+    const currentTabId = localStorage.getItem('current-tab');
+    if (currentTabId) {
+      const sessionData = localStorage.getItem(`login-event-${currentTabId}`);
+      if (sessionData) {
+        this.router.navigate(['/admin/dashboard/home']);
+      } else {
+        localStorage.removeItem('logout-event');
+        this.router.navigate(['/login']);
+      }
     } else {
-      localStorage.removeItem('logout-event')
+      localStorage.removeItem('logout-event');
       this.router.navigate(['/login']);
     }
    }

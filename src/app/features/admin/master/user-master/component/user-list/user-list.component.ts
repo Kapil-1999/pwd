@@ -36,7 +36,7 @@ export class UserListComponent {
     count: 0,
   };
   bsModalRef!: BsModalRef;
-  searchKeyword: any = null;
+  searchKeyword: any = '';
   deparmentList: any
   config = {
     displayKey: "text",
@@ -130,6 +130,7 @@ export class UserListComponent {
       setTimeout(() => {
         this.isLoading = false;
       }, 600);
+      
       this.userList = res?.body?.result || [];
       this.pagesize.count = res?.body?.totalRow;
     })
@@ -275,9 +276,9 @@ export class UserListComponent {
   }
 
   onSearch(event:any) {
-    console.log(event.target.value);
-    this.getUserList(this.pagesize.offset, this.pagesize.limit, event.target.value);
-    
-
+    this.userList = [];
+    this.pagesize.offset = 1;
+    this.pagesize.limit = 25;
+    this.getUserList(this.pagesize.offset, this.pagesize.limit, event.target.value);  
   }
 }
