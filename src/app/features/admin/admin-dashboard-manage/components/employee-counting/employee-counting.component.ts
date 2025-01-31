@@ -10,11 +10,11 @@ export class EmployeeCountingComponent {
   @Input() dashboardData :any;
 
   cards = [
-    { count: 0, name: 'Chief Engineer', status: 'offline', icon: 'assets/images/no-image.png', key: 'ce_count', ce_desig_id: 0, user_id : 0 },
-    { count: 0, name: 'Supritending Engineer',status: 'online', icon: 'assets/images/no-image.png', key: 'se_count', se_desig_id: 0,user_id : 0   },
-    { count: 0, name: 'Ex. Engineer',status: 'stopped', icon: 'assets/images/no-image.png', key: 'ee_count',se_desig_id: 0,user_id : 0 },
-    { count: 0, name: 'AE',status: 'idle', icon: 'assets/images/no-image.png', key: 'ae_count', se_desig_id: 0,user_id : 0 },
-    { count: 0, name: 'JE',status: 'offline', icon: 'assets/images/no-image.png', key: 'je_count', se_desig_id: 0,user_id : 0 },
+    { count: 0, name: 'Chief Engineer', status: 'offline', icon: 'assets/images/user.png', key: 'ce_count', ce_desig_id: 0, user_id : 0 },
+    { count: 0, name: 'Supritending Engineer',status: 'online', icon: 'assets/images/user.png', key: 'se_count', ce_desig_id: 0,user_id : 0   },
+    { count: 0, name: 'Ex. Engineer',status: 'stopped', icon: 'assets/images/user.png', key: 'ee_count',ce_desig_id: 0,user_id : 0 },
+    { count: 0, name: 'AE',status: 'idle', icon: 'assets/images/user.png', key: 'ae_count', ce_desig_id: 0,user_id : 0 },
+    { count: 0, name: 'JE',status: 'offline', icon: 'assets/images/user.png', key: 'je_count', ce_desig_id: 0,user_id : 0 },
   ];
   type = 'JE'
 
@@ -30,20 +30,42 @@ export class EmployeeCountingComponent {
 
   updateCardCounts(): void {
     if (this.dashboardData) {
-      this.cards = this.cards.map((card:any) => {        
+      this.cards = this.cards.map((card: any) => {
         const updatedCount = this.dashboardData[card.key] || 0;
-        return { ...card, count: updatedCount };
+          const updatedUserId = this.dashboardData.user_id || 0;
+          let updatedDesigId = 0;
+        switch (card.key) {
+          case 'ce_count':
+            updatedDesigId = this.dashboardData.ce_desig_id || 0;
+            break;
+          case 'se_count':
+            updatedDesigId = this.dashboardData.se_desig_id || 0;
+            break;
+          case 'ee_count':
+            updatedDesigId = this.dashboardData.ee_desig_id || 0;
+            break;
+          case 'ae_count':
+            updatedDesigId = this.dashboardData.ae_desig_id || 0;
+            break;
+          case 'je_count':
+            updatedDesigId = this.dashboardData.je_desig_id || 0;
+            break;
+          default:
+            updatedDesigId = 0;
+        }
+          return {
+          ...card,
+          count: updatedCount,
+          user_id: updatedUserId,
+          ce_desig_id: updatedDesigId
+        };
       });
     }
   }
 
   goToDetails(data:any) {
-    console.log("check data",data);
-    // return
-    
-    this.router.navigateByUrl('/admin/dashboard/user-details')
-    if(data.name == "JE") {
-      this.router.navigateByUrl('/admin/dashboard/area-allot-details')
-    }
+    this.router.navigateByUrl('/admin/dashboard/user-details', {
+      state: { userData: data }
+    });
   }
 }

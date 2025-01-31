@@ -1,153 +1,88 @@
+@if(isLoading) {
+<app-loader></app-loader>
+} @else {
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 bg-gray-50">
-    <div class="bg-white shadow rounded-lg p-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <h2 class="text-lg  text-gray-800">CE-AGR3</h2>
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-100 text-green-800">
-            <i class="fas fa-phone"></i> 1234567890
-          </span>
-        </div>
-        <img
-          class="w-12 h-12 rounded-full border-2 border-white"
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt="Jane Cooper"
-        />
+  @if (allUserList && allUserList.length > 0) {
+  @for (user of allUserList; track user) {
+  <div class="bg-white shadow rounded-lg p-4">
+    <div class="flex justify-between items-center">
+      <div>
+        <h2 class="text-lg text-gray-800">{{ user?.full_name }}</h2>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-100 text-green-800">
+          <i class="fas fa-phone"></i> {{ user?.contact_no }}
+        </span>
       </div>
-      <div class="flex justify-between profile-button mt-2 pt-4">
-        <button class="px-3 py-1 bg-blue-500 text-white rounded-full" >SE : 1</button>
-        <button class="px-3 py-1 bg-green-500 text-white rounded-full"  >EE : 2</button>
-        <button class="px-3 py-1 bg-yellow-500 text-white rounded-full"  >AE :3 </button>
-        <button class="px-3 py-1 bg-red-500 text-white rounded-full" >JE : 1</button>
-      </div>
-      <div class="border-t mt-4 pt-4 flex justify-between">
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-battery-full"></i>
-          <span>Battery : 15%</span>
-        </p>
-        
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-road"></i>
-          <span>Distance : 5Km</span>
-        </p>
-        
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>GPS : On</span>
-        </p>
-      </div>
+      <img class="w-12 h-12 rounded-full border-2 border-white"
+        [src]="user?.img_path !== '' ? imgUrl + user?.img_path : 'assets/images/no-image-1.png'" alt="Jane Cooper" />
     </div>
-  
-    <div class="bg-white shadow rounded-lg p-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <h2 class="text-lg  text-gray-800">UP-MAT2</h2>
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-100 text-green-800">
-            <i class="fas fa-phone"></i> 1234567890
-          </span>
-        </div>
-        <img
-          class="w-12 h-12 rounded-full border-2 border-white"
-          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt="Cody Fisher"
-        />
+
+    @if (user?.designation_id == 6) {
+      <div class="flex border rounded-lg overflow-hidden mt-2">
+        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100" (click)="onAssignArea()">
+          <i class="fas fa-envelope mr-2 text-gray-500"></i> Assign 1
+        </button>
+      
+        <div class="w-px bg-gray-300"></div>
+      
+        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100">
+          <i class="fas fa-image mr-2 text-gray-500"></i> Image
+        </button>
       </div>
-      <div class="flex justify-between profile-button mt-2 pt-4">
-        <button class="px-3 py-1 bg-blue-500 text-white rounded-full" >SE : 1</button>
-        <button class="px-3 py-1 bg-green-500 text-white rounded-full"  >EE : 2</button>
-        <button class="px-3 py-1 bg-yellow-500 text-white rounded-full"  >AE :3 </button>
-        <button class="px-3 py-1 bg-red-500 text-white rounded-full" >JE : 1</button>
-      </div>
-      <div class="border-t mt-4 pt-4 flex justify-between">
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-battery-full"></i>
-          <span>Battery : 15%</span>
-        </p>
-        
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-road"></i>
-          <span>Distance : 5Km</span>
-        </p>
-        
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>GPS : On</span>
-        </p>
-      </div>
+
+    } @else {
+    <div class="flex justify-between profile-button mt-2 pt-2">
+      @if (user?.designation_id == 2) {
+      <button class="px-3 py-1 bg-blue-500 text-white rounded-full" [disabled]="user?.se_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.se_desig_id)">
+        SE : {{ user?.se_count }}
+      </button>
+      }
+      @if (user?.designation_id == 2 || user?.designation_id == 3) {
+      <button class="px-3 py-1 bg-green-500 text-white rounded-full" [disabled]="user?.ee_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.ee_desig_id)">
+        EE : {{ user?.ee_count }}
+      </button>
+      }
+      @if (user?.designation_id == 2 || user?.designation_id == 3 || user?.designation_id == 4) {
+      <button class="px-3 py-1 bg-yellow-500 text-white rounded-full" [disabled]="user?.ae_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.ae_desig_id)">
+        AE : {{ user?.ae_count }}
+      </button>
+      }
+      @if (user?.designation_id == 2 || user?.designation_id == 3 || user?.designation_id == 4 || user?.designation_id
+      == 5) {
+      <button class="px-3 py-1 bg-red-500 text-white rounded-full" [disabled]="user?.je_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.je_desig_id)">
+        JE : {{ user?.je_count }}
+      </button>
+      }
     </div>
-  
-    <div class="bg-white shadow rounded-lg p-4">
-      <div class="flex justify-between items-center">
-        <div>
-          <h2 class="text-lg  text-gray-800">UP-MAT1</h2>
-          <span class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-100 text-green-800">
-            <i class="fas fa-phone"></i> 1234567890
-          </span>
-        </div>
-        <img
-          class="w-12 h-12 rounded-full border-2 border-white"
-          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt="Esther Howard"
-        />
-      </div>
-      <div class="flex justify-between profile-button mt-2 pt-4">
-        <button class="px-3 py-1 bg-blue-500 text-white rounded-full" >SE : 1</button>
-        <button class="px-3 py-1 bg-green-500 text-white rounded-full"  >EE : 2</button>
-        <button class="px-3 py-1 bg-yellow-500 text-white rounded-full"  >AE :3 </button>
-        <button class="px-3 py-1 bg-red-500 text-white rounded-full" >JE : 1</button>
-      </div>
-      <div class="border-t mt-4 pt-4 flex justify-between">
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-battery-full"></i>
-          <span>Battery : 15%</span>
-        </p>
-        
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-road"></i>
-          <span>Distance : 5Km</span>
-        </p>
-        
-        <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>GPS : On</span>
-        </p>
-      </div>
+    }
+
+    <!-- Bottom Section (Battery, Distance, GPS) -->
+    <div class="border-t mt-2 pt-2 flex justify-between">
+      <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+        <i class="fas fa-battery-full"></i>
+        <span>Battery : 15%</span>
+      </p>
+
+      <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+        <i class="fas fa-road"></i>
+        <span>Distance : 5Km</span>
+      </p>
+
+      <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>GPS : On</span>
+      </p>
     </div>
-    <div class="bg-white shadow rounded-lg p-4">
-        <div class="flex justify-between items-center">
-          <div>
-            <h2 class="text-lg  text-gray-800">UP-AGR2</h2>
-            <span class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-100 text-green-800">
-              <i class="fas fa-phone"></i> 1234567890
-            </span>
-          </div>
-          <img
-            class="w-12 h-12 rounded-full border-2 border-white"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt="Esther Howard"
-          />
-        </div>
-        <div class="flex justify-between profile-button mt-2 pt-4">
-            <button class="px-3 py-1 bg-blue-500 text-white rounded-full" >SE : 1</button>
-            <button class="px-3 py-1 bg-green-500 text-white rounded-full"  >EE : 2</button>
-            <button class="px-3 py-1 bg-yellow-500 text-white rounded-full"  >AE :3 </button>
-            <button class="px-3 py-1 bg-red-500 text-white rounded-full" >JE : 1</button>
-          </div>
-        <div class="border-t mt-4 pt-4 flex justify-between">
-          <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-            <i class="fas fa-battery-full"></i>
-            <span>Battery : 15%</span>
-          </p>
-          
-          <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-            <i class="fas fa-road"></i>
-            <span>Distance : 5Km</span>
-          </p>
-          
-          <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>GPS : On</span>
-          </p>
-        </div>
-      </div>
   </div>
-  
+
+  }
+  } @else {
+  <div class="bg-white shadow rounded-lg p-4 col-span-full text-center">
+    <p class="text-gray-600">Data Not Available</p>
+  </div>
+  }
+</div>
+}

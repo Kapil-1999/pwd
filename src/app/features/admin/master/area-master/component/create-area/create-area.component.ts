@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { AreaService } from '../../services/area.service';
 import { CommonService } from '../../../../../shared/services/common.service';
+import { MapService } from '../../services/map.service';
 
 @Component({
   selector: 'app-create-area',
@@ -41,7 +42,7 @@ export class CreateAreaComponent {
     private notificationService: NotificationService,
     private areaService: AreaService,
     private commonService: CommonService,
-    private bsModelService: BsModalService
+    private bsModelService: BsModalService,
   ) { }
 
   ngOnInit() {
@@ -61,7 +62,7 @@ export class CreateAreaComponent {
       "shape_type": ['', [Validators.required]],
       "travel_mode": ['Driving', [Validators.required]],
       "color_code": ['black', [Validators.required]],
-      "radius": [0, [Validators.required]],
+      "radius": [0],
       "speed_limit": [0],
       "source_lat": [null, [Validators.required]],
       "source_lon": [null, [Validators.required]],
@@ -74,19 +75,21 @@ export class CreateAreaComponent {
     });
     this.areaForm.get('shape_type')?.valueChanges.subscribe((value) => this.onShapeChange(value));
     this.areaForm.get('shape_type')?.valueChanges.subscribe((shapeType) => {
-      if (shapeType === '1') { // If Circle is selected
+      if (shapeType == '1') {
         this.updateDestinationCoordinates();
+        this.areaForm.get('radius')?.setValidators([Validators.required, Validators.min(1)]);
+      } else {
+        this.areaForm.get('radius')?.clearValidators();
       }
+      this.areaForm.get('radius')?.updateValueAndValidity();
     });
-  
-    // Subscribe to source_lat changes
+
     this.areaForm.get('source_lat')?.valueChanges.subscribe(() => {
       if (this.areaForm.get('shape_type')?.value === '1') {
         this.updateDestinationCoordinates();
       }
     });
-  
-    // Subscribe to source_lon changes
+
     this.areaForm.get('source_lon')?.valueChanges.subscribe(() => {
       if (this.areaForm.get('shape_type')?.value === '1') {
         this.updateDestinationCoordinates();
@@ -95,19 +98,19 @@ export class CreateAreaComponent {
 
     if (this.editData) {
       this.label = 'Update'
-      this.getAreaById(this.editData?.area_id)
-      this.getWorkList();
-      this.getCityList()
+      this.getAreaById(this.editData?.area_id);
+
     } else {
       this.getWorkList();
       this.getCityList()
     }
   }
 
+
   updateDestinationCoordinates() {
     const sourceLat = this.areaForm.get('source_lat')?.value;
     const sourceLon = this.areaForm.get('source_lon')?.value;
-  
+
     if (sourceLat !== null || sourceLon !== null) {
       this.areaForm.patchValue({
         destination_lat: sourceLat,
@@ -119,6 +122,7 @@ export class CreateAreaComponent {
   getAreaById(id: any) {
     this.areaService.getAreaById(id).subscribe((res: any) => {
       this.areaById = res?.body?.result;
+      console.log("area",this.areaById);      
       if (this.areaById) {
         this.areaForm.patchValue({
           "area_name": this.areaById?.area_name,
@@ -134,6 +138,8 @@ export class CreateAreaComponent {
           "is_active": this.areaById?.is_active
         })
       }
+      this.getWorkList();
+      this.getCityList()
       this.onShapeChange(this.areaById?.shape_type.toString())
       this.onCreateShape();
     })
@@ -155,27 +161,31 @@ export class CreateAreaComponent {
       })
 
       if (this.areaById) {
-        let workId = this.workNameList.find((val: any) => val.value == this.areaById?.work_id);
+        let workId = this.workNameList.find((val: any) => val.value == this.areaById?.work_id);        
         this.areaForm.controls['work_id'].setValue(workId)
       }
     })
   }
 
   getCityList() {
-    this.commonService.cityList(0).subscribe((res:any) => {
+    this.commonService.cityList(0).subscribe((res: any) => {
       this.cityList = res?.body?.result;
+      console.log("check city", this.cityList);
+      
       if (this.areaById) {
-        let workId = this.cityList.find((val: any) => val.value == this.areaById?.district_id);
-        this.areaForm.controls['district_id'].setValue(workId)
+        setTimeout(() => {          
+          let workId = this.cityList.find((val: any) => val.value == this.areaById?.district_id);
+          this.areaForm.controls['district_id'].setValue(workId)
+        }, 1000);
       }
     })
   }
 
   onShapeChange(value: string) {
-    if (value === '1') { 
+    if (value === '1') {
       const sourceLat = this.areaForm.get('source_lat')?.value;
       const sourceLon = this.areaForm.get('source_lon')?.value;
-  
+
       if (sourceLat !== null && sourceLon !== null) {
         this.areaForm.patchValue({
           destination_lat: sourceLat,
@@ -231,6 +241,8 @@ export class CreateAreaComponent {
     const shape = this.areaForm.get('shape_type')?.value;
     const colour = this.areaForm.get('color_code')?.value;
     const radius = this.areaForm.get('radius')?.value;
+    const geofanceText = this.areaById?.geofence_text
+
 
     this.errorMessages = {
       sourceLat: null,
@@ -238,7 +250,7 @@ export class CreateAreaComponent {
       destinationLat: null,
       destinationLon: null,
       shape: null,
-      radius: null
+      radius: null,
     };
 
     let hasError = false;
@@ -275,7 +287,7 @@ export class CreateAreaComponent {
       hasError = true;
     }
 
-    if (!radius) {
+    if (shape == 1) {
       this.errorMessages.radius = 'Radius is required.';
       hasError = true;
     }
@@ -291,7 +303,8 @@ export class CreateAreaComponent {
       destinationLon,
       shape,
       colour,
-      radius
+      radius,
+      geofanceText
     };
 
     this.markerData = shapeData;
@@ -343,5 +356,32 @@ export class CreateAreaComponent {
 
   close() {
     this.modalService.hide()
+  }
+
+  confirm(event: any) {
+    const { circle, radius, shapeType } = event;
+    if (shapeType == 1) {
+      this.areaForm.patchValue({
+        source_lat: circle.lat,
+        source_lon: circle.lng,
+        destination_lat: circle.lat,
+        destination_lon: circle.lng,
+        radius: radius,
+        shape_type: shapeType.toString()
+      });
+    } else if (shapeType == 2) {
+      const sourceLat = circle[0][0];
+      const sourceLon = circle[0][1];
+      const destinationLat = circle[circle.length - 2][0];
+      const destinationLon = circle[circle.length - 2][1];
+      this.areaForm.patchValue({
+        source_lat: sourceLat,
+        source_lon: sourceLon,
+        destination_lat: destinationLat,
+        destination_lon: destinationLon,
+        radius: radius,
+        shape_type: shapeType.toString()
+      });
+    }
   }
 }
