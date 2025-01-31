@@ -5,6 +5,7 @@ import { CreateAreaComponent } from '../create-area/create-area.component';
 import { AreaService } from '../../services/area.service';
 import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 import { NotificationService } from '../../../../../shared/services/notification.service';
+import { AreaMapComponent } from '../area-map/area-map.component';
 
 @Component({
   selector: 'area-list',
@@ -63,6 +64,7 @@ export class AreaListComponent {
       { key: 'Radius', title: 'Radius' },
       { key: 'Status', title: 'Status' },
       { key: 'Action', title: 'Action', width: "10%" },
+      { key: 'Show On Map', title: 'Show On Map' },
     ];
   }
 
@@ -142,6 +144,22 @@ export class AreaListComponent {
           this.notificationService.errorAlert(value?.title);
         }
       }
+    );
+  }
+
+  showOnMap(value:any) {
+    const initialState: ModalOptions = {
+      initialState: {
+        mapData: value ? value : '',
+        mapType : 'show on Map'
+      },
+    };
+    this.bsModalRef = this.modalService.show(
+      AreaMapComponent,
+      Object.assign(initialState, {
+        id: "confirmation",
+        class: 'modal-xl modal-dialog-centered alert-popup',
+      })
     );
   }
 }

@@ -186,7 +186,7 @@
             </form>
         </div>
         <div class="col-md-7">
-            <area-map [markerData]="markerData"></area-map>
+            <area-map [markerData]="markerData" (mapAddress)="confirm($event)"></area-map>
         </div>
     </div>
 </div>
