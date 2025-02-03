@@ -16,3 +16,10 @@
 .cirlce-side, .right-side {
     align-self: start; 
 }
+
+
+div#datatable_wrapper {
+    height: calc(100vh - 92px);
+    overflow: auto;
+    scrollbar-width: thin;
+}

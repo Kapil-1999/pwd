@@ -22,6 +22,8 @@
                 </div>
                 <div [class.max-h-0]="!item.isOpen" [class.max-h-[1000px]]="item.isOpen"
                     class="overflow-hidden transition-all duration-500 ease-in-out px-2">
+                    <h3>Before Details :- </h3>
+                    <hr>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6">
                         <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
                             <img class="w-24 h-24 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/1.jpg" alt="Jane Cooper">
@@ -40,6 +42,28 @@
                             </div>
                         </div>
                     </div>
+
+                    <h3>After Details :- </h3>
+                    <hr>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6">
+                        <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
+                            <img class="w-24 h-24 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/1.jpg" alt="Jane Cooper">
+                            <div class="mt-4 w-full border-t pt-2 text-gray-600">
+                                <p class="text-gray-500">Remarks: </p>
+                                <p class="text-gray-500">Adress: </p>
+                            </div>
+                        </div>
+                    
+                        <!-- Card 2 -->
+                        <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
+                            <img class="w-24 h-24 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/1.jpg" alt="Cody Fisher">
+                            <div class="mt-4 w-full border-t pt-2 text-gray-600">
+                                <p class="text-gray-500">Remarks: </p>
+                                <p class="text-gray-500">Adress: </p>
+                            </div>
+                        </div>
+                    </div>
+
                     
                 </div>
             </div>
