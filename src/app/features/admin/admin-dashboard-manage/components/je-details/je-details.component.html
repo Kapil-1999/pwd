@@ -30,18 +30,22 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let item of categoryList; let index = index">
-                            <td>{{ item?.cat }}</td>
-                            <td>{{ item?.work }}</td>
-                            <td>{{ item?.status }}</td>                            
-                            <td class="flex space-x-2">
-                                <button class="btn btn-primary" (click)="openAreaPlot()">
-                                    <i class="fa fa-tasks" aria-hidden="true"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    @if(isLoading) {
+                        <app-loader></app-loader>
+                    } @else {
+                        <tbody>
+                            <tr *ngFor="let item of categoryList; let index = index">
+                                <td>{{ item?.category_name }}</td>
+                                <td>2</td>
+                                <td>{{ item?.status || 'NA' }}</td>                            
+                                <td class="flex space-x-2">
+                                    <button class="btn btn-primary" (click)="openAreaPlot()">
+                                        <i class="fa fa-tasks" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
                 </table>
                 <div class="text-center py-4 text-gray-500" *ngIf="!categoryList?.length">
                     No Category Available
