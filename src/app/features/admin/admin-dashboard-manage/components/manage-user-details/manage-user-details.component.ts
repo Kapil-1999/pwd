@@ -97,5 +97,10 @@ export class ManageUserDetailsComponent {
     this.router.navigateByUrl('/admin/dashboard/area-allot-details')
   }
 
+  goToLive(user:any) {
+    console.log(user);
+    this.router.navigateByUrl("/admin/live/track")
+  }
+
 
 }

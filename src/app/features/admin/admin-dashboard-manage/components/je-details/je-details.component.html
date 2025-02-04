@@ -3,8 +3,8 @@
         @for (item of accordionItems; track item; let index = $index) {
             <div class="bg-white shadow rounded-lg p-4 mb-3 cursor-pointer transition-all duration-300"
             [ngClass]="{
-                'border border-blue-500 scale-105 shadow-lg': openItemId === item.id, 
-                'border border-gray-500 w-full': openItemId !== item.id
+                'border-2 border-blue-700 scale-105 shadow-lg': openItemId === item.id, 
+                'border border-gray-300 w-full': openItemId !== item.id
             }"
              (click)="onOpenCategory(item.id)">
                 <div class="flex justify-between items-center">

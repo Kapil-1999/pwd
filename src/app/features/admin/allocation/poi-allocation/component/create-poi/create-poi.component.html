@@ -1,5 +1,5 @@
 <div class="modal-header text-center">
-    <h5>{{label}} Poi Allocation</h5>
+    <h5>{{label}} POI Allocation</h5>
     <div class="close-modal" (click)="close()">
         <i class="fa fa-close" style="cursor: pointer;"></i>
     </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <label class="form-label">Area</label>
-                        <ngx-select-dropdown [config]="config" [options]="areaData" formControlName="area">
+                        <ngx-select-dropdown [config]="config" [options]="areaData" [multiple]="true"  formControlName="area">
                         </ngx-select-dropdown>  
                         <div *ngIf="poiForm.get('area')?.touched && poiForm.get('area')?.invalid" class="text-danger">
                             Area is required.

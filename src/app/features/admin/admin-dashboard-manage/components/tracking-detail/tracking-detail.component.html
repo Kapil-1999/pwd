@@ -81,7 +81,7 @@
                 </td>
                 <ng-container *ngIf="jeshow; else elseBlock">
                   <td><b>Name:</b></td>
-                  <td>{{ card.full_name || 'NA' }}</td>
+                  <td> <strong>{{ card.full_name || 'NA' }}</strong></td>
                 </ng-container>
                 <ng-template #elseBlock>
                   <td><b>Mobile:</b></td>
