@@ -133,13 +133,23 @@ export class CreatePoiComponent {
     });
   }
 
+  getSelectedValues(data: any) {
+    if (!Array.isArray(data)) {
+      return { value: data?.value, text: data?.text };
+    }
+    return {
+      value: data.map((item: any) => item.value).join(','),
+      text: data.map((item: any) => item.text).join(',')
+    };
+  }
+
   submit(formvalue: any) {
     if (this.poiForm.invalid) {
       this.poiForm.markAllAsTouched();
       return;
     }
-    let user = this.commonService.getUserDetails()
-
+    let user = this.commonService.getUserDetails();
+    let areaData = formvalue?.area ? this.getSelectedValues(formvalue?.area) : { value: null, text: null };
     let payload = {
       "poi_alloc_id": 0,
       "designation_id": formvalue?.designation ? Number(formvalue?.designation?.value) : null,
@@ -147,12 +157,13 @@ export class CreatePoiComponent {
       "user_id": formvalue?.user ? Number(formvalue?.user?.value) : null,
       "user_name": formvalue?.user ? formvalue?.user?.text : null,
       "allocated_date": formvalue?.date,
-      "area_id": formvalue?.area ? formvalue?.area?.value.toString() : null,
-      "area_text": formvalue?.area ? formvalue?.area?.text : null,
+      "area_id": areaData.value,
+      "area_text": "",
       "remarks": formvalue?.remark,
       "is_active": formvalue?.status,
       "created_by": user?.user_id
     }
+
     let service = this.poiService.addPOIAllocation(payload);
     if(this.getPoiByIdData) {
       payload['poi_alloc_id'] = this.getPoiByIdData?.poi_alloc_id
