@@ -26,4 +26,25 @@ export class DashboardService {
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
+
+  workAreaList(data: any): Observable<any> {
+    let url = API_CONSTANTS.workAreaList.replace('{userId}', data.userId).replace('{userDesigId}', data.userDesigId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  categoryListByArea(taskId: any): Observable<any> {
+    let url = API_CONSTANTS.categoryListByArea.replace('{taskId}', taskId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  subCategoryListByCat(data:any): Observable<any> {
+    let url = API_CONSTANTS.subCategoryListByCat.replace('{taskId}', data?.taskId).replace('{categoryId}', data?.categoryId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
 }

@@ -93,8 +93,8 @@ export class ManageUserDetailsComponent {
     this.getAllUserDetails()
   }
 
-  onAssignArea() {
-    this.router.navigateByUrl('/admin/dashboard/area-allot-details')
+  onAssignArea(userId:any, designationId : any) {
+    this.router.navigateByUrl(`/admin/dashboard/${userId}/${designationId}/area-allot-details`)
   }
 
   goToLive(user:any) {

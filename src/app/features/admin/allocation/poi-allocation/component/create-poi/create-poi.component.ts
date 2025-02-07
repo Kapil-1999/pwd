@@ -114,21 +114,22 @@ export class CreatePoiComponent {
   }
 
   getAreaList() {
-    const page = {
-      pageNo: 1,
-      pageSize: 5000,
-    };
-    this.areaService.areaList(page).subscribe((res: any) => {
-      let data = res?.body?.result || [];
-      this.areaData = data?.map((val: any) => {
-        return {
-          value: val?.area_id,
-          text: val?.area_name
+    this.poiService.poiArea().subscribe((res: any) => {
+      this.areaData = res?.body?.result || [];           
+      let circleValue = this.getPoiByIdData?.area_id
+      if (circleValue) {
+        let matchingCE;
+        if (circleValue.includes(",")) {
+          let formatValue = circleValue.split(",").map((val: any) => val.trim());
+          matchingCE = this.areaData.filter((zone: any) =>
+            formatValue.includes(zone?.value.toString())
+          );
+        } else {
+          matchingCE = this.areaData.find((zone: any) =>
+            zone?.value.toString() === circleValue.toString()
+          );
         }
-      })
-      if(this.getPoiByIdData) {
-        let selectedDesi = this.areaData.find((val:any) => val?.value == this.getPoiByIdData?.area_id);
-        this.poiForm.controls['area'].setValue(selectedDesi) 
+        this.poiForm.controls['area'].setValue(matchingCE || null) 
       }
     });
   }
@@ -178,9 +179,6 @@ export class CreatePoiComponent {
         this.notificationService.errorAlert(res?.title);
       }
     })
-    console.log("check form value", payload);
-
-
   }
 
 

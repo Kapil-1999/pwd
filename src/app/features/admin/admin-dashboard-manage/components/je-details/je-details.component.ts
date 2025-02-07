@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AreaAllotDetailsPopupComponent } from '../area-allot-details-popup/area-allot-details-popup.component';
 import { CategoryService } from '../../../master/category-master/services/category.service';
+import { ActivatedRoute } from '@angular/router';
+import { DashboardService } from '../../service/dashboard.service';
 
 @Component({
   selector: 'app-je-details',
@@ -12,18 +14,25 @@ export class JeDetailsComponent {
   bsModalRef!: BsModalRef;
   columns: any;
   categoryList :any;
-  accordionItems = [
-    { id: 1, heading: 'UP80-361575' },
-    { id: 2, heading: 'UP80-89832' }
-  ];
+  accordionItems :any;
   openItemId: number | null = null; 
   isLoading: boolean = false;
+  id: any;
+  desiId: any
+  taskId: any;
   constructor(
     private bsmoalService: BsModalService,
-    private CategoryService : CategoryService
+    private CategoryService : CategoryService,
+    private route : ActivatedRoute, 
+    private dashboardService : DashboardService
   ) {}
 
   ngOnInit() {
+    this.route?.paramMap.subscribe(params => {      
+      this.id = params.get('id'); 
+      this.desiId = params.get('desiId'); 
+      this.poiWorkList()
+    });
     this.setInitialtable();
   }
 
@@ -36,33 +45,34 @@ export class JeDetailsComponent {
     ];
   }
 
+  poiWorkList(){
+    let payload = {
+      userId : Number(this.id),
+      userDesigId : Number(this.desiId)
+    }
+    this.dashboardService.workAreaList(payload).subscribe((res:any) => {
+      this.accordionItems = res?.body?.result || [];      
+    })
+  }
 
-  getCategoryList() {
+
+  getCategoryList(taskId: number) {
     this.isLoading = true;
-    const page = {
-      pageNo: 1,
-      pageSize: 5000,
-    };
-    this.CategoryService.categoryList(page).subscribe(
+    this.dashboardService.categoryListByArea(taskId).subscribe(
       (data) => {
         setTimeout(() => {
           this.isLoading = false;
         }, 600);
         this.categoryList = data?.body?.result || [];
-      },
-      (error) => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 600);
-        console.error("Error fetching zone list", error);
       }
     );
   }
 
-  openAreaPlot() {
+  openAreaPlot(item:any) {
     const initialState: ModalOptions = {
       initialState: {
-        editData: ''
+        editData: item,
+        taskId : this.taskId
       },
     };
     this.bsModalRef = this.bsmoalService.show(
@@ -74,14 +84,15 @@ export class JeDetailsComponent {
     );
   }
 
-  onOpenCategory(itemId: number) {
+  onOpenCategory(itemId: number, taskId:number) {
     if (this.openItemId === itemId) {
       this.openItemId = null;
-      this.getCategoryList();
+      this.categoryList = [];
+      this.taskId = null;
     } else {
+      this.taskId = taskId;
       this.openItemId = itemId;
-      this.getCategoryList();
-
+      this.getCategoryList(taskId);
     }
   }
   
