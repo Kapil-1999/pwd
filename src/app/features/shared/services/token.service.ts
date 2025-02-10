@@ -32,7 +32,6 @@ export class TokenService {
     this.loginService.login(payload).subscribe((res: any) => {
       const userDetail = res.body;
       if (userDetail?.statusCode == 200) {
-        this.notificationService.successAlert('Login Successfully');
         let userData = userDetail?.result;
         let menuData = userDetail?.moduleList;
         // this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
@@ -49,9 +48,10 @@ export class TokenService {
         });
         this.localStorageService.setItem(`user-login-${tabId}`, JSON.stringify(userData));
         this.localStorageService.setItem(`menu-login-${tabId}`, JSON.stringify(menuData));
+        this.notificationService.successAlert('Login Successfully');
         setTimeout(() => {
           this.goToDashboard();
-        }, 1000);
+        }, 500);
       } else {
         this.notificationService.errorAlert(userDetail?.actionResponse)
       }

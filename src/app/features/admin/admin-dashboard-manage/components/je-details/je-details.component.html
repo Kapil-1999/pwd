@@ -5,7 +5,7 @@
         <div class="shadow rounded-lg p-4 mb-3 cursor-pointer transition-all duration-300" [ngClass]="{
                     'border-2 border-blue-700 scale-105 shadow-lg': openItemId === item.area_name,
                     'border border-gray-300 w-full': openItemId !== item.area_name,
-                    'bg-green-500 text-white': item.task_id === 1
+                    'bg-green-500 text-white': item.task_status === 1
                   }" (click)="onOpenCategory(item.area_name, item?.task_id)">
             <div class="flex justify-between items-center">
                 <div>
@@ -22,12 +22,6 @@
             <h2 class="text-lg text-gray-800">No Data Available</h2>
         </div>
         }
-
-        <ng-template #noData>
-            <div class="bg-white shadow rounded-lg p-4 text-center border border-gray-300">
-                <h2 class="text-lg text-gray-800">No Data Available</h2>
-            </div>
-        </ng-template>
     </div>
     @if (openItemId !== null) {
     <div class="cirlce-side">

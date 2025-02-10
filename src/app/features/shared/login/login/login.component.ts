@@ -14,6 +14,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
   ipAddress: string = '';
   showPassword: boolean = false;
+  isloading : boolean = false;
 
   constructor(
     private router: Router,
@@ -71,7 +72,9 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     } 
+   this.isloading = true;
     this.tokenService.generateToken(formvalue, this.ipAddress);
+    this.isloading = false
   }
 
 
