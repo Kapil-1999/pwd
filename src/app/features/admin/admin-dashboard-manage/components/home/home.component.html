@@ -7,7 +7,11 @@
       <app-tracking-detail [allUserList]="allUserList" [isLoading]="isLoading" (mapdata)="confirm($event)"></app-tracking-detail>
     </div>
     <div class="map-track">
-      <app-tracking-map [allUserList]="allUserList"></app-tracking-map>
+      @if(this.userData?.is_gmap_enabled === 0) {
+        <app-tracking-map [allUserList]="allUserList"></app-tracking-map>
+      } @else if (this.userData?.is_gmap_enabled === 1){ 
+        <tracking-map-google [allUserList]="allUserList"></tracking-map-google>
+      }
     </div>
   </div>
 </div>

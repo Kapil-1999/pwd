@@ -34,8 +34,6 @@ export class TokenService {
       if (userDetail?.statusCode == 200) {
         let userData = userDetail?.result;
         let menuData = userDetail?.moduleList;
-        // this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
-
         const tabId = `${userData?.user_id}_${new Date().getTime()}`;
         localStorage.setItem('current-tab', tabId);
         localStorage.setItem(`tab-id-${tabId}`, tabId);

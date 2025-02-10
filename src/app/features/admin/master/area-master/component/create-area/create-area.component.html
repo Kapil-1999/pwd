@@ -59,9 +59,9 @@
                             <input type="number" class="form-control" placeholder="Enter Radius"
                                 aria-describedby="button-addon2" formControlName="radius" />
                         </div>
-                        <div *ngIf="errorMessages?.radius" class="text-danger">
+                        <!-- <div *ngIf="errorMessages?.radius" class="text-danger">
                             {{ errorMessages?.radius }}
-                        </div>
+                        </div> -->
                         <span *ngIf="areaForm?.get('radius')?.invalid &&
                         (areaForm?.get('radius')?.dirty || areaForm?.get('radius')?.touched)" class="text-danger mt-2">
                         Radius is Required
@@ -186,7 +186,12 @@
             </form>
         </div>
         <div class="col-md-7">
+            @if(this.userData?.is_gmap_enabled === 0) {
             <area-map [markerData]="markerData" (mapAddress)="confirm($event)"></area-map>
+
+              } @else if (this.userData?.is_gmap_enabled === 1){ 
+                <app-area-google-map [markerData]="markerData" (mapAddress)="confirm($event)"></app-area-google-map>
+              }
         </div>
     </div>
 </div>
