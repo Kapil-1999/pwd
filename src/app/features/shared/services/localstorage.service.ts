@@ -56,11 +56,12 @@ export class LocalStorageService {
   // }
 
   clear(): void {
-    const currentTabId = localStorage.getItem('current-tab');
+    let currentTabId = localStorage.getItem('current-tab');
     if (currentTabId) {
       this.cookieService.delete(`token-login-${currentTabId}`, '/');
       localStorage.removeItem(`menu-login-${currentTabId}`);
       localStorage.removeItem(`user-login-${currentTabId}`);
+      localStorage.removeItem(`tab-id-${currentTabId}`);
       localStorage.setItem('logout-event', currentTabId + '-' + new Date().getTime());  
       localStorage.removeItem('current-tab');
     }

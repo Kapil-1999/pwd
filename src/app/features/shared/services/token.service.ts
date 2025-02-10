@@ -37,7 +37,6 @@ export class TokenService {
         // this.localStorageService.setItem("pwdtoken", userDetail?.jwtToken);
 
         const tabId = `${userData?.user_id}_${new Date().getTime()}`;
-        let tab = this.localStorageService.getCurrentTab(`tab-id-${tabId}`)
         localStorage.setItem('current-tab', tabId);
         localStorage.setItem(`tab-id-${tabId}`, tabId);
         this.cookieService.set(`token-login-${tabId}`, userDetail?.jwtToken, {
