@@ -26,12 +26,12 @@ export class LoginComponent {
   ) {
     const currentTabId = localStorage.getItem('current-tab');
     if (currentTabId) {
-      const sessionData = localStorage.getItem(`login-event-${currentTabId}`);
+      const sessionData = localStorage.getItem(`logout-event-${currentTabId}`);
       if (sessionData) {
-        this.router.navigate(['/admin/dashboard/home']);
-      } else {
         localStorage.removeItem('logout-event');
         this.router.navigate(['/login']);
+      } else {
+        this.router.navigate(['/admin/dashboard/home']);
       }
     } else {
       localStorage.removeItem('logout-event');
