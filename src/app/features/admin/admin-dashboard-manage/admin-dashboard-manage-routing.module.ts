@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'user-details', component: DashboardUserDetailsComponent
   },
   {
-    path : 'area-allot-details', component : JeDetailsComponent
+    path : ':id/:desiId/area-allot-details', component : JeDetailsComponent
   },
   {
     path : 'area-plot-form' , component : AreaPlotFormComponent

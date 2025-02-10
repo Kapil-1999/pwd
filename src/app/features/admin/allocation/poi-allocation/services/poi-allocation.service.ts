@@ -55,5 +55,12 @@ export class PoiAllocationService {
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
+  poiArea() {
+    let url = API_CONSTANTS.poiArea;
+    return this.apiService
+      .get(url)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
 
 }

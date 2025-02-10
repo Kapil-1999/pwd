@@ -60,5 +60,9 @@ export const API_CONSTANTS = {
     dashboardCount : 'Dashboard',
     districtReport : 'Report?pageNo={pageNo}&pageSize={pageSize}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}',
     userDetails : 'Dashboard/GetUserDetailsWithLoc?userId={userId}&userDesigId={desiId}&locId={locId}',
-    liveTracking : 'LiveTracking?selectedDesigId={selectedDesigId}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}'  
+    liveTracking : 'LiveTracking?selectedDesigId={selectedDesigId}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}',
+    poiArea : 'Common/GetAreaList',
+    workAreaList :'Dashboard/GetWorkAreaListByUser?userId={userId}&userDesigId={userDesigId}',
+    categoryListByArea: 'Dashboard/GetCategoryListByArea?taskId={taskId}',
+    subCategoryListByCat: 'Dashboard/GetSubCategoryListByCat?taskId={taskId}&categoryId={categoryId}'
 }

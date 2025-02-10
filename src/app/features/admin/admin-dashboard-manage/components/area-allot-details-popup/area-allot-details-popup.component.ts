@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { DashboardService } from '../../service/dashboard.service';
 
 @Component({
   selector: 'app-area-allot-details-popup',
@@ -8,21 +9,39 @@ import { BsModalService } from 'ngx-bootstrap/modal';
   styleUrl: './area-allot-details-popup.component.scss'
 })
 export class AreaAllotDetailsPopupComponent {
-
-  accordionItems = [
-    { id: 1, heading: 'Quality of Binder', status: 'Pending', content: 'This content is straight in the template.', isOpen: false },
-    { id: 2, heading: 'Aggregate Impact Value or Los Angeles Abrasion Value', status: 'Pending', content: 'Some content goes here.', isOpen: false },
-  ];
+  editData :any;
+  taskId :any
+  accordionItems :any
 
   constructor(
     private bsmodalService : BsModalService,
-    private router : Router
+    private router : Router,
+    private dashboardService : DashboardService
   ){};
 
+  ngOnInit() {
+    this.getSubCategoryByList()
+  };
+
+  getSubCategoryByList() {
+    let data = {
+      taskId: this.taskId,
+      categoryId : this.editData?.category_id
+    }
+    this.dashboardService.subCategoryListByCat(data).subscribe((res:any) => {
+      this.accordionItems = res?.body?.result;
+      this.accordionItems =this.accordionItems.map((val:any) => (
+        {
+          ...val, isOpen : false
+        }
+      ))
+    })
+  }
+
   toggleAccordion(id: number) {
-    this.accordionItems = this.accordionItems.map((item) => ({
+    this.accordionItems = this.accordionItems.map((item:any) => ({
       ...item,
-      isOpen: item.id === id ? !item.isOpen : false, 
+      isOpen: item.sub_category_id === id ? !item.isOpen : false, 
     }));
   }
 

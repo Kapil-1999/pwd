@@ -34,7 +34,7 @@
         }
         }
 
-        <button class="form-btn" (click)="submit(loginForm.value)">Log in</button>
+        <button class="form-btn" (click)="submit(loginForm.value)">  {{ isloading ? 'Logging in...' : 'Log in' }} </button>
       </form>
      
       <!-- <div class="buttons-container">

@@ -21,14 +21,14 @@
 
     @if (user?.designation_id == 6) {
       <div class="flex border rounded-lg overflow-hidden mt-2">
-        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100" (click)="onAssignArea()">
-          <i class="fas fa-envelope mr-2 text-gray-500"></i> Assign (1)
+        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100" (click)="onAssignArea(user?.user_id, user?.je_desig_id)">
+          <i class="fas fa-envelope mr-2 text-gray-500"></i> Assign ({{user?.task_count || 0}})
         </button>
       
         <div class="w-px bg-gray-300"></div>
       
         <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100">
-          <i class="fas fa-image mr-2 text-gray-500"></i> Image (0)
+          <i class="fas fa-image mr-2 text-gray-500"></i> Image ({{user?.img_count || 0}})
         </button>
       </div>
 
