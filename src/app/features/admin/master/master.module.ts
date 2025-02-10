@@ -42,6 +42,7 @@ import { WorkListComponent } from './work-master/component/work-list/work-list.c
 import { CreateAreaComponent } from './area-master/component/create-area/create-area.component';
 import { AreaMapComponent } from './area-master/component/area-map/area-map.component';
 import { CreateWorkComponent } from './work-master/component/create-work/create-work.component';
+import { AreaGoogleMapComponent } from './area-master/component/area-google-map/area-google-map.component';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { CreateWorkComponent } from './work-master/component/create-work/create-
     WorkListComponent,
     CreateAreaComponent,
     AreaMapComponent,
-    CreateWorkComponent
+    CreateWorkComponent,
+    AreaGoogleMapComponent
   ],
   imports: [
     CommonModule,

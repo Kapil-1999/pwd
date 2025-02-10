@@ -28,6 +28,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { LoaderComponent } from './component/loader/loader.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     CarouselModule,
     NgChartsModule,
     NgxSpinnerModule,
-    AccordionModule
+    AccordionModule,
+    GoogleMapsModule
   ],
   exports: [
     HeaderComponent,
@@ -93,7 +95,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     NgChartsModule,
     NgxSpinnerModule,
     LoaderComponent,
-    AccordionModule
+    AccordionModule,
+    GoogleMapsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [DatePipe]

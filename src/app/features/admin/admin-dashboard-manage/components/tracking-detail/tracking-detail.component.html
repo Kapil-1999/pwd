@@ -99,10 +99,10 @@
               <tr *ngIf="!jeshow">
                 <td><b>Present:</b></td>
                 <td [ngSwitch]="card?.designation_id">
-                  <ng-container *ngSwitchCase="2">0/0/0/0</ng-container>
-                  <ng-container *ngSwitchCase="3">0/0/0</ng-container>
-                  <ng-container *ngSwitchCase="4">0/0</ng-container>
-                  <ng-container *ngSwitchCase="5">0</ng-container>
+                  <ng-container *ngSwitchCase="2">{{card?.se_present_count || 0}}/{{card?.ee_present_count || 0}}/{{card?.ae_present_count || 0}}/{{card?.je_present_count || 0}}</ng-container>
+                  <ng-container *ngSwitchCase="3">{{card?.ee_present_count || 0}}/{{card?.ae_present_count || 0}}/{{card?.je_present_count || 0}}</ng-container>
+                  <ng-container *ngSwitchCase="4">{{card?.ae_present_count || 0}}/{{card?.je_present_count || 0}}</ng-container>
+                  <ng-container *ngSwitchCase="5">{{card?.je_present_count || 0}}</ng-container>
                 </td>
               </tr>
               <tr>

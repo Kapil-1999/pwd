@@ -34,6 +34,7 @@ export class CreateAreaComponent {
   errorMessages: any;
   editData: any
   areaById: any;
+  userData: any;
 
   constructor(
     private modalService: BsModalService,
@@ -46,6 +47,7 @@ export class CreateAreaComponent {
   ) { }
 
   ngOnInit() {
+    this.userData = this.commonService.getUserDetails();
     this.setInitialValue();
   };
 
@@ -242,7 +244,8 @@ export class CreateAreaComponent {
     const colour = this.areaForm.get('color_code')?.value;
     const radius = this.areaForm.get('radius')?.value;
     const geofanceText = this.areaById?.geofence_text
-
+    console.log(radius);
+    
 
     this.errorMessages = {
       sourceLat: null,
@@ -287,10 +290,6 @@ export class CreateAreaComponent {
       hasError = true;
     }
 
-    if (shape == 1) {
-      this.errorMessages.radius = 'Radius is required.';
-      hasError = true;
-    }
 
     if (hasError) {
       return;
@@ -305,8 +304,7 @@ export class CreateAreaComponent {
       colour,
       radius,
       geofanceText
-    };
-
+    };    
     this.markerData = shapeData;
     this.notificationService.showSuccess('Shape created successfully!');
   }

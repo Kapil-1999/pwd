@@ -6,6 +6,8 @@ import { AreaService } from '../../services/area.service';
 import { DeleteConfirmationComponent } from '../../../../../shared/component/delete-confirmation/delete-confirmation.component';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { AreaMapComponent } from '../area-map/area-map.component';
+import { CommonService } from '../../../../../shared/services/common.service';
+import { AreaGoogleMapComponent } from '../area-google-map/area-google-map.component';
 
 @Component({
   selector: 'area-list',
@@ -30,6 +32,7 @@ export class AreaListComponent {
     offset: 1,
     count: 0,
   };
+  userData: any;
   get startValue(): number {
     return this.pagesize.offset * this.pagesize.limit - (this.pagesize.limit - 1);
   }
@@ -44,10 +47,13 @@ export class AreaListComponent {
   constructor(
     private modalService: BsModalService,
     private areaService: AreaService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private commonService : CommonService
   ) { }
 
   ngOnInit() {
+    this.userData = this.commonService.getUserDetails();
+
     this.setInitialtable();
     this.getAreaList(this.pagesize.offset, this.pagesize.limit)
 
@@ -148,6 +154,12 @@ export class AreaListComponent {
   }
 
   showOnMap(value:any) {
+    let component :any;
+    if (this.userData?.is_gmap_enabled === 0) {
+      component =  AreaMapComponent
+    } else if(this.userData?.is_gmap_enabled === 1) {
+      component = AreaGoogleMapComponent
+    }
     const initialState: ModalOptions = {
       initialState: {
         mapData: value ? value : '',
@@ -155,7 +167,7 @@ export class AreaListComponent {
       },
     };
     this.bsModalRef = this.modalService.show(
-      AreaMapComponent,
+      component,
       Object.assign(initialState, {
         id: "confirmation",
         class: 'modal-xl modal-dialog-centered alert-popup',

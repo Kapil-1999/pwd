@@ -14,6 +14,7 @@ import { ManageUserDetailsComponent } from './components/manage-user-details/man
 import { JeDetailsComponent } from './components/je-details/je-details.component';
 import { AreaAllotDetailsPopupComponent } from './components/area-allot-details-popup/area-allot-details-popup.component';
 import { AreaPlotFormComponent } from './components/area-plot-form/area-plot-form.component';
+import { TrackingMapGoogleComponent } from './components/tracking-map-google/tracking-map-google.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AreaPlotFormComponent } from './components/area-plot-form/area-plot-for
     JeDetailsComponent,
     AreaAllotDetailsPopupComponent,
     AreaPlotFormComponent,
+    TrackingMapGoogleComponent,
   ],
   imports: [
     CommonModule,

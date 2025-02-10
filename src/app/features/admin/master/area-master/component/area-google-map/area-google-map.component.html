@@ -1,0 +1,21 @@
+@if(mapType == 'show on Map') {
+    <div class="modal-header text-center">
+        <h5>Area On Map</h5>
+        <div class="close-modal" (click)="close()">
+            <i class="fa fa-close" style="cursor: pointer;"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="map-part">
+            <div class="map-container">
+                <div id="area_map"></div>
+            </div>
+        </div>
+    </div>
+    } @else {
+    <div class="map-part">
+        <div class="map-container">
+            <div id="area_map"></div>
+        </div>
+    </div>
+    }
