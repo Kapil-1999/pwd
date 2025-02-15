@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header">
+        History Track
+    </div>
+    <div class="card-body">
+        <form [formGroup]="historyForm">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <label class="form-label">Designation</label>
+                    <ngx-select-dropdown [config]="config" [options]="desigantionList" formControlName="designation"
+                        (change)="onChangeDesi($event)">
+                    </ngx-select-dropdown>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <label class="form-label">User</label>
+                    <ngx-select-dropdown [config]="config" [options]="userList" formControlName="user">
+                    </ngx-select-dropdown>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <label class="form-label">Time Format</label>
+                    <select class="form-control" formControlName="timeformat" (change)="timecheck($event)" >
+                        <option *ngFor="let item of selectDate" [value]="item.id">{{ item.dateValue }}</option>
+                    </select>
+                </div>
+                <ng-container *ngIf="customDate">
+                    <div class="col-md-6 mb-2">
+                        <label for="exampleInputEmail1" class="form-label">From Date</label>
+                        <div class="input-group mb-2">
+                            <input type="datetime-local" class="form-control"  formControlName="fromDate"
+                                placeholder="dd/MM/yyy" aria-describedby="button-addon2" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="exampleInputEmail1" class="form-label">To Date</label>
+                        <input type="datetime-local" class="form-control"  formControlName="toDate"
+                        placeholder="dd/MM/yyy" aria-describedby="button-addon2" />
+                    </div>
+                </ng-container>
+        
+                <div class="col-md-6">
+                    <button class="btn btn-success" style="width: 100%;" type="submit">Submit</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger" style="width: 100%;" type="button">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

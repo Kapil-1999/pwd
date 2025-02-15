@@ -1,0 +1,35 @@
+/* Card Styling */
+.map-panel {
+    background: #ffffff;
+    height: 500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  #map {
+    width: 100%;
+    height: calc(100vh - 238px);
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    z-index: 0 !important;
+  }
+
+
+  ::ng-deep {
+    .live-data {
+      padding: 4px;
+      padding: 4px;
+      width: 300px;
+  
+      span {
+        font-size: 13px;
+        font-weight: 400;
+        color: gray;
+  
+        strong {
+          color: black;
+        }
+      }
+  
+    }
+  }

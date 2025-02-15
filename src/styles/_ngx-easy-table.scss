@@ -1,0 +1,130 @@
+// @import "./fonts";
+@import "../styles/mixins/breakpoints";
+@import "./colors";
+
+
+.ngx-container{
+overflow-x: auto;
+} 
+.ngx-table {
+  color: $color-dark-gray;
+  overflow-x: scroll;
+  width: 100%;
+  @include breakpoint-range($max: sm) {
+    overflow-y: auto;
+    // display: block;
+  }
+  @include breakpoint-range($max: lg) {
+    overflow-y: auto;
+    white-space: nowrap;
+
+    // display: block;
+  }
+  // @include breakpoint-range($max : lg){
+  //     overflow-y: auto;
+  //     display: block;
+  // }
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.ngx-table__table--striped > tbody {
+  tr:nth-of-type(odd) {
+    // background-color: $color-white;
+    background: #f2f4f8;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: white;
+    border: 1px solid #e9ecef;
+
+  }
+}
+
+.ngx-table__table--hoverable > tbody tr:hover {
+  background-color: $color-medium-gray;
+}
+
+.ngx-table__table--normal > tbody > tr > td,
+.ngx-table__table--normal > thead > tr > th {
+  padding: 6px 15px;
+  // border-right: 1px solid $color-gray;
+  border: 1px solid #e9ecef;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+
+ 
+}
+.ngx-table__table--normal > thead > tr > th{
+  padding: 5px 0px;
+}
+.ngx-table__header-title {
+  display: inline-block;
+  width: 100%;
+  padding: 6px 15px;
+}
+.ngx-form-icon {
+  border-color: $color-gray;
+  width: 20px;
+  height: 20px;
+}
+
+.ngx-form-checkbox input:checked + .ngx-form-icon {
+  background-color: $color-dark-gray;
+  border-color: $color-dark-gray;
+}
+
+.ngx-table__table--normal > thead > tr > th {
+  // background: $color-medium-gray;
+  font-weight: 600;
+}
+
+.ngx-pagination {
+  display: flex;
+
+  a,
+  button {
+    padding: 0;
+  }
+
+  li {
+    &.disabled {
+      display: none;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color-gray;
+    height: 30px;
+    min-width: 30px;
+    padding: 0 !important;
+    text-align: center;
+    margin: 0 0 0 -1px;
+    background: $color-light-gray;
+
+    &:last-child {
+      border: 1px solid $color-gray;
+    }
+
+    &.current {
+      background-color: $color-white;
+      color: $color-red;
+      font-weight: 500;
+      padding: 0 !important;
+      border-color: $color-gray;
+    }
+
+    &:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}

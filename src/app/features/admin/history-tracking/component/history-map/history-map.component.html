@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-4">
+        <app-history-filter></app-history-filter>
+    </div>
+    <div class="col-md-8">
+        <div class="map-part">
+            <div class="map-container">
+                <div id="history_map"></div>
+                <div class="slider-part" >
+                    <div class="play-button">
+                      <button class="button-play">
+                        <ng-container *ngIf="isPlaying; else playIcon">
+                            <i class="fa fa-pause" style="margin-right: 5px;" aria-hidden="true"></i>
+                        </ng-container>
+                        <ng-template #playIcon>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </ng-template>
+                    </button>
+                    </div>
+                    <div class="slider-vehicle">
+                      <input type="range" min="1" [max]="historylist?.length - 1" [value]="sliderValue" class="slider" id="myRange">
+                    </div>
+                    <div class="speed-value" style="margin-left: 13px;">
+                      <select name="" id="">
+                        <option *ngFor="let speedValue of speed"  [value]="speedValue.id">{{speedValue.value}}</option>
+                       </select>
+                    </div>
+                    <div class="total-distance">
+                      <span class="distance">Distance :   Km</span>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

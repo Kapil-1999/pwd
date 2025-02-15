@@ -1,0 +1,123 @@
+@import "../../../../../styles/mixins/breakpoints";
+@import "../../../../../styles/colors";
+
+.customer-messages-header {
+  margin: 0px 5px 5px;
+  z-index: -1;
+
+  .hide-all {
+    text-align: right;
+    color: $color-red;
+    cursor: pointer;
+  }
+}
+
+.customer-messages-carousel {
+  z-index: -1;
+
+  .alert-content {
+    display: flex;
+    align-items: center;
+
+    .alert-img {
+        background-color: white;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width: 75px;
+        height: 30px;
+        max-height: 60px;    
+
+      img {
+        width: 40px;
+        height: 40px;
+        max-height: 40px;
+      }
+    }
+
+    .alert-msg {
+      width: 85%;
+      padding-right: 22px;
+    }
+  }
+
+  ::ng-deep {
+    .owl-item {
+      font-size: 14px;
+      height: auto;
+
+      .alert {
+        padding-left: 0px;
+        padding-right: 0px;
+        height: 90px;
+        background: $color-white;
+        box-shadow: rgba(100, 100, 111, 0.2) 4px 7px 8px 4px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+    }
+
+   .owl-theme .owl-nav .owl-prev {
+    top: 35%;
+    transform: translateY(-50%);
+    position: absolute;
+    background: transparent;
+    font-size: 13px;
+    left: -6%;
+    color: black;
+
+  }
+
+  .owl-theme .owl-nav .owl-next{
+    top: 35%;
+    transform: translateY(-50%);
+    position: absolute;
+    background: transparent;
+    font-size: 13px;
+    left: 97%;
+    color: black;
+}
+
+    .owl-dots {
+      height: 100%;
+      position: relative;
+      transform: none;
+      left: 0px;
+      bottom: 0px;
+      margin-top: 0px !important;
+      .owl-dot {
+        &.active {
+          span {
+            background: #ce0e2d;
+          }
+        }
+
+        span {
+          background: grey;
+        }
+      }
+    }
+    .owl-item{
+      margin-right: 0px !important;
+      width: 84px !important;
+    }
+  }
+}
+
+span.vehicle-status {
+  // position: relative;
+  // left: 10px;
+  font-size: 14px;
+}
+
+li.swiper-part {
+  border: 1px solid black;
+}
+
+.count {
+  height: 25px;
+  border-top: 1px solid black;
+}
+

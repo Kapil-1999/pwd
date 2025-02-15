@@ -1,0 +1,83 @@
+<div class="modal-header text-center">
+    <h5>{{label}} {{designation?.text}}</h5>
+    <div class="close-modal" (click)="close()">
+        <i class="fa fa-close" style="cursor: pointer;"></i>
+    </div>
+</div>
+<div class="modal-body">
+    <form [formGroup]="userForm">
+        <div class="row">
+            <!-- Common Fields -->
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Name <span class="text-danger">*</span></label>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" />
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Contact No.</label>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Enter Contact No." formControlName="contactNo" />
+                </div>
+                <div *ngIf="userForm.get('contactNo')?.invalid && userForm.get('contactNo')?.touched">
+                    <span class="text-danger">Contact No. must be a 10-digit number.</span>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Email</label>
+                <div class="input-group mb-2">
+                    <input type="email" class="form-control" placeholder="Enter Email" formControlName="email" />
+                </div>
+                <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                    <span class="text-danger">Please enter a valid email address.</span>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" placeholder="Enter Address" formControlName="address" />
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Login Id <span class="text-danger">*</span></label>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Enter Login Id" formControlName="loginId" />
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Login Password <span class="text-danger">*</span></label>
+                <div class="input-group mb-2 password-container">
+                    <input  type="{{ showPassword ? 'text' : 'password' }}" class="form-control password" placeholder="Enter Login Password"
+                        formControlName="loginPassword" />
+                        <i
+                        class="fa"
+                        id="visiblePassword"
+                        (click)="showPassword = !showPassword"
+                        [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"
+                        style="cursor: pointer;"
+                      ></i>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Remarks</label>
+                <input type="text" class="form-control" placeholder="Enter Remarks" formControlName="remarks" />
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Status <span class="text-danger">*</span></label>
+                <select class="form-control" formControlName="status">
+                    <option *ngFor="let value of status" [ngValue]="value.id">{{ value.value }}</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Photo</label>
+                <div *ngIf="imagePath">
+                    <img [src]="getImageUrl(imagePath)" alt="Profile Photo" class="w-10 h-10 rounded-full profile-image mb-2" />
+                  </div>
+                <input type="file" class="form-control" formControlName="photo" (change)="onFileChange($event)"/>
+            </div>
+            <!-- Submit Button -->
+            <div class="col-md-3 mb-2 mt-4">
+                <button class="btn btn-success" [disabled]="userForm.invalid" (click)="submit(userForm.value)">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

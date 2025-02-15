@@ -1,0 +1,118 @@
+<div class="card">
+  <div class="card-header">
+    <div class="flex justify-between items-center">
+      <div class="min-w-0 flex-auto">
+        <p>Tracking</p>
+      </div>
+      <div class="hidden sm:flex sm:flex-col sm:items-end">
+        <div class="search-form">
+          <input placeholder="Search for..." type="text" [(ngModel)]="searchKeyword"
+            class="form-control search-input" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-loader *ngIf="isLoading"></app-loader>
+  <div class="p-2" *ngIf="!isLoading">
+    <div class="flex justify-between mb-2">
+      <span class="px-3 py-1 bg-gray-300 text-black rounded-md" style="cursor: pointer;" (click)="previousCard()"
+        *ngIf="isPrevious">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Previous
+      </span>
+    </div>
+
+    <div *ngIf="!trackingData || trackingData.length === 0 || !(trackingData | searchFilter: searchKeyword)?.length"
+      class="no-data-message text-center p-4 card-container">
+      <p class="text-gray-500">No Data Available</p>
+    </div>
+
+    <ul role="list" class="card-container" *ngIf="trackingData && trackingData.length > 0"
+      [class.scrollable]="trackingData?.length > 6">
+      <li class="p-2 mt-1 tracking-row" *ngFor="let card of trackingData | searchFilter : searchKeyword; let i = index">
+        <div class="profile-stats p" [ngClass]="jeshow ? 'JE-profile': ''">
+          <div class="flex min-w-0 gap-x-4 items-center" (click)="toggleDetails(i, $event)" *ngIf="!jeshow">
+            <img class="size-12 flex-none rounded-full bg-gray-50 user-image"
+              [src]="card.img_path !== '' ? imgUrl + card.img_path : 'assets/images/no-image-1.png'">
+            <div class="min-w-0 flex-auto">
+              <p class="text-sm/6 font-semibold text-gray-900">{{card.full_name || 'NA'}}</p>
+            </div>
+          </div>
+          <div class="flex profile-button">
+            <button class="px-1 py-1 bg-blue-500 text-white rounded-md text-sm" *ngIf="card?.designation_id == 2"
+              [disabled]="card?.se_count == 0" (click)="onGetUserBeasedOnId(card, card?.se_desig_id)">
+              SE : {{card?.se_count}}
+            </button>
+            <button class="px-1 py-1 bg-green-500 text-white rounded-md text-sm"
+              *ngIf="card?.designation_id == 2 || card?.designation_id == 3" [disabled]="card?.ee_count == 0"
+              (click)="onGetUserBeasedOnId(card, card?.ee_desig_id)">
+              EE : {{card?.ee_count}}
+            </button>
+            <button class="px-1 py-1 bg-yellow-500 text-white rounded-md text-sm"
+              *ngIf="card?.designation_id == 2 || card?.designation_id == 3 || card?.designation_id == 4"
+              [disabled]="card?.ae_count == 0" (click)="onGetUserBeasedOnId(card, card?.ae_desig_id)">
+              AE : {{card?.ae_count}}
+            </button>
+            <button class="px-1 py-1 bg-red-500 text-white rounded-md text-sm"
+              *ngIf="card?.designation_id == 2 || card?.designation_id == 3 || card?.designation_id == 4 || card?.designation_id == 5"
+              [disabled]="card?.je_count == 0" (click)="onGetUserBeasedOnId(card, card?.je_desig_id)">
+              JE : {{card?.je_count}}
+            </button>
+          </div>
+          <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end" *ngIf="!jeshow">
+            <p class="mt-1 text-xs/5 text-gray-500">
+              <time datetime="2023-01-23T13:23Z">{{card?.working_status || 'NA'}}</time>
+            </p>
+          </div>
+          <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p class="mt-1 text-xs/5 text-gray-500">
+              <i class="fa fa-circle" aria-hidden="true"
+                [style]="card.user_status === 'Offline' ? 'color: red' : 'color: green'"></i>
+            </p>
+          </div>
+        </div>
+
+        <div *ngIf="activeCardIndex === i || card?.designation_id == 6" class="details-section mt-3">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td class="image-column" rowspan="4" style="width: 140px;">
+                  <img [src]="card.img_path !== '' ? imgUrl + card.img_path : 'assets/images/no-image-1.png'"
+                    alt="Image" class="detail-image">
+                </td>
+                <ng-container *ngIf="jeshow; else elseBlock">
+                  <td><b>Name:</b></td>
+                  <td> <strong>{{ card.full_name || 'NA' }}</strong></td>
+                </ng-container>
+                <ng-template #elseBlock>
+                  <td><b>Mobile:</b></td>
+                  <td>{{ card.contact_no || 'NA' }}</td>
+                </ng-template>
+              </tr>
+              <tr *ngIf="jeshow">
+                <td><b>Mobile:</b></td>
+                <td>{{ card.contact_no || 'NA' }}</td>
+              </tr>
+              <tr>
+                <td><b>Status:</b></td>
+                <td>{{ card.user_status || 'NA' }}</td>
+              </tr>
+              <tr *ngIf="!jeshow">
+                <td><b>Present:</b></td>
+                <td [ngSwitch]="card?.designation_id">
+                  <ng-container *ngSwitchCase="2">{{card?.se_present_count || 0}}/{{card?.ee_present_count || 0}}/{{card?.ae_present_count || 0}}/{{card?.je_present_count || 0}}</ng-container>
+                  <ng-container *ngSwitchCase="3">{{card?.ee_present_count || 0}}/{{card?.ae_present_count || 0}}/{{card?.je_present_count || 0}}</ng-container>
+                  <ng-container *ngSwitchCase="4">{{card?.ae_present_count || 0}}/{{card?.je_present_count || 0}}</ng-container>
+                  <ng-container *ngSwitchCase="5">{{card?.je_present_count || 0}}</ng-container>
+                </td>
+              </tr>
+              <tr>
+                <td><b>Address:</b></td>
+                <td>{{ card.last_loc || 'NA' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

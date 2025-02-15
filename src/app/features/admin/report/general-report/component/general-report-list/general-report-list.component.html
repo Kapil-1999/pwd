@@ -1,0 +1,77 @@
+<div class="card">
+    <div class="card-header">
+        <div class="header-part">
+            <span>General Report</span>
+            <div class="counting">
+                <span>
+
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+            <general-filter-report></general-filter-report>
+        <div class="header-container">
+
+            <div class="left-section">
+                <div class="search-form">
+                    <input placeholder="Search for..." type="text" 
+                        class="form-control search-input" />
+                    <button type="button" class="btn-search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="right-side d-flex justify-center gap-x-2">
+                <button class="px-3 py-1 bg-blue-500 text-white rounded-full">Copy</button>
+                <button class="px-3 py-1 bg-green-500 text-white rounded-full">CSV</button>
+                <button class="px-3 py-1 bg-yellow-500 text-white rounded-full">Excel</button>
+                <button class="px-3 py-1 bg-red-500 text-white rounded-full">Pdf</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overflow-auto">
+                    <ng-container *ngIf="isLoading; else content">
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="generalReportList"></app-skeleton-loader>
+                    </ng-container>
+                    <ng-template #content>
+                        <div id="datatable_wrapper">
+                            <table id="datatable" class="table table-striped nowrap dataTable no-footer dtr-inline" role="grid"
+                            #TABLE aria-describedby="datatable_info" style="width: 100%" width="100%">
+                                <thead>
+                                    <tr role="row">
+                                        <th *ngFor="let vehicleHeading of columns"
+                                           >
+                                            <span>{{ vehicleHeading?.title }}</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of generalReportList let index = index"
+                                        >
+                                        <td >{{
+                                            item?.zone_name ||
+                                            "NA" }}</td>
+                                        <td >{{
+                                            item?.state_name
+                                            || "NA" }}</td>                                                
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center py-4 text-gray-500"
+                                *ngIf="!generalReportList?.length || !(generalReportList | searchFilter: searchKeyword)?.length">
+                                No General Report Available
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

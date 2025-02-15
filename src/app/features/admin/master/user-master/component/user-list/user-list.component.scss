@@ -1,0 +1,42 @@
+.header-container-user {
+  display: flex;
+  justify-content: space-between;
+
+  .left-section-user {
+    width: 100%;
+  }
+}
+
+img.user-image {
+  max-width: 100%;
+}
+
+.user-image {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Smooth transformation */
+}
+
+.user-image:hover {
+  -webkit-transform: scale(3.5);
+  transform: scale(3.5);
+  /* Scale up and slightly rotate */
+}
+
+.w-zone {
+  min-width: 86px;
+  word-wrap: break-word;
+  /* Optional: Handles long text */
+}
+
+.w-circle {
+  min-width: 100px;
+}
+
+.w-name {
+  min-width: 100px;
+}
+.btn-edit {
+  display: flex;
+  gap: 4px;
+  ;
+}

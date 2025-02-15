@@ -1,0 +1,151 @@
+<div class="min-h-full">
+  <nav class="bg-blue-500 text-white fixed top-0 left-0 w-full z-50 shadow-md py-1">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="shrink-0">
+            <a routerLink="/admin/dashboard/home">
+              <img class="logo-part" src="assets/images/pwd-logo-png.png"  alt="">
+            </a>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <div *ngFor="let menuValue of menuListData" class="relative group">
+                <a *ngIf="!menuValue.menuList?.length" [routerLink]="menuValue.url"
+                  class="menu-link rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white"
+                  [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
+                  (click)="toggleDropdown(menuValue, $event)">
+                  {{ menuValue.module_name }}
+                </a>
+                <div *ngIf="menuValue.menuList?.length">
+                  <a class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white cursor-pointer flex items-center"
+                    [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
+                    (click)="toggleDropdown(menuValue, $event)">
+                    <span class="flex-1 menu-link">{{ menuValue.module_name }}</span>
+                    <span class="ml-2 transition-transform" [ngClass]="{ 'rotate-180': menuValue.is_open }">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </a>
+                  <div class="absolute left-0 z-10  mt-2 w-[15rem] rounded-md bg-gray-800 shadow-lg"
+                    [ngClass]="{ 'hidden': !menuValue.is_open }">
+                    <a *ngFor="let subNav of menuValue?.menuList" [routerLink]="subNav.url"
+                      class="menu-link block px-4 py-2  hover:bg-gray-700 hover:text-white"
+                      [ngClass]="{'bg-blue-500 text-white': subNav.isActive, 'hover:bg-gray-700 hover:text-white': !subNav.isActive}"
+                      (click)="toggleDropdown(subNav, $event)">
+                      {{ subNav.menu_name }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-4 flex items-center md:ml-6">
+            <div class="text-white mr-4">
+              <div class="text-base font-medium">
+                Login Name : {{userDetails.full_name}}
+              </div>
+              <div class="text-sm">
+                Department : {{userDetails.department_name}}
+              </div>
+            </div>
+            <div class="relative inline-block text-left">
+              <div>
+                <button type="button" (click)="togglePopup()"
+                  class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img class="size-12 rounded-full" [src]="imgUrl + userDetails.img_path" alt="">
+                </button>
+              </div>
+
+              <div *ngIf="showPopup"
+                class="absolute right-0 z-10 mt-2 w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+               <profile></profile>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="-mr-2 flex md:hidden">
+          <!-- Mobile menu button -->
+          <button type="button" (click)="onShowMobileMewnu()"
+            class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            aria-controls="mobile-menu" aria-expanded="false">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!-- Menu open: "hidden", Menu closed: "block" -->
+            <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!-- Menu open: "block", Menu closed: "hidden" -->
+            <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" *ngIf="showMobileMenu">
+      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+        <div *ngFor="let menuValue of menuListData" class="relative group">
+          <a *ngIf="!menuValue.subNav?.length" [routerLink]="menuValue.url"
+            class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white"
+            [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
+            (click)="toggleDropdown(menuValue, $event)">
+            {{ menuValue.name }}
+          </a>
+          <div *ngIf="menuValue.subNav?.length">
+            <a class="rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white cursor-pointer flex items-center"
+              [ngClass]="{'bg-gray-700 text-white': menuValue.isActive, 'hover:bg-gray-700 hover:text-white': !menuValue.isActive}"
+              (click)="toggleDropdown(menuValue, $event)">
+              <span class="flex-1">{{ menuValue.name }}</span>
+              <span class="ml-2 transition-transform" [ngClass]="{ 'rotate-180': menuValue.is_open }">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+              </span>
+            </a>
+            <div class="absolute left-0 z-10  mt-2 w-48 rounded-md bg-gray-800 shadow-lg"
+              [ngClass]="{ 'hidden': !menuValue.is_open }">
+              <a *ngFor="let subNav of menuValue.subNav" [routerLink]="subNav.url"
+                class="block px-4 py-2  hover:bg-gray-700 hover:text-white"
+                [ngClass]="{'bg-gray-700 text-white': subNav.isActive, 'hover:bg-gray-700 hover:text-white': !subNav.isActive}"
+                (click)="toggleDropdown(subNav, $event)">
+                {{ subNav.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pb-3 pt-4">
+        <div class="flex items-center px-5">
+          <div class="shrink-0">
+            <img class="size-10 rounded-full"
+            [src]="imgUrl + userDetails.img_path"
+              alt="">
+          </div>
+          <div class="ml-3">
+            <div class="text-base/5 text-white"> Login Name : {{userDetails.full_name}}</div>
+            <div class="text-sm">Department : {{userDetails.department_name}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="pt-16">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

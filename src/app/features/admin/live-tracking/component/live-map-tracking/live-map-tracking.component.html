@@ -1,0 +1,27 @@
+<div class="map-part">
+    <div class="map-container">
+        <div id="map_canvas"></div>
+        <div class="live">
+            <!-- <div id="over_map" class="live-details">
+               <div fxflex="33" fxlayoutalign="start center"
+                  style="margin-right: 1px; flex: 1 1 33%; box-sizing: border-box; place-content: center flex-start; align-items: center; flex-direction: row; display: flex; max-width: 33%;">
+                  <b>Refresh In: </b> s
+               </div>
+               <div fxflex="33" fxlayoutalign="center end"
+                  style="margin-right: 1px; flex: 1 1 33%; box-sizing: border-box; place-content: flex-end center; align-items: flex-end; flex-direction: row; display: flex; max-width: 33%;">
+                  <b></b>
+               </div>
+               <div fxflex="33" fxlayoutalign="end end"
+                  style="flex: 1 1 33%; box-sizing: border-box; place-content: flex-end; align-items: flex-end; flex-direction: row; display: flex; max-width: 33%;">
+                  <a style="cursor: pointer;"><i class="fa fa-close"></i></a>
+               </div>
+            </div> -->
+         </div>
+
+         <div class="main-content">
+            <div class="vehicle-list" >
+               <user-in-map [userValue]="userData"  [userCountData]="userCountData" [spinnerLoading]="spinnerLoading" (mapData)="confirm($event)" (selectUserConfirm)="selectUsersPlot($event)"></user-in-map>
+            </div>
+         </div>
+    </div>
+</div>

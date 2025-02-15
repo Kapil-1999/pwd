@@ -1,0 +1,15 @@
+li.page-name {
+    margin-right: 8px;
+
+    i.fa.fa-long-arrow-right {
+        margin-right: 8px;
+    }
+  }
+
+  .breadcrumb-item {
+    &.active {
+      color: gray;
+      cursor: default;
+      text-decoration: none;
+    }
+  }

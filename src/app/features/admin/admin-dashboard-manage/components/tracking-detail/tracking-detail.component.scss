@@ -1,0 +1,76 @@
+.card-container {
+  height: calc(100vh - 302px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.card-container.scrollable {
+  height: calc(100vh - 277px);
+  overflow-y: auto;
+}
+
+
+.tracking-row {
+  background: #fff;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #cecece;
+}
+
+
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: 4fr 10fr 2fr 1fr;
+  align-items: center;
+
+  &.JE-profile {
+  grid-template-columns: 1fr;
+  align-items: end;
+  }
+}
+
+.detail-image {
+  width: 120px;
+  height: 120px;
+}
+
+
+@media (max-width: 1024px) {
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem; 
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem; 
+  }
+
+  .profile-button {
+    margin-top: 0.5rem;
+  }
+
+  .sm\\:flex {
+    display: flex !important; 
+    justify-content: flex-end;
+  }
+}
+
+.profile-button {
+  display: flex;
+  justify-content: space-between;
+  gap: 3px;
+}
+
+button {
+  width: 100%;
+}
+
+td {
+  width: 33.33%;
+}

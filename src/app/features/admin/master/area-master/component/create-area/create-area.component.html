@@ -1,0 +1,197 @@
+<div class="modal-header text-center">
+    <h5>{{label}} Area</h5>
+    <div class="close-modal" (click)="close()">
+        <i class="fa fa-close" style="cursor: pointer;"></i>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-5">
+            <form [formGroup]="areaForm">
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">City</label>
+                        <ngx-select-dropdown [config]="config" formControlName="district_id" [options]="cityList">
+                        </ngx-select-dropdown>
+                        <span *ngIf="areaForm?.get('district_id')?.invalid &&
+                        (areaForm?.get('district_id')?.dirty || areaForm?.get('district_id')?.touched)" class="text-danger mt-2">
+                            City is Required
+                        </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Area Name</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" formControlName="area_name"
+                                placeholder="Enter Location" aria-describedby="button-addon2" />
+                        </div>
+                        <span *ngIf="areaForm?.get('area_name')?.invalid &&
+                        (areaForm?.get('area_name')?.dirty || areaForm?.get('area_name')?.touched)" class="text-danger mt-2">
+                            Area Name is Required
+                        </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Shape</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="shape_type" value='1'
+                                id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Circle
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="shape_type" value='2'
+                                id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Polygon
+                            </label>
+                        </div>
+                        <div *ngIf="errorMessages?.shape" class="text-danger">
+                            {{ errorMessages?.shape }}
+                        </div>
+                        <span *ngIf="areaForm?.get('shape_type')?.invalid &&
+                        (areaForm?.get('shape_type')?.dirty || areaForm?.get('shape_type')?.touched)" class="text-danger mt-2">
+                        Shape is Required
+                    </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Radius</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" placeholder="Enter Radius"
+                                aria-describedby="button-addon2" formControlName="radius" />
+                        </div>
+                        <!-- <div *ngIf="errorMessages?.radius" class="text-danger">
+                            {{ errorMessages?.radius }}
+                        </div> -->
+                        <span *ngIf="areaForm?.get('radius')?.invalid &&
+                        (areaForm?.get('radius')?.dirty || areaForm?.get('radius')?.touched)" class="text-danger mt-2">
+                        Radius is Required
+                    </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Source Latitude</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" placeholder="Enter Latitude"
+                                formControlName="source_lat" aria-describedby="button-addon2" />
+                        </div>
+                        <div *ngIf="errorMessages?.sourceLat" class="text-danger">
+                            {{ errorMessages.sourceLat }}
+                        </div>
+                        <span *ngIf="areaForm?.get('source_lat')?.invalid &&
+                            (areaForm?.get('source_lat')?.dirty || areaForm?.get('source_lat')?.touched)" class="text-danger mt-2">
+                            Source Latitude is Required
+                        </span>
+
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Source Longitude</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" placeholder="Enter Longitude"
+                                formControlName="source_lon" aria-describedby="button-addon2" />
+                        </div>
+
+                        <div *ngIf="errorMessages?.sourceLon" class="text-danger">
+                            {{ errorMessages?.sourceLon }}
+                        </div>
+
+                        <span *ngIf="areaForm?.get('source_lon')?.invalid &&
+                        (areaForm?.get('source_lon')?.dirty || areaForm?.get('source_lon')?.touched)" class="text-danger mt-2">
+                        Source Longitude is Required
+                    </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Destination Latitude</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" placeholder="Enter Latitude"
+                                formControlName="destination_lat" aria-describedby="button-addon2" />
+                        </div>
+                        <div *ngIf="errorMessages?.destinationLat" class="text-danger">
+                            {{ errorMessages?.destinationLat }}
+                        </div>
+                        <span *ngIf="areaForm?.get('destination_lat')?.invalid &&
+                            (areaForm?.get('destination_lat')?.dirty || areaForm?.get('destination_lat')?.touched)" class="text-danger mt-2">
+                            Destination Latitude is Required
+                        </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Destination Longitude</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" placeholder="Enter Longitude"
+                                formControlName="destination_lon" aria-describedby="button-addon2" />
+                        </div>
+                        <div *ngIf="errorMessages?.destinationLon" class="text-danger">
+                            {{ errorMessages?.destinationLon }}
+                        </div>
+                        <span *ngIf="areaForm?.get('destination_lon')?.invalid &&
+                        (areaForm?.get('destination_lon')?.dirty || areaForm?.get('destination_lon')?.touched)" class="text-danger mt-2">
+                        Destination Longitude is Required
+                    </span>
+                    </div>                 
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Route Colour</label>
+                        <div class="input-group mb-2">
+                            <input type="color" class="form-control" formControlName="color_code"
+                                aria-describedby="button-addon2" />
+                        </div>
+                        <span *ngIf="areaForm?.get('color_code')?.invalid &&
+                        (areaForm?.get('color_code')?.dirty || areaForm?.get('color_code')?.touched)" class="text-danger mt-2">
+                        Colour is Required
+                    </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Speed</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" placeholder="Enter Speed"
+                                aria-describedby="button-addon2" formControlName="speed_limit" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Work Name</label>
+                        <ngx-select-dropdown [config]="config" [options]="workNameList" formControlName="work_id">
+                        </ngx-select-dropdown>
+                        <span *ngIf="areaForm?.get('work_id')?.invalid &&
+                        (areaForm?.get('work_id')?.dirty || areaForm?.get('work_id')?.touched)" class="text-danger mt-2">
+                        Work Name is Required
+                    </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Travel Mode</label>
+                        <select class="form-control" formControlName="travel_mode">
+                            <option *ngFor="let value of travelModeList" [ngValue]="value.value">{{ value.text }}
+                            </option>
+                        </select>
+                        <span *ngIf="areaForm?.get('travel_mode')?.invalid &&
+                        (areaForm?.get('travel_mode')?.dirty || areaForm?.get('travel_mode')?.touched)" class="text-danger mt-2">
+                        Travel Mode is Required
+                    </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Status</label>
+                        <select class="form-control" formControlName="is_active">
+                            <option *ngFor="let value of status" [ngValue]="value.id">{{ value.value }}</option>
+                        </select>
+                        <span *ngIf="areaForm?.get('is_active')?.invalid &&
+                        (areaForm?.get('is_active')?.dirty || areaForm?.get('is_active')?.touched)" class="text-danger mt-2">
+                        Status is Required
+                    </span>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="button-container">
+                        <button class="btn btn-success" type="submit" (click)="onCreateShape()">Create Shape</button>
+                        <button class="btn btn-primary" type="button" (click)="onCreateRoute(areaForm.value)">Save
+                            Route</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-7">
+            @if(this.userData?.is_gmap_enabled === 0) {
+            <area-map [markerData]="markerData" (mapAddress)="confirm($event)"></area-map>
+
+              } @else if (this.userData?.is_gmap_enabled === 1){ 
+                <app-area-google-map [markerData]="markerData" (mapAddress)="confirm($event)"></app-area-google-map>
+              }
+        </div>
+    </div>
+</div>

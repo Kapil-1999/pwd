@@ -1,0 +1,242 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css'; 
+@import "./styles/ngx-easy-table";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "./styles/colors";
+@import "./styles//mixins/breakpoints";
+@import 'ngx-toastr/toastr';
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Outfit;
+  font-size: 13px;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main-section {
+  padding: 20px;
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-left: 1rem;
+  color: $color-red;
+  font-size: 12px;
+}
+
+pagination-controls {
+  pagination-template {
+    .ngx-pagination {
+      margin-left: 0;
+      margin-bottom: 0rem !important;
+    }
+
+    ul {
+      border-radius: unset !important;
+
+      li {
+        border: none !important;
+        border-radius: 5px;
+        box-shadow: inset 0px 5px 6px #00000014;
+
+        &:nth-child(3) {
+          &.current {
+            border-radius: 5px 0px 0px 5px;
+          }
+        }
+
+        &:nth-last-child(2) {
+          &.current {
+            border-radius: 5px
+          }
+        }
+
+        &.current {
+          display: flex !important;
+          box-shadow: unset;
+        }
+
+        a {
+          text-decoration: unset !important;
+          height: 100%;
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &.pagination-next,
+        &.pagination-previous {
+          a {
+            color: $color-red;
+            font-size: 24px;
+
+            &::after,
+            &::before {
+              margin-left: 0px !important;
+              margin-bottom: 3px !important;
+            }
+          }
+        }
+      }
+
+      &.ngx-pagination.responsive {
+        li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+          display: inline-block;
+        }
+
+        li.small-screen {
+          display: none;
+        }
+      }
+    }
+  }
+}
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 0;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+.card-header {
+  .header-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 13px;
+  }
+}
+
+.no-results {
+  text-align: center;
+  height: 75px;
+}
+
+.search-form {
+  display: block;
+  float: left;
+  position: relative;
+}
+
+.search-form .form-control {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  box-shadow: none;
+  border-radius: 30px;
+}
+
+.search-form .form-control::-webkit-input-placeholder,
+.search-form .form-control:-moz-placeholder,
+.search-form .form-control::-moz-placeholder,
+.search-form .form-control:-ms-input-placeholder {
+  color: $color-white;
+}
+
+.search-form .btn-search {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  border: 0;
+  background: transparent;
+  color: $color-white;
+  padding: 0;
+}
+
+.search-input {
+  border-color: $color-blue !important;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+
+  .left-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .right-section {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.badge.rounded-pill {
+  color: $color-white;
+  padding: 5px;
+  font-weight: 500;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px; /* Space between buttons */
+}
+
+.icon {
+  display: flex;
+  gap: 5px;
+}
+
+.modal-xl.modal-dialog,
+.modal-lg.modal-dialog {
+  @include breakpoint-range($min: md, $max: lg) {
+    max-width: 90%;
+  }
+}
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 0 !important;
+}
+
+
+.table>tbody>tr>td {
+  padding: 6px 10px;
+}
+
+.table>tbody>tr:nth-of-type(odd) {
+  background: #f2f4f8;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th {
+  border: 1px solid #e9ecef;
+  vertical-align: inherit;
+}
+
+.table>tfoot>tr>td,
+.table>tfoot>tr>th {
+  border: 1px solid #e9ecef;
+  vertical-align: inherit;
+}
+
+.table>thead>tr>td,
+.table>thead>tr>th {
+  border: 1px solid #e9ecef;
+  vertical-align: inherit;
+  font-weight: 500;
+}
+
+
+.modal-xl.modal-dialog{
+  max-width: 90% !important;
+}

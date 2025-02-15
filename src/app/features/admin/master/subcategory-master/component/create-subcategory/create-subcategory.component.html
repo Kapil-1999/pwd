@@ -1,0 +1,66 @@
+<div class="modal-header text-center">
+    <h5>{{label}} Subcategory</h5>
+    <div class="close-modal" (click)="close()">
+        <i class="fa fa-close" style="cursor: pointer;"></i>
+    </div>
+</div>
+<div class="modal-body">
+    <div>
+        <form [formGroup]="subcateForm">
+            <div class="_card white-bg">
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Category</label>
+                        <ngx-select-dropdown [config]="config" formControlName="catId" [options]="categoryList">
+                        </ngx-select-dropdown>
+                        <span *ngIf="subcateForm?.get('catId')?.invalid &&
+                                    (subcateForm?.get('catId')?.dirty || subcateForm?.get('catId')?.touched)"
+                            class="text-danger mt-2">
+                            Category is Required
+                        </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Subcategory Name</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" formControlName="subcateName"
+                                placeholder="Enter Subcategory Name" aria-describedby="button-addon2" />
+                        </div>
+                        <span *ngIf="subcateForm?.get('subcateName')?.invalid &&
+                                    (subcateForm?.get('subcateName')?.dirty || subcateForm?.get('subcateName')?.touched)"
+                            class="text-danger">
+                            Subcategory Name is Required
+                        </span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Form Code</label>
+                        <ngx-select-dropdown [config]="config1" formControlName="formCode" [options]="formCodeList">
+                        </ngx-select-dropdown>
+                        <span *ngIf="subcateForm?.get('formCode')?.invalid &&
+                                    (subcateForm?.get('formCode')?.dirty || subcateForm?.get('formCode')?.touched)"
+                            class="text-danger">
+                            Form Code is Required
+                        </span>
+                    </div>
+                 
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Status</label>
+                        <select class="form-control" formControlName="status">
+                            <option *ngFor="let value of status" [ngValue]="value.id">{{ value.value }}</option>
+                        </select>
+                        <span *ngIf="subcateForm?.get('status')?.invalid &&
+                                    (subcateForm?.get('status')?.dirty || subcateForm?.get('status')?.touched)"
+                            class="text-danger mt-2">
+                            Status is Required
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="button-container">
+                  <button class="btn btn-success" type="submit"  (click)="submit(subcateForm.value)">Submit</button>
+                  <button class="btn btn-danger" type="button"  (click)="close()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

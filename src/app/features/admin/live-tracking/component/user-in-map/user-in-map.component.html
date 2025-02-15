@@ -1,0 +1,50 @@
+<div class="card" #card>
+    <div class="card-content">
+        <div class="vehclelist">
+            <div class="label"> <span class="login-user" style="text-transform:capitalize;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{loginUser}} </span></div>
+            <div class="right">
+            </div>
+
+        </div>
+        <div class="tab-value">  
+            <form [formGroup]="liveForm">
+                <div class="searcharea mt-2">
+                    <div class="zone">
+                        <ngx-select-dropdown [config]="config" formControlName="zone"  [options]="zoneList" (change)="onChangeZone($event)">
+                        </ngx-select-dropdown>
+                    </div>
+                    <div class="circle">
+                        <ngx-select-dropdown [config]="config1" formControlName="circle"  [options]="circleList" (change)="onChangeCircle($event)">
+                        </ngx-select-dropdown>
+                    </div>
+                    <div class="city">
+                        <ngx-select-dropdown [config]="config2" formControlName="city"  [options]="cityList" (change)="onChangeCity($event)">
+                        </ngx-select-dropdown>
+                    </div>
+                </div>
+            </form>       
+            <div class="swiper-data mt-3">
+               <swiper [vehicleStauts]="swiperList" (onConfirm)="confirm($event)"></swiper>
+            </div>
+            <div class="vehicle-follow-wrapper mt-3" #vehicleFollowWrapper>
+                <div class="vehicle-follow">                    
+                    <app-loader *ngIf="spinnerLoading"></app-loader>
+                    <ul class="vehicle-data" *ngIf="!spinnerLoading && userData && userData.length > 0">
+                        <li class="vehicle-value"
+                            *ngFor="let vehicle of userData | searchFilter: searchKeyword, let i = index"
+                             style="cursor: pointer; ">
+                            <span [class]="getVehicleColor(vehicle)">{{vehicle?.full_name}}</span>
+                            <span [class]="getVehicleColor(vehicle)">{{formatVehicleStatusDuration(vehicle)}}</span>
+                            <span [class]="getVehicleColor(vehicle)" style="text-align: end;"><i class="fa fa-circle"aria-hidden="true"></i></span>                           
+                        </li>
+                    </ul>
+                    <ul class="vehicle-data"
+                        *ngIf="!userData || userData.length == 0 || userData== null || !(userData | searchFilter:searchKeyword)?.length">
+                        <li class="vehicle-value" style="text-align: center;">
+                            <span style="color: black; width: 100% !important;">No Data Available</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>           
+        </div>
+    </div>

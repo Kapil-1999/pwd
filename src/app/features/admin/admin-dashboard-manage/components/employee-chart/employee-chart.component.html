@@ -1,0 +1,48 @@
+<div class="grid-container">
+  <div class="card">
+    <div class="card-item">
+      <div class="card-header">
+        Activity Check
+      </div>
+      <div class="card-body">
+        <app-loader *ngIf="isChartLoding"></app-loader>
+        <div class="" *ngIf="!isChartLoding && dashboardData">
+          <div class="total-count">
+            <div class="count">
+              <div>
+                <p>Total User : {{ getTotalUserSum() }}</p>
+              </div>
+              <div>
+                Total Present : {{ getTotalSum() }}
+              </div>
+              <div>
+                Total Absent : {{ getTotalUpsentSum() }}
+              </div>
+  
+            </div>
+          </div>
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-item">
+      <div class="card-header">
+        Users
+      </div>
+      <div class="card-body pie">
+        <app-loader *ngIf="isChartLoding"></app-loader>
+        <div *ngIf="!isChartLoding && dashboardData">
+          <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+          </canvas>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<div class="card">
+    <div class="card-header">
+        <div class="header-part">
+            <span>Division Report</span>
+            <div class="counting">
+                <div class="counting">
+                    <span>
+                        {{ pagesize.count > 0 ? startValue : 0 }} -
+                        {{ pagesize.count > 0 ? lastValue : 0 }}
+                        OF {{ pagesize.count > 0 ? pagesize.count : 0 }} Division Report
+                    </span>
+                </div>
+            </div>
+            <div class="row" *ngIf="pagesize.count && pagesize.count > 0">
+                <div class="d-flex justify-content-center">
+                    <pagination-controls id="distReID" [maxSize]="10" [responsive]="true" [nextLabel]="''"
+                        [previousLabel]="''" (pageChange)="onTablePageChange($event)">
+                    </pagination-controls>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <district-filter (filterData)="confirm($event)"></district-filter>
+        <div class="header-container">
+            <div class="left-section flex items-center space-x-2">
+                <div class="search-form">
+                    <input placeholder="Search for..." type="text" class="form-control search-input" />
+                    <button type="button" class="btn-search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label for="itemsPerPage" class="text-sm text-gray-700">Items per page:</label>
+                    <select id="itemsPerPage"
+                        class="block w-20 p-2 bg-white border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+                        [(ngModel)]="pagesize.limit" (change)="onPageSizeChange($event)">
+                        <option *ngFor="let size of [25, 50, 100]" [value]="size">{{ size }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="right-side d-flex justify-center gap-x-2">
+                <button class="px-3 py-1 bg-blue-500 text-white rounded-full" (click)="copyTable()"
+                    [disabled]="isExporting && isExporting !== 'Copy'">
+                    {{ isExporting === 'Copy' ? 'Copying...' : 'Copy' }}
+                </button>
+                <button class="px-3 py-1 bg-green-500 text-white rounded-full" (click)="exportToCSV()"
+                    [disabled]="isExporting && isExporting !== 'CSV'">
+                    {{ isExporting === 'CSV' ? 'Exporting...' : 'CSV' }}
+                </button>
+                <button class="px-3 py-1 bg-yellow-500 text-white rounded-full" (click)="exportToExcel()"
+                    [disabled]="isExporting && isExporting !== 'Excel'">
+                    {{ isExporting === 'Excel' ? 'Exporting...' : 'Excel' }}
+                </button>
+                <button class="px-3 py-1 bg-red-500 text-white rounded-full" (click)="exportToPDF()"
+                    [disabled]="isExporting && isExporting !== 'PDF'">
+                    {{ isExporting === 'PDF' ? 'Exporting...' : 'PDF' }}
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overflow-auto">
+                    <ng-container *ngIf="isLoading; else content">
+                        <app-skeleton-loader [isLoading]="isLoading" [columns]="columns" [items]="districtReportList | paginate
+                        : {
+                            id: 'distReID',
+                            itemsPerPage: pagesize.limit,
+                            currentPage: pagesize.offset,
+                            totalItems: pagesize.count
+                          }"></app-skeleton-loader>
+                    </ng-container>
+                    <ng-template #content>
+                        <div id="datatable_wrapper">
+                            <table id="datatable" class="table table-striped nowrap dataTable no-footer dtr-inline"
+                                role="grid" #TABLE aria-describedby="datatable_info" style="width: 100%" width="100%">
+                                <thead>
+                                    <tr role="row">
+                                        <th *ngFor="let vehicleHeading of columns">
+                                            <span>{{ vehicleHeading?.title }}</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of districtReportList | searchFilter: searchKeyword | paginate
+                                    : {
+                                        id: 'distReID',
+                                        itemsPerPage: pagesize.limit,
+                                        currentPage: pagesize.offset,
+                                        totalItems: pagesize.count
+                                      }; let index = index">
+                                        <td> {{ (pagesize.offset - 1) * pagesize.limit + index + 1 }}</td>
+                                        <td>{{item?.zone_name ||"NA" }}</td>
+                                        <td>{{item?.circle_name|| "NA" }}</td>
+                                        <td>{{item?.district_name ||"NA" }}</td>
+                                        <td>{{item?.division_name|| "NA" }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center py-4 text-gray-500"
+                                *ngIf="!districtReportList?.length || !(districtReportList | searchFilter: searchKeyword)?.length">
+                                No Division Report Available
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

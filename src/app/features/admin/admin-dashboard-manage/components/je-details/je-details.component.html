@@ -1,0 +1,71 @@
+<div class="je-details p-6">
+    <div class="left">
+        @if (accordionItems && accordionItems.length > 0) {
+        @for (item of accordionItems; track item.area_name) {
+        <div class="shadow rounded-lg p-4 mb-3 cursor-pointer transition-all duration-300" [ngClass]="{
+                    'border-2 border-blue-700 scale-105 shadow-lg': openItemId === item.area_name,
+                    'border border-gray-300 w-full': openItemId !== item.area_name,
+                    'bg-green-500 text-white': item.task_status === 1
+                  }" (click)="onOpenCategory(item.area_name, item?.task_id)">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-lg">{{ item.area_name }}</h2>
+                </div>
+                <span class="inline-flex items-center px-3 py-0.5">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </span>
+            </div>
+        </div>
+        }
+        } @else {
+        <div class="bg-white shadow rounded-lg p-4 text-center border border-gray-300">
+            <h2 class="text-lg text-gray-800">No Data Available</h2>
+        </div>
+        }
+    </div>
+    @if (openItemId !== null) {
+    <div class="cirlce-side">
+        <div id="datatable_wrapper">
+            @if(isLoading) {
+            <app-loader></app-loader>
+            } @else {
+            <table id="datatable" class="table table-striped nowrap dataTable no-footer dtr-inline" role="grid" #TABLE
+                aria-describedby="datatable_info" style="width: 100%" width="100%">
+                <thead>
+                    <tr role="row">
+                        <th *ngFor="let vehicleHeading of columns">
+                            <span>{{ vehicleHeading?.title }}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of categoryList; track item; let index = $index) {
+                    <tr
+                        [ngClass]="{ 'bg-green-600 text-white': item?.cat_status === 1, 'bg-white text-black': item?.cat_status === 0 }">
+                        <td>{{ item?.category_name || 'NA' }}</td>
+                        <td>{{ item?.sub_cat_count }}</td>
+                        <td>
+                            @if (item?.cat_status == 0) {
+                            <span class="font-medium">Open</span>
+                            } @else {
+                            <span class="font-medium">Closed</span>
+                            }
+                        </td>
+                        <td class="flex space-x-2">
+                            <button class="btn btn-primary" (click)="openAreaPlot(item)">
+                                <i class="fa fa-tasks" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div class="text-center py-4 text-gray-500" *ngIf="!categoryList?.length">
+                No Category Available
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,70 @@
+<div class="modal-header text-center">
+    <h5>({{editData?.category_name}}) Area Allot Details </h5>
+    <div class="close-modal" (click)="close()">
+        <i class="fa fa-close" style="cursor: pointer;"></i>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="w-full mx-auto mt-2">
+        @for (item of accordionItems; track item) {
+            <div class="border border-gray-300 rounded-lg mb-2">
+                <div class="w-full text-left px-4 py-2 bg-gray-300 flex justify-between items-center">
+                    <p class="flex items-center cursor-pointer" (click)="toggleAccordion(item.sub_category_id)">
+                        <span class="mr-2">
+                            {{ item.isOpen ? '-' : '+' }}
+                        </span>
+                        {{ item.sub_category_name }}
+                    </p>
+                    <span class="flex items-center">
+                        <span class="mr-2">Status: {{ item.sub_cat_status == 0 ? 'Pending' : 'Closed'   }}</span>
+                        <span class="text-blue-500 underline cursor-pointer" (click)="openAreaForm()">Form</span>
+                    </span>
+                </div>
+                <div [class.max-h-0]="!item.isOpen" [class.max-h-[1000px]]="item.isOpen"
+                    class="overflow-hidden transition-all duration-500 ease-in-out px-2">
+                    <h3>Before Details :- </h3>
+                    <hr>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6">
+                        <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
+                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Jane Cooper">
+                            <div class="mt-4 w-full border-t pt-2 text-gray-600">
+                                <p class="text-gray-500">Remarks: </p>
+                                <p class="text-gray-500">Adress: </p>
+                            </div>
+                        </div>
+                    
+                        <!-- Card 2 -->
+                        <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
+                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Cody Fisher">
+                            <div class="mt-4 w-full border-t pt-2 text-gray-600">
+                                <p class="text-gray-500">Remarks: </p>
+                                <p class="text-gray-500">Adress: </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>After Details :- </h3>
+                    <hr>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6">
+                        <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
+                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Jane Cooper">
+                            <div class="mt-4 w-full border-t pt-2 text-gray-600">
+                                <p class="text-gray-500">Remarks: </p>
+                                <p class="text-gray-500">Adress: </p>
+                            </div>
+                        </div>
+                    
+                        <!-- Card 2 -->
+                        <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
+                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Cody Fisher">
+                            <div class="mt-4 w-full border-t pt-2 text-gray-600">
+                                <p class="text-gray-500">Remarks: </p>
+                                <p class="text-gray-500">Adress: </p>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        }
+    </div>
+</div>

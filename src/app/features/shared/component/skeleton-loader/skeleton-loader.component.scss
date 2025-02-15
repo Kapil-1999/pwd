@@ -1,0 +1,37 @@
+.table-skeleton {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    // background-color: #f5f6fa;
+    padding: 10px;
+    border-collapse: collapse; /* Ensure no gap between table cells */
+  }
+  
+  .table-skeleton table {
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  
+  .skeleton-cell {
+    height: 20px;
+    width: 100%; /* Ensures the cell takes the full width of the td */
+    background: linear-gradient(90deg, #f5f6fa, #e0e0e0, #f5f6fa);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+  }
+  
+  td {
+    padding: 8px; /* Adjust padding to match your table's padding */
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  

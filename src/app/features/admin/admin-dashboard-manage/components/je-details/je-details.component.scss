@@ -1,0 +1,30 @@
+.je-details {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 1rem;
+}
+
+
+
+.cotant-part {
+    display: grid;
+    grid-template-columns: 10fr 3fr;
+    gap: 5px;
+}
+
+.cirlce-side, .right-side {
+    align-self: start; 
+}
+
+
+div#datatable_wrapper {
+    height: calc(100vh - 92px);
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+tr.bg-green-600.text-white 
+{
+    background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
+}

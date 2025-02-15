@@ -1,0 +1,36 @@
+.card-body.pie {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); 
+    gap: 20px;
+  }
+  
+  .card-item {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    // .card {
+    //     border: none !important;
+    // }
+  }
+  
+  
+  .card-body {
+    padding: 15px;
+  }
+
+  .total-count {
+    display: flex;
+    justify-content: center;
+    .count {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+    }
+}
+  

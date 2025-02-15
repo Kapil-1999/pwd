@@ -1,0 +1,91 @@
+@if(isLoading) {
+<app-loader></app-loader>
+} @else {
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 bg-gray-50">
+  @if (allUserList && allUserList.length > 0) {
+  @for (user of allUserList; track user) {
+  <div class="bg-white shadow rounded-lg p-4">
+    <div class="flex justify-between items-center">
+      <div class="flex justify-center gap-x-2 items-center" >
+        <img class="w-14 h-14 rounded-full border-2 border-white"
+        [src]="user?.img_path !== '' ? imgUrl + user?.img_path : 'assets/images/no-image-1.png'" alt="Jane Cooper" /> 
+        <h2 class="text-lg text-gray-800">
+          {{ user?.full_name }} <br>
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-100 text-green-800 mt-2">
+            <i class="fas fa-phone"></i> {{ user?.contact_no }}
+          </span>
+        </h2>      
+      </div>  
+        <img class="w-10 h-10 rounded-full border-2 border-white cursor-pointer" src="assets/images/map-pin.png" (click)="goToLive(user)"/>
+    </div>
+
+    @if (user?.designation_id == 6) {
+      <div class="flex border rounded-lg overflow-hidden mt-2">
+        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100" (click)="onAssignArea(user?.user_id, user?.je_desig_id)">
+          <i class="fas fa-envelope mr-2 text-gray-500"></i> Assign ({{user?.task_count || 0}})
+        </button>
+      
+        <div class="w-px bg-gray-300"></div>
+      
+        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100">
+          <i class="fas fa-image mr-2 text-gray-500"></i> Image ({{user?.img_count || 0}})
+        </button>
+      </div>
+
+    } @else {
+    <div class="flex justify-between profile-button mt-2 pt-2">
+      @if (user?.designation_id == 2) {
+      <button class="px-2 py-1 bg-blue-500 text-white rounded-full" [disabled]="user?.se_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.se_desig_id)">
+        SE/P : {{ user?.se_count }}/{{user?.se_present_count}}
+      </button>
+      }
+      @if (user?.designation_id == 2 || user?.designation_id == 3) {
+      <button class="px-2 py-1 bg-green-500 text-white rounded-full" [disabled]="user?.ee_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.ee_desig_id)">
+        EE/P : {{ user?.ee_count }}/{{user?.ee_present_count}}
+      </button>
+      }
+      @if (user?.designation_id == 2 || user?.designation_id == 3 || user?.designation_id == 4) {
+      <button class="px-2 py-1 bg-yellow-500 text-white rounded-full" [disabled]="user?.ae_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.ae_desig_id)">
+        AE/P : {{ user?.ae_count }}/{{user?.ae_present_count}}
+      </button>
+      }
+      @if (user?.designation_id == 2 || user?.designation_id == 3 || user?.designation_id == 4 || user?.designation_id
+      == 5) {
+      <button class="px-2 py-1 bg-red-500 text-white rounded-full" [disabled]="user?.je_count == 0"
+        (click)="onGetUserBeasedOnId(user, user?.je_desig_id)">
+        JE/P : {{ user?.je_count }}/{{user?.je_present_count}}
+      </button>
+      }
+    </div>
+    }
+
+    <!-- Bottom Section (Battery, Distance, GPS) -->
+    <div class="border-t mt-2 pt-2 flex justify-between">
+      <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+        <i class="fas fa-battery-full"></i>
+        <span>Battery : 15%</span>
+      </p>
+
+      <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+        <i class="fas fa-road"></i>
+        <span>Distance : 5Km</span>
+      </p>
+
+      <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>GPS : On</span>
+      </p>
+    </div>
+  </div>
+
+  }
+  } @else {
+  <div class="bg-white shadow rounded-lg p-4 col-span-full text-center">
+    <p class="text-gray-600">Data Not Available</p>
+  </div>
+  }
+</div>
+}

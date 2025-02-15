@@ -1,0 +1,23 @@
+<div class="card-part">
+  <app-employee-counting [dashboardData]="dashboardData"></app-employee-counting>
+</div>
+<div class="mt-4">
+  <div class="tracking-data">
+    <div class="user-details">
+      <app-tracking-detail [allUserList]="allUserList" [isLoading]="isLoading" (mapdata)="confirm($event)"></app-tracking-detail>
+    </div>
+    <div class="map-track">
+      @if(this.userData?.is_gmap_enabled === 0) {
+        <app-tracking-map [allUserList]="allUserList"></app-tracking-map>
+      } @else if (this.userData?.is_gmap_enabled === 1){ 
+        <tracking-map-google [allUserList]="allUserList"></tracking-map-google>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-12">
+    <app-employee-chart [dashboardData]="dashboardData" [isChartLoding]="isChartLoding"></app-employee-chart>
+  </div>
+</div>
