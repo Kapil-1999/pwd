@@ -64,5 +64,6 @@ export const API_CONSTANTS = {
     poiArea : 'Common/GetAreaList',
     workAreaList :'Dashboard/GetWorkAreaListByUser?userId={userId}&userDesigId={userDesigId}',
     categoryListByArea: 'Dashboard/GetCategoryListByArea?taskId={taskId}',
-    subCategoryListByCat: 'Dashboard/GetSubCategoryListByCat?taskId={taskId}&categoryId={categoryId}'
+    subCategoryListByCat: 'Dashboard/GetSubCategoryListByCat?taskId={taskId}&categoryId={categoryId}',
+    commonArea : 'Common/GetAreaList'
 }
