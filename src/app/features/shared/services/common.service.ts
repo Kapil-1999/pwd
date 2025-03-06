@@ -226,5 +226,12 @@ export class CommonService {
     doc.save(`${report}.pdf`);
   }
 
+  commonArea(): Observable<any> {
+    let url = API_CONSTANTS.commonArea;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+
 
 }

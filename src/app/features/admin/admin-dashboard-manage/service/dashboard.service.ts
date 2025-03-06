@@ -28,7 +28,7 @@ export class DashboardService {
   }
 
   workAreaList(data: any): Observable<any> {
-    let url = API_CONSTANTS.workAreaList.replace('{userId}', data.userId).replace('{userDesigId}', data.userDesigId)
+    let url = API_CONSTANTS.workAreaList.replace('{workId}', data.workId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
@@ -46,5 +46,12 @@ export class DashboardService {
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  workListByUser(data:any): Observable<any> {
+    let url = API_CONSTANTS.workListByUser.replace('{userId}', data?.userId).replace('{userDesigId}', data?.userDesigId)
+    return this.apiService
+   .get(url)
+   .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 }

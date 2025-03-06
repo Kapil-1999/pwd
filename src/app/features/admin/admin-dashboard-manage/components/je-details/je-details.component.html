@@ -1,29 +1,63 @@
 <div class="je-details p-6">
     <div class="left">
         @if (accordionItems && accordionItems.length > 0) {
-        @for (item of accordionItems; track item.area_name) {
+        <!-- @for (item of accordionItems; track item) {
         <div class="shadow rounded-lg p-4 mb-3 cursor-pointer transition-all duration-300" [ngClass]="{
-                    'border-2 border-blue-700 scale-105 shadow-lg': openItemId === item.area_name,
-                    'border border-gray-300 w-full': openItemId !== item.area_name,
-                    'bg-green-500 text-white': item.task_status === 1
-                  }" (click)="onOpenCategory(item.area_name, item?.task_id)">
+                    'border-2 border-blue-700 scale-105 shadow-lg': openItemId === item.work_unique_id,
+                    'border border-gray-300 w-full': openItemId !== item.work_unique_id,
+                  }" (click)="onOpenCategory(item.work_unique_id)">
             <div class="flex justify-between items-center">
                 <div>
-                    <h2 class="text-lg">{{ item.area_name }}</h2>
+                    <h2 class="text-lg">{{ item.work_unique_id }}</h2>
                 </div>
                 <span class="inline-flex items-center px-3 py-0.5">
                     <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </span>
             </div>
         </div>
-        }
+        } -->
+
+        <div class="w-full max-w-lg mx-auto space-y-2">
+            @for (item of accordionItems; track item.id) {
+            <div class="border rounded-lg shadow-sm">
+                <button class="w-full flex justify-between items-center p-4 focus:outline-none"
+                    (click)="onOpenWork(item.work_unique_id, item.work_id)"
+                    [attr.aria-expanded]="openItemId === item.work_unique_id">
+                    <span class="text-lg font-medium">{{ item.work_unique_id }}</span>
+                    <span class="transform transition-transform duration-300"
+                        [ngClass]="{'rotate-180': openItemId === item.work_unique_id}">
+                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                    </span>
+                </button>
+                <div class="overflow-hidden transition-all duration-300"
+                    [ngClass]="{'max-h-0': openItemId !== item.work_unique_id, 'max-h-96': openItemId === item.work_unique_id}">
+                    @for(data of workList; track data) {                    
+                    <div class="shadow rounded-lg m-2 mr-6 ml-6 p-3 cursor-pointer transition-all duration-300" [ngClass]="{
+                        'border-2 border-blue-700 shadow-lg': showCategory === data.area_id,
+                        'border border-gray-300': showCategory !== data.area_id,
+                        'bg-green-500 text-white': data.task_status === 1
+                      }" (click)="onOpenCategory(data.area_id)">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h2 class="text-lg">{{ data.area_name }}</h2>
+                            </div>
+                            <span class="inline-flex items-center px-3 py-0.5">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
         } @else {
         <div class="bg-white shadow rounded-lg p-4 text-center border border-gray-300">
             <h2 class="text-lg text-gray-800">No Data Available</h2>
         </div>
         }
     </div>
-    @if (openItemId !== null) {
+    @if (showCategory !== null) {
     <div class="cirlce-side">
         <div id="datatable_wrapper">
             @if(isLoading) {

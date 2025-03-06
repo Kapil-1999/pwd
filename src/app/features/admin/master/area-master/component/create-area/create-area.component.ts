@@ -148,21 +148,9 @@ export class CreateAreaComponent {
   }
 
   getWorkList() {
-    const page = {
-      pageNo: 1,
-      pageSize: 5000,
-    };
-    this.workService.workList(page).subscribe((res: any) => {
-      let data = res?.body?.result || [];
-
-      this.workNameList = data?.map((val: any) => {
-        return {
-          value: val?.work_id,
-          text: val?.work_unique_code
-        }
-      })
-
-      if (this.areaById) {
+    this.commonService.commonArea().subscribe((res:any) => {
+      this.workNameList = res?.body?.result || [];
+        if (this.areaById) {
         let workId = this.workNameList.find((val: any) => val.value == this.areaById?.work_id);        
         this.areaForm.controls['work_id'].setValue(workId)
       }

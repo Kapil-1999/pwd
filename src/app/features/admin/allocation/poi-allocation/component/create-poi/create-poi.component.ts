@@ -114,24 +114,25 @@ export class CreatePoiComponent {
   }
 
   getAreaList() {
-    this.poiService.poiArea().subscribe((res: any) => {
-      this.areaData = res?.body?.result || [];           
-      let circleValue = this.getPoiByIdData?.area_id
-      if (circleValue) {
-        let matchingCE;
-        if (circleValue.includes(",")) {
-          let formatValue = circleValue.split(",").map((val: any) => val.trim());
-          matchingCE = this.areaData.filter((zone: any) =>
-            formatValue.includes(zone?.value.toString())
-          );
-        } else {
-          matchingCE = this.areaData.find((zone: any) =>
-            zone?.value.toString() === circleValue.toString()
-          );
+      this.commonService.commonArea().subscribe((res:any) => {
+        this.areaData = res?.body?.result || [];
+        let circleValue = this.getPoiByIdData?.work_id;
+        
+        if (circleValue) {
+          let matchingCE;
+          if (circleValue.includes(",")) {
+            let formatValue = circleValue.split(",").map((val: any) => val.trim());
+            matchingCE = this.areaData.filter((zone: any) =>
+              formatValue.includes(zone?.value.toString())
+            );
+          } else {
+            matchingCE = this.areaData.find((zone: any) =>
+              zone?.value.toString() === circleValue.toString()
+            );
+          }
+          this.poiForm.controls['area'].setValue(matchingCE || null) 
         }
-        this.poiForm.controls['area'].setValue(matchingCE || null) 
-      }
-    });
+      })
   }
 
   getSelectedValues(data: any) {
@@ -158,8 +159,8 @@ export class CreatePoiComponent {
       "user_id": formvalue?.user ? Number(formvalue?.user?.value) : null,
       "user_name": formvalue?.user ? formvalue?.user?.text : null,
       "allocated_date": formvalue?.date,
-      "area_id": areaData.value,
-      "area_text": "",
+      "work_id": areaData.value,
+      "work_text": "",
       "remarks": formvalue?.remark,
       "is_active": formvalue?.status,
       "created_by": user?.user_id

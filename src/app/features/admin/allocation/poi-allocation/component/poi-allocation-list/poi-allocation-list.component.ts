@@ -50,7 +50,7 @@ export class PoiAllocationListComponent {
       { key: 'Designation', title: 'Designation' },
       { key: 'User', title: 'User' },
       { key: 'Allocated Date', title: 'Allocated Date' },
-      { key: 'Area', title: 'Area' },
+      { key: 'Work Area', title: 'Work Area' },
       { key: 'Remark', title: 'Remark' },
       { key: 'Status', title: 'Status' },
       { key: 'Action', title: 'Action', width: "10%" },
@@ -102,7 +102,7 @@ export class PoiAllocationListComponent {
     let url = this.poiService.deleteAllocation(item?.poi_alloc_id)
     const initialState: ModalOptions = {
       initialState: {
-        title: item?.area_text,
+        title: item?.work_text,
         content: 'Are you sure you want to delete?',
         primaryActionLabel: 'Delete',
         secondaryActionLabel: 'Cancel',

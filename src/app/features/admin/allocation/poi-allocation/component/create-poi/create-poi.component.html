@@ -37,7 +37,7 @@
                           </div>
                     </div>
                     <div class="col-md-6 mb-2">
-                        <label class="form-label">Area</label>
+                        <label class="form-label">Work Area</label>
                         <ngx-select-dropdown [config]="config" [options]="areaData" [multiple]="true"  formControlName="area">
                         </ngx-select-dropdown>  
                         <div *ngIf="poiForm.get('area')?.touched && poiForm.get('area')?.invalid" class="text-danger">
