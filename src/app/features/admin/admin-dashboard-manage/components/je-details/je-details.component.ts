@@ -20,6 +20,8 @@ export class JeDetailsComponent {
   id: any;
   desiId: any
   taskId: any;
+  showCategory: number | null = null; 
+  workList: any;
   constructor(
     private bsmoalService: BsModalService,
     private CategoryService : CategoryService,
@@ -31,7 +33,7 @@ export class JeDetailsComponent {
     this.route?.paramMap.subscribe(params => {      
       this.id = params.get('id'); 
       this.desiId = params.get('desiId'); 
-      this.poiWorkList()
+      this.poiAreaList()
     });
     this.setInitialtable();
   }
@@ -45,12 +47,12 @@ export class JeDetailsComponent {
     ];
   }
 
-  poiWorkList(){
+  poiAreaList(){
     let payload = {
       userId : Number(this.id),
       userDesigId : Number(this.desiId)
     }
-    this.dashboardService.workAreaList(payload).subscribe((res:any) => {
+    this.dashboardService.workListByUser(payload).subscribe((res:any) => {
       this.accordionItems = res?.body?.result || [];      
     })
   }
@@ -84,15 +86,32 @@ export class JeDetailsComponent {
     );
   }
 
-  onOpenCategory(itemId: number, taskId:number) {
+  onOpenWork(itemId: number, workId:any) {
     if (this.openItemId === itemId) {
       this.openItemId = null;
-      this.categoryList = [];
       this.taskId = null;
     } else {
-      this.taskId = taskId;
       this.openItemId = itemId;
-      this.getCategoryList(taskId);
+      this.taskId = workId
+      this.poiWorkList(this.taskId);
+    }
+  }
+
+  poiWorkList(workid:any){
+    let payload = {
+      workId : workid
+    }
+    this.dashboardService.workAreaList(payload).subscribe((res:any) => {
+      this.workList = res?.body?.result || [];      
+    })
+  }
+
+  onOpenCategory(id: number) {
+    if (this.showCategory === id) {
+      this.showCategory = null;
+    } else {
+      this.showCategory = id;
+      this.getCategoryList(id)
     }
   }
   
