@@ -12,6 +12,7 @@ export class EmployeeChartComponent {
 
   barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
   };
 
   barChartLabels: any = ['CE', 'SE', 'EE', 'AE', 'JE'];
@@ -27,9 +28,15 @@ export class EmployeeChartComponent {
       data: [0, 0, 0, 0, 0], label: 'Absent', stack: 'a', backgroundColor: 'rgba(204, 41, 76, 0.96)',hoverBackgroundColor : 'rgba(204, 41, 76, 0.96)',
     },
   ];
-
-  public pieChartOptions: ChartOptions<'pie'> = {
+  pieChartOptions :any= {
     responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        align: 'center'
+      }
+    }
   };
   public pieChartLabels = ['CE', 'SE', 'EE', 'AE', 'JE'];
   public pieChartDatasets = [{

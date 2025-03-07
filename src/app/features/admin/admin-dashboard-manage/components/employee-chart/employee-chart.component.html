@@ -1,47 +1,47 @@
-<div class="grid-container">
-  <div class="card">
+<div class="grid-container grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="card bg-white rounded-lg shadow-md">
     <div class="card-item">
-      <div class="card-header">
+      <div class="card-header p-4 border-b">
         Activity Check
       </div>
-      <div class="card-body">
+      <div class="card-body p-4">
         <app-loader *ngIf="isChartLoding"></app-loader>
-        <div class="" *ngIf="!isChartLoding && dashboardData">
-          <div class="total-count">
-            <div class="count">
-              <div>
+        <div class="w-full h-full" *ngIf="!isChartLoding && dashboardData">
+          <div class="total-count mb-4 space-y-2">
+            <div class="count grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+              <div class="p-2 bg-gray-50 rounded">
                 <p>Total User : {{ getTotalUserSum() }}</p>
               </div>
-              <div>
+              <div class="p-2 bg-gray-50 rounded">
                 Total Present : {{ getTotalSum() }}
               </div>
-              <div>
+              <div class="p-2 bg-gray-50 rounded">
                 Total Absent : {{ getTotalUpsentSum() }}
               </div>
-  
             </div>
           </div>
-          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-            [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
-          </canvas>
+          <div class="chart-container relative h-[300px] sm:h-[300px]">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+              [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card">
+  <div class="card bg-white rounded-lg shadow-md">
     <div class="card-item">
-      <div class="card-header">
+      <div class="card-header p-4 border-b">
         Users
       </div>
-      <div class="card-body pie">
+      <div class="card-body p-4">
         <app-loader *ngIf="isChartLoding"></app-loader>
-        <div *ngIf="!isChartLoding && dashboardData">
+        <div class="chart-container relative h-[250px] md:h-[350px] max-h-[400px] w-full" *ngIf="!isChartLoding && dashboardData">
           <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
           </canvas>
         </div>
-
       </div>
     </div>
   </div>
