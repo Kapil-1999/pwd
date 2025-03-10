@@ -39,10 +39,10 @@ export class HomeComponent {
   getUserFromLocal() {
     this.userData = this.commonService.getUserDetails();
     this.data = {
-      userId: 0,
-      desiId: this.userData?.designation_id + 1,
+      userId: this.userData?.user_id,
+      desiId: this.userData?.designation_id === 6 ? this.userData?.designation_id : this.userData?.designation_id + 1,
       locId: this.userData?.locId
-    }
+    }    
     this.getAllUserDetails()
   }
 
