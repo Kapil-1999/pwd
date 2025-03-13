@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   hostURL: "http://localhost:4200",
-  baseAPIURl: "https://itmparampara.co.in/api/",
+  baseAPIURl: "http://103.109.7.173:7604/api/",
 };
 /*
  * For easier debugging in development mode, you can import the following file

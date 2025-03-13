@@ -7,64 +7,88 @@
 <div class="modal-body">
     <div class="w-full mx-auto mt-2">
         @for (item of accordionItems; track item) {
-            <div class="border border-gray-300 rounded-lg mb-2">
-                <div class="w-full text-left px-4 py-2 bg-gray-300 flex justify-between items-center">
-                    <p class="flex items-center cursor-pointer" (click)="toggleAccordion(item.sub_category_id)">
-                        <span class="mr-2">
-                            {{ item.isOpen ? '-' : '+' }}
-                        </span>
-                        {{ item.sub_category_name }}
-                    </p>
-                    <span class="flex items-center">
-                        <span class="mr-2">Status: {{ item.sub_cat_status == 0 ? 'Pending' : 'Closed'   }}</span>
-                        <span class="text-blue-500 underline cursor-pointer" (click)="openAreaForm()">Form</span>
+        <div class="border border-gray-300 rounded-lg mb-2">
+            <div class="w-full text-left px-4 py-2 bg-gray-300 flex justify-between items-center">
+                <p class="flex items-center cursor-pointer" (click)="toggleAccordion(item)">
+                    <span class="mr-2">
+                        {{ item.isOpen ? '-' : '+' }}
                     </span>
-                </div>
-                <div [class.max-h-0]="!item.isOpen" [class.max-h-[1000px]]="item.isOpen"
-                    class="overflow-hidden transition-all duration-500 ease-in-out px-2">
-                    <h3>Before Details :- </h3>
+                    {{ item.sub_category_name }}
+                </p>
+                <span class="flex items-center">
+                    <span class="mr-2">Status: {{ item.sub_cat_status == 0 ? 'Pending' : 'Closed' }}</span>
+                    <span class="text-blue-500 underline cursor-pointer" (click)="openAreaForm()">Form</span>
+                </span>
+            </div>
+            <div [class.max-h-0]="!item.isOpen" [class.max-h-[1000px]]="item.isOpen"
+                class="overflow-hidden transition-all duration-500 ease-in-out px-2">
+                @if (taskData && taskData.length > 0) {
+                @for(task of taskData; track task) {
+                <div class="border border-gray-100 m-2">
+                    <h3 class="p-3">Before Details :- </h3>
                     <hr>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6">
                         <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
-                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Jane Cooper">
+                            <img class="w-24 h-24 rounded-full object-cover"
+                                [src]="task.bef_img1_path ? IMG_URL+task.bef_img1_path : 'assets/images/no-image.png'"
+                                alt="Before Image1">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
-                                <p class="text-gray-500">Remarks: </p>
-                                <p class="text-gray-500">Adress: </p>
+                                <p class="text-gray-500">Remarks: {{task.bef_remark1 || 'NA'}}</p>
+                                <p class="text-gray-500">Adress: {{ task.bef_lat1 && task.bef_lon1 ? task.bef_lat1 + ' '
+                                    + task.bef_lon1 : 'NA' }}</p>
                             </div>
                         </div>
-                    
+
                         <!-- Card 2 -->
                         <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
-                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Cody Fisher">
+                            <img class="w-24 h-24 rounded-full object-cover"
+                                [src]="task.bef_img2_path ? IMG_URL+task.bef_img2_path : 'assets/images/no-image.png'"
+                                alt="Before Image2">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
-                                <p class="text-gray-500">Remarks: </p>
-                                <p class="text-gray-500">Adress: </p>
+                                <p class="text-gray-500">Remarks: {{task.bef_remark2 || 'NA'}}</p>
+                                <p class="text-gray-500">Adress: {{ task.bef_lat2 && task.bef_lon2 ? task.bef_lat2 + ' '
+                                    + task.bef_lon2 : 'NA' }}</p>
                             </div>
                         </div>
                     </div>
-
-                    <h3>After Details :- </h3>
+                    <h3 class="p-3">After Details :- </h3>
                     <hr>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6">
                         <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
-                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Jane Cooper">
+                            <img class="w-24 h-24 rounded-full object-cover"
+                                [src]="task.aft_img1_path ? IMG_URL+task.aft_img1_path : 'assets/images/no-image.png'"
+                                alt="After Image1">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
-                                <p class="text-gray-500">Remarks: </p>
-                                <p class="text-gray-500">Adress: </p>
+                                <p class="text-gray-500">Remarks: {{task.aft_remark1 || 'NA'}}</p>
+                                <p class="text-gray-500">Adress: {{ task.aft_lat1 && task.aft_loc1 ? task.aft_lat1 + ' '
+                                    + task.aft_loc1 : 'NA' }}</p>
                             </div>
                         </div>
-                    
+
                         <!-- Card 2 -->
                         <div class="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center">
-                            <img class="w-24 h-24 rounded-full object-cover" src="assets/images/no-image.png" alt="Cody Fisher">
+                            <img class="w-24 h-24 rounded-full object-cover"
+                                [src]="task.aft_img2_path ? IMG_URL+task.aft_img2_path : 'assets/images/no-image.png'"
+                                alt="After Image2">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
-                                <p class="text-gray-500">Remarks: </p>
-                                <p class="text-gray-500">Adress: </p>
+                                <p class="text-gray-500">Remarks: {{task.aft_remark2 || 'NA'}}</p>
+                                <p class="text-gray-500">Adress: {{ task.aft_lat2 && task.aft_lon2 ? task.aft_lat2 + ' '
+                                    + task.aft_lon2 : 'NA' }}</p>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
+                }
+                } @else {
+                <div class="flex items-center justify-center p-8">
+                    <div class="text-center">
+                        <img src="assets/images/no-image.png" alt="No Data" class="w-24 h-24 mx-auto mb-4">
+                        <p class="text-gray-500 text-lg">No Details Available</p>
+                    </div>
+                </div>
+                }
             </div>
+        </div>
         }
     </div>
 </div>

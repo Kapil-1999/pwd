@@ -36,7 +36,7 @@
                         'border-2 border-blue-700 shadow-lg': showCategory === data.area_id,
                         'border border-gray-300': showCategory !== data.area_id,
                         'bg-green-500 text-white': data.task_status === 1
-                      }" (click)="onOpenCategory(data.area_id)">
+                      }" (click)="onOpenCategory(data.task_id, data.area_id)">
                         <div class="flex justify-between items-center">
                             <div>
                                 <h2 class="text-lg">{{ data.area_name }}</h2>
