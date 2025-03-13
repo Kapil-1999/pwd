@@ -66,6 +66,7 @@ export const API_CONSTANTS = {
     categoryListByArea: 'Dashboard/GetCategoryListByArea?taskId={taskId}',
     subCategoryListByCat: 'Dashboard/GetSubCategoryListByCat?taskId={taskId}&categoryId={categoryId}',
     commonArea : 'Common/GetAreaList',
-    workListByUser : 'Dashboard/GetWorkListByUser?userId={userId}&userDesigId={userDesigId}'
+    workListByUser : 'Dashboard/GetWorkListByUser?userId={userId}&userDesigId={userDesigId}',
+    taskData : 'Task/GetImagesBasedOnCatSubCat?taskDetId={taskDetId}&catId={catId}&subCatId={subCatId}'
 
 }

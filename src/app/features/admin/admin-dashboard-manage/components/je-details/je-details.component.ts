@@ -19,9 +19,10 @@ export class JeDetailsComponent {
   isLoading: boolean = false;
   id: any;
   desiId: any
-  taskId: any;
+  wrokId: any;
   showCategory: number | null = null; 
   workList: any;
+  taskId: any;
   constructor(
     private bsmoalService: BsModalService,
     private CategoryService : CategoryService,
@@ -58,9 +59,9 @@ export class JeDetailsComponent {
   }
 
 
-  getCategoryList(taskId: number) {
+  getCategoryList(wrokId: number) {
     this.isLoading = true;
-    this.dashboardService.categoryListByArea(taskId).subscribe(
+    this.dashboardService.categoryListByArea(wrokId).subscribe(
       (data) => {
         setTimeout(() => {
           this.isLoading = false;
@@ -89,11 +90,11 @@ export class JeDetailsComponent {
   onOpenWork(itemId: number, workId:any) {
     if (this.openItemId === itemId) {
       this.openItemId = null;
-      this.taskId = null;
+      this.wrokId = null;
     } else {
       this.openItemId = itemId;
-      this.taskId = workId
-      this.poiWorkList(this.taskId);
+      this.wrokId = workId
+      this.poiWorkList(this.wrokId);
     }
   }
 
@@ -106,11 +107,13 @@ export class JeDetailsComponent {
     })
   }
 
-  onOpenCategory(id: number) {
-    if (this.showCategory === id) {
+  onOpenCategory(id: number,areaid:any) {
+    if (this.showCategory === areaid) {
       this.showCategory = null;
+      this.taskId = null 
     } else {
-      this.showCategory = id;
+      this.showCategory = areaid;
+      this.taskId = id
       this.getCategoryList(id)
     }
   }

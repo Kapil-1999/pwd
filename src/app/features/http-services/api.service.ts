@@ -22,7 +22,6 @@ export class ApiService {
   };
 
   miniCartSubject = new ReplaySubject(1);
-
   setBaseSiteIdLocal(url: string) {
     const formatedURl = 'http://103.109.7.173:7604/api/' + url
     return formatedURl;
@@ -66,35 +65,4 @@ export class ApiService {
       .delete(this.setBaseSiteIdLocal(url), requestOptions)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
-
-
-
-
-
-
-
-
-
-
-  // getUserDetails(url: any) {
-  //   const requestUrl = environment.baseAPIURl + url;
-  //   const headers = new HttpHeaders()
-  //     .set("Access-Control-Allow-Origin", "*")
-  //     .set("Access-Control-Allow-Headers", "Content-Type")
-  //     .set(
-  //       "Authorization",
-  //       "Basic " +
-  //         btoa(
-  //           `${environment.onDemand.clientId}:${environment.onDemand.secret}`
-  //         )
-  //     )
-  //     .set("Content-Type", "application/json");
-  //   return this.http.post(requestUrl, {}, { headers: headers });
-  // }
-
-  // getHomePageDate(url: any): Observable<any> {
-  //   return this.http
-  //     .get(this.setBaseSiteId(url))
-  //     .pipe(catchError((error: HttpErrorResponse) => of(error)));
-  // }
 }

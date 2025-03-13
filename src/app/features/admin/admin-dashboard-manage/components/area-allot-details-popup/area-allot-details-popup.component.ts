@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { DashboardService } from '../../service/dashboard.service';
+import { IMG_URL } from '../../../../shared/constant/menu/menu';
 
 @Component({
   selector: 'app-area-allot-details-popup',
@@ -12,6 +13,9 @@ export class AreaAllotDetailsPopupComponent {
   editData :any;
   taskId :any
   accordionItems :any
+  selectedsubCat: any;
+  taskData: any;
+  IMG_URL = IMG_URL;
 
   constructor(
     private bsmodalService : BsModalService,
@@ -38,11 +42,31 @@ export class AreaAllotDetailsPopupComponent {
     })
   }
 
-  toggleAccordion(id: number) {
-    this.accordionItems = this.accordionItems.map((item:any) => ({
+  toggleAccordion(data: any) {
+    this.selectedsubCat = data;
+    const previousState = this.accordionItems.find((item: any) => item.sub_category_id === data.sub_category_id)?.isOpen;
+    
+    this.accordionItems = this.accordionItems.map((item: any) => ({
       ...item,
-      isOpen: item.sub_category_id === id ? !item.isOpen : false, 
+      isOpen: item.sub_category_id === data.sub_category_id ? !item.isOpen : false,
     }));
+
+    const currentItem = this.accordionItems.find((item: any) => item.sub_category_id === data.sub_category_id);
+    if (currentItem?.isOpen && !previousState) {
+      this.getTaskData();
+    }
+  }
+
+  getTaskData() {
+    let payload = {
+      taskDetId : this.selectedsubCat?.task_det_id,
+      catId : this.selectedsubCat?.category_id,
+      subCatId : this.selectedsubCat?.sub_category_id
+    }
+    this.dashboardService.taskData(payload).subscribe((res:any) => {
+      console.log("check res", res);
+      this.taskData = res?.body?.result;
+    })
   }
 
   openAreaForm() {
