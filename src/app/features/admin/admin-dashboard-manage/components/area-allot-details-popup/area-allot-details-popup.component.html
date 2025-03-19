@@ -8,7 +8,7 @@
     <div class="w-full mx-auto mt-2">
         @for (item of accordionItems; track item) {
         <div class="border border-gray-300 rounded-lg mb-2">
-            <div class="w-full text-left px-4 py-2 bg-gray-300 flex justify-between items-center">
+            <div class="w-full text-left px-4 py-2 bg-gray-300 flex justify-between items-center" [ngClass]="item?.sub_cat_status == 1 ? 'bg-green-500 text-white' : 'border-gray-300 text-black'">
                 <p class="flex items-center cursor-pointer" (click)="toggleAccordion(item)">
                     <span class="mr-2">
                         {{ item.isOpen ? '-' : '+' }}
