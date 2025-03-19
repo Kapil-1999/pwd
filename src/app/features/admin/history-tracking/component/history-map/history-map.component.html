@@ -1,33 +1,38 @@
-<div class="row">
-    <div class="col-md-4">
+<div class="flex flex-col lg:flex-row gap-4">
+    <div class="w-full lg:w-1/3">
         <app-history-filter></app-history-filter>
     </div>
-    <div class="col-md-8">
-        <div class="map-part">
-            <div class="map-container">
-                <div id="history_map"></div>
-                <div class="slider-part" >
+    <div class="w-full lg:w-2/3">
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <div class="relative ">
+                <div id="history_map"  class="w-full rounded-lg h-[calc(100vh-80px)]"></div>
+                <div class="absolute bottom-0 left-0 right-0 bg-white p-3 rounded-b-lg border-t flex flex-wrap items-center gap-3">
                     <div class="play-button">
-                      <button class="button-play">
-                        <ng-container *ngIf="isPlaying; else playIcon">
-                            <i class="fa fa-pause" style="margin-right: 5px;" aria-hidden="true"></i>
-                        </ng-container>
-                        <ng-template #playIcon>
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                        </ng-template>
-                    </button>
+                        <button class="px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                            <ng-container *ngIf="isPlaying; else playIcon">
+                                <i class="fa fa-pause mr-2" aria-hidden="true"></i>
+                            </ng-container>
+                            <ng-template #playIcon>
+                                <i class="fa fa-play" aria-hidden="true"></i>
+                            </ng-template>
+                        </button>
                     </div>
-                    <div class="slider-vehicle">
-                      <input type="range" min="1" [max]="historylist?.length - 1" [value]="sliderValue" class="slider" id="myRange">
+                    <div class="slider-vehicle flex-1">
+                        <input type="range" 
+                               min="1" 
+                               [max]="historylist?.length - 1" 
+                               [value]="sliderValue" 
+                               class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer z-10" 
+                               id="myRange">
                     </div>
-                    <div class="speed-value" style="margin-left: 13px;">
-                      <select name="" id="">
-                        <option *ngFor="let speedValue of speed"  [value]="speedValue.id">{{speedValue.value}}</option>
-                       </select>
+                    <div class="speed-value">
+                        <select class="px-2 py-1 border rounded-md">
+                            <option *ngFor="let speedValue of speed" [value]="speedValue.id">{{speedValue.value}}</option>
+                        </select>
                     </div>
-                    <div class="total-distance">
-                      <span class="distance">Distance :   Km</span>
-                      </div>
+                    <div class="total-distance whitespace-nowrap">
+                        <span class="text-sm font-medium">Distance: <span class="text-blue-600">0 Km</span></span>
+                    </div>
                 </div>
             </div>
         </div>

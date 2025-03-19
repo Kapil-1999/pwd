@@ -75,6 +75,7 @@ export class LiveMapTrackingComponent {
     this.map = L.map('map_canvas', {
       center: [28.6139, 77.2088],
       zoom: 6,
+      zoomControl: false,
     });
 
     const mapElement = document.getElementById('map_canvas');
@@ -114,6 +115,9 @@ export class LiveMapTrackingComponent {
     };
 
     L.control.layers(baseMaps).addTo(this.map);
+    L.control.zoom({
+      position: 'bottomright'
+    }).addTo(this.map);
   }
 
   confirm(event: any) {

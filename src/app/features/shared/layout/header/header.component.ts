@@ -76,14 +76,15 @@ export class HeaderComponent {
     this.showPopup = false;
     if (item.menuList?.length > 0) {
       item.is_open = !item.is_open;
-    }
+    } 
   }
 
 
   private closeAllMenus(menuList: any[], exception?: any): void {
     menuList.forEach((menu: any) => {
       if (menu !== exception) {
-        menu.is_open = false;      }
+        menu.is_open = false;    
+      }
       if (menu.menuList?.length) {
         this.closeAllMenus(menu.menuList, exception);
       }
@@ -100,8 +101,10 @@ export class HeaderComponent {
     this.closeAllMenus(this.menuListData);
   }
 
-  onShowMobileMewnu() {
-    this.showMobileMenu = !this.showMobileMenu
+
+  onShowMobileMenu(e:any) {    
+    e.stopPropagation();
+    this.showMobileMenu = !this.showMobileMenu;
   }
 
   goToProfile() {
@@ -110,4 +113,11 @@ export class HeaderComponent {
     this.router.navigateByUrl('/admin/profile')
   }
 
+  handleMobileMenuClick(item: any, event: any) {
+      event.stopPropagation();
+      if (!item.menuList?.length) {
+        this.showMobileMenu = false;
+      }
+      this.toggleDropdown(item, event);
+    }
 }

@@ -28,6 +28,7 @@
     .vehclelist {
         display: flex;
         justify-content: space-between;
+        align-items: center;  // Added to vertically center items
 
         .login-user {
             border: 2px solid white;
@@ -51,26 +52,19 @@
 
         .right {
             display: flex;
-            justify-content: space-between;
-            gap: 10px;
+            justify-content: center;  // Changed to center
+            align-items: center;      // Added to vertically center
+            padding: 5px;            // Added padding
+            cursor: pointer;         // Added cursor pointer
 
-            .searchcontent {
-                display: flex;
-                justify-content: space-between;
-                gap: 5px;
-
-
+            .fa-chevron-down {
+                transition: transform 0.3s ease;
+                margin-right: 5px;    // Added margin
+                
+                &.rotate {
+                    transform: rotate(180deg);
+                }
             }
-        }
-
-        .arrow {
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            background-image: url('/assets/icons/down-new.png');
-            /* Replace 'down-arrow.png' with your arrow image */
-            background-size: contain;
-            background-repeat: no-repeat;
         }
     }
 
@@ -116,11 +110,11 @@
 
 
 .status-0 {
-    color: rgb(65, 65, 65) !important;
+    @apply text-gray-600;
 }
 
 .status {
-    color: rgb(25 173 0) !important;
+    @apply text-[rgb(25_173_0)];
 }
 
 span.login-user {
@@ -134,4 +128,25 @@ span.login-user {
     box-shadow: 0px 9px 9px 0px rgb(0 0 0 / 25%);
     border-radius: 12px;
     scrollbar-width: thin;
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 95vw;
+        max-width: 450px;
+        min-width: 300px;
+    }
+
+    .searcharea {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+}
+
+.fa-chevron-down {
+    transition: transform 0.3s ease;
+    
+    &.rotate {
+        transform: rotate(180deg);
+    }
 }

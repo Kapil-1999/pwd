@@ -8,6 +8,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./user-in-map.component.scss']
 })
 export class UserInMapComponent {
+  showContent: boolean = true;
+
+  toggleContent(e:any) {
+    e.stopPropagation()
+    this.showContent = !this.showContent;
+  }
   @Output() mapData = new EventEmitter();
   @Output() selectUserConfirm = new EventEmitter();
   @Input() userValue: any;
