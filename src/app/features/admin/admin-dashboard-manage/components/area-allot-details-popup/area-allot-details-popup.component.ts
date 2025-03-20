@@ -69,8 +69,12 @@ export class AreaAllotDetailsPopupComponent {
     })
   }
 
-  openAreaForm() {
-    const url = this.router.serializeUrl(this.router.createUrlTree(['/admin/dashboard/area-plot-form']));
+  openAreaForm(item:any) {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/admin/dashboard/area-plot-form', item?.form_code], {
+        queryParams: { cat: item?.category_id, subCat: item?.sub_category_id, task: item?.task_det_id }
+      })
+    );
     window.open(url, '_blank');
   }
 

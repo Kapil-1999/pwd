@@ -1,5 +1,5 @@
 <div class="main-section">
-    <h3>Form 1</h3>
+    @if(showForm(1)) {
     <table>
         <tr>
             <td colspan="7" class="center">
@@ -118,12 +118,12 @@
             <td colspan="6"></td>
         </tr>
     </table>
-
-
+    } @else if (showForm(2)) {
     <table class="mt-4">
-        <h3>Form 2</h3>
         <tr>
-            <td colspan="3" class="center"><h2>Table 900-1: Tolerances in Surface Levels</h2></td>
+            <td colspan="3" class="center">
+                <h2>Table 900-1: Tolerances in Surface Levels</h2>
+            </td>
         </tr>
         <tr>
             <td style="width: 10%;">1)</td>
@@ -189,7 +189,9 @@
         </tr>
         <tr>
             <td colspan="3" class="pt-3">
-                Provided, however, that the negative tolerance for wearing course shall not be permitted in conjunction with the positive tolerance for base course, if the thickness of the former is thereby reduced by more than the following limits:
+                Provided, however, that the negative tolerance for wearing course shall not be permitted in conjunction
+                with the positive tolerance for base course, if the thickness of the former is thereby reduced by more
+                than the following limits:
             </td>
         </tr>
         <tr>
@@ -203,26 +205,39 @@
         </tr>
         <tr>
             <td colspan="3" class="pt-3">
-                For checking compliance with the above requirement for subgrade, sub-base and base course, measurements of the surface levels shall be taken on grid of points placed at 6.25 m longitudinally and 3.5 m transversely. For any 10 consecutive measurements taken longitudinally or transversely. not more than one measurement shall be permitted to exceed the tolerance as above, this one measurement being not in excess of 5 mm above the permitted tolerance.
+                For checking compliance with the above requirement for subgrade, sub-base and base course, measurements
+                of the surface levels shall be taken on grid of points placed at 6.25 m longitudinally and 3.5 m
+                transversely. For any 10 consecutive measurements taken longitudinally or transversely. not more than
+                one measurement shall be permitted to exceed the tolerance as above, this one measurement being not in
+                excess of 5 mm above the permitted tolerance.
             </td>
         </tr>
         <tr>
             <td colspan="3" class="pt-3">
-                For checking the compliance with the above requirement for bituminous wearing courses and concrete pavement, measurements of the surface levels shall be taken on a grid of points spaced at 6.25 m along the length and at 0.5 m from the edges and at the center of the pavement. In any length of pavement,compliance shall be deemed to be met for the final road surface, only if the tolerance given above is satisfied for any poin on the surface.
+                For checking the compliance with the above requirement for bituminous wearing courses and concrete
+                pavement, measurements of the surface levels shall be taken on a grid of points spaced at 6.25 m along
+                the length and at 0.5 m from the edges and at the center of the pavement. In any length of
+                pavement,compliance shall be deemed to be met for the final road surface, only if the tolerance given
+                above is satisfied for any poin on the surface.
             </td>
         </tr>
     </table>
-
+    } @else if (showForm(3)) {
     <table class="mt-4">
-        <h3>Form 3</h3>
         <tr>
-            <td colspan="7" class="center"><h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2></td>
+            <td colspan="7" class="center">
+                <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>Work Implementation Unit</h2></td>
+            <td colspan="7" class="center">
+                <h2>Work Implementation Unit</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>Executive Engineer,Construction Division,PWD,Varanasi</h2></td>
+            <td colspan="7" class="center">
+                <h2>Executive Engineer,Construction Division,PWD,Varanasi</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: </td>
@@ -235,7 +250,9 @@
             <td colspan="7">NAME OF CONTRACTOR : </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>Aggregate Impact Value(AIV)</h2></td>
+            <td colspan="7" class="center">
+                <h2>Aggregate Impact Value(AIV)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Chainage : </td>
@@ -246,7 +263,9 @@
             <td colspan="4">Date of Testing : </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h3>Observation</h3></td>
+            <td colspan="7" class="center">
+                <h3>Observation</h3>
+            </td>
         </tr>
         <tr>
             <td colspan="4" style="width: 50%;">Description</td>
@@ -274,7 +293,8 @@
         </tr>
         <tr>
             <td colspan="7" class="center">
-                <p>Permissible Limit :- Aggregate Impact Value Should be Maximum 30 percent of Coarse Aggregates For Grannular Sub-Base and Wet Mix Macadum for Sub-Base/Base Courses.</p>
+                <p>Permissible Limit :- Aggregate Impact Value Should be Maximum 30 percent of Coarse Aggregates For
+                    Grannular Sub-Base and Wet Mix Macadum for Sub-Base/Base Courses.</p>
             </td>
         </tr>
         <tr>
@@ -283,17 +303,22 @@
             <td colspan="3">Noted By</td>
         </tr>
     </table>
-
+    } @else if (showForm(6) ) {
     <table class="mt-4">
-        <h3>Form 6</h3>
         <tr>
-            <td colspan="7" class="center"><h2>SPECIFIC GRAVITY & WATER ABSORPTION OF</h2></td>
+            <td colspan="7" class="center">
+                <h2>SPECIFIC GRAVITY & WATER ABSORPTION OF</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>COARSE AGGREGATES</h2></td>
+            <td colspan="7" class="center">
+                <h2>COARSE AGGREGATES</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>IS:2386(PART-III)</h2></td>
+            <td colspan="7" class="center">
+                <h2>IS:2386(PART-III)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">PROJECT</td>
@@ -320,7 +345,9 @@
             <td colspan="4"></td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h3>Determination</h3></td>
+            <td colspan="7" class="center">
+                <h3>Determination</h3>
+            </td>
         </tr>
         <tr>
             <td colspan="4" style="width: 40%;">Before Soaking</td>
@@ -428,9 +455,8 @@
             <td colspan="7">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(7) ) {
     <table class="mt-4">
-        <h3>Form 7</h3>
         <tr>
             <td colspan="7" class="center">
                 <h2>SPECIFIC GRAVITY & WATER ABSORPTION OF FINE AGGREGATES</h2>
@@ -531,14 +557,17 @@
             <td colspan="7">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(8)) {
     <table class="mt-4">
-        <h3>Form 8</h3>
         <tr>
-            <td colspan="7" class="center"><h2>SPECIFIC GRAVITY OF CEMENT</h2></td>
+            <td colspan="7" class="center">
+                <h2>SPECIFIC GRAVITY OF CEMENT</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>(IS:4031)</h2></td>
+            <td colspan="7" class="center">
+                <h2>(IS:4031)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: </td>
@@ -558,7 +587,9 @@
         </tr>
         <tr>
             <td colspan="3" style="width: 60%;">Determination</td>
-            <td colspan="4" class="center" style="width: 40%;"><h3>Trial No.</h3></td>
+            <td colspan="4" class="center" style="width: 40%;">
+                <h3>Trial No.</h3>
+            </td>
         </tr>
         <tr>
             <td colspan="3"></td>
@@ -620,14 +651,17 @@
             <td colspan="7">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(9)) {
     <table class="mt-4">
-        <h3>Form 9</h3>
         <tr>
-            <td colspan="7" class="center"><h2>Lok Nirman Vibhag</h2></td>
+            <td colspan="7" class="center">
+                <h2>Lok Nirman Vibhag</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>DBM</h2></td>
+            <td colspan="7" class="center">
+                <h2>DBM</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: </td>
@@ -821,14 +855,17 @@
             <td>2-8</td>
         </tr>
     </table>
-
+    } @else if (showForm(10)) {
     <table class="mt-4">
-        <h3>Form 10</h3>
         <tr>
-            <td colspan="7" class="center"><h2>NORMAL CONSISTENCY OF CEMENT</h2></td>
+            <td colspan="7" class="center">
+                <h2>NORMAL CONSISTENCY OF CEMENT</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>(IS:4031 PART-V)</h2></td>
+            <td colspan="7" class="center">
+                <h2>(IS:4031 PART-V)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: </td>
@@ -847,7 +884,9 @@
             <td colspan="4">Source :- </td>
         </tr>
         <tr>
-            <td colspan="7"><h3>NORMAL CONSISTENCY:</h3></td>
+            <td colspan="7">
+                <h3>NORMAL CONSISTENCY:</h3>
+            </td>
         </tr>
         <tr>
             <td style="width: 10%;">S.No.</td>
@@ -901,14 +940,17 @@
             <td colspan="6">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(11)) {
     <table class="mt-4">
-        <h3>Form 11</h3>
         <tr>
-            <td colspan="8" class="center"><h2>INITIAL AND FINAL SETTING TIME OF CEMENT</h2></td>
+            <td colspan="8" class="center">
+                <h2>INITIAL AND FINAL SETTING TIME OF CEMENT</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="8" class="center"><h2>(IS:4031 PART-V)</h2></td>
+            <td colspan="8" class="center">
+                <h2>(IS:4031 PART-V)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="4">Sr No.: </td>
@@ -927,8 +969,12 @@
             <td colspan="4">Source :- </td>
         </tr>
         <tr>
-            <td colspan="4"><h3>A) Initial Setting Time</h3></td>
-            <td colspan="4"><h3>B) Final Setting Time</h3></td>
+            <td colspan="4">
+                <h3>A) Initial Setting Time</h3>
+            </td>
+            <td colspan="4">
+                <h3>B) Final Setting Time</h3>
+            </td>
         </tr>
         <tr>
             <td style="width: 10%;">S.No.</td>
@@ -998,14 +1044,17 @@
             <td colspan="8">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(12)) {
     <table class="mt-4">
-        <h3>Form 12</h3>
         <tr>
-            <td colspan="7" class="center"><h2>FINENESS OF CEMENT</h2></td>
+            <td colspan="7" class="center">
+                <h2>FINENESS OF CEMENT</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="7" class="center"><h2>(IS:4031 PART-1)</h2></td>
+            <td colspan="7" class="center">
+                <h2>(IS:4031 PART-1)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: 1</td>
@@ -1024,7 +1073,9 @@
             <td colspan="4">Source :- </td>
         </tr>
         <tr>
-            <td colspan="7"><h3>Observation</h3></td>
+            <td colspan="7">
+                <h3>Observation</h3>
+            </td>
         </tr>
         <tr>
             <td style="width: 10%;">S.No.</td>
@@ -1066,14 +1117,17 @@
             <td colspan="7">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(13) ) {
     <table class="mt-4">
-        <h3>Form 13</h3>
         <tr>
-            <td colspan="10" class="center"><h2>UNCONFINED COMPRESSIVE STRENGTH</h2></td>
+            <td colspan="10" class="center">
+                <h2>UNCONFINED COMPRESSIVE STRENGTH</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="10" class="center"><h2>(IS:2720 PART:10)</h2></td>
+            <td colspan="10" class="center">
+                <h2>(IS:2720 PART:10)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="5">Sr No.: </td>
@@ -1125,7 +1179,9 @@
             <td></td>
         </tr>
         <tr>
-            <td colspan="10" class="center"><h3> Stress Dial Guage Reading(div.)</h3></td>
+            <td colspan="10" class="center">
+                <h3> Stress Dial Guage Reading(div.)</h3>
+            </td>
         </tr>
         <tr>
             <td>Sl No.</td>
@@ -1146,11 +1202,12 @@
             <td colspan="10">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(14) ) {
     <table class="mt-4">
-        <h3>Form 14</h3>
         <tr>
-            <td colspan="7" class="center"><h2>CONCRETE COMPRESSIVE STRENGTH TEST</h2></td>
+            <td colspan="7" class="center">
+                <h2>CONCRETE COMPRESSIVE STRENGTH TEST</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: </td>
@@ -1233,11 +1290,12 @@
             <td colspan="5">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(15)) {
     <table class="mt-4">
-        <h3>Form 15</h3>
         <tr>
-            <td colspan="7" class="center"><h2>Concrete Slum Test</h2></td>
+            <td colspan="7" class="center">
+                <h2>Concrete Slum Test</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: </td>
@@ -1293,9 +1351,8 @@
             <td colspan="5"></td>
         </tr>
     </table>
-
+    } @else if (showForm(16)) {
     <table class="mt-4">
-        <h3>Form 16</h3>
         <tr>
             <td colspan="7" class="center">
                 <h2>AGGREGATE IMPACT VALUE</h2>
@@ -1378,11 +1435,12 @@
             <td colspan="6">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(17)) {
     <table class="mt-4">
-        <h3>Form 17</h3>
         <tr>
-            <td colspan="7" class="center"><h2>Concrete Slum Test</h2></td>
+            <td colspan="7" class="center">
+                <h2>Concrete Slum Test</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Sr No.: </td>
@@ -1438,9 +1496,8 @@
             <td colspan="5"></td>
         </tr>
     </table>
-
+    } @else if (showForm(18)) {
     <table class="mt-4">
-        <h3>Form 18</h3>
         <tr>
             <td colspan="7" class="center">
                 <h2>FLAKINESS INDEX AND ELONGATION INDEX</h2>
@@ -1561,9 +1618,8 @@
             <td colspan="6">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(20)) {
     <table class="mt-4">
-        <h3>Form 20</h3>
         <tr>
             <td colspan="14" class="center">
                 <h2>DENSITY TEST</h2>
@@ -1628,9 +1684,8 @@
         </tr>
         <!-- Repeat the empty row 19 more times -->
     </table>
-
+    } @else if (showForm(21)) {
     <table class="mt-4">
-        <h3>Form 21</h3>
         <tr>
             <td colspan="7" class="center">
                 <h2>LOK NIRMAN VIBHAG</h2>
@@ -1713,17 +1768,22 @@
             <td colspan="7">Remarks:-</td>
         </tr>
     </table>
-
+    } @else if (showForm(22)) {
     <table class="mt-4">
-        <h3>Form 22</h3>
         <tr>
-            <td colspan="8" class="center"><h2>GRADATION AGGREGATE FACTORS BINDER CONTENT PAVING</h2></td>
+            <td colspan="8" class="center">
+                <h2>GRADATION AGGREGATE FACTORS BINDER CONTENT PAVING</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="8" class="center"><h2>MIXTURES CENTRIFUGE METHOD BC/DBM/BM</h2></td>
+            <td colspan="8" class="center">
+                <h2>MIXTURES CENTRIFUGE METHOD BC/DBM/BM</h2>
+            </td>
         </tr>
         <tr>
-            <td colspan="8" class="center"><h2>(IRC:SP:11)</h2></td>
+            <td colspan="8" class="center">
+                <h2>(IRC:SP:11)</h2>
+            </td>
         </tr>
         <tr>
             <td colspan="4">Sr No.: </td>
@@ -1742,7 +1802,9 @@
             <td colspan="4">Source :- </td>
         </tr>
         <tr>
-            <td colspan="8" class="center"><h3>BINDER CONTENT TEST</h3></td>
+            <td colspan="8" class="center">
+                <h3>BINDER CONTENT TEST</h3>
+            </td>
         </tr>
         <tr>
             <td style="width: 10%;">S No.</td>
@@ -1807,13 +1869,16 @@
             <td></td>
         </tr>
     </table>
-    
     <table class="mt-4">
         <tr>
-            <td colspan="8" class="center"><h3>GRADIATION OF AGGREGATE FRACTION(BC-MoRT&H TABLE 500-18),</h3></td>
+            <td colspan="8" class="center">
+                <h3>GRADIATION OF AGGREGATE FRACTION(BC-MoRT&H TABLE 500-18),</h3>
+            </td>
         </tr>
         <tr>
-            <td colspan="8" class="center"><h3>(DBM - BC-MoRT&H TABLE 500-10)&(BC-MoRT&H TABLE 500-4)</h3></td>
+            <td colspan="8" class="center">
+                <h3>(DBM - BC-MoRT&H TABLE 500-10)&(BC-MoRT&H TABLE 500-4)</h3>
+            </td>
         </tr>
         <tr>
             <td style="width: 15%;">Sieve size (mm)</td>
@@ -1846,213 +1911,236 @@
             <td>Layer thickness =</td>
         </tr>
     </table>
-
-    <table class="mt-4">
-        <h3>Form 24</h3>
-        <tr>
-            <td colspan="7" class="center"><h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2></td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center"><h2>-:WORK IMPLEMENTATION UNIT:-</h2></td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center"><h2>EXECUTIVE ENGINEER,CONSTRUCTION DIVISION,PWD,VARANASI</h2></td>
-        </tr>
-        <tr>
-            <td colspan="3">Sr No.: </td>
-            <td colspan="4" class="right">Date: 01/01/1970 05:30:00</td>
-        </tr>
-        <tr>
-            <td colspan="3">Name Of Work :- </td>
-            <td colspan="4">Date Of Sampling :- </td>
-        </tr>
-        <tr>
-            <td colspan="3">Contractor :- </td>
-            <td colspan="4">Date Of Testing :- </td>
-        </tr>
-        <tr>
-            <td colspan="3">Bond No. :- </td>
-            <td colspan="4">Source :- </td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center"><h2>CORE DENSITY TEST DENSITY BY CORE CUTTING</h2></td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center"><h3>Type of Sample</h3></td>
-        </tr>
-        <tr>
-            <td style="width: 40%;">Description</td>
-            <td style="width: 20%;">Sample 1</td>
-            <td style="width: 20%;">Sample 2</td>
-            <td style="width: 20%;">Sample 3</td>
-        </tr>
-        <tr>
-            <td>Density as per JBF........=...</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Initial weight of core........=...</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Weight of core(A)=</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Weight of core + wax(B)=</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Weight of core + wax in water(C)=</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Density = (A)/(B-C)-(B-A)/0.9=</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-
-    <table class="mt-4">
-        <h3>Form 25</h3>
-        <tr>
-            <td colspan="9" class="center"><h2>INDIVIDUAL GRADATION OF COARSE AGGREGATE</h2></td>
-        </tr>
-        <tr>
-            <td colspan="9" class="center"><h2>(IS:383)</h2></td>
-        </tr>
-        <tr>
-            <td colspan="4">Sr No.: </td>
-            <td colspan="5" class="right">Date: 01/01/1970 05:30:00</td>
-        </tr>
-        <tr>
-            <td colspan="4">Name Of Work :- </td>
-            <td colspan="5">Date Of Sampling :- </td>
-        </tr>
-        <tr>
-            <td colspan="4">Contractor :- </td>
-            <td colspan="5">Date Of Testing :- </td>
-        </tr>
-        <tr>
-            <td colspan="4">Bond No. :- </td>
-            <td colspan="5">Source :- </td>
-        </tr>
-        <tr>
-            <td rowspan="2" style="width: 12%;">Sieve size (mm)</td>
-            <td rowspan="2" style="width: 12%;">Wt. Retained (g)</td>
-            <td rowspan="2" style="width: 12%;">Cumulative wt. Retained =(g)</td>
-            <td rowspan="2" style="width: 12%;">% Cumulative wt.Retailed</td>
-            <td rowspan="2" style="width: 12%;">% Passing</td>
-            <td colspan="4" class="center" style="width: 40%;">Specified % of Passing</td>
-        </tr>
-        <tr>
-            <td>40mm</td>
-            <td>20mm</td>
-            <td>12.5mm</td>
-            <td>10mm</td>
-        </tr>
-        <tr>
-            <td>63mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>100</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>40mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>85-100</td>
-            <td>100</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>20mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>0-20</td>
-            <td>85-10</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>16mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-</td>
-            <td>-</td>
-            <td>100</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>12.5mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-</td>
-            <td>-</td>
-            <td>85-100</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <td>10.0mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>0-5</td>
-            <td>0-20</td>
-            <td>0-45</td>
-            <td>0-20</td>
-        </tr>
-        <tr>
-            <td>4.75mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-</td>
-            <td>0-5</td>
-            <td>0-10</td>
-            <td>0-20</td>
-        </tr>
-        <tr>
-            <td>2.36mm</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>0-5</td>
-        </tr>
-        <tr>
-            <td colspan="9">Remarks:-</td>
-        </tr>
-    </table>
+    } @else if (showForm(24)) {
+        <table class="mt-4">
+            <h3>Form 24</h3>
+            <tr>
+                <td colspan="7" class="center">
+                    <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" class="center">
+                    <h2>-:WORK IMPLEMENTATION UNIT:-</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" class="center">
+                    <h2>EXECUTIVE ENGINEER,CONSTRUCTION DIVISION,PWD,VARANASI</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">Sr No.: </td>
+                <td colspan="4" class="right">Date: 01/01/1970 05:30:00</td>
+            </tr>
+            <tr>
+                <td colspan="3">Name Of Work :- </td>
+                <td colspan="4">Date Of Sampling :- </td>
+            </tr>
+            <tr>
+                <td colspan="3">Contractor :- </td>
+                <td colspan="4">Date Of Testing :- </td>
+            </tr>
+            <tr>
+                <td colspan="3">Bond No. :- </td>
+                <td colspan="4">Source :- </td>
+            </tr>
+            <tr>
+                <td colspan="7" class="center">
+                    <h2>CORE DENSITY TEST DENSITY BY CORE CUTTING</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" class="center">
+                    <h3>Type of Sample</h3>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40%;">Description</td>
+                <td style="width: 20%;">Sample 1</td>
+                <td style="width: 20%;">Sample 2</td>
+                <td style="width: 20%;">Sample 3</td>
+            </tr>
+            <tr>
+                <td>Density as per JBF........=...</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Initial weight of core........=...</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Weight of core(A)=</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Weight of core + wax(B)=</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Weight of core + wax in water(C)=</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Density = (A)/(B-C)-(B-A)/0.9=</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    } @else if (showForm(25)) {
+        <table class="mt-4">
+            <h3>Form 25</h3>
+            <tr>
+                <td colspan="9" class="center">
+                    <h2>INDIVIDUAL GRADATION OF COARSE AGGREGATE</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="9" class="center">
+                    <h2>(IS:383)</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">Sr No.: </td>
+                <td colspan="5" class="right">Date: 01/01/1970 05:30:00</td>
+            </tr>
+            <tr>
+                <td colspan="4">Name Of Work :- </td>
+                <td colspan="5">Date Of Sampling :- </td>
+            </tr>
+            <tr>
+                <td colspan="4">Contractor :- </td>
+                <td colspan="5">Date Of Testing :- </td>
+            </tr>
+            <tr>
+                <td colspan="4">Bond No. :- </td>
+                <td colspan="5">Source :- </td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="width: 12%;">Sieve size (mm)</td>
+                <td rowspan="2" style="width: 12%;">Wt. Retained (g)</td>
+                <td rowspan="2" style="width: 12%;">Cumulative wt. Retained =(g)</td>
+                <td rowspan="2" style="width: 12%;">% Cumulative wt.Retailed</td>
+                <td rowspan="2" style="width: 12%;">% Passing</td>
+                <td colspan="4" class="center" style="width: 40%;">Specified % of Passing</td>
+            </tr>
+            <tr>
+                <td>40mm</td>
+                <td>20mm</td>
+                <td>12.5mm</td>
+                <td>10mm</td>
+            </tr>
+            <tr>
+                <td>63mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>100</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>40mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>85-100</td>
+                <td>100</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>20mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>0-20</td>
+                <td>85-10</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>16mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>-</td>
+                <td>-</td>
+                <td>100</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>12.5mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>-</td>
+                <td>-</td>
+                <td>85-100</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>10.0mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>0-5</td>
+                <td>0-20</td>
+                <td>0-45</td>
+                <td>0-20</td>
+            </tr>
+            <tr>
+                <td>4.75mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>-</td>
+                <td>0-5</td>
+                <td>0-10</td>
+                <td>0-20</td>
+            </tr>
+            <tr>
+                <td>2.36mm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>0-5</td>
+            </tr>
+            <tr>
+                <td colspan="9">Remarks:-</td>
+            </tr>
+        </table>
+    }
+    @if(!isFormAvailable()) {
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                <h3>Form Not Available</h3>
+                <p>The requested form (Form {{formCode}}) is not available in the system.</p>
+            </div>
+        </div>
+    }
 
 </div>
