@@ -17,7 +17,7 @@
                 </p>
                 <span class="flex items-center">
                     <span class="mr-2">Status: {{ item.sub_cat_status == 0 ? 'Pending' : 'Closed' }}</span>
-                    <span class="text-blue-500 underline cursor-pointer" (click)="openAreaForm()">Form</span>
+                    <span class="text-blue-500 underline cursor-pointer" (click)="openAreaForm(item)">Form</span>
                 </span>
             </div>
             <div [class.max-h-0]="!item.isOpen" [class.max-h-[1000px]]="item.isOpen"

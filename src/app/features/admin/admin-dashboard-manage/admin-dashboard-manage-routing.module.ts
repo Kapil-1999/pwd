@@ -16,7 +16,7 @@ const routes: Routes = [
     path : ':id/:desiId/area-allot-details', component : JeDetailsComponent
   },
   {
-    path : 'area-plot-form' , component : AreaPlotFormComponent
+    path : 'area-plot-form/:formCode' , component : AreaPlotFormComponent
   }
 ];
 
