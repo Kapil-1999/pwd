@@ -24,7 +24,7 @@
                 </div>
             </form>       
             <div class="swiper-data mt-3">
-               <swiper [vehicleStauts]="swiperList" (onConfirm)="confirm($event)"></swiper>
+               <swiper></swiper>
             </div>
             <div class="vehicle-follow-wrapper mt-3" #vehicleFollowWrapper>
                 <div class="vehicle-follow">                    
@@ -32,7 +32,7 @@
                     <ul class="vehicle-data" *ngIf="!spinnerLoading && userData && userData.length > 0">
                         <li class="vehicle-value"
                             *ngFor="let vehicle of userData | searchFilter: searchKeyword, let i = index"
-                             style="cursor: pointer; ">
+                             style="cursor: pointer;" (click)="onSelectuser(vehicle)">
                             <span [class]="getVehicleColor(vehicle)">{{vehicle?.full_name}}</span>
                             <span [class]="getVehicleColor(vehicle)">{{formatVehicleStatusDuration(vehicle)}}</span>
                             <span [class]="getVehicleColor(vehicle)" style="text-align: end;"><i class="fa fa-circle"aria-hidden="true"></i></span>                           

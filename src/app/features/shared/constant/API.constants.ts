@@ -67,6 +67,7 @@ export const API_CONSTANTS = {
     subCategoryListByCat: 'Dashboard/GetSubCategoryListByCat?taskId={taskId}&categoryId={categoryId}',
     commonArea : 'Common/GetAreaList',
     workListByUser : 'Dashboard/GetWorkListByUser?userId={userId}&userDesigId={userDesigId}',
-    taskData : 'Task/GetImagesBasedOnCatSubCat?taskDetId={taskDetId}&catId={catId}&subCatId={subCatId}'
+    taskData : 'Task/GetImagesBasedOnCatSubCat?taskDetId={taskDetId}&catId={catId}&subCatId={subCatId}',
+    addressApi : 'https://api.olamaps.io/places/v1/reverse-geocode?latlng={lat}%2C{lng}&api_key={api_key}'
 
 }

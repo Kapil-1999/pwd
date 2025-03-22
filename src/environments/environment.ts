@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   hostURL: "http://localhost:4200",
   baseAPIURl: "http://103.109.7.173:7604/api/",
+  Api_Key : 'I2bZLLfPzJg9v3AaOdhxB1cjFiHf2M9G6nAB8CUu'
 };
 /*
  * For easier debugging in development mode, you can import the following file

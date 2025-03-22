@@ -7,12 +7,15 @@ import { SharedModule } from './features/shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { HeaderInterceptor } from './features/shared/services/http-interceptor.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './core/app.reducer';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    StoreModule.forRoot({ app: appReducer }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

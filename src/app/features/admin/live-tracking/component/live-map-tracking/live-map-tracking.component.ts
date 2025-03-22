@@ -24,6 +24,11 @@ import {
   timer,
 } from 'rxjs';
 import { StorageService } from '../../../../shared/services/storage.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../../core/app.reducer';
+import { setShowUserList, setUserCountData, setvehicleData } from '../../../../../core/app.action';
+import { setIsShowUserList, setSelectedVehicleData } from '../../../../../core/app.selector';
+import { CommonService } from '../../../../shared/services/common.service';
 
 @Component({
   selector: 'live-map-tracking',
@@ -52,15 +57,37 @@ export class LiveMapTrackingComponent {
   private markers: L.Marker[] = [];
   private infoVehicleWindows: L.Popup[] = [];
   private clickedMarker: L.Marker | any = null;
-  userCountData:any
   data: any;
+  selctedUser$!: Observable<any>
+  liveCordinateOnmap: any[] = [];
+  polyline: L.Polyline | null = null;
+  confirmedVehicleId: string | null = null;
+  animationRequest: any;
+  showUserlist!:Observable<boolean>;
+  isShowUserList : boolean = true
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private liveSrevice: LiveTrackingService,
     private storageService: StorageService,
-    private cdr : ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private store: Store<AppState>,
+    private commonServive : CommonService
+  ) {
+    this.selctedUser$ = this.store.select(setSelectedVehicleData)
+    this.selctedUser$.subscribe((res: any) => {
+      this.liveData = res;
+      if (this.liveData) {
+        this.getSeletedData();
+      }
+    });
+
+    this.showUserlist = this.store.select(setIsShowUserList)
+    this.showUserlist.subscribe((res:any) => {
+      this.isShowUserList = res
+    })
+
+  }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -142,6 +169,8 @@ export class LiveMapTrackingComponent {
     this.livePayloadValue = Object.fromEntries(
       Object.entries(livePayload).filter(([_, value]) => value !== null)
     );
+    this.liveData=null;
+    this.clearMap()
     this.getLiveTracking();
   }
 
@@ -149,6 +178,7 @@ export class LiveMapTrackingComponent {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+    this.storageService.setItem('status', 'All');
   }
 
   getLiveTracking() {
@@ -170,8 +200,8 @@ export class LiveMapTrackingComponent {
         tap((res: any) => {
           this.spinnerLoading = false;
           this.data = res?.body?.result || [];
-          this.userCountData = res?.body?.result || []
-          // this.sendFilteredData();
+          this.store.dispatch(setUserCountData({ userCountData: this.data }));
+          this.sendFilteredData();
         }),
         switchMap(() => this.storageService.getItem('status')),
         tap((status: any) => {
@@ -182,7 +212,7 @@ export class LiveMapTrackingComponent {
         })
       )
       .subscribe(
-        () => {},
+        () => { },
         (error) => {
           console.error('Error fetching vehicle data:', error);
           this.spinnerLoading = false;
@@ -210,7 +240,8 @@ export class LiveMapTrackingComponent {
     ) {
       this.userData = data;
     }
-    this.userOnMapdata =  this.userData;
+    this.store.dispatch(setvehicleData({ vehicleData: this.userData }));
+    this.userOnMapdata = this.userData;
     return of(this.userOnMapdata);
   }
 
@@ -224,6 +255,7 @@ export class LiveMapTrackingComponent {
         if (!user || (!user?.latitude && !user?.longitude)) {
           return EMPTY;
         }
+
         const existingMarkerIndex = this.findExistingMarkerIndex(
           user.full_name
         );
@@ -276,7 +308,7 @@ export class LiveMapTrackingComponent {
             resolve({ user, icon, newPosition, existingMarkerIndex });
           };
         }).then((data: any) => {
-          const { vehicle, icon, newPosition, existingMarkerIndex } = data;
+          const { user, icon, newPosition, existingMarkerIndex } = data;
           if (existingMarkerIndex !== -1) {
             this.markers[existingMarkerIndex].setIcon(icon);
             this.markers[existingMarkerIndex].setLatLng(newPosition);
@@ -291,13 +323,13 @@ export class LiveMapTrackingComponent {
                 (vehicle: any) => vehicle?.full_name === clickedMarkerText
               );
               if (vehicleInfo) {
-                const initialContent = this.generateInfoWindowContent(vehicle);
+                const initialContent = this.generateInfoWindowContent(user);
                 popup.setContent(initialContent).setLatLng(newPosition);
               }
             }
           } else {
             const popup = L.popup();
-            this.createMarker(vehicle, index, icon, popup);
+            this.createMarker(user, index, icon, popup);
             this.infoVehicleWindows.push(popup);
           }
           return Promise.resolve();
@@ -305,7 +337,7 @@ export class LiveMapTrackingComponent {
       }),
       switchMap(() => interval(10000).pipe(takeUntil(this.destroy$))),
       take(1)
-    )  .subscribe(() => {
+    ).subscribe(() => {
       this.cdr.detectChanges();
     });
   }
@@ -317,7 +349,13 @@ export class LiveMapTrackingComponent {
   }
 
   onCheckVehicleDevice(device: any) {
-    return 'assets/images/rp_marker_person_red.png';
+    if(device?.sub_status === '1') {
+      return 'assets/images/rp_marker_person_green.png';
+    } else if(device?.sub_status === '2' || device?.sub_status === '3' || device?.sub_status === '4') {
+      return 'assets/images/yellow_man.png';
+    } else {
+      return 'assets/images/rp_marker_person_red.png';
+    }
   }
 
   createMarker(vehicle: any, index: number, icon: any, popup: L.Popup) {
@@ -347,14 +385,41 @@ export class LiveMapTrackingComponent {
       const initialContent = this.generateInfoWindowContent(vehicle);
       popup.setContent(initialContent).setLatLng(newPosition).openOn(this.map);
     });
-    // this.addPopupListeners(popup, vehicle);
 
     this.markers.push(marker);
     const bounds = L.latLngBounds(this.markers.map((m) => m.getLatLng()));
     this.map.fitBounds(bounds);
   }
 
-  generateInfoWindowContent(vehicle: any) {
+  generateInfoWindowContent(vehicle: any) {  
+    const locationPromise = new Promise(async (resolve) => {
+      if (vehicle?.latitude && vehicle?.longitude) {
+        try {
+          const address = { lat: vehicle.latitude, lng: vehicle.longitude };
+          this.commonServive.addressApi(address).subscribe({
+            next: (res: any) => {
+              const location = res?.results[0]?.formatted_address || 'Location not available';
+              resolve(location);
+            },
+            error: () => {
+              resolve(vehicle?.location || 'Location not available');
+            }
+          });
+        } catch {
+          resolve(vehicle?.location || 'Location not available');
+        }
+      } else {
+        resolve(vehicle?.location || 'Location not available');
+      }
+    });
+  
+    locationPromise.then((location: any) => {
+      const locationElement = document.querySelector('.location-part .label');
+      if (locationElement) {
+        locationElement.textContent = location;
+      }
+    });
+  
     return `
       <div>
         <div class="live-data pl-2 mt-1">
@@ -366,9 +431,7 @@ export class LiveMapTrackingComponent {
             </div>
             <div class="col-md-5">
               <span>
-                <strong>Designation:</strong> ${
-                  vehicle?.designation_name || 'N/A'
-                }
+                <strong>Designation:</strong> ${vehicle?.designation_name || 'N/A'}
               </span>
             </div>
           </div>  
@@ -406,7 +469,7 @@ export class LiveMapTrackingComponent {
           <div class="row mb-2">
             <div class="col-md-12 location-part">
               <span style="color: black" class="label">
-                ${vehicle?.location || 'Location not available'}
+               ${vehicle?.location || 'Fetching location...'}
               </span>
             </div>
           </div>  
@@ -414,5 +477,216 @@ export class LiveMapTrackingComponent {
       </div>`;
   }
 
-  selectUsersPlot(event: any) {}
+  async getLocationFromCoordinates(address:any): Promise<string> {
+    try {
+     this.commonServive.addressApi(address).subscribe((res:any) => {
+
+     })
+      return 'Location not available';
+    } catch (error) {
+      console.error('Error fetching location:', error);
+      return 'Location not available';
+    }
+  }
+
+  closeAllInfoWindows() {
+    for (const infoWindow of this.infoVehicleWindows) {
+      infoWindow.close();
+    }
+  }
+
+  clearMap() {
+    this.closeAllInfoWindows();
+    this.liveCordinateOnmap = []; 
+    if (this.markers && this.markers.length > 0) {
+      this.markers.forEach((marker: any) => {
+        marker.remove();
+      }); 
+    }
+    this.markers = [];
+    if (this.polyline) {
+      this.polyline.remove();
+      this.polyline = null;
+    }
+
+    if (this.animationRequest) {
+      cancelAnimationFrame(this.animationRequest);
+    }
+    this.animationRequest = null;
+    this.confirmedVehicleId = null;
+  }
+
+  getSeletedData() {
+    this.clearMap();
+    if (this.liveData) {         
+      this.confirmedVehicleId = this.liveData?.user_id;
+      this.sendFilteredData()
+    }
+  }
+
+  sendFilteredData() {
+    if (!this.confirmedVehicleId) return;
+    let selectedUserId = this.data.find((user:any) => user?.user_id == this.confirmedVehicleId);
+    console.log(selectedUserId);
+    
+    const latestLatLng = L.latLng(
+      selectedUserId?.latitude,
+      selectedUserId?.longitude
+    );    
+    this.map.setView(latestLatLng, 16);
+    const newLocationComing = {
+      lat: selectedUserId?.latitude,
+      lon: selectedUserId?.longitude,
+    };
+    this.liveCordinateOnmap.push(newLocationComing);
+    this.updateMarker(latestLatLng, selectedUserId);
+  }
+
+  updateMarker(latestLatLng: L.LatLng, data: any) {
+    const existingMarkerIndex = this.findExistingMarkerIndex(data?.full_name);
+    console.log(existingMarkerIndex);
+    
+    const currentLat = data?.Latitude;
+    const currentLon = data?.Longitude;
+
+    let previousLat: number | null = null;
+    let previousLon: number | null = null;
+
+    if (existingMarkerIndex !== -1) {
+      const prevLatLng = this.markers[existingMarkerIndex].getLatLng();
+      previousLat = prevLatLng.lat;
+      previousLon = prevLatLng.lng;
+    }
+
+    // Calculate heading only if there is a previous position
+    let heading = 0;
+    if (previousLat !== null && previousLon !== null) {
+      const deltaLat = currentLat - previousLat;
+      const deltaLng = currentLon - previousLon;
+      heading = Math.atan2(deltaLng, deltaLat) * (180 / Math.PI);
+    }
+
+    const canvas = document.createElement('canvas');
+    const context: CanvasRenderingContext2D | null = canvas.getContext('2d');
+    const img = new Image();
+    img.src = this.onCheckVehicleDevice(data);
+
+    img.onload = () => {
+      const canvasSize = Math.max(img.width, img.height);
+      canvas.width = canvas.height = canvasSize;
+
+      if (context) {
+        context.clearRect(0, 0, canvasSize, canvasSize);
+        context.translate(canvasSize / 2, canvasSize / 2);
+        context.rotate((heading || 0) * Math.PI / 180);
+        context.drawImage(img, -img.width / 2, -img.height / 2, img.width, img.height);
+        context.resetTransform();
+      }
+
+      const icon = L.icon({
+        iconUrl: canvas.toDataURL(),
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+      });
+
+      const vehicleLabel = `${data?.full_name}`;
+      const markerAnimationDuration = 5000;
+
+      if (existingMarkerIndex !== -1) {
+        console.log("check marker");
+        
+        const marker: any = this.markers[existingMarkerIndex];
+        const startLatLng = marker.getLatLng();
+        const startTime = performance.now(); 
+
+        if (!marker.popupManuallyClosed) {
+          let popup = L.popup();
+          popup.setContent(this.generateInfoWindowContent(data));
+          popup.setLatLng(latestLatLng);
+          marker.setPopup(popup);
+        }
+        if (marker.getPopup() && marker.getPopup().isOpen()) {
+          marker.getPopup().setContent(this.generateInfoWindowContent(data));
+          marker.getPopup().setLatLng(latestLatLng);
+        }
+        const animateMarker = (time: number) => {
+          const progress = Math.min((time - startTime) / markerAnimationDuration, 1);
+          const intermediateLat =
+            startLatLng.lat + (latestLatLng.lat - startLatLng.lat) * progress;
+          const intermediateLng =
+            startLatLng.lng + (latestLatLng.lng - startLatLng.lng) * progress;
+
+          const intermediateLatLng = L.latLng(intermediateLat, intermediateLng);
+          marker.setLatLng(intermediateLatLng);
+
+          if (this.polyline) {
+            const lastPoint: any = this.polyline.getLatLngs().slice(-1)[0];
+            if (!lastPoint || lastPoint.lat !== intermediateLat || lastPoint.lng !== intermediateLng) {
+              this.polyline.addLatLng(intermediateLatLng);
+            }
+          }
+
+          if (progress < 1) {
+            this.animationRequest = requestAnimationFrame(animateMarker);
+          } else {
+            marker.setLatLng(latestLatLng);
+            this.polyline?.addLatLng(latestLatLng);
+          }
+        };
+
+        this.animationRequest = requestAnimationFrame(animateMarker);
+
+        marker.setIcon(icon);
+        marker.bindTooltip(vehicleLabel, {
+          permanent: false,
+          direction: 'bottom',
+          className: 'map-label',
+        });
+      } else {
+        const newMarker: any = L.marker(latestLatLng, { icon });
+        newMarker.bindTooltip(vehicleLabel, {
+          permanent: false,
+          direction: 'bottom',
+          className: 'map-label',
+        });
+        newMarker.addTo(this.map);
+
+        // Polyline logic
+        if (!this.polyline) {
+          this.polyline = L.polyline([latestLatLng], {
+            color: 'green',
+            weight: 3,
+            opacity: 0.8,
+          }).addTo(this.map);
+        } else {
+          this.polyline.addLatLng(latestLatLng);
+        }
+        // Popup logic
+        const popup = L.popup();
+        popup.setContent(this.generateInfoWindowContent(data));
+        popup.setLatLng(latestLatLng);
+        newMarker.bindPopup(popup).openPopup();
+
+        
+        popup.on('close', () => {
+          newMarker.popupManuallyClosed = true;
+        });
+        newMarker.on('click', () => {
+          if (newMarker.popupManuallyClosed) {
+            newMarker.openPopup();
+            newMarker.popupManuallyClosed = false;
+          }
+        });
+        //this.addPopupListener(popup, data);
+        this.markers.push(newMarker);
+      }
+    };
+  }
+
+  closeTab() {
+    this.store.dispatch(setShowUserList({ showUserList: true }));
+    this.liveData = null;
+    this.clearMap();
+  }
+
 }

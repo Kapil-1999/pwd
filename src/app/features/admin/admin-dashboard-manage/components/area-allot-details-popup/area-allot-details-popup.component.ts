@@ -64,8 +64,7 @@ export class AreaAllotDetailsPopupComponent {
       subCatId : this.selectedsubCat?.sub_category_id
     }
     this.dashboardService.taskData(payload).subscribe((res:any) => {
-      console.log("check res", res);
-      this.taskData = res?.body?.result;
+      this.taskData = res?.body?.result || [];
     })
   }
 

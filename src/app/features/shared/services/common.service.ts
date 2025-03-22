@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../../http-services/api.service';
 import { API_CONSTANTS } from '../constant/API.constants';
 import { LocalStorageService } from './localstorage.service';
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { environment } from '../../../../environments/environment';
 
 
 
@@ -16,7 +17,8 @@ import autoTable from 'jspdf-autotable';
 export class CommonService {
   constructor(
     private apiService: ApiService,
-    private localStorageService : LocalStorageService
+    private localStorageService : LocalStorageService,
+    private http :  HttpClient
   ) { }
 
   zoneList(stateId: any): Observable<any> {
@@ -231,6 +233,12 @@ export class CommonService {
     return this.apiService.get(url).pipe(
       catchError((error: HttpErrorResponse) => of(error))
     );
+  }
+
+  addressApi(address:any): Observable<any> {
+    let url = API_CONSTANTS.addressApi.replace("{lat}", address.lat).replace("{lng}", address.lng).replace("{api_key}", environment.Api_Key);
+    return this.http.get(url)
+      .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
 

@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonService } from '../../../../shared/services/common.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../../core/app.reducer';
+import { allvehicleData } from '../../../../../core/app.selector';
+import { selectedVehicleData, setShowUserList } from '../../../../../core/app.action';
 
 @Component({
   selector: 'user-in-map',
@@ -9,9 +14,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class UserInMapComponent {
   @Output() mapData = new EventEmitter();
-  @Output() selectUserConfirm = new EventEmitter();
-  @Input() userValue: any;
-  @Input() userCountData: any;
   @Input() spinnerLoading :any
   userData: any
   searchKeyword: any;
@@ -19,6 +21,7 @@ export class UserInMapComponent {
   zoneList: any[] = [];
   circleList: any[] = [];
   cityList: any[] = [];
+  newVehicle$: Observable<any>
 
   config = {
     displayKey: 'text',
@@ -32,7 +35,23 @@ export class UserInMapComponent {
   liveForm!: FormGroup;
   swiperList: any;
 
-  constructor(private commonService: CommonService, private fb: FormBuilder) { }
+  constructor(
+    private commonService: CommonService, 
+    private fb: FormBuilder,
+    private store: Store<AppState>
+  ) { 
+    this.newVehicle$ = this.store.select(allvehicleData)  
+    this.newVehicle$.subscribe({
+      next: (user) => {
+        if (user) {
+          this.userData = user
+        }
+      },
+      error: (error) => {
+        console.error('Error in vehicle subscription:', error);
+      }
+    });
+  }
 
   ngOnInit() {
     this.initializeForm();
@@ -46,11 +65,6 @@ export class UserInMapComponent {
       circle: [null],
       city: [null],
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.userData = this.userValue;
-    this.swiperList = this.userCountData;
   }
 
   private getUserDetails() {
@@ -142,11 +156,14 @@ export class UserInMapComponent {
   }
 
   getVehicleColor(user: any) {
-    if (user?.status_duration === 'Never Connected!') {
+    if (user?.sub_status === '' || user?.sub_status === null) {
       return 'status-0';
-    } else {
+    } else if (user?.sub_status === '1')  {
       return 'status';
-    }
+    } else if (user?.sub_status === '2' || user?.sub_status === '3' || user?.sub_status === '4')  {
+      return'status-1';
+    } 
+    return 'status-0';
   }
 
   formatVehicleStatusDuration(vehicle: any) {
@@ -158,9 +175,11 @@ export class UserInMapComponent {
     }
   }
 
-  confirm(event: any) {
-    this.userData = [];
-    this.userData = event?.data;
-    this.selectUserConfirm.emit(event?.data)
+  onSelectuser(item: any) {
+    if (!item || (!item?.latitude && !item?.longitude)) {
+      return;
+    }    
+    this.store.dispatch(selectedVehicleData({ selectedVehicle: item })); 
+    this.store.dispatch(setShowUserList({ showUserList: false }));
   }
 }
