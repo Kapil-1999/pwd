@@ -29,6 +29,7 @@ import { LoaderComponent } from './component/loader/loader.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { AddressPipe } from './pipe/address.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     SwiperComponent,
     ProfileComponent,
     LoaderComponent,
+    AddressPipe,
   ],
   imports: [
     CommonModule,
@@ -96,7 +98,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     NgxSpinnerModule,
     LoaderComponent,
     AccordionModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    AddressPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [DatePipe]

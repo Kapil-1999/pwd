@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { DashboardService } from '../../service/dashboard.service';
 import { IMG_URL } from '../../../../shared/constant/menu/menu';
+import { CommonService } from '../../../../shared/services/common.service';
+import { AddressCacheService } from '../../../../shared/services/address.service';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-area-allot-details-popup',
@@ -20,7 +23,9 @@ export class AreaAllotDetailsPopupComponent {
   constructor(
     private bsmodalService : BsModalService,
     private router : Router,
-    private dashboardService : DashboardService
+    private dashboardService : DashboardService,
+    private commonServive : CommonService,
+    private addressCache : AddressCacheService
   ){};
 
   ngOnInit() {
@@ -80,4 +85,24 @@ export class AreaAllotDetailsPopupComponent {
   close() {
     this.bsmodalService.hide()
   }
+
+
+
+getAddress(lat: number, lng: number): Observable<string> {
+  const cachedAddress = this.addressCache.getCachedAddress(lat, lng);
+  if (cachedAddress) {
+    return of(cachedAddress); // Return cached address as an Observable
+  }
+
+  return this.commonServive.addressApi({ lat, lng }).pipe(
+    map((res: any) => {
+      const address = res?.results[0]?.formatted_address || 'Location not available';
+      this.addressCache.setCachedAddress(lat, lng, address); // Cache the address
+      return address;
+    }),
+    catchError(() => {
+      return of('Location not available'); // Handle errors
+    })
+  );
+}
 }

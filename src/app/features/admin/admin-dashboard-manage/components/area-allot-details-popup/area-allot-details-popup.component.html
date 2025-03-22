@@ -34,8 +34,7 @@
                                 alt="Before Image1">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
                                 <p class="text-gray-500">Remarks: {{task.bef_remark1 || 'NA'}}</p>
-                                <p class="text-gray-500">Adress: {{ task.bef_lat1 && task.bef_lon1 ? task.bef_lat1 + ' '
-                                    + task.bef_lon1 : 'NA' }}</p>
+                                <p class="text-gray-500">Adress: {{ (task.bef_lat1 | address : task.bef_lon1) | async  }}</p>
                             </div>
                         </div>
 
@@ -46,8 +45,7 @@
                                 alt="Before Image2">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
                                 <p class="text-gray-500">Remarks: {{task.bef_remark2 || 'NA'}}</p>
-                                <p class="text-gray-500">Adress: {{ task.bef_lat2 && task.bef_lon2 ? task.bef_lat2 + ' '
-                                    + task.bef_lon2 : 'NA' }}</p>
+                                <p class="text-gray-500">Adress: {{(task.bef_lat2 | address : task.bef_lon2) | async   }}</p>
                             </div>
                         </div>
                     </div>
@@ -60,8 +58,7 @@
                                 alt="After Image1">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
                                 <p class="text-gray-500">Remarks: {{task.aft_remark1 || 'NA'}}</p>
-                                <p class="text-gray-500">Adress: {{ task.aft_lat1 && task.aft_loc1 ? task.aft_lat1 + ' '
-                                    + task.aft_loc1 : 'NA' }}</p>
+                                <p class="text-gray-500">Adress: {{(task.aft_lat1 | address : task.aft_lon1) | async  }}</p>
                             </div>
                         </div>
 
@@ -72,8 +69,7 @@
                                 alt="After Image2">
                             <div class="mt-4 w-full border-t pt-2 text-gray-600">
                                 <p class="text-gray-500">Remarks: {{task.aft_remark2 || 'NA'}}</p>
-                                <p class="text-gray-500">Adress: {{ task.aft_lat2 && task.aft_lon2 ? task.aft_lat2 + ' '
-                                    + task.aft_lon2 : 'NA' }}</p>
+                                <p class="text-gray-500">Adress: {{ (task.aft_lat2 | address : task.aft_lon2) | async  }}</p>
                             </div>
                         </div>
                     </div>
