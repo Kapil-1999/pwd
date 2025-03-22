@@ -26,8 +26,17 @@ import {
 import { StorageService } from '../../../../shared/services/storage.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
-import { setShowUserList, setUserCountData, setvehicleData } from '../../../../../core/app.action';
-import { setIsShowUserList, setSelectedVehicleData } from '../../../../../core/app.selector';
+import {
+  setShowUserList,
+  setTypeUser,
+  setUserCountData,
+  setvehicleData,
+} from '../../../../../core/app.action';
+import {
+  setIsShowUserList,
+  setSelectedVehicleData,
+  setTypeUserOnMap,
+} from '../../../../../core/app.selector';
 import { CommonService } from '../../../../shared/services/common.service';
 
 @Component({
@@ -36,7 +45,6 @@ import { CommonService } from '../../../../shared/services/common.service';
   styleUrl: './live-map-tracking.component.scss',
 })
 export class LiveMapTrackingComponent {
-  @Output() onConfirm = new EventEmitter();
   map: L.Map | any;
   subscription: Subscription | any;
   livePayloadValue: any = {
@@ -58,23 +66,23 @@ export class LiveMapTrackingComponent {
   private infoVehicleWindows: L.Popup[] = [];
   private clickedMarker: L.Marker | any = null;
   data: any;
-  selctedUser$!: Observable<any>
+  selctedUser$!: Observable<any>;
   liveCordinateOnmap: any[] = [];
   polyline: L.Polyline | null = null;
   confirmedVehicleId: string | null = null;
   animationRequest: any;
-  showUserlist!:Observable<boolean>;
-  isShowUserList : boolean = true
+  showUserlist!: Observable<boolean>;
+  isShowUserList: boolean = true;
+  showUseronMap$: Observable<any>;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private liveSrevice: LiveTrackingService,
-    private storageService: StorageService,
     private cdr: ChangeDetectorRef,
     private store: Store<AppState>,
-    private commonServive : CommonService
+    private commonServive: CommonService
   ) {
-    this.selctedUser$ = this.store.select(setSelectedVehicleData)
+    this.selctedUser$ = this.store.select(setSelectedVehicleData);
     this.selctedUser$.subscribe((res: any) => {
       this.liveData = res;
       if (this.liveData) {
@@ -82,11 +90,18 @@ export class LiveMapTrackingComponent {
       }
     });
 
-    this.showUserlist = this.store.select(setIsShowUserList)
-    this.showUserlist.subscribe((res:any) => {
-      this.isShowUserList = res
-    })
+    this.showUserlist = this.store.select(setIsShowUserList);
+    this.showUserlist.subscribe((res: any) => {
+      this.isShowUserList = res;
+    });
 
+    this.showUseronMap$ = this.store.select(setTypeUserOnMap);
+    this.showUseronMap$.subscribe((res: any) => {
+      this.selectedStatus = res || 'All';
+      this.clearMap();
+      this.liveData = null;
+      this.getLiveTracking()
+    });
   }
 
   ngOnInit() {
@@ -169,8 +184,8 @@ export class LiveMapTrackingComponent {
     this.livePayloadValue = Object.fromEntries(
       Object.entries(livePayload).filter(([_, value]) => value !== null)
     );
-    this.liveData=null;
-    this.clearMap()
+    this.liveData = null;
+    this.clearMap();
     this.getLiveTracking();
   }
 
@@ -178,10 +193,10 @@ export class LiveMapTrackingComponent {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.storageService.setItem('status', 'All');
     this.store.dispatch(setvehicleData({ vehicleData: [] }));
     this.store.dispatch(setUserCountData({ userCountData: [] }));
     this.store.dispatch(setShowUserList({ showUserList: true }));
+    this.store.dispatch(setTypeUser({ typeUser: 'All' }));
     this.clearMap();
     this.destroy$.next();
   }
@@ -207,17 +222,13 @@ export class LiveMapTrackingComponent {
           this.data = res?.body?.result || [];
           this.store.dispatch(setUserCountData({ userCountData: this.data }));
           this.sendFilteredData();
-        }),
-        switchMap(() => this.storageService.getItem('status')),
-        tap((status: any) => {
-          this.selectedStatus = status;
           this.filterout(this.data);
-          this.onConfirm.emit(true);
           this.plotVehicleonMap();
+
         })
       )
       .subscribe(
-        () => { },
+        () => {},
         (error) => {
           console.error('Error fetching vehicle data:', error);
           this.spinnerLoading = false;
@@ -248,6 +259,7 @@ export class LiveMapTrackingComponent {
     this.store.dispatch(setvehicleData({ vehicleData: this.userData }));
     this.userOnMapdata = this.userData;
     return of(this.userOnMapdata);
+    
   }
 
   plotVehicleonMap() {
@@ -255,96 +267,98 @@ export class LiveMapTrackingComponent {
       return;
     }
     const vehicleObs$ = from(this.userOnMapdata);
-    vehicleObs$.pipe(
-      switchMap((user: any, index: number) => {
-        if (!user || (!user?.latitude && !user?.longitude)) {
-          return EMPTY;
-        }
-
-        const existingMarkerIndex = this.findExistingMarkerIndex(
-          user.full_name
-        );
-        let previousLat: any, previousLon: any;
-        if (existingMarkerIndex !== -1) {
-          previousLat = this.markers[existingMarkerIndex].getLatLng().lat;
-          previousLon = this.markers[existingMarkerIndex].getLatLng().lng;
-        }
-
-        const currentLat = user?.latitude;
-        const currentLon = user?.longitude;
-
-        const deltaLat = currentLat - previousLat;
-        const deltaLng = currentLon - previousLon;
-
-        let heading = Math.atan2(deltaLng, deltaLat) * (180 / Math.PI);
-        const canvas = document.createElement('canvas');
-        const context: any = canvas.getContext('2d');
-        const img = new Image();
-        img.src = this.onCheckVehicleDevice(user);
-
-        return new Promise((resolve) => {
-          img.onload = () => {
-            const canvasWidth = Math.max(img.width, img.height);
-            const canvasHeight = canvasWidth;
-
-            canvas.width = canvasWidth;
-            canvas.height = canvasHeight;
-
-            context.clearRect(0, 0, canvasWidth, canvasHeight);
-            context.translate(canvasWidth / 2, canvasHeight / 2);
-            context.rotate((heading * Math.PI) / 180);
-            context.drawImage(
-              img,
-              -img.width / 2,
-              -img.height / 2,
-              img.width,
-              img.height
-            );
-            context.rotate((-heading * Math.PI) / 180);
-            context.translate(-canvasWidth / 2, -canvasHeight / 2);
-
-            const icon = L.icon({
-              iconUrl: canvas.toDataURL(),
-              iconSize: [40, 40],
-              iconAnchor: [20, 20],
-            });
-
-            const newPosition = L.latLng(user?.latitude, user?.longitude);
-            resolve({ user, icon, newPosition, existingMarkerIndex });
-          };
-        }).then((data: any) => {
-          const { user, icon, newPosition, existingMarkerIndex } = data;
-          if (existingMarkerIndex !== -1) {
-            this.markers[existingMarkerIndex].setIcon(icon);
-            this.markers[existingMarkerIndex].setLatLng(newPosition);
-            const popup = this.infoVehicleWindows[existingMarkerIndex];
-            if (
-              popup &&
-              this.clickedMarker === this.markers[existingMarkerIndex]
-            ) {
-              const clickedMarkerTooltip = this.clickedMarker.getTooltip();
-              const clickedMarkerText = clickedMarkerTooltip.getContent();
-              const vehicleInfo = this.userOnMapdata.find(
-                (vehicle: any) => vehicle?.full_name === clickedMarkerText
-              );
-              if (vehicleInfo) {
-                const initialContent = this.generateInfoWindowContent(user);
-                popup.setContent(initialContent).setLatLng(newPosition);
-              }
-            }
-          } else {
-            const popup = L.popup();
-            this.createMarker(user, index, icon, popup);
-            this.infoVehicleWindows.push(popup);
+    vehicleObs$
+      .pipe(
+        switchMap((user: any, index: number) => {
+          if (!user || (!user?.latitude && !user?.longitude)) {
+            return EMPTY;
           }
-          return Promise.resolve();
-        });
-      }),
-      switchMap(() => interval(10000).pipe(takeUntil(this.destroy$))),
-      take(1)
-    ).subscribe(() => {
-      this.cdr.detectChanges();
-    });
+
+          const existingMarkerIndex = this.findExistingMarkerIndex(
+            user.full_name
+          );
+          let previousLat: any, previousLon: any;
+          if (existingMarkerIndex !== -1) {
+            previousLat = this.markers[existingMarkerIndex].getLatLng().lat;
+            previousLon = this.markers[existingMarkerIndex].getLatLng().lng;
+          }
+
+          const currentLat = user?.latitude;
+          const currentLon = user?.longitude;
+
+          const deltaLat = currentLat - previousLat;
+          const deltaLng = currentLon - previousLon;
+
+          let heading = Math.atan2(deltaLng, deltaLat) * (180 / Math.PI);
+          const canvas = document.createElement('canvas');
+          const context: any = canvas.getContext('2d');
+          const img = new Image();
+          img.src = this.onCheckVehicleDevice(user);
+
+          return new Promise((resolve) => {
+            img.onload = () => {
+              const canvasWidth = Math.max(img.width, img.height);
+              const canvasHeight = canvasWidth;
+
+              canvas.width = canvasWidth;
+              canvas.height = canvasHeight;
+
+              context.clearRect(0, 0, canvasWidth, canvasHeight);
+              context.translate(canvasWidth / 2, canvasHeight / 2);
+              context.rotate((heading * Math.PI) / 180);
+              context.drawImage(
+                img,
+                -img.width / 2,
+                -img.height / 2,
+                img.width,
+                img.height
+              );
+              context.rotate((-heading * Math.PI) / 180);
+              context.translate(-canvasWidth / 2, -canvasHeight / 2);
+
+              const icon = L.icon({
+                iconUrl: canvas.toDataURL(),
+                iconSize: [40, 40],
+                iconAnchor: [20, 20],
+              });
+
+              const newPosition = L.latLng(user?.latitude, user?.longitude);
+              resolve({ user, icon, newPosition, existingMarkerIndex });
+            };
+          }).then((data: any) => {
+            const { user, icon, newPosition, existingMarkerIndex } = data;
+            if (existingMarkerIndex !== -1) {
+              this.markers[existingMarkerIndex].setIcon(icon);
+              this.markers[existingMarkerIndex].setLatLng(newPosition);
+              const popup = this.infoVehicleWindows[existingMarkerIndex];
+              if (
+                popup &&
+                this.clickedMarker === this.markers[existingMarkerIndex]
+              ) {
+                const clickedMarkerTooltip = this.clickedMarker.getTooltip();
+                const clickedMarkerText = clickedMarkerTooltip.getContent();
+                const vehicleInfo = this.userOnMapdata.find(
+                  (vehicle: any) => vehicle?.full_name === clickedMarkerText
+                );
+                if (vehicleInfo) {
+                  const initialContent = this.generateInfoWindowContent(user);
+                  popup.setContent(initialContent).setLatLng(newPosition);
+                }
+              }
+            } else {
+              const popup = L.popup();
+              this.createMarker(user, index, icon, popup);
+              this.infoVehicleWindows.push(popup);
+            }
+            return Promise.resolve();
+          });
+        }),
+        switchMap(() => interval(10000).pipe(takeUntil(this.destroy$))),
+        take(1)
+      )
+      .subscribe(() => {
+        this.cdr.detectChanges();
+      });
   }
 
   findExistingMarkerIndex(vehicleNo: string): any {
@@ -354,9 +368,13 @@ export class LiveMapTrackingComponent {
   }
 
   onCheckVehicleDevice(device: any) {
-    if(device?.sub_status === '1') {
+    if (device?.sub_status === '1') {
       return 'assets/images/rp_marker_person_green.png';
-    } else if(device?.sub_status === '2' || device?.sub_status === '3' || device?.sub_status === '4') {
+    } else if (
+      device?.sub_status === '2' ||
+      device?.sub_status === '3' ||
+      device?.sub_status === '4'
+    ) {
       return 'assets/images/yellow_man.png';
     } else {
       return 'assets/images/rp_marker_person_red.png';
@@ -396,19 +414,20 @@ export class LiveMapTrackingComponent {
     this.map.fitBounds(bounds);
   }
 
-  generateInfoWindowContent(vehicle: any) {  
+  generateInfoWindowContent(vehicle: any) {
     const locationPromise = new Promise(async (resolve) => {
       if (vehicle?.latitude && vehicle?.longitude) {
         try {
           const address = { lat: vehicle.latitude, lng: vehicle.longitude };
           this.commonServive.addressApi(address).subscribe({
             next: (res: any) => {
-              const location = res?.results[0]?.formatted_address || 'Location not available';
+              const location =
+                res?.results[0]?.formatted_address || 'Location not available';
               resolve(location);
             },
             error: () => {
               resolve(vehicle?.location || 'Location not available');
-            }
+            },
           });
         } catch {
           resolve(vehicle?.location || 'Location not available');
@@ -417,14 +436,14 @@ export class LiveMapTrackingComponent {
         resolve(vehicle?.location || 'Location not available');
       }
     });
-  
+
     locationPromise.then((location: any) => {
       const locationElement = document.querySelector('.location-part .label');
       if (locationElement) {
         locationElement.textContent = location;
       }
     });
-  
+
     return `
       <div>
         <div class="live-data pl-2 mt-1">
@@ -436,7 +455,9 @@ export class LiveMapTrackingComponent {
             </div>
             <div class="col-md-5">
               <span>
-                <strong>Designation:</strong> ${vehicle?.designation_name || 'N/A'}
+                <strong>Designation:</strong> ${
+                  vehicle?.designation_name || 'N/A'
+                }
               </span>
             </div>
           </div>  
@@ -482,11 +503,9 @@ export class LiveMapTrackingComponent {
       </div>`;
   }
 
-  async getLocationFromCoordinates(address:any): Promise<string> {
+  async getLocationFromCoordinates(address: any): Promise<string> {
     try {
-     this.commonServive.addressApi(address).subscribe((res:any) => {
-
-     })
+      this.commonServive.addressApi(address).subscribe((res: any) => {});
       return 'Location not available';
     } catch (error) {
       console.error('Error fetching location:', error);
@@ -502,11 +521,11 @@ export class LiveMapTrackingComponent {
 
   clearMap() {
     this.closeAllInfoWindows();
-    this.liveCordinateOnmap = []; 
+    this.liveCordinateOnmap = [];
     if (this.markers && this.markers.length > 0) {
       this.markers.forEach((marker: any) => {
         marker.remove();
-      }); 
+      });
     }
     this.markers = [];
     if (this.polyline) {
@@ -523,21 +542,23 @@ export class LiveMapTrackingComponent {
 
   getSeletedData() {
     this.clearMap();
-    if (this.liveData) {         
+    if (this.liveData) {
       this.confirmedVehicleId = this.liveData?.user_id;
-      this.sendFilteredData()
+      this.sendFilteredData();
     }
   }
 
   sendFilteredData() {
     if (!this.confirmedVehicleId) return;
-    let selectedUserId = this.data.find((user:any) => user?.user_id == this.confirmedVehicleId);
+    let selectedUserId = this.data.find(
+      (user: any) => user?.user_id == this.confirmedVehicleId
+    );
     console.log(selectedUserId);
-    
+
     const latestLatLng = L.latLng(
       selectedUserId?.latitude,
       selectedUserId?.longitude
-    );    
+    );
     this.map.setView(latestLatLng, 16);
     const newLocationComing = {
       lat: selectedUserId?.latitude,
@@ -550,7 +571,7 @@ export class LiveMapTrackingComponent {
   updateMarker(latestLatLng: L.LatLng, data: any) {
     const existingMarkerIndex = this.findExistingMarkerIndex(data?.full_name);
     console.log(existingMarkerIndex);
-    
+
     const currentLat = data?.Latitude;
     const currentLon = data?.Longitude;
 
@@ -583,8 +604,14 @@ export class LiveMapTrackingComponent {
       if (context) {
         context.clearRect(0, 0, canvasSize, canvasSize);
         context.translate(canvasSize / 2, canvasSize / 2);
-        context.rotate((heading || 0) * Math.PI / 180);
-        context.drawImage(img, -img.width / 2, -img.height / 2, img.width, img.height);
+        context.rotate(((heading || 0) * Math.PI) / 180);
+        context.drawImage(
+          img,
+          -img.width / 2,
+          -img.height / 2,
+          img.width,
+          img.height
+        );
         context.resetTransform();
       }
 
@@ -598,11 +625,11 @@ export class LiveMapTrackingComponent {
       const markerAnimationDuration = 5000;
 
       if (existingMarkerIndex !== -1) {
-        console.log("check marker");
-        
+        console.log('check marker');
+
         const marker: any = this.markers[existingMarkerIndex];
         const startLatLng = marker.getLatLng();
-        const startTime = performance.now(); 
+        const startTime = performance.now();
 
         if (!marker.popupManuallyClosed) {
           let popup = L.popup();
@@ -615,7 +642,10 @@ export class LiveMapTrackingComponent {
           marker.getPopup().setLatLng(latestLatLng);
         }
         const animateMarker = (time: number) => {
-          const progress = Math.min((time - startTime) / markerAnimationDuration, 1);
+          const progress = Math.min(
+            (time - startTime) / markerAnimationDuration,
+            1
+          );
           const intermediateLat =
             startLatLng.lat + (latestLatLng.lat - startLatLng.lat) * progress;
           const intermediateLng =
@@ -626,7 +656,11 @@ export class LiveMapTrackingComponent {
 
           if (this.polyline) {
             const lastPoint: any = this.polyline.getLatLngs().slice(-1)[0];
-            if (!lastPoint || lastPoint.lat !== intermediateLat || lastPoint.lng !== intermediateLng) {
+            if (
+              !lastPoint ||
+              lastPoint.lat !== intermediateLat ||
+              lastPoint.lng !== intermediateLng
+            ) {
               this.polyline.addLatLng(intermediateLatLng);
             }
           }
@@ -672,7 +706,6 @@ export class LiveMapTrackingComponent {
         popup.setLatLng(latestLatLng);
         newMarker.bindPopup(popup).openPopup();
 
-        
         popup.on('close', () => {
           newMarker.popupManuallyClosed = true;
         });
@@ -693,5 +726,4 @@ export class LiveMapTrackingComponent {
     this.liveData = null;
     this.clearMap();
   }
-
 }

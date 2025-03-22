@@ -11,7 +11,7 @@ export interface AppState {
 
 export const initialState: AppState = {
   vehicleData: [],
-  typeUser: [],
+  typeUser: null,
   selectedVehicle: null, 
   userCountData: [],
   showUserList: true,
@@ -23,10 +23,13 @@ export const appReducer = createReducer(
       ...state,
       vehicleData,
     })),
-    on(setTypeUser, (state, { typeUser }) => ({
-     ...state,
-      typeUser,
-    })),
+    on(setTypeUser, (state, { typeUser }) => {
+      localStorage.setItem('pwd_user', (typeUser))
+       return {
+        ...state,
+        typeUser,
+      }
+    }),
     on(selectedVehicleData, (state, { selectedVehicle }) => ({
     ...state,
       selectedVehicle,

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../core/app.reducer';
 import {  setUserCountData } from '../../../../core/app.selector';
+import { setTypeUser } from '../../../../core/app.action';
 
 @Component({
   selector: 'swiper',
@@ -45,7 +46,6 @@ export class SwiperComponent {
   vehicleStauts:any
 
   constructor(
-    private storageService: StorageService,
     private store : Store<AppState>
   ) {
 
@@ -124,7 +124,7 @@ export class SwiperComponent {
   }
 
   filterData(data: any) {    
-    this.storageService.setItem('status', data.status)
+    this.store.dispatch(setTypeUser({ typeUser: data?.status }));
   }
 
 }
