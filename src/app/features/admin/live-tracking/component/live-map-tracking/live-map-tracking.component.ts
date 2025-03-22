@@ -179,6 +179,11 @@ export class LiveMapTrackingComponent {
       this.subscription.unsubscribe();
     }
     this.storageService.setItem('status', 'All');
+    this.store.dispatch(setvehicleData({ vehicleData: [] }));
+    this.store.dispatch(setUserCountData({ userCountData: [] }));
+    this.store.dispatch(setShowUserList({ showUserList: true }));
+    this.clearMap();
+    this.destroy$.next();
   }
 
   getLiveTracking() {
