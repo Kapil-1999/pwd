@@ -503,16 +503,6 @@ export class LiveMapTrackingComponent {
       </div>`;
   }
 
-  async getLocationFromCoordinates(address: any): Promise<string> {
-    try {
-      this.commonServive.addressApi(address).subscribe((res: any) => {});
-      return 'Location not available';
-    } catch (error) {
-      console.error('Error fetching location:', error);
-      return 'Location not available';
-    }
-  }
-
   closeAllInfoWindows() {
     for (const infoWindow of this.infoVehicleWindows) {
       infoWindow.close();
@@ -553,8 +543,6 @@ export class LiveMapTrackingComponent {
     let selectedUserId = this.data.find(
       (user: any) => user?.user_id == this.confirmedVehicleId
     );
-    console.log(selectedUserId);
-
     const latestLatLng = L.latLng(
       selectedUserId?.latitude,
       selectedUserId?.longitude
