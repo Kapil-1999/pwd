@@ -10,6 +10,7 @@ import {
 import * as L from 'leaflet';
 import { LiveTrackingService } from '../../services/live-tracking.service';
 import {
+  catchError,
   EMPTY,
   from,
   interval,
@@ -23,7 +24,6 @@ import {
   tap,
   timer,
 } from 'rxjs';
-import { StorageService } from '../../../../shared/services/storage.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
 import {
@@ -73,7 +73,8 @@ export class LiveMapTrackingComponent {
   animationRequest: any;
   showUserlist!: Observable<boolean>;
   isShowUserList: boolean = true;
-  showUseronMap$: Observable<any>;
+  private subs: Subscription[] = [];
+  private isDestroyed = false;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -82,26 +83,33 @@ export class LiveMapTrackingComponent {
     private store: Store<AppState>,
     private commonServive: CommonService
   ) {
-    this.selctedUser$ = this.store.select(setSelectedVehicleData);
-    this.selctedUser$.subscribe((res: any) => {
-      this.liveData = res;
-      if (this.liveData) {
-        this.getSeletedData();
-      }
-    });
+    this.subs.push(
+      this.store.select(setSelectedVehicleData)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+          this.liveData = res;
+          if (this.liveData) {
+            this.getSeletedData();
+          }
+        }));
 
-    this.showUserlist = this.store.select(setIsShowUserList);
-    this.showUserlist.subscribe((res: any) => {
-      this.isShowUserList = res;
-    });
+    this.subs.push(
+      this.store.select(setIsShowUserList)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+          this.isShowUserList = res;
+        }));
 
-    this.showUseronMap$ = this.store.select(setTypeUserOnMap);
-    this.showUseronMap$.subscribe((res: any) => {
-      this.selectedStatus = res || 'All';
-      this.clearMap();
-      this.liveData = null;
-      this.getLiveTracking()
-    });
+    this.subs.push(
+      this.store.select(setTypeUserOnMap)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+          if (this.isDestroyed) return;
+          this.selectedStatus = res || 'JE';
+          this.clearMap();
+          this.liveData = null;
+          this.filterout(this.data);
+        }));
   }
 
   ngOnInit() {
@@ -173,8 +181,9 @@ export class LiveMapTrackingComponent {
       Array.isArray(event.city) && event.city.length === 0
         ? null
         : event.city?.value;
+    let livePayload: any;
 
-    const livePayload = {
+    livePayload = {
       selectedDesigId: 0,
       zoneId: zone,
       circleId: circle,
@@ -184,56 +193,85 @@ export class LiveMapTrackingComponent {
     this.livePayloadValue = Object.fromEntries(
       Object.entries(livePayload).filter(([_, value]) => value !== null)
     );
+    this.data = []
     this.liveData = null;
     this.clearMap();
     this.getLiveTracking();
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    this.isDestroyed = true;
+
+    this.destroy$.next();
+    this.destroy$.complete();
+
+    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs = [];
+
+    if (this.counterInterval) {
+      clearInterval(this.counterInterval);
+      this.counterInterval = null;
     }
+
+    if (this.animationRequest) {
+      cancelAnimationFrame(this.animationRequest);
+      this.animationRequest = null;
+    }
+
     this.store.dispatch(setvehicleData({ vehicleData: [] }));
     this.store.dispatch(setUserCountData({ userCountData: [] }));
     this.store.dispatch(setShowUserList({ showUserList: true }));
-    this.store.dispatch(setTypeUser({ typeUser: 'All' }));
+    this.store.dispatch(setTypeUser({ typeUser: 'JE' }));
+
     this.clearMap();
-    this.destroy$.next();
   }
 
   getLiveTracking() {
+    if (this.isDestroyed) return;
     this.spinnerLoading = true;
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.subscription = timer(0, 10000)
-      .pipe(
-        tap((value) => {
-          this.countdown = value % 10 === 0 ? 0 : 10 - (value % 10);
-          this.counter = 10;
-          clearInterval(this.counterInterval);
-          this.counterInterval = setInterval(() => {
-            this.counter--;
-          }, 1000);
-        }),
-        switchMap(() => this.liveSrevice.liveTracking(this.livePayloadValue)),
-        tap((res: any) => {
-          this.spinnerLoading = false;
-          this.data = res?.body?.result || [];
-          this.store.dispatch(setUserCountData({ userCountData: this.data }));
-          this.sendFilteredData();
-          this.filterout(this.data);
-          this.plotVehicleonMap();
 
-        })
-      )
-      .subscribe(
-        () => {},
-        (error) => {
+    this.subscription = timer(0, 10000).pipe(
+      takeUntil(this.destroy$),
+      tap((value) => {
+        if (this.isDestroyed) return;
+        this.countdown = value % 10 === 0 ? 0 : 10 - (value % 10);
+        this.counter = 10;
+        clearInterval(this.counterInterval);
+        this.counterInterval = setInterval(() => {
+          if (!this.isDestroyed) {
+            this.counter--;
+          }
+        }, 1000);
+      }),
+      switchMap(() => {
+        if (this.isDestroyed) return EMPTY;
+        return this.liveSrevice.liveTracking(this.livePayloadValue);
+      }),
+      tap((res: any) => {
+        if (this.isDestroyed) return;
+        this.spinnerLoading = false;
+        const uniqueData = Array.from(new Map(
+          (res?.body?.result || []).map((item: any) => [item.user_id, item])
+        ).values());
+        this.data = uniqueData;
+        this.store.dispatch(setUserCountData({ userCountData: this.data }));
+        this.sendFilteredData();
+        this.filterout(this.data);
+        this.plotVehicleonMap();
+      }),
+      catchError(error => {
+        if (!this.isDestroyed) {
           console.error('Error fetching vehicle data:', error);
           this.spinnerLoading = false;
         }
-      );
+        return EMPTY;
+      })
+    ).subscribe();
+
+    this.subs.push(this.subscription);
   }
 
   filterout(data: any): Observable<any> {
@@ -250,7 +288,7 @@ export class LiveMapTrackingComponent {
     } else if (this.selectedStatus === 'JE') {
       this.userData = data.filter((res: any) => res?.designation_id == 6);
     } else if (
-      this.selectedStatus === 'All' ||
+      this.selectedStatus === 'JE' ||
       this.selectedStatus == undefined ||
       this.selectedStatus == null
     ) {
@@ -259,7 +297,7 @@ export class LiveMapTrackingComponent {
     this.store.dispatch(setvehicleData({ vehicleData: this.userData }));
     this.userOnMapdata = this.userData;
     return of(this.userOnMapdata);
-    
+
   }
 
   plotVehicleonMap() {
@@ -455,9 +493,8 @@ export class LiveMapTrackingComponent {
             </div>
             <div class="col-md-5">
               <span>
-                <strong>Designation:</strong> ${
-                  vehicle?.designation_name || 'N/A'
-                }
+                <strong>Designation:</strong> ${vehicle?.designation_name || 'N/A'
+      }
               </span>
             </div>
           </div>  
@@ -613,21 +650,19 @@ export class LiveMapTrackingComponent {
       const markerAnimationDuration = 5000;
 
       if (existingMarkerIndex !== -1) {
-        console.log('check marker');
-
         const marker: any = this.markers[existingMarkerIndex];
-        const startLatLng = marker.getLatLng();
+        const startLatLng = marker?.getLatLng();
         const startTime = performance.now();
 
-        if (!marker.popupManuallyClosed) {
+        if (!marker?.popupManuallyClosed) {
           let popup = L.popup();
           popup.setContent(this.generateInfoWindowContent(data));
           popup.setLatLng(latestLatLng);
-          marker.setPopup(popup);
+          marker?.setPopup(popup);
         }
-        if (marker.getPopup() && marker.getPopup().isOpen()) {
-          marker.getPopup().setContent(this.generateInfoWindowContent(data));
-          marker.getPopup().setLatLng(latestLatLng);
+        if (marker?.getPopup() && marker?.getPopup().isOpen()) {
+          marker?.getPopup().setContent(this.generateInfoWindowContent(data));
+          marker?.getPopup().setLatLng(latestLatLng);
         }
         const animateMarker = (time: number) => {
           const progress = Math.min(
@@ -640,7 +675,7 @@ export class LiveMapTrackingComponent {
             startLatLng.lng + (latestLatLng.lng - startLatLng.lng) * progress;
 
           const intermediateLatLng = L.latLng(intermediateLat, intermediateLng);
-          marker.setLatLng(intermediateLatLng);
+          marker?.setLatLng(intermediateLatLng);
 
           if (this.polyline) {
             const lastPoint: any = this.polyline.getLatLngs().slice(-1)[0];
@@ -656,15 +691,15 @@ export class LiveMapTrackingComponent {
           if (progress < 1) {
             this.animationRequest = requestAnimationFrame(animateMarker);
           } else {
-            marker.setLatLng(latestLatLng);
+            marker?.setLatLng(latestLatLng);
             this.polyline?.addLatLng(latestLatLng);
           }
         };
 
         this.animationRequest = requestAnimationFrame(animateMarker);
 
-        marker.setIcon(icon);
-        marker.bindTooltip(vehicleLabel, {
+        marker?.setIcon(icon);
+        marker?.bindTooltip(vehicleLabel, {
           permanent: false,
           direction: 'bottom',
           className: 'map-label',

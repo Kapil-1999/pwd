@@ -5,7 +5,10 @@ import { ManageLiveTrackingComponent } from './pages/manage-live-tracking/manage
 const routes: Routes = [
   {
     path : 'track', component: ManageLiveTrackingComponent
-  }
+  },
+  {
+    path: 'selectUser-track/:id', component: ManageLiveTrackingComponent
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { DashboardService } from '../../service/dashboard.service';
 import { CommonService } from '../../../../shared/services/common.service';
 import { IMG_URL } from '../../../../shared/constant/menu/menu';
@@ -19,13 +19,20 @@ export class ManageUserDetailsComponent {
     locId: 0
   }
   userData: any;
-  imgUrl = IMG_URL
+  imgUrl = IMG_URL;
+  previousUrl: string = '/admin/dashboard/home';
 
   constructor(
     private dashboardService: DashboardService,
     private commonService: CommonService,
-    private router : Router
-  ) { }
+    private router : Router,
+    private location: Location
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras?.state?.['previousUrl']) {
+      this.previousUrl = navigation.extras.state['previousUrl'];
+    }
+   }
 
   ngOnInit() {
     this.userData = history.state.userData;
@@ -40,6 +47,10 @@ export class ManageUserDetailsComponent {
     this.userData = this.commonService.getUserDetails();
     this.data['locId'] = this.userData?.locId
     this.getAllUserDetails()
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   getAllUserDetails() {
@@ -93,13 +104,17 @@ export class ManageUserDetailsComponent {
     this.getAllUserDetails()
   }
 
-  onAssignArea(userId:any, designationId : any) {
-    this.router.navigateByUrl(`/admin/dashboard/${userId}/${designationId}/area-allot-details`)
+  onAssignArea(userId:any, designationId : any, user: any) {
+    if(user?.task_count == 0) return;    
+    this.router.navigateByUrl(`/admin/dashboard/${userId}/${designationId}/area-allot-details`, {
+      state: { 
+        previousUrl : '/admin/dashboard/user-details'
+       }
+    })
   }
 
-  goToLive(user:any) {
-    console.log(user);
-    this.router.navigateByUrl("/admin/live/track")
+  goToLive(user: any) {
+    this.router.navigateByUrl('/admin/live/track');
   }
 
 

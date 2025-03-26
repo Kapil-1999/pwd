@@ -65,7 +65,9 @@ export class EmployeeCountingComponent {
 
   goToDetails(data:any) {
     this.router.navigateByUrl('/admin/dashboard/user-details', {
-      state: { userData: data }
+      state: { userData: data ,
+        previousUrl : '/admin/dashboard/home'
+       }
     });
   }
 }

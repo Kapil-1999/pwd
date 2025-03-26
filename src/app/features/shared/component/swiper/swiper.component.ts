@@ -43,7 +43,8 @@ export class SwiperComponent {
   JECount: any;
   adminCount: any;
   userData$:Observable<any>;
-  vehicleStauts:any
+  vehicleStauts:any;
+  selectedAlert: any = 'JE';
 
   constructor(
     private store : Store<AppState>
@@ -72,51 +73,51 @@ export class SwiperComponent {
     this.JECount = this.vehicleStauts?.filter((res: any) => res?.designation_id == 6);
 
     this.status = [
-      {
-        src: "/assets/icons/feather-alert-octagon.svg",
-        label: this.vehicleStauts?.length,
-        class: '#696969',
-        color: '#696969',
-        status: 'All',
-        data: this.vehicleStauts
-      },
+      // {
+      //   src: "/assets/icons/feather-alert-octagon.svg",
+      //   label: this.vehicleStauts?.length,
+      //   class: '#696969',
+      //   color: '#696969',
+      //   status: 'All',
+      //   data: this.vehicleStauts
+      // },
       {
         src: "/assets/icons/awesome-gas-pump.svg",
         label: this.CECount?.length,
-        class: '#696969',
-        color: '#696969',
+        class: this.selectedAlert == 'CE' ? 'blue' : '#696969',
+        color:  this.selectedAlert == 'CE' ? 'blue' : '#696969',
         status: 'CE',
         data: this.CECount
       },
       {
         src: "/assets/icons/zocial-call.svg",
         label: this.SECount?.length,
-        class: '#696969',
-        color: '#696969',
+        class: this.selectedAlert == 'SE' ? 'blue' : '#696969',
+        color:  this.selectedAlert == 'SE' ? 'blue' : '#696969',
         status: "SE",
         data: this.SECount
       },
       {
         src: "/assets/icons/awesome-truck.svg",
         label: this.EECount?.length,
-        class: '#696969',
-        color: '#696969',
+        class: this.selectedAlert == 'EE' ? 'blue' : '#696969',
+        color:  this.selectedAlert == 'EE' ? 'blue' : '#696969',
         status: 'EE',
         data: this.EECount
       },
       {
         src: "/assets/icons/awesome-box.svg",
         label: this.AECount?.length,
-        class: '#696969',
-        color: '#696969',
+        class: this.selectedAlert == 'AE' ? 'blue' : '#696969',
+        color:  this.selectedAlert == 'AE' ? 'blue' : '#696969',
         status: "AE",
         data: this.AECount
       },
       {
         src: "/assets/icons/awesome-box.svg",
         label: this.JECount?.length,
-        class: '#696969',
-        color: '#696969',
+        class: this.selectedAlert == 'JE' ? 'blue' : '#696969',
+        color:  this.selectedAlert == 'JE' ? 'blue' : '#696969',
         status: "JE",
         data: this.JECount
       }
@@ -124,6 +125,7 @@ export class SwiperComponent {
   }
 
   filterData(data: any) {    
+    this.selectedAlert = data?.status;
     this.store.dispatch(setTypeUser({ typeUser: data?.status }));
   }
 

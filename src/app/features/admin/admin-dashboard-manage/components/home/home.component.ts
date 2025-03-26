@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import * as L from 'leaflet';
 import { DashboardService } from '../../service/dashboard.service';
 import { CommonService } from '../../../../shared/services/common.service';
 @Component({
