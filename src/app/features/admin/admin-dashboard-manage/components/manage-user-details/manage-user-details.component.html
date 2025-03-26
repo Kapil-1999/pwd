@@ -1,6 +1,9 @@
 @if(isLoading) {
 <app-loader></app-loader>
 } @else {
+  <button class="btn btn-secondary" (click)="goBack()">
+    <i class="fas fa-arrow-left mr-1"></i> Back
+  </button>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 bg-gray-50">
   @if (allUserList && allUserList.length > 0) {
   @for (user of allUserList; track user) {
@@ -21,7 +24,7 @@
 
     @if (user?.designation_id == 6) {
       <div class="flex border rounded-lg overflow-hidden mt-2">
-        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100" (click)="onAssignArea(user?.user_id, user?.je_desig_id)">
+        <button class="flex-1 flex items-center justify-center py-2 text-gray-700 hover:bg-gray-100" (click)="onAssignArea(user?.user_id, user?.je_desig_id,user)">
           <i class="fas fa-envelope mr-2 text-gray-500"></i> Assign ({{user?.task_count || 0}})
         </button>
       

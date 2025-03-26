@@ -6,3 +6,4 @@ export const  setTypeUserOnMap =  createSelector(selectAppstate ,(state) => stat
 export const  setSelectedVehicleData = createSelector(selectAppstate ,(state) => state.selectedVehicle);
 export const  setUserCountData = createSelector(selectAppstate,(state) => state.userCountData);
 export const  setIsShowUserList = createSelector(selectAppstate,(state) => state.showUserList);
+export const  setSelectedUser = createSelector(selectAppstate,(state) => state.selectedUser);

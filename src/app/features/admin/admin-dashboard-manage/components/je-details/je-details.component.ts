@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AreaAllotDetailsPopupComponent } from '../area-allot-details-popup/area-allot-details-popup.component';
-import { CategoryService } from '../../../master/category-master/services/category.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from '../../service/dashboard.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-je-details',
@@ -23,12 +23,20 @@ export class JeDetailsComponent {
   showCategory: number | null = null; 
   workList: any;
   taskId: any;
+  previousUrl :any;
+
   constructor(
     private bsmoalService: BsModalService,
-    private CategoryService : CategoryService,
     private route : ActivatedRoute, 
-    private dashboardService : DashboardService
-  ) {}
+    private dashboardService : DashboardService,
+    private router: Router,
+    private location : Location
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras?.state?.['previousUrl']) {
+      this.previousUrl = navigation.extras.state['previousUrl'];
+    }
+  }
 
   ngOnInit() {
     this.route?.paramMap.subscribe(params => {      
@@ -85,6 +93,10 @@ export class JeDetailsComponent {
         class: 'modal-lg modal-dialog-centered alert-popup',
       })
     );
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   onOpenWork(itemId: number, workId:any) {
