@@ -35,9 +35,7 @@ export class ManageUserDetailsComponent {
    }
 
   ngOnInit() {
-    this.userData = history.state.userData;
-    console.log(this.userData);
-    
+    this.userData = history.state.userData;    
     if (this.userData) {
       this.data['userId'] = this.userData?.user_id;
       this.data['desiId'] = this.userData?.ce_desig_id;
