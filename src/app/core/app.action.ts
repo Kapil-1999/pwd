@@ -4,5 +4,6 @@ export const setvehicleData = createAction('[vehicle] setvehicleData', props<{ve
 export const setTypeUser = createAction('[vehicle] setTypeUser', props<{typeUser: any}>());
 export const selectedVehicleData = createAction('[vehicle] selectedVehicleData', props<{selectedVehicle: any}>());
 export const setUserCountData = createAction('[vehicle] setuserCountData', props<{userCountData: any}>());
-export const removeVehicle = createAction('[vehicle] removeVehicle');
 export const setShowUserList = createAction('[vehicle] showUserList', props<{showUserList: any}>());
+export const selectedUser = createAction('[vehicle] selectedUser', props<{selectedUser: any}>());
+export const selectedUserArea = createAction('[vehicle] selectedUserArea', props<{selectedUserArea: any}>());
