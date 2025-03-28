@@ -36,6 +36,8 @@ export class ManageUserDetailsComponent {
 
   ngOnInit() {
     this.userData = history.state.userData;
+    console.log(this.userData);
+    
     if (this.userData) {
       this.data['userId'] = this.userData?.user_id;
       this.data['desiId'] = this.userData?.ce_desig_id;
@@ -65,39 +67,49 @@ export class ManageUserDetailsComponent {
     if (data?.designation_id == 2) {
       if (id == 3) {
         this.data['locId'] = `zone_${data?.zone_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       } else if (id == 4) {
-        this.data['locId'] = `zone_${data?.zone_id}`
+        this.data['locId'] = `zone_${data?.zone_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       } else if (id == 5) {
-        this.data['locId'] = `zone_${data?.zone_id}`
+        this.data['locId'] = `zone_${data?.zone_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       } else if (id == 6) {
-        this.data['locId'] = `zone_${data?.zone_id}`
+        this.data['locId'] = `zone_${data?.zone_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       }
     } else if (data?.designation_id == 3) {
       if (id == 4) {
-        this.data['locId'] = `circle_${data?.circle_id}`
+        this.data['locId'] = `circle_${data?.circle_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       } else if (id == 5) {
-        this.data['locId'] = `circle_${data?.circle_id}`
+        this.data['locId'] = `circle_${data?.circle_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       } else if (id == 6) {
         this.data['locId'] = `circle_${data?.circle_id}`
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       }
     } else if (data?.designation_id == 4) {
       if (id == 5) {
-        this.data['locId'] = `district_${data?.district_id}`
+        this.data['locId'] = `district_${data?.district_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       } else if (id == 6) {
-        this.data['locId'] = `district_${data?.district_id}`
+        this.data['locId'] = `district_${data?.district_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       }
     } else if(data?.designation_id == 5) {
       if (id == 6) {
-        this.data['locId'] = `division_${data?.division_id}`
+        this.data['locId'] = `division_${data?.division_id}`;
+        this.data['userId'] = data?.user_id;
         this.data['desiId'] = id
       }
     }
