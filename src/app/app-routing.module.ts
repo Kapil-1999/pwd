@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './features/shared/layout/main-layout/main-layout.component';
 import { LoginComponent } from './features/shared/login/login/login.component';
 import { AuthguardGuard } from './features/shared/services/authguard.guard';
+import { AreaPlotFormComponent } from './features/admin/admin-dashboard-manage/components/area-plot-form/area-plot-form.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
       import("./features/admin/admin.module").then(
         (m) => m.AdminModule
       ),
+  },
+  {
+    path : 'admin/dashboard/area-plot-form/:formCode' , component : AreaPlotFormComponent
   },
   {
     path: '**',

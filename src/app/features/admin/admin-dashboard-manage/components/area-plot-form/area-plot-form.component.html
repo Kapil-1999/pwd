@@ -1,123 +1,264 @@
 <div class="main-section">
     @if(showForm(1)) {
-    <table>
-        <tr>
-            <td colspan="7" class="center">
-                <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center">
-                <h2>-: Work Implementation Unit :-</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center">
-                <h2>Executive Engineer, Construction Division, PWD, Varanasi</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="5">Sr No.: 1</td>
-            <td colspan="2" class="center">Date: 01/01/1970 05:30:00</td>
-        </tr>
-        <tr>
-            <td colspan="7">NAME OF WORK: </td>
-        </tr>
-        <tr>
-            <td colspan="7">NAME OF CONTRACTOR: </td>
-        </tr>
-        <tr>
-            <td colspan="3">Chainage: </td>
-            <td colspan="4">Contract Bond No.: </td>
-        </tr>
-        <tr>
-            <td colspan="3">MDD: </td>
-            <td colspan="2">Date of Sampling: </td>
-            <td colspan="2">Date of Testing: </td>
-        </tr>
-        <tr>
-            <td colspan="2">Density Determination Test in Situ (Sand Replacement Method)</td>
-            <td colspan="3" class="center">IS:2720 (Part XXVIII)</td>
-            <td colspan="2">OMC: </td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center"><b>(A) Calibration of Sand</b></td>
-        </tr>
-        <tr>
-            <td>(I) Mean weight of sand in cone (of pouring cylinder) (W2) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(II) Volume of calibrating cylinder (V) in cm<sup>3</sup></td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(III) Weight of sand before pouring into calibrating container (W1) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(IV) Mean weight of sand after pouring into calibrating container (W3) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(V) Weight of sand to fill calibrating cylinder (Wa = W1-W2-W3) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(VI) Bulk density of sand Y<sub>s</sub> = (Wa/V) g/cm<sup>3</sup></td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center"><b>(B) Determination of Field Density of Core</b></td>
-        </tr>
-        <tr>
-            <td>(I) Weight of wet material from hole (Ww) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(II) Weight of sand (+ cylinder) before pouring into hole and cone (W1) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(III) Weight of sand (+ cylinder) before pouring into hole and cone (W4) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(IV) Weight of sand in cone (W2) in g.</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(V) Weight of sand in hole, in g. W<sub>b</sub> = (W1-W4-W2)</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(VI) Bulk density Y<sub>b</sub> = (Ww/W<sub>b</sub>) Y<sub>s</sub> g/cm<sup>3</sup></td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(VII) Moisture Content (W) percent (By moisture meter)</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(VIII) Dry density Y<sub>d</sub> = (Y<sub>b</sub> / (1 + (W/100))) g/cm<sup>3</sup></td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>(XI) Relative Dry density w.r.t MDD as above in percentage (=100xY<sub>d</sub>/MDD)</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center"><b>Layer</b></td>
-        </tr>
-        <tr>
-            <td>Mean Value as per above test</td>
-            <td colspan="6"></td>
-        </tr>
-        <tr>
-            <td>Not less than.......percent of MDD</td>
-            <td colspan="6"></td>
-        </tr>
-    </table>
+    @for(data of areaPlotForm ; track data) {
+        <div class="table-container">
+            <table class="mt-4">
+                <tr>
+                    <td colspan="11" class="center">
+                        <h2>DETERMINATION OF DRY DENSITY OF SOIL IN PLACE</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="center">
+                        <h2>(SAND REPLACEMENT METHOD)</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="center">
+                        <h2>AS PER IS:2720-PART 29</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">Source/Location Of Lab: <span style="padding-left: 10px;">{{data?.location_lab}}</span>
+                    </td>
+                    <td colspan="5">Date: <span style="padding-left: 10px;">{{data?.date}}</span> </td>
+                </tr>
+                <tr>
+                    <td colspan="11">Material Source Details: </td>
+                </tr>
+                <tr>
+                    <td colspan="6">1. Borrow area Name/Pit No/Any Other Reference: <span
+                            style="padding-left: 10px;">{{data?.borrow_area}}</span></td>
+                    <td colspan="5">MDD (g/cc): <span style="padding-left: 10px;">{{data?.mdd}}</span> </td>
+                </tr>
+                <tr>
+                    <td colspan="11">2. Optimum Moisture Content (OMC)(%): <span
+                            style="padding-left: 10px;">{{data?.omc}}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="center">
+                        <h3>Pre-Test Data</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="11">Chainage Of Stretch(From Km-To Km): <span
+                            style="padding-left: 10px;">{{data?.chainage}}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="11">Layer No: <span style="padding-left: 10px;">{{data?.layer_no}}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="11">Bulk Density Of Sand, g/cc (g/cc): <span
+                            style="padding-left: 10px;">{{data?.bulk_density}}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="11">Weight Of Sand in Cone W-3 (grams from Lab): <span
+                            style="padding-left: 10px;">{{data?.cone_sand}}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="center">
+                        <h3>Field Density Determination</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 5%;">Sl No.</th>
+                    <th colspan="3" style="width: 45%;">Description</th>
+                    <th style="width: 10%;">Unit</th>
+                    <th colspan="6" style="width: 40%;">Observations at Pit Location</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td colspan="3">Chainage & Pit Location</td>
+                    <td>g</td>
+                    <td>{{data?.pit_location1}}</td>
+                    <td>{{data?.pit_location2}}</td>
+                    <td>{{data?.pit_location3}}</td>
+                    <td>{{data?.pit_location4}}</td>
+                    <td>{{data?.pit_location5}}</td>
+                    <td>{{data?.pit_location6}}</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td colspan="3" class="description">Weight of wet soil from hole W</td>
+                    <td class="unit">g</td>
+                    <td class="data-cell">{{data?.wt_soil_hole1}}</td>
+                    <td class="data-cell">{{data?.wt_soil_hole2}}</td>
+                    <td class="data-cell">{{data?.wt_soil_hole3}}</td>
+                    <td class="data-cell">{{data?.wt_soil_hole4}}</td>
+                    <td class="data-cell">{{data?.wt_soil_hole5}}</td>
+                    <td class="data-cell">{{data?.wt_soil_hole6}}</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td colspan="3">Weight Of sand with Cyclinder before Pouring(W1)</td>
+                    <td>g</td>
+                    <td>{{data?.before_wt_sand1}}</td>
+                    <td>{{data?.before_wt_sand2}}</td>
+                    <td>{{data?.before_wt_sand3}}</td>
+                    <td>{{data?.before_wt_sand4}}</td>
+                    <td>{{data?.before_wt_sand5}}</td>
+                    <td>{{data?.before_wt_sand6}}</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td colspan="3">Weight of sand with Cyclinder before Pouring(W2)</td>
+                    <td>g</td>
+                    <td>{{data?.after_wt_sand1}}</td>
+                    <td>{{data?.after_wt_sand2}}</td>
+                    <td>{{data?.after_wt_sand3}}</td>
+                    <td>{{data?.after_wt_sand4}}</td>
+                    <td>{{data?.after_wt_sand5}}</td>
+                    <td>{{data?.after_wt_sand6}}</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td colspan="3">Weight Of sand in Hole(W0=W1-W2-W3)</td>
+                    <td>g</td>
+                    <td>{{data?.wt_sand_ws1}}</td>
+                    <td>{{data?.wt_sand_ws2}}</td>
+                    <td>{{data?.wt_sand_ws3}}</td>
+                    <td>{{data?.wt_sand_ws4}}</td>
+                    <td>{{data?.wt_sand_ws5}}</td>
+                    <td>{{data?.wt_sand_ws6}}</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td colspan="3">Volume Of the Hole V = W3/G3</td>
+                    <td>g</td>
+                    <td>{{data?.volume1}}</td>
+                    <td>{{data?.volume2}}</td>
+                    <td>{{data?.volume3}}</td>
+                    <td>{{data?.volume4}}</td>
+                    <td>{{data?.volume5}}</td>
+                    <td>{{data?.volume6}}</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td colspan="3">Bulk Density Of Soil g'bulk = (W/V)</td>
+                    <td>g</td>
+                    <td>{{data?.g_bulk1}}</td>
+                    <td>{{data?.g_bulk2}}</td>
+                    <td>{{data?.g_bulk3}}</td>
+                    <td>{{data?.g_bulk4}}</td>
+                    <td>{{data?.g_bulk5}}</td>
+                    <td>{{data?.g_bulk6}}</td>
+                </tr>
+                <!-- Add rows for field density data -->
+                <tr>
+                    <td colspan="11" class="center">
+                        <h3>Moisture Content Determination</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td colspan="3">Container No.</td>
+                    <td>-</td>
+                    <td>{{data?.container_no1}}</td>
+                    <td>{{data?.container_no2}}</td>
+                    <td>{{data?.container_no3}}</td>
+                    <td>{{data?.container_no4}}</td>
+                    <td>{{data?.container_no5}}</td>
+                    <td>{{data?.container_no6}}</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td colspan="3">Weight of Container(W-4)</td>
+                    <td>gms</td>
+                    <td>{{data?.w4_container1}}</td>
+                    <td>{{data?.w4_container2}}</td>
+                    <td>{{data?.w4_container3}}</td>
+                    <td>{{data?.w4_container4}}</td>
+                    <td>{{data?.w4_container5}}</td>
+                    <td>{{data?.w4_container6}}</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td colspan="3">Weight of Container + wet soil(W-5)</td>
+                    <td>gms</td>
+                    <td>{{data?.w5_wet_soil1}}</td>
+                    <td>{{data?.w5_wet_soil2}}</td>
+                    <td>{{data?.w5_wet_soil3}}</td>
+                    <td>{{data?.w5_wet_soil4}}</td>
+                    <td>{{data?.w5_wet_soil5}}</td>
+                    <td>{{data?.w5_wet_soil6}}</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td colspan="3">Weight of Container + dry soil(W-6)</td>
+                    <td>gms</td>
+                    <td>{{data?.w6_dry_soil1}}</td>
+                    <td>{{data?.w6_dry_soil2}}</td>
+                    <td>{{data?.w6_dry_soil3}}</td>
+                    <td>{{data?.w6_dry_soil4}}</td>
+                    <td>{{data?.w6_dry_soil5}}</td>
+                    <td>{{data?.w6_dry_soil6}}</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td colspan="3">Moisture Content 'W' = (W5-W6)/(W6-W4)*100</td>
+                    <td>%</td>
+                    <td>{{data?.w_moisture1}}</td>
+                    <td>{{data?.w_moisture2}}</td>
+                    <td>{{data?.w_moisture3}}</td>
+                    <td>{{data?.w_moisture4}}</td>
+                    <td>{{data?.w_moisture5}}</td>
+                    <td>{{data?.w_moisture6}}</td>
+                </tr>
+                <tr>
+                    <td colspan="11" class="center">
+                        <h3>Test Results</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td colspan="3">Dry Density g = g-bulk/(1+w/100)</td>
+                    <td>g/cm^3</td>
+                    <td>{{data?.gd_dry_density1}}</td>
+                    <td>{{data?.gd_dry_density2}}</td>
+                    <td>{{data?.gd_dry_density3}}</td>
+                    <td>{{data?.gd_dry_density4}}</td>
+                    <td>{{data?.gd_dry_density5}}</td>
+                    <td>{{data?.gd_dry_density6}}</td>
+        
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td colspan="3">Percentage Compaction = (g/MDD)*100</td>
+                    <td>-</td>
+                    <td>{{data?.percentage_compaction1}}</td>
+                    <td>{{data?.percentage_compaction2}}</td>
+                    <td>{{data?.percentage_compaction3}}</td>
+                    <td>{{data?.percentage_compaction4}}</td>
+                    <td>{{data?.percentage_compaction5}}</td>
+                    <td>{{data?.percentage_compaction6}}</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td colspan="6">Mean Density(g/cc)</td>
+                    <td colspan="5">{{data?.mean_density}}</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td colspan="6">Compaction Density Required(g/cc)(97% of MDD)</td>
+                    <td colspan="5">{{data?.compaction_density}}</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td colspan="6">Standard Deviation, SD</td>
+                    <td colspan="5">{{data?.sd}}</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td colspan="6">Acceptance Criteria (Mean > Required Compaction + [1.65-(1.65/(No. Of Samples)^0.5)]*SD)
+                    </td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="11">Remarks: <span style="padding-left: 10px;">{{data?.form01_remarks}}</span></td>
+                </tr>
+            </table>
+        </div>
+    }
     } @else if (showForm(2)) {
     <table class="mt-4">
         <tr>
@@ -1912,235 +2053,235 @@
         </tr>
     </table>
     } @else if (showForm(24)) {
-        <table class="mt-4">
-            <h3>Form 24</h3>
-            <tr>
-                <td colspan="7" class="center">
-                    <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="7" class="center">
-                    <h2>-:WORK IMPLEMENTATION UNIT:-</h2>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="7" class="center">
-                    <h2>EXECUTIVE ENGINEER,CONSTRUCTION DIVISION,PWD,VARANASI</h2>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">Sr No.: </td>
-                <td colspan="4" class="right">Date: 01/01/1970 05:30:00</td>
-            </tr>
-            <tr>
-                <td colspan="3">Name Of Work :- </td>
-                <td colspan="4">Date Of Sampling :- </td>
-            </tr>
-            <tr>
-                <td colspan="3">Contractor :- </td>
-                <td colspan="4">Date Of Testing :- </td>
-            </tr>
-            <tr>
-                <td colspan="3">Bond No. :- </td>
-                <td colspan="4">Source :- </td>
-            </tr>
-            <tr>
-                <td colspan="7" class="center">
-                    <h2>CORE DENSITY TEST DENSITY BY CORE CUTTING</h2>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="7" class="center">
-                    <h3>Type of Sample</h3>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 40%;">Description</td>
-                <td style="width: 20%;">Sample 1</td>
-                <td style="width: 20%;">Sample 2</td>
-                <td style="width: 20%;">Sample 3</td>
-            </tr>
-            <tr>
-                <td>Density as per JBF........=...</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Initial weight of core........=...</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Weight of core(A)=</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Weight of core + wax(B)=</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Weight of core + wax in water(C)=</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Density = (A)/(B-C)-(B-A)/0.9=</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+    <table class="mt-4">
+        <h3>Form 24</h3>
+        <tr>
+            <td colspan="7" class="center">
+                <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7" class="center">
+                <h2>-:WORK IMPLEMENTATION UNIT:-</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7" class="center">
+                <h2>EXECUTIVE ENGINEER,CONSTRUCTION DIVISION,PWD,VARANASI</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">Sr No.: </td>
+            <td colspan="4" class="right">Date: 01/01/1970 05:30:00</td>
+        </tr>
+        <tr>
+            <td colspan="3">Name Of Work :- </td>
+            <td colspan="4">Date Of Sampling :- </td>
+        </tr>
+        <tr>
+            <td colspan="3">Contractor :- </td>
+            <td colspan="4">Date Of Testing :- </td>
+        </tr>
+        <tr>
+            <td colspan="3">Bond No. :- </td>
+            <td colspan="4">Source :- </td>
+        </tr>
+        <tr>
+            <td colspan="7" class="center">
+                <h2>CORE DENSITY TEST DENSITY BY CORE CUTTING</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7" class="center">
+                <h3>Type of Sample</h3>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40%;">Description</td>
+            <td style="width: 20%;">Sample 1</td>
+            <td style="width: 20%;">Sample 2</td>
+            <td style="width: 20%;">Sample 3</td>
+        </tr>
+        <tr>
+            <td>Density as per JBF........=...</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Initial weight of core........=...</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Weight of core(A)=</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Weight of core + wax(B)=</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Weight of core + wax in water(C)=</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Density = (A)/(B-C)-(B-A)/0.9=</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
     } @else if (showForm(25)) {
-        <table class="mt-4">
-            <h3>Form 25</h3>
-            <tr>
-                <td colspan="9" class="center">
-                    <h2>INDIVIDUAL GRADATION OF COARSE AGGREGATE</h2>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="9" class="center">
-                    <h2>(IS:383)</h2>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">Sr No.: </td>
-                <td colspan="5" class="right">Date: 01/01/1970 05:30:00</td>
-            </tr>
-            <tr>
-                <td colspan="4">Name Of Work :- </td>
-                <td colspan="5">Date Of Sampling :- </td>
-            </tr>
-            <tr>
-                <td colspan="4">Contractor :- </td>
-                <td colspan="5">Date Of Testing :- </td>
-            </tr>
-            <tr>
-                <td colspan="4">Bond No. :- </td>
-                <td colspan="5">Source :- </td>
-            </tr>
-            <tr>
-                <td rowspan="2" style="width: 12%;">Sieve size (mm)</td>
-                <td rowspan="2" style="width: 12%;">Wt. Retained (g)</td>
-                <td rowspan="2" style="width: 12%;">Cumulative wt. Retained =(g)</td>
-                <td rowspan="2" style="width: 12%;">% Cumulative wt.Retailed</td>
-                <td rowspan="2" style="width: 12%;">% Passing</td>
-                <td colspan="4" class="center" style="width: 40%;">Specified % of Passing</td>
-            </tr>
-            <tr>
-                <td>40mm</td>
-                <td>20mm</td>
-                <td>12.5mm</td>
-                <td>10mm</td>
-            </tr>
-            <tr>
-                <td>63mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>100</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>40mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>85-100</td>
-                <td>100</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>20mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>0-20</td>
-                <td>85-10</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>16mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>-</td>
-                <td>-</td>
-                <td>100</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>12.5mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>-</td>
-                <td>-</td>
-                <td>85-100</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td>10.0mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>0-5</td>
-                <td>0-20</td>
-                <td>0-45</td>
-                <td>0-20</td>
-            </tr>
-            <tr>
-                <td>4.75mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>-</td>
-                <td>0-5</td>
-                <td>0-10</td>
-                <td>0-20</td>
-            </tr>
-            <tr>
-                <td>2.36mm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>0-5</td>
-            </tr>
-            <tr>
-                <td colspan="9">Remarks:-</td>
-            </tr>
-        </table>
+    <table class="mt-4">
+        <h3>Form 25</h3>
+        <tr>
+            <td colspan="9" class="center">
+                <h2>INDIVIDUAL GRADATION OF COARSE AGGREGATE</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="9" class="center">
+                <h2>(IS:383)</h2>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">Sr No.: </td>
+            <td colspan="5" class="right">Date: 01/01/1970 05:30:00</td>
+        </tr>
+        <tr>
+            <td colspan="4">Name Of Work :- </td>
+            <td colspan="5">Date Of Sampling :- </td>
+        </tr>
+        <tr>
+            <td colspan="4">Contractor :- </td>
+            <td colspan="5">Date Of Testing :- </td>
+        </tr>
+        <tr>
+            <td colspan="4">Bond No. :- </td>
+            <td colspan="5">Source :- </td>
+        </tr>
+        <tr>
+            <td rowspan="2" style="width: 12%;">Sieve size (mm)</td>
+            <td rowspan="2" style="width: 12%;">Wt. Retained (g)</td>
+            <td rowspan="2" style="width: 12%;">Cumulative wt. Retained =(g)</td>
+            <td rowspan="2" style="width: 12%;">% Cumulative wt.Retailed</td>
+            <td rowspan="2" style="width: 12%;">% Passing</td>
+            <td colspan="4" class="center" style="width: 40%;">Specified % of Passing</td>
+        </tr>
+        <tr>
+            <td>40mm</td>
+            <td>20mm</td>
+            <td>12.5mm</td>
+            <td>10mm</td>
+        </tr>
+        <tr>
+            <td>63mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>100</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>40mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>85-100</td>
+            <td>100</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>20mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>0-20</td>
+            <td>85-10</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>16mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+            <td>-</td>
+            <td>100</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>12.5mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+            <td>-</td>
+            <td>85-100</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>10.0mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>0-5</td>
+            <td>0-20</td>
+            <td>0-45</td>
+            <td>0-20</td>
+        </tr>
+        <tr>
+            <td>4.75mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+            <td>0-5</td>
+            <td>0-10</td>
+            <td>0-20</td>
+        </tr>
+        <tr>
+            <td>2.36mm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>0-5</td>
+        </tr>
+        <tr>
+            <td colspan="9">Remarks:-</td>
+        </tr>
+    </table>
     }
     @if(!isFormAvailable()) {
-        <div class="card mt-4">
-            <div class="card-body text-center">
-                <h3>Form Not Available</h3>
-                <p>The requested form (Form {{formCode}}) is not available in the system.</p>
-            </div>
+    <div class="card mt-4">
+        <div class="card-body text-center">
+            <h3>Form Not Available</h3>
+            <p>The requested form (Form {{formCode}}) is not available in the system.</p>
         </div>
+    </div>
     }
 
 </div>

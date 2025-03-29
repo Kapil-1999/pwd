@@ -27,6 +27,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
 import {
+  selectedUser,
   setShowUserList,
   setTypeUser,
   setUserCountData,
@@ -34,6 +35,7 @@ import {
 } from '../../../../../core/app.action';
 import {
   setIsShowUserList,
+  setSelectedUserArea,
   setSelectedVehicleData,
   setTypeUserOnMap,
 } from '../../../../../core/app.selector';
@@ -72,9 +74,10 @@ export class LiveMapTrackingComponent {
   confirmedVehicleId: string | null = null;
   animationRequest: any;
   showUserlist!: Observable<boolean>;
-  isShowUserList: boolean = true;
+  isShowUserList!: boolean;
   private subs: Subscription[] = [];
   private isDestroyed = false;
+  selectArea$!: Observable<any>
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -96,7 +99,7 @@ export class LiveMapTrackingComponent {
     this.subs.push(
       this.store.select(setIsShowUserList)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: any) => {
+        .subscribe((res: any) => {          
           this.isShowUserList = res;
         }));
 
@@ -110,6 +113,14 @@ export class LiveMapTrackingComponent {
           this.liveData = null;
           this.filterout(this.data);
         }));
+
+    this.subs.push(
+      this.store.select(setSelectedUserArea)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: any) => {
+          this.confirm(res)
+        }));
+
   }
 
   ngOnInit() {
@@ -167,20 +178,9 @@ export class LiveMapTrackingComponent {
   }
 
   confirm(event: any) {
-    let zone =
-      Array.isArray(event.zone) && event.zone.length === 0
-        ? null
-        : event.zone?.value;
-
-    let circle =
-      Array.isArray(event.circle) && event.circle.length === 0
-        ? null
-        : event.circle?.value;
-
-    let city =
-      Array.isArray(event.city) && event.city.length === 0
-        ? null
-        : event.city?.value;
+    let zone = event?.zone;
+    let circle = event?.circle;
+    let city = event?.city;
     let livePayload: any;
 
     livePayload = {
@@ -197,6 +197,7 @@ export class LiveMapTrackingComponent {
     this.liveData = null;
     this.clearMap();
     this.getLiveTracking();
+
   }
 
   ngOnDestroy(): void {
@@ -222,7 +223,6 @@ export class LiveMapTrackingComponent {
     this.store.dispatch(setUserCountData({ userCountData: [] }));
     this.store.dispatch(setShowUserList({ showUserList: true }));
     this.store.dispatch(setTypeUser({ typeUser: 'JE' }));
-
     this.clearMap();
   }
 
@@ -270,23 +270,22 @@ export class LiveMapTrackingComponent {
         return EMPTY;
       })
     ).subscribe();
-
     this.subs.push(this.subscription);
   }
 
   filterout(data: any): Observable<any> {
     if (this.selectedStatus === 'Admin') {
-      this.userData = data.filter((res: any) => res?.designation_id == 1);
+      this.userData = data?.filter((res: any) => res?.designation_id == 1);
     } else if (this.selectedStatus === 'CE') {
-      this.userData = data.filter((res: any) => res?.designation_id == 2);
+      this.userData = data?.filter((res: any) => res?.designation_id == 2);
     } else if (this.selectedStatus === 'SE') {
-      this.userData = data.filter((res: any) => res?.designation_id == 3);
+      this.userData = data?.filter((res: any) => res?.designation_id == 3);
     } else if (this.selectedStatus === 'EE') {
-      this.userData = data.filter((res: any) => res?.designation_id == 4);
+      this.userData = data?.filter((res: any) => res?.designation_id == 4);
     } else if (this.selectedStatus === 'AE') {
-      this.userData = data.filter((res: any) => res?.designation_id == 5);
+      this.userData = data?.filter((res: any) => res?.designation_id == 5);
     } else if (this.selectedStatus === 'JE') {
-      this.userData = data.filter((res: any) => res?.designation_id == 6);
+      this.userData = data?.filter((res: any) => res?.designation_id == 6);
     } else if (
       this.selectedStatus === 'JE' ||
       this.selectedStatus == undefined ||
@@ -577,7 +576,7 @@ export class LiveMapTrackingComponent {
 
   sendFilteredData() {
     if (!this.confirmedVehicleId) return;
-    let selectedUserId = this.data.find(
+    let selectedUserId = this.data?.find(
       (user: any) => user?.user_id == this.confirmedVehicleId
     );
     const latestLatLng = L.latLng(
@@ -595,7 +594,6 @@ export class LiveMapTrackingComponent {
 
   updateMarker(latestLatLng: L.LatLng, data: any) {
     const existingMarkerIndex = this.findExistingMarkerIndex(data?.full_name);
-    console.log(existingMarkerIndex);
 
     const currentLat = data?.Latitude;
     const currentLon = data?.Longitude;
@@ -658,7 +656,7 @@ export class LiveMapTrackingComponent {
           let popup = L.popup();
           popup.setContent(this.generateInfoWindowContent(data));
           popup.setLatLng(latestLatLng);
-          marker?.setPopup(popup);
+          // marker?.setPopup(popup);
         }
         if (marker?.getPopup() && marker?.getPopup().isOpen()) {
           marker?.getPopup().setContent(this.generateInfoWindowContent(data));

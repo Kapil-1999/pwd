@@ -4,6 +4,9 @@ import { DashboardService } from '../../service/dashboard.service';
 import { CommonService } from '../../../../shared/services/common.service';
 import { IMG_URL } from '../../../../shared/constant/menu/menu';
 import { Location } from '@angular/common';
+import { AppState } from '../../../../../core/app.reducer';
+import { Store } from '@ngrx/store';
+import { selectedUser, setShowUserList } from '../../../../../core/app.action';
 
 @Component({
   selector: 'manage-user-details',
@@ -26,7 +29,8 @@ export class ManageUserDetailsComponent {
     private dashboardService: DashboardService,
     private commonService: CommonService,
     private router : Router,
-    private location: Location
+    private location: Location,
+    private store: Store<AppState>
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state?.['previousUrl']) {
@@ -124,6 +128,8 @@ export class ManageUserDetailsComponent {
   }
 
   goToLive(user: any) {
+    this.store.dispatch(selectedUser({selectedUser: user}));
+    //this.store.dispatch(setShowUserList({ showUserList: false }));
     this.router.navigateByUrl('/admin/live/track');
   }
 

@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { CommonService } from '../../../../shared/services/common.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { distinctUntilChanged, filter, Observable, scan, take, takeWhile, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
-import { allvehicleData } from '../../../../../core/app.selector';
-import { selectedVehicleData, setShowUserList } from '../../../../../core/app.action';
+import { allvehicleData, setSelectedUser, setUserCountData } from '../../../../../core/app.selector';
+import { selectedUserArea, selectedVehicleData, setShowUserList } from '../../../../../core/app.action';
 
 @Component({
   selector: 'user-in-map',
@@ -13,15 +13,16 @@ import { selectedVehicleData, setShowUserList } from '../../../../../core/app.ac
   styleUrls: ['./user-in-map.component.scss']
 })
 export class UserInMapComponent {
-  @Output() mapData = new EventEmitter();
-  @Input() spinnerLoading :any
+  @Input() spinnerLoading: any
   userData: any
   searchKeyword: any;
   loginUser: string | null = null;
   zoneList: any[] = [];
   circleList: any[] = [];
   cityList: any[] = [];
-  newVehicle$: Observable<any>
+  newVehicle$: Observable<any>;
+  selectedUser$: Observable<any>;
+  selectuser: any;
 
   config = {
     displayKey: 'text',
@@ -34,29 +35,63 @@ export class UserInMapComponent {
 
   liveForm!: FormGroup;
   swiperList: any;
+  allUserCountData$: Observable<any>;
+  allUserCountData: any;
+  selectedUserValue: any;
+  attempts = 0;
+  isDataReceived = false;
 
   constructor(
-    private commonService: CommonService, 
+    private commonService: CommonService,
     private fb: FormBuilder,
-    private store: Store<AppState>
-  ) { 
-    this.newVehicle$ = this.store.select(allvehicleData)  
+    private store: Store<AppState>,
+    private cdRef: ChangeDetectorRef
+  ) {
+    this.newVehicle$ = this.store.select(allvehicleData)
     this.newVehicle$.subscribe({
       next: (user) => {
         if (user) {
-          this.userData = user
+          this.userData = user;
         }
       },
       error: (error) => {
         console.error('Error in vehicle subscription:', error);
       }
     });
+
+    this.allUserCountData$ = this.store.select(setUserCountData);
+    this.allUserCountData$
+  .pipe(
+    tap((res: any) => {
+      this.allUserCountData = res;
+    }),
+    scan((acc, res) => {
+      if (!acc.isDataReceived && res && res.length > 0) {
+        this.getUserData();
+        acc.isDataReceived = true; 
+      }
+      return acc; 
+    }, { isDataReceived: false })
+  )
+  .subscribe();
+
+    this.selectedUser$ = this.store.select(setSelectedUser);
+    this.selectedUser$.subscribe((res: any) => {
+      this.selectuser = res;
+    })
   }
 
   ngOnInit() {
     this.initializeForm();
     this.getUserDetails();
     this.getZoneData();
+    if (!this.selectuser) {
+      this.emitMapData();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.cdRef.detectChanges();
   }
 
   private initializeForm() {
@@ -65,6 +100,36 @@ export class UserInMapComponent {
       circle: [null],
       city: [null],
     });
+
+    this.liveForm.get('zone')?.valueChanges
+      .pipe(distinctUntilChanged((prev, curr) =>
+        prev?.value === curr?.value
+      ))
+      .subscribe(zoneValue => {
+        if (zoneValue) {
+          this.emitMapData();
+        }
+      });
+
+    this.liveForm.get('circle')?.valueChanges
+      .pipe(distinctUntilChanged((prev, curr) =>
+        prev?.value === curr?.value
+      ))
+      .subscribe(circleValue => {
+        if (circleValue) {
+          this.emitMapData();
+        }
+      });
+
+    this.liveForm.get('city')?.valueChanges
+      .pipe(distinctUntilChanged((prev, curr) =>
+        prev?.value === curr?.value
+      ))
+      .subscribe(cityValue => {
+        if (cityValue) {
+          this.emitMapData();
+        }
+      });
   }
 
   private getUserDetails() {
@@ -73,24 +138,34 @@ export class UserInMapComponent {
   }
 
   private emitMapData() {
-    this.mapData.emit({
-      zone: this.liveForm.get('zone')?.value,
-      circle: this.liveForm.get('circle')?.value,
-      city: this.liveForm.get('city')?.value,
-    });
+    let data = {
+      zone: this.liveForm.get('zone')?.value?.value,
+      circle: this.liveForm.get('circle')?.value?.value,
+      city: this.liveForm.get('city')?.value?.value,
+    }
+    this.store.dispatch(selectedUserArea({ selectedUserArea: data }))
+
   }
 
   getZoneData() {
     this.commonService.zoneList(30).subscribe({
       next: (res: any) => {
         this.zoneList = res?.body?.result || [];
-        if (this.zoneList.length === 1) {
-          this.liveForm.controls['zone'].setValue(this.zoneList[0]);
-          this.getCircleData(this.zoneList[0].value);
+        if (this.zoneList.length > 0) {
+          if (this.selectuser && this.selectuser?.zone_id) {
+            let selectZone = this.zoneList.find((item: any) => item.value == this.selectuser?.zone_id);
+            if (selectZone) {
+              this.liveForm.controls['zone'].setValue(selectZone);
+              this.getCircleData(selectZone.value);
+            }
+          }
+          // if(this.zoneList.length === 1) {
+          //   this.liveForm.controls['zone'].setValue(this.zoneList[0]);
+          //   this.getCircleData(this.zoneList[0].value);
+          // }
         } else {
           this.resetForm(['zone', 'circle', 'city']);
         }
-        this.emitMapData();
       },
       error: (err) => console.error('Error fetching zones:', err),
     });
@@ -102,20 +177,27 @@ export class UserInMapComponent {
     } else {
       this.resetForm(['circle', 'city']);
     }
-    this.emitMapData();
   }
 
   private getCircleData(zoneId: any) {
     this.commonService.circleList(zoneId).subscribe({
       next: (res: any) => {
         this.circleList = res?.body?.result || [];
-        if (this.circleList.length === 1) {
-          this.liveForm.controls['circle'].setValue(this.circleList[0]);
-          this.getCityData(this.circleList[0].value);
+        if (this.circleList.length > 0) {
+          if (this.selectuser && this.selectuser?.circle_id) {
+            let selectCircle = this.circleList.find((item: any) => item.value == this.selectuser?.circle_id);
+            if (selectCircle) {
+              this.liveForm.controls['circle'].setValue(selectCircle);
+              this.getCityData(selectCircle.value);
+            }
+          }
+          // if(this.circleList.length === 1) {
+          //   this.liveForm.controls['circle'].setValue(this.circleList[0]);
+          //   this.getCityData(this.circleList[0].value);
+          // }
         } else {
           this.resetForm(['circle', 'city']);
         }
-        this.emitMapData();
       },
       error: (err) => console.error('Error fetching circles:', err),
     });
@@ -127,21 +209,26 @@ export class UserInMapComponent {
     } else {
       this.resetForm(['city']);
     }
-    this.emitMapData();
   }
 
   onChangeCity(event: any) {
-    this.emitMapData();
   }
 
   private getCityData(circleId: any) {
     this.commonService.cityList(circleId).subscribe({
       next: (res: any) => {
         this.cityList = res?.body?.result || [];
-        if (this.cityList.length === 1) {
-          this.liveForm.controls['city'].setValue(this.cityList[0]);
+        if (this.cityList.length > 0) {
+          if (this.selectuser && this.selectuser?.district_id) {
+            let selectCity = this.cityList.find((item: any) => item.value == this.selectuser?.district_id);
+            if (selectCity) {
+              this.liveForm.controls['city'].setValue(selectCity);
+            }
+          }
+          // if(this.cityList.length === 1) {
+          //   this.liveForm.controls['city'].setValue(this.cityList[0]);
+          // }
         }
-        this.emitMapData();
       },
       error: (err) => console.error('Error fetching cities:', err),
     });
@@ -158,11 +245,11 @@ export class UserInMapComponent {
   getVehicleColor(user: any) {
     if (user?.sub_status === '' || user?.sub_status === null) {
       return 'status-0';
-    } else if (user?.sub_status === '1')  {
+    } else if (user?.sub_status === '1') {
       return 'status';
-    } else if (user?.sub_status === '2' || user?.sub_status === '3' || user?.sub_status === '4')  {
-      return'status-1';
-    } 
+    } else if (user?.sub_status === '2' || user?.sub_status === '3' || user?.sub_status === '4') {
+      return 'status-1';
+    }
     return 'status-0';
   }
 
@@ -177,9 +264,23 @@ export class UserInMapComponent {
 
   onSelectuser(item: any) {
     if (!item || (!item?.latitude && !item?.longitude)) {
+      this.store.dispatch(setShowUserList({ showUserList: true }));
+
       return;
-    }    
-    this.store.dispatch(selectedVehicleData({ selectedVehicle: item })); 
+    }
+    this.store.dispatch(selectedVehicleData({ selectedVehicle: item }));
     this.store.dispatch(setShowUserList({ showUserList: false }));
   }
+
+
+  getUserData() {    
+    if (!this.allUserCountData || !this.selectuser?.user_id) {
+        console.log("User data or selected user is missing!");
+        return;
+    };
+    let selected:any = this.allUserCountData && this.allUserCountData?.find((res: any) => res?.user_id == this.selectuser?.user_id)
+    if (selected) {
+        this.onSelectuser(selected);
+    }
+}
 }
