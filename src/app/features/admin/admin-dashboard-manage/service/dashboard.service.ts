@@ -68,4 +68,18 @@ export class DashboardService {
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
+
+  form2Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form2Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form3Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form3Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
 }

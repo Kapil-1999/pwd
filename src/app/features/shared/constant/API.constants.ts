@@ -70,5 +70,8 @@ export const API_CONSTANTS = {
     taskData : 'Task/GetImagesBasedOnCatSubCat?taskDetId={taskDetId}&catId={catId}&subCatId={subCatId}',
     addressApi : 'https://api.olamaps.io/places/v1/reverse-geocode?latlng={lat}%2C{lng}&api_key={api_key}',
     form1Data: 'Task/GetForm01?taskId={taskId}&taskDetId={taskDetId}',
+    form2Data: 'Task/GetForm02?taskId={taskId}&taskDetId={taskDetId}',
+    form3Data: 'Task/GetForm03?taskId={taskId}&taskDetId={taskDetId}',
+    form4Data: 'Task/GetForm04?taskId={taskId}&taskDetId={taskDetId}',
 
 }

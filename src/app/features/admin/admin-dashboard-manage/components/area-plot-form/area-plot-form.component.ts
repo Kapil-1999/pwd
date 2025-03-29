@@ -42,15 +42,34 @@ export class AreaPlotFormComponent {
   }
 
   getFormData() {
-    let data = {
-      taskId : this.catId,
-      taskDetId : this.taskDetId 
+    const data = {
+      taskId: this.catId,
+      taskDetId: this.taskDetId 
+    };
+    
+    let service: any;
+    
+    switch(this.formCode) {
+      case '1':
+        service = this.dashboardService.form1Data(data);
+        break;
+      case '02':
+        service = this.dashboardService.form2Data(data);
+        break;
+      case '03':
+        service = this.dashboardService.form3Data(data);
+        break;
+      default:
+        console.log('Form code not handled:', this.formCode);
+        return;
     }
-    let service :any;
-    service = this.formCode == 1 && this.dashboardService.form1Data(data)
-    service.subscribe((res:any) => {
-      this.areaPlotForm = res?.body?.result || []
-    })
-  }
-
+    service.subscribe({
+      next: (res: any) => {
+        this.areaPlotForm = res?.body?.result || [];
+      },
+      error: (err: any) => {
+        console.error('Error fetching form data:', err);
+      }
+    });
+}
 }
