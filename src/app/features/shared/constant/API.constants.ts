@@ -73,5 +73,18 @@ export const API_CONSTANTS = {
     form2Data: 'Task/GetForm02?taskId={taskId}&taskDetId={taskDetId}',
     form3Data: 'Task/GetForm03?taskId={taskId}&taskDetId={taskDetId}',
     form4Data: 'Task/GetForm04?taskId={taskId}&taskDetId={taskDetId}',
+    form5Data: 'Task/GetForm05?taskId={taskId}&taskDetId={taskDetId}',
+    form6Data: 'Task/GetForm06?taskId={taskId}&taskDetId={taskDetId}',
+    form7Data: 'Task/GetForm07?taskId={taskId}&taskDetId={taskDetId}',
+    form8Data: 'Task/GetForm08?taskId={taskId}&taskDetId={taskDetId}',
+    form9Data: 'Task/GetForm09?taskId={taskId}&taskDetId={taskDetId}',
+    form10Data: 'Task/GetForm10?taskId={taskId}&taskDetId={taskDetId}',
+    form11Data: 'Task/GetForm11?taskId={taskId}&taskDetId={taskDetId}',
+    form12Data: 'Task/GetForm12?taskId={taskId}&taskDetId={taskDetId}',
+    form13Data: 'Task/GetForm13?taskId={taskId}&taskDetId={taskDetId}',
+    form14Data: 'Task/GetForm14?taskId={taskId}&taskDetId={taskDetId}',
+    form15Data: 'Task/GetForm15?taskId={taskId}&taskDetId={taskDetId}',
+    form16Data: 'Task/GetForm16?taskId={taskId}&taskDetId={taskDetId}',
+    form25Data: 'Task/GetForm25?taskId={taskId}&taskDetId={taskDetId}',
 
 }

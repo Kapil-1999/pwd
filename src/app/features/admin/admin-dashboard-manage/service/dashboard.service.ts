@@ -82,4 +82,87 @@ export class DashboardService {
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
+
+  form6Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form6Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+  form7Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form7Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form8Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form8Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form9Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form9Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form10Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form10Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+   .get(url)
+   .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form11Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form11Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+   .get(url)
+   .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form12Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form12Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+   .get(url)
+   .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form13Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form13Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form14Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form14Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form15Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form15Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form16Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form16Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form25Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form25Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
 }

@@ -13,9 +13,10 @@ export class AreaPlotFormComponent {
   subCat: string | any;
   taskDetId: string | any;
   areaPlotForm: any;
+  isLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
-    private dashboardService : DashboardService
+    private dashboardService: DashboardService
   ) {
     this.route.paramMap.subscribe(params => {
       this.formCode = params.get('formCode');
@@ -42,15 +43,16 @@ export class AreaPlotFormComponent {
   }
 
   getFormData() {
+    this.isLoading = true;
     const data = {
       taskId: this.catId,
-      taskDetId: this.taskDetId 
+      taskDetId: this.taskDetId
     };
-    
+
     let service: any;
-    
-    switch(this.formCode) {
-      case '1':
+
+    switch (this.formCode) {
+      case '01':
         service = this.dashboardService.form1Data(data);
         break;
       case '02':
@@ -58,6 +60,42 @@ export class AreaPlotFormComponent {
         break;
       case '03':
         service = this.dashboardService.form3Data(data);
+        break;
+      case '06':
+        service = this.dashboardService.form6Data(data);
+        break;
+      case '07':
+        service = this.dashboardService.form7Data(data);
+        break;
+      case '08':
+        service = this.dashboardService.form8Data(data);
+        break;
+      case '09':
+        service = this.dashboardService.form9Data(data);
+        break;
+      case '10':
+        service = this.dashboardService.form10Data(data);
+        break;
+      case '11':
+        service = this.dashboardService.form11Data(data);
+        break;
+      case '12':
+        service = this.dashboardService.form12Data(data);
+        break;
+      case '13':
+        service = this.dashboardService.form13Data(data);
+        break;
+      case '14':
+        service = this.dashboardService.form14Data(data);
+        break;
+      case '15':
+        service = this.dashboardService.form15Data(data);
+        break;
+      case '16':
+        service = this.dashboardService.form16Data(data);
+        break;
+      case '25':
+        service = this.dashboardService.form25Data(data);
         break;
       default:
         console.log('Form code not handled:', this.formCode);
@@ -69,7 +107,10 @@ export class AreaPlotFormComponent {
       },
       error: (err: any) => {
         console.error('Error fetching form data:', err);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
-}
+  }
 }
