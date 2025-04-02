@@ -27,7 +27,6 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
 import {
-  selectedUser,
   setShowUserList,
   setTypeUser,
   setUserCountData,
@@ -61,7 +60,7 @@ export class LiveMapTrackingComponent {
   counterInterval: any = null;
   userData: any;
   private destroy$ = new Subject<void>();
-  selectedStatus: any;
+  selectedStatus: any = 'JE';
   userOnMapdata: any;
   liveData: any;
   private markers: L.Marker[] = [];
@@ -99,25 +98,36 @@ export class LiveMapTrackingComponent {
     this.subs.push(
       this.store.select(setIsShowUserList)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: any) => {          
+        .subscribe((res: any) => {         
           this.isShowUserList = res;
         }));
 
     this.subs.push(
       this.store.select(setTypeUserOnMap)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: any) => {
+        .subscribe((res: any) => {          
           if (this.isDestroyed) return;
-          this.selectedStatus = res || 'JE';
-          this.clearMap();
-          this.liveData = null;
-          this.filterout(this.data);
+          if(res) {            
+            this.liveData = null; 
+            this.selectedStatus = res || 'JE';
+            this.clearMap();
+            this.store.select(setUserCountData).pipe(take(1)).subscribe((userData: any) => {
+              if (userData?.app?.vehicleData.length > 0) {                
+                this.userOnMapdata = userData?.app?.vehicleData;                
+                this.selectedStatus = res;
+                this.plotVehicleonMap();
+                this.cdr.detectChanges();
+              }
+            });
+          }
+          
+                  
         }));
 
     this.subs.push(
       this.store.select(setSelectedUserArea)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: any) => {
+        .subscribe((res: any) => {          
           this.confirm(res)
         }));
 
@@ -222,7 +232,6 @@ export class LiveMapTrackingComponent {
     this.store.dispatch(setvehicleData({ vehicleData: [] }));
     this.store.dispatch(setUserCountData({ userCountData: [] }));
     this.store.dispatch(setShowUserList({ showUserList: true }));
-    this.store.dispatch(setTypeUser({ typeUser: 'JE' }));
     this.clearMap();
   }
 
@@ -743,8 +752,12 @@ export class LiveMapTrackingComponent {
   }
 
   closeTab() {
-    this.store.dispatch(setShowUserList({ showUserList: true }));
-    this.liveData = null;
-    this.clearMap();
+    setTimeout(() => {
+      this.store.dispatch(setTypeUser({ typeUser: this.selectedStatus }));
+      this.liveData = null;
+      this.clearMap();
+      this.store.dispatch(setShowUserList({ showUserList: true }));
+      this.cdr.detectChanges();
+    }, 0);
   }
 }

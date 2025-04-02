@@ -85,6 +85,14 @@ export const API_CONSTANTS = {
     form14Data: 'Task/GetForm14?taskId={taskId}&taskDetId={taskDetId}',
     form15Data: 'Task/GetForm15?taskId={taskId}&taskDetId={taskDetId}',
     form16Data: 'Task/GetForm16?taskId={taskId}&taskDetId={taskDetId}',
+    form17Data: 'Task/GetForm17?taskId={taskId}&taskDetId={taskDetId}',
+    form18Data: 'Task/GetForm18?taskId={taskId}&taskDetId={taskDetId}',
+    form19Data: 'Task/GetForm19?taskId={taskId}&taskDetId={taskDetId}',
+    form20Data: 'Task/GetForm20?taskId={taskId}&taskDetId={taskDetId}',
+    form21Data: 'Task/GetForm21?taskId={taskId}&taskDetId={taskDetId}',
+    form22Data: 'Task/GetForm22?taskId={taskId}&taskDetId={taskDetId}',
+    form23Data: 'Task/GetForm23?taskId={taskId}&taskDetId={taskDetId}',
+    form24Data: 'Task/GetForm24?taskId={taskId}&taskDetId={taskDetId}',
     form25Data: 'Task/GetForm25?taskId={taskId}&taskDetId={taskDetId}',
 
 }

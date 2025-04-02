@@ -4,8 +4,8 @@ import { StorageService } from '../../services/storage.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../core/app.reducer';
-import {  setUserCountData } from '../../../../core/app.selector';
-import { setTypeUser } from '../../../../core/app.action';
+import {  setTypeUserOnMap, setUserCountData } from '../../../../core/app.selector';
+import { setTypeUser, setvehicleData } from '../../../../core/app.action';
 
 @Component({
   selector: 'swiper',
@@ -62,6 +62,13 @@ export class SwiperComponent {
         console.error('Error in vehicle subscription:', error);
       }
     });
+
+    this.store.select(setTypeUserOnMap).subscribe((res: any) => {
+      if(res) {
+        this.selectedAlert = res;
+      }
+      
+     })
   }
 
   formatUserData() {
@@ -124,8 +131,10 @@ export class SwiperComponent {
     ];
   }
 
-  filterData(data: any) {    
+  filterData(data: any) {        
     this.selectedAlert = data?.status;
+    this.store.dispatch(setvehicleData({ vehicleData: data?.data }));
+    this.formatUserData();
     this.store.dispatch(setTypeUser({ typeUser: data?.status }));
   }
 

@@ -159,6 +159,62 @@ export class DashboardService {
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
+  form17Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form17Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form18Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form18Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form19Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form19Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form20Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form20Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form21Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form21Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form22Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form22Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form23Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form23Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  form24Data(data:any): Observable<any> {
+    let url = API_CONSTANTS.form24Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    return this.apiService
+    .get(url)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
   form25Data(data:any): Observable<any> {
     let url = API_CONSTANTS.form25Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
     return this.apiService

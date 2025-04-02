@@ -94,6 +94,27 @@ export class AreaPlotFormComponent {
       case '16':
         service = this.dashboardService.form16Data(data);
         break;
+        case '17':
+        service = this.dashboardService.form17Data(data);
+        break;
+        case '18':
+        service = this.dashboardService.form18Data(data);
+        break;
+        case '19' :
+        service = this.dashboardService.form19Data(data);
+        break;
+        case '20':
+        service = this.dashboardService.form20Data(data);
+        break;
+        case '21':
+        service = this.dashboardService.form21Data(data);
+        break;
+        case '22':
+        service = this.dashboardService.form22Data(data);
+        break;
+      case '24':
+        service = this.dashboardService.form24Data(data);
+        break;
       case '25':
         service = this.dashboardService.form25Data(data);
         break;
