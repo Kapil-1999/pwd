@@ -281,4 +281,11 @@ export class UserListComponent {
     this.pagesize.limit = 25;
     this.getUserList(this.pagesize.offset, this.pagesize.limit, event.target.value);  
   }
+
+  clearSearch() {
+    this.searchKeyword = '';
+    this.pagesize.offset = 1;
+    this.pagesize.limit = 25;
+    this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);  
+  }
 }

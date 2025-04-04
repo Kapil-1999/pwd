@@ -34,9 +34,15 @@
                 <div class="search-form">
                     <input placeholder="Search for..." type="text" [(ngModel)]="searchKeyword" (input)="onSearch($event)"
                         class="form-control search-input" />
-                    <button type="button" class="btn-search">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
+                        @if(searchKeyword) {
+                            <button type="button" class="btn-search" (click)="clearSearch()">
+                                <i class="fa fa-close"  aria-hidden="true"></i>
+                            </button>
+                        } @else {
+                            <button type="button" class="btn-search">
+                                <i class="fa fa-search"  aria-hidden="true"></i>
+                            </button>
+                        }
                 </div>
             </div>
             <div class="col-md-3 flex justify-end gap-x-2">

@@ -14,7 +14,7 @@ export class SubcategoryService {
   ) { }
 
   subcategoryList(data: any): Observable<any> {
-    let url = API_CONSTANTS.SubCategory.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize);
+    let url = API_CONSTANTS.SubCategory.replace('{pageNo}', data.pageNo).replace('{pageSize}', data?.pageSize).replace('{searchText}', data.searchText);
     return this.apiService
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));

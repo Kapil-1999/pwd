@@ -39,7 +39,7 @@ export class SubcategoryListComponent {
     return Math.min(calculatedLastValue, this.pagesize.count);
   }
   bsModalRef!: BsModalRef;
-  searchKeyword: any
+  searchKeyword: any = '';
 
   constructor(
     private modalService: BsModalService,
@@ -51,7 +51,7 @@ export class SubcategoryListComponent {
   ngOnInit() {
     this.tableProperty();
     this.setInitialtable()
-    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword)
   }
 
   setInitialtable() {
@@ -76,11 +76,12 @@ export class SubcategoryListComponent {
     this.configuration.paginationEnabled = false;
   }
 
-  getSubategoryList(pagedata: any, tableSize: any) {
+  getSubategoryList(pagedata: any, tableSize: any , searchKeyword:any) {
     this.isLoading = true;
     const page = {
       pageNo: pagedata,
       pageSize: tableSize,
+      searchText : searchKeyword
     };
 
     this.subcategoryService.subcategoryList(page).subscribe(
@@ -100,16 +101,7 @@ export class SubcategoryListComponent {
 
   onTablePageChange(event: number) {
     this.pagesize.offset = event;
-    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
-  }
-
-  paginationEvent($event: any): void {
-    this.pagesize = {
-      ...this.pagesize,
-      limit: $event.pageSize,
-      offset: $event.pageIndex + 1,
-    };
-    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit , this.searchKeyword)
   }
 
   onCreateCate(value: any) {
@@ -127,7 +119,7 @@ export class SubcategoryListComponent {
     this.bsModalRef?.content?.mapdata?.subscribe((val: any) => {
       this.pagesize.offset = 1;
       this.pagesize.limit = 25;
-      this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+      this.getSubategoryList(this.pagesize.offset, this.pagesize.limit , this.searchKeyword)
     });
   }
 
@@ -155,7 +147,7 @@ export class SubcategoryListComponent {
           this.notificationSerivce.successAlert(value?.body?.actionResponse);
           this.pagesize.offset = 1;
           this.pagesize.limit = 25;
-          this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+          this.getSubategoryList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword)
         } else {
           this.notificationSerivce.errorAlert(value?.title);
         }
@@ -167,9 +159,22 @@ export class SubcategoryListComponent {
   onPageSizeChange(event: Event): void {
     const selectedSize = parseInt((event.target as HTMLSelectElement).value, 10);
     this.pagesize.limit = selectedSize;
-    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit)
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit , this.searchKeyword)
   }
 
+  onSearch(event:any) {
+    this.categoryList = [];
+    this.pagesize.offset = 1;
+    this.pagesize.limit = 25;
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit, event.target.value);  
+  }
+
+  clearSearch() {
+    this.searchKeyword = '';
+    this.pagesize.offset = 1;
+    this.pagesize.limit = 25;
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);  
+  }
 }
 
 

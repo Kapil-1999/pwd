@@ -35,7 +35,7 @@ export const API_CONSTANTS = {
     category : 'Category?pageNo={pageNo}&pageSize={pageSize}',
     addcategory : 'Category',
     updateDelgetCat : "Category/{id}",
-    SubCategory : "SubCategory?pageNo={pageNo}&pageSize={pageSize}",
+    SubCategory : "SubCategory?pageNo={pageNo}&pageSize={pageSize}&searchText={searchText}",
     addSubcategory : 'SubCategory',
     updateDelgetSubCat : "SubCategory/{id}",
     departmentData : 'Department?pageNo={pageNo}&pageSize={pageSize}',

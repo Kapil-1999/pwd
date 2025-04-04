@@ -5,7 +5,7 @@ import { distinctUntilChanged, filter, Observable, scan, take, takeWhile, tap } 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
 import { allvehicleData, setSelectedUser, setUserCountData } from '../../../../../core/app.selector';
-import { selectedUserArea, selectedVehicleData, setShowUserList } from '../../../../../core/app.action';
+import { selectedUser, selectedUserArea, selectedVehicleData, setShowUserList } from '../../../../../core/app.action';
 
 @Component({
   selector: 'user-in-map',
@@ -21,7 +21,7 @@ export class UserInMapComponent {
   circleList: any[] = [];
   cityList: any[] = [];
   newVehicle$: Observable<any>;
-  selectedUser$: Observable<any>;
+  selectedUser$!: Observable<any>;
   selectuser: any;
 
   config = {
@@ -61,24 +61,23 @@ export class UserInMapComponent {
 
     this.allUserCountData$ = this.store.select(setUserCountData);
     this.allUserCountData$
-  .pipe(
-    tap((res: any) => {
-      this.allUserCountData = res;
-    }),
-    scan((acc, res) => {
-      if (!acc.isDataReceived && res && res.length > 0) {
-        this.getUserData();
-        acc.isDataReceived = true; 
-      }
-      return acc; 
-    }, { isDataReceived: false })
-  )
-  .subscribe();
-
-    this.selectedUser$ = this.store.select(setSelectedUser);
-    this.selectedUser$.subscribe((res: any) => {
-      this.selectuser = res;
-    })
+      .pipe(
+        tap((res: any) => {
+          this.allUserCountData = res;
+        }),
+        scan((acc, res) => {
+          if (!acc.isDataReceived && res && res.length > 0) {
+            this.selectedUser$ = this.store.select(setSelectedUser);
+            this.selectedUser$.subscribe((res: any) => {
+              this.selectuser = res;
+              this.getUserData();
+            })
+            acc.isDataReceived = true;
+          }
+          return acc;
+        }, { isDataReceived: false })
+      )
+      .subscribe();
   }
 
   ngOnInit() {
@@ -262,12 +261,12 @@ export class UserInMapComponent {
     }
   }
 
-  onSelectuser(item: any) {
+  onSelectuser(item: any) {    
     if (!item || (!item?.latitude && !item?.longitude)) {
       this.store.dispatch(setShowUserList({ showUserList: true }));
-
+      this.store.dispatch(selectedUser({selectedUser: null}))
       return;
-    }
+    }    
     this.store.dispatch(selectedVehicleData({ selectedVehicle: item }));
     this.store.dispatch(setShowUserList({ showUserList: false }));
   }
@@ -275,12 +274,13 @@ export class UserInMapComponent {
 
   getUserData() {    
     if (!this.allUserCountData || !this.selectuser?.user_id) {
-        console.log("User data or selected user is missing!");
-        return;
+      console.log("User data or selected user is missing!");
+      return;
     };
-    let selected:any = this.allUserCountData && this.allUserCountData?.find((res: any) => res?.user_id == this.selectuser?.user_id)
+    
+    let selected: any = this.allUserCountData && this.allUserCountData?.find((res: any) => res?.user_id == this.selectuser?.user_id)
     if (selected) {
-        this.onSelectuser(selected);
+      this.onSelectuser(selected);
     }
-}
+  }
 }

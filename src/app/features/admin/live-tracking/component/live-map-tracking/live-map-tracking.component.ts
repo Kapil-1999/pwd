@@ -27,6 +27,9 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
 import {
+  selectedUser,
+  selectedUserArea,
+  selectedVehicleData,
   setShowUserList,
   setTypeUser,
   setUserCountData,
@@ -119,16 +122,14 @@ export class LiveMapTrackingComponent {
                 this.cdr.detectChanges();
               }
             });
-          }
-          
-                  
+          };          
         }));
 
     this.subs.push(
       this.store.select(setSelectedUserArea)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: any) => {          
-          this.confirm(res)
+        .subscribe((res: any) => {                    
+          this.confirm(res);
         }));
 
   }
@@ -230,8 +231,13 @@ export class LiveMapTrackingComponent {
     }
 
     this.store.dispatch(setvehicleData({ vehicleData: [] }));
+    this.store.dispatch(setTypeUser({ typeUser: 'JE' }));
+    this.store.dispatch(selectedVehicleData({ selectedVehicle: null }));
     this.store.dispatch(setUserCountData({ userCountData: [] }));
     this.store.dispatch(setShowUserList({ showUserList: true }));
+    this.store.dispatch(selectedUserArea({ selectedUserArea: null }));
+    this.store.dispatch(selectedUser({ selectedUser: null }));
+
     this.clearMap();
   }
 
@@ -592,7 +598,7 @@ export class LiveMapTrackingComponent {
       selectedUserId?.latitude,
       selectedUserId?.longitude
     );
-    this.map.setView(latestLatLng, 16);
+    this.map?.setView(latestLatLng, 16);
     const newLocationComing = {
       lat: selectedUserId?.latitude,
       lon: selectedUserId?.longitude,
@@ -612,8 +618,8 @@ export class LiveMapTrackingComponent {
 
     if (existingMarkerIndex !== -1) {
       const prevLatLng = this.markers[existingMarkerIndex].getLatLng();
-      previousLat = prevLatLng.lat;
-      previousLon = prevLatLng.lng;
+      previousLat = prevLatLng?.lat;
+      previousLon = prevLatLng?.lng;
     }
 
     // Calculate heading only if there is a previous position
@@ -752,12 +758,11 @@ export class LiveMapTrackingComponent {
   }
 
   closeTab() {
-    setTimeout(() => {
-      this.store.dispatch(setTypeUser({ typeUser: this.selectedStatus }));
-      this.liveData = null;
-      this.clearMap();
-      this.store.dispatch(setShowUserList({ showUserList: true }));
-      this.cdr.detectChanges();
-    }, 0);
+    this.store.dispatch(setTypeUser({ typeUser: this.selectedStatus }));
+    this.store.dispatch(selectedUser({ selectedUser: null }));
+    this.liveData = null;
+    this.clearMap();
+    this.store.dispatch(setShowUserList({ showUserList: true }));
+    this.cdr.detectChanges();
   }
 }
