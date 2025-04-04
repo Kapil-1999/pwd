@@ -163,10 +163,12 @@ export class SubcategoryListComponent {
   }
 
   onSearch(event:any) {
+    const searchValue = event.target.value.trim().replace(/\s+/g, ' ');
+    this.searchKeyword = searchValue;
     this.categoryList = [];
     this.pagesize.offset = 1;
     this.pagesize.limit = 25;
-    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit, event.target.value);  
+    this.getSubategoryList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);  
   }
 
   clearSearch() {

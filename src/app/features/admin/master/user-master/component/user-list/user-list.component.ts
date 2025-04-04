@@ -276,10 +276,12 @@ export class UserListComponent {
   }
 
   onSearch(event:any) {
+    const searchValue = event.target.value.trim().replace(/\s+/g, ' ');
+    this.searchKeyword = searchValue;
     this.userList = [];
     this.pagesize.offset = 1;
     this.pagesize.limit = 25;
-    this.getUserList(this.pagesize.offset, this.pagesize.limit, event.target.value);  
+    this.getUserList(this.pagesize.offset, this.pagesize.limit, this.searchKeyword);  
   }
 
   clearSearch() {
