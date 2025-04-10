@@ -1100,7 +1100,533 @@
             </tr>
         </table>
     </div>
-    } } @else if (showForm(6) ) { @if(!isLoading) { @for(data of
+    } } 
+    @else if(showForm(5)) {
+        @for(data of areaPlotForm; track data){
+            <div class="table-containere">
+                <table class="mt-4">
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>-: Work Implementation Unit :-</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>Executive Engineer, Construction Division, PWD, Varanasi</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Serial No.:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Name Of Work:
+                                <span style="padding-left: 10px">{{data?.work_name}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Name Of Contractor:
+                                <span style="padding-left: 10px">{{data?.contract_name}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Contract Bond NO.:
+                                <span style="padding-left: 10px">{{data?.contract_bond_no}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>Determination Of Liquid & Plastic Limit</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>(IS:2720(Part V))</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Type Of Material:</td>
+                            <td colspan="7">
+                                Date Of Sampling:
+                                <span style="padding-left: 10px">{{data?.sampling_date}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                Sampling Location:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                            <td colspan="7">
+                                Date Of Testing:
+                                <span style="padding-left: 10px">{{data?.testing_date}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Sample Description:</td>
+                            <td colspan="7">
+                                Date Of Result:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">Sampled By:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="text-center">
+                                <h3>Determination of Liquid Limit(LL)</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                <table class="inner-table" style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <th>Container Number</th>
+                                        <td>{{data?.container_a1}}</td>
+                                        <td>{{data?.container_a1}}</td>
+                                        <td>{{data?.container_a1}}</td>
+                                        <td>{{data?.container_a1}}</td>
+                                        <td>{{data?.container_a1}}</td>
+                                        <td>{{data?.container_a1}}</td>
+                                        <td>{{data?.container_a_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + wet Material</th>
+                                        <td>{{data?.container_wet_material_a1}}</td>
+                                        <td>{{data?.container_wet_material_a2}}</td>
+                                        <td>{{data?.container_wet_material_a3}}</td>
+                                        <td>{{data?.container_wet_material_a4}}</td>
+                                        <td>{{data?.container_wet_material_a5}}</td>
+                                        <td>{{data?.container_wet_material_a6}}</td>
+                                        <td>{{data?.container_wet_material_a_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + dry Material</th>
+                                        <td>{{data?.container_dry_material_a1}}</td>
+                                        <td>{{data?.container_dry_material_a2}}</td>
+                                        <td>{{data?.container_dry_material_a3}}</td>
+                                        <td>{{data?.container_dry_material_a4}}</td>
+                                        <td>{{data?.container_dry_material_a5}}</td>
+                                        <td>{{data?.container_dry_material_a6}}</td>
+                                        <td>{{data?.container_dry_material_a_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Loss Of Moisture</th>
+                                        <td>{{data?.moisture_a1}}</td>
+                                        <td>{{data?.moisture_a2}}</td>
+                                        <td>{{data?.moisture_a3}}</td>
+                                        <td>{{data?.moisture_a4}}</td>
+                                        <td>{{data?.moisture_a5}}</td>
+                                        <td>{{data?.moisture_a6}}</td>
+                                        <td>{{data?.moisture_a_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Dry Material</th>
+                                        <td>{{data?.dry_material_a1}}</td>
+                                        <td>{{data?.dry_material_a2}}</td>
+                                        <td>{{data?.dry_material_a3}}</td>
+                                        <td>{{data?.dry_material_a4}}</td>
+                                        <td>{{data?.dry_material_a5}}</td>
+                                        <td>{{data?.dry_material_a6}}</td>
+                                        <td>{{data?.dry_material_a_remark}}</td>                                  
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Container</th>
+                                        <td>{{data?.wt_container_a1}}</td>
+                                        <td>{{data?.wt_container_a2}}</td>
+                                        <td>{{data?.wt_container_a3}}</td>
+                                        <td>{{data?.wt_container_a4}}</td>
+                                        <td>{{data?.wt_container_a5}}</td>
+                                        <td>{{data?.wt_container_a6}}</td>
+                                        <td>{{data?.wt_container_a_remark}}</td>              
+                                    </tr> 
+                                    <tr>
+                                        <th>Moisture Content %</th>
+                                        <td>{{data?.content_moisture_a1}}</td>
+                                        <td>{{data?.content_moisture_a2}}</td>
+                                        <td>{{data?.content_moisture_a3}}</td>
+                                        <td>{{data?.content_moisture_a4}}</td>
+                                        <td>{{data?.content_moisture_a5}}</td>
+                                        <td>{{data?.content_moisture_a6}}</td>
+                                        <td>{{data?.content_moisture_a_remark}}</td>                                      
+                                    </tr> 
+                                    <tr>
+                                        <th>Number Of blows</th>
+                                        <td>{{data?.blows_a1}}</td>
+                                        <td>{{data?.blows_a2}}</td>
+                                        <td>{{data?.blows_a3}}</td>
+                                        <td>{{data?.blows_a4}}</td>
+                                        <td>{{data?.blows_a5}}</td>
+                                        <td>{{data?.blows_a6}}</td>
+                                        <td>{{data?.blows_a_remark}}</td>                                   
+                                    </tr>                                  
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center pt-3">
+                                <h3> Liquid Limit(LL) = ................per cent(as per Graph attached at 25 blows)</h3> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h3>Determination of Plastic Limit(PL)</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                <table class="inner-table" style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <th>Container Number</th>
+                                        <td>{{data?.container_b1}}</td>
+                                        <td>{{data?.container_b2}}</td>
+                                        <td>{{data?.container_b3}}</td>
+                                        <td>{{data?.container_b_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + wet Material</th>
+                                        <td>{{data?.container_wet_material_b1}}</td>
+                                        <td>{{data?.container_wet_material_b2}}</td>
+                                        <td>{{data?.container_wet_material_b3}}</td>
+                                        <td>{{data?.container_wet_material_b_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + dry Material</th>
+                                        <td>{{data?.container_dry_material_b1}}</td>
+                                        <td>{{data?.container_dry_material_b2}}</td>
+                                        <td>{{data?.container_dry_material_b3}}</td>
+                                        <td>{{data?.container_dry_material_b_remark}}</td>
+                                    </tr>
+                                    <tr>                                        
+                                        <th>Loss Of Moisture</th>
+                                        <td>{{data?.moisture_b1}}</td>
+                                        <td>{{data?.moisture_b2}}</td>
+                                        <td>{{data?.moisture_b3}}</td>
+                                        <td>{{data?.moisture_b_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Container</th>
+                                        <td>{{data?.wt_container_b1}}</td>
+                                        <td>{{data?.wt_container_b2}}</td>
+                                        <td>{{data?.wt_container_b3}}</td>
+                                        <td>{{data?.wt_container_b_remark}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Dry Material</th>
+                                        <td>{{data?.dry_material_b1}}</td>
+                                        <td>{{data?.dry_material_b2}}</td>
+                                        <td>{{data?.dry_material_b3}}</td>
+                                        <td>{{data?.dry_material_b_remark}}</td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <th>Moisture Content %</th>
+                                        <td>{{data?.content_moisture_b1}}</td>
+                                        <td>{{data?.content_moisture_b2}}</td>
+                                        <td>{{data?.content_moisture_b3}}</td>
+                                        <td>{{data?.content_moisture_b_remark}}</td>
+
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="pt-3 text-center">
+                               <h3>Plastic Limit(PL) = (mc1+mc2+mc3)/3 = ............... per cent</h3> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="text-center">
+                                <h3>Plasticity Index(PI)=(LL - PL) =.................per cent</h3>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="pt-3">
+                                <strong>Permissible Limit :-</strong>
+                                <ol>
+                                    <li>Soils having a liquid limit exceeding 35 and a plasticity Index exceeding 18,material shall be considered unsuitable for embankment/subgrade/shoulder.</li>
+                                    <li>The material passing 425 micron(0.425 mm) sieve for all the three gradings of GSB and WMM shall have liquid limit and plasticity index not more than 25 and 6 percent respectivley.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">Remarks:- {{ data?.form05_remarks }}</td>
+                        </tr>
+                </table>
+
+            </div>
+        }
+        @if(!areaPlotForm.length) {
+            <div class="table-containere">
+                <table class="mt-4">
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>-: Work Implementation Unit :-</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>Executive Engineer, Construction Division, PWD, Varanasi</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Serial No.:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Name Of Work:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Name Of Contractor:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                Contract Bond NO.:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>Determination Of Liquid & Plastic Limit</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h2>(IS:2720(Part V))</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Type Of Material:</td>
+                            <td colspan="7">
+                                Date Of Sampling:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                Sampling Location:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                            <td colspan="7">
+                                Date Of Testing:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Sample Description:</td>
+                            <td colspan="7">
+                                Date Of Result:
+                                <span style="padding-left: 10px"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">Sampled By:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                <table class="inner-table" style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <th>Container Number</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + wet Material</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + dry Material</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Loss Of Moisture</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>                                        
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Dry Material</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Container</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr> 
+                                    <tr>
+                                        <th>Moisture Content %</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr> 
+                                    <tr>
+                                        <th>Number Of blows</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>                                  
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center pt-3">
+                                <h3> Liquid Limit(LL) = ................per cent(as per Graph attached at 25 blows)</h3> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="center">
+                                <h3>Determination of Plastic Limit(PL)</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">
+                                <table class="inner-table" style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <th>Container Number</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + wet Material</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Weight Of Container + dry Material</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>                                        
+                                        <th>Loss Of Moisture</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Container</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Wt. Of Dry Material</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <th>Moisture Content %</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="pt-3 text-center">
+                               <h3>Plastic Limit(PL) = (mc1+mc2+mc3)/3 = ............... per cent</h3> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="text-center">
+                                <h3>Plasticity Index(PI)=(LL - PL) =.................per cent</h3>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" class="pt-3">
+                                <strong>Permissible Limit :-</strong>
+                                <ol>
+                                    <li>Soils having a liquid limit exceeding 35 and a plasticity Index exceeding 18,material shall be considered unsuitable for embankment/subgrade/shoulder.</li>
+                                    <li>The material passing 425 micron(0.425 mm) sieve for all the three gradings of GSB and WMM shall have liquid limit and plasticity index not more than 25 and 6 percent respectivley.</li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">Remarks:-</td>
+                        </tr>
+                </table>
+
+            </div>
+        }
+    }
+    
+    @else if (showForm(6) ) { @if(!isLoading) { @for(data of
     areaPlotForm;track data) {
     <table class="mt-4">
         <tr>
@@ -3146,9 +3672,7 @@
         </tr>
     </table>
     } } @else if (showForm(16)) { @if(!isLoading) {
-    {{ areaPlotForm | json }}
     @for(data of areaPlotForm ;track data) {
-
     <table class="mt-4">
         <tr>
             <td colspan="7" class="center">
@@ -3165,15 +3689,15 @@
             <td colspan="4" class="right">Date:</td>
         </tr>
         <tr>
-            <td colspan="3">Name Of Work :-</td>
-            <td colspan="4">Date Of Sampling :-</td>
+            <td colspan="3">Name Of Work :- <span style="padding-left: 10px">{{data?.work_name}}</span></td>
+            <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px">{{data?.sampling_date}}</span></td>
         </tr>
         <tr>
-            <td colspan="3">Contractor :-</td>
-            <td colspan="4">Date Of Testing :-</td>
+            <td colspan="3">Contractor :- <span style="padding-left: 10px">{{data?.contract_name}}</span></td>
+            <td colspan="4">Date Of Testing :- <span style="padding-left: 10px">{{data?.testing_date}}</span></td>
         </tr>
         <tr>
-            <td colspan="3">Bond No. :-</td>
+            <td colspan="3">Bond No. :- <span style="padding-left: 10px">{{data?.contract_bond_no}}</span></td>
             <td colspan="4">Source :-</td>
         </tr>
         <tr>
@@ -3191,48 +3715,52 @@
             </td>
             <td>W1</td>
             <td>g</td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
+            <td>{{data?.w1_a}}</td>
+            <td>{{data?.w1_b}}</td>
+            <td>{{data?.w1_c}}</td>
         </tr>
         <tr>
             <td>Weight of Fraction retained on 2.36 mm IS Sieve</td>
             <td>W2</td>
             <td>g</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.w2_a}}</td>
+            <td>{{data?.w2_b}}</td>
+            <td>{{data?.w2_c}}</td>
         </tr>
         <tr>
             <td>Weight of Fraction passing through 2.36 mm IS Sieve</td>
             <td>W3=W1-W2</td>
             <td>g</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.w3_a}}</td>
+            <td>{{data?.w3_b}}</td>
+            <td>{{data?.w3_c}}</td>
         </tr>
         <tr>
             <td>W3=W1-(W2+W3) If W4>1g discard and carryout fresh test)</td>
             <td>W4</td>
             <td>%</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.w4_a}}</td>
+            <td>{{data?.w4_a}}</td>
+            <td>{{data?.w4_a}}</td>
         </tr>
         <tr>
             <td>Aggregate Impact Value</td>
             <td>(W3/W1)*100</td>
             <td>%</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.aggreagte_a}}</td>
+            <td>{{data?.aggreagte_b}}</td>
+            <td>{{data?.aggreagte_c}}</td>
         </tr>
         <tr>
             <td>Average Aggregate Impact Value</td>
-            <td colspan="5"></td>
+            <td></td>
+            <td>%</td>
+            <td>{{data?.average_a}}</td>
+            <td>{{data?.average_b}}</td>
+            <td>{{data?.average_c}}</td>
         </tr>
         <tr>
-            <td colspan="6">Remarks:-</td>
+            <td colspan="6">Remarks:- <span style="padding-left: 10px">{{data?.form16_remarks}}</span></td>
         </tr>
     </table>
     } } @if(!areaPlotForm?.length) {
@@ -3384,134 +3912,278 @@
         </tr>
     </table>
     } @else if (showForm(18)) {
-    <table class="mt-4">
-        <tr>
-            <td colspan="7" class="center">
-                <h2>FLAKINESS INDEX AND ELONGATION INDEX</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center">
-                <h2>(IS:2386 PART-I)</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
-            <td colspan="3">Name Of Work :-</td>
-            <td colspan="4">Date Of Sampling :-</td>
-        </tr>
-        <tr>
-            <td colspan="3">Contractor :-</td>
-            <td colspan="4">Date Of Testing :-</td>
-        </tr>
-        <tr>
-            <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
-        </tr>
-        <tr>
-            <td colspan="2">IS-Sieve Size mm</td>
-            <td rowspan="2">Total Weight of Aggregate taken(g)</td>
-            <td rowspan="2">Weight of Aggregate retained on Thickness gauge (g)</td>
-            <td rowspan="2">
-                Weight of Aggregate passing through Thickness gauge(g)
-            </td>
-            <td rowspan="2">
-                Weight of Aggregate retained on Length gauge after retained on Thickness
-                gauge(g)
-            </td>
-        </tr>
-        <tr>
-            <td>Passing</td>
-            <td>Retained</td>
-        </tr>
-        <tr>
-            <td>63</td>
-            <td>50</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>50</td>
-            <td>40</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>31.5</td>
-            <td>25</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>25</td>
-            <td>20</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>20</td>
-            <td>16</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>12.5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>12.5</td>
-            <td>10</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>6.3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Total(gm)</td>
-            <td></td>
-            <td>A=</td>
-            <td>B=</td>
-            <td>C=</td>
-            <td>D=</td>
-        </tr>
-        <tr>
-            <td colspan="3">Flakiness Index(C/A)=</td>
-            <td colspan="3">Elongation Index(D/B)=</td>
-        </tr>
-        <tr>
-            <td colspan="6">
-                Combined Flakiness and Elongation Indices = ((C/A) + D/B))*100 =
-            </td>
-        </tr>
-        <tr>
-            <td colspan="6">Remarks:-</td>
-        </tr>
-    </table>
+        @for(data of areaPlotForm ;track data) {            
+            <div class="table-conatiner">
+                <table class="mt-4">
+                    <tr>
+                        <td colspan="7" class="center">
+                            <h2>FLAKINESS INDEX AND ELONGATION INDEX</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="center">
+                            <h2>(IS:2386 PART-I)</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Sr No.:</td>
+                        <td colspan="4" class="right">Date: </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Name Of Work :- <span style="padding-left: 10px;">{{data?.work_name}}</span></td>
+                        <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px;">{{data?.sampling_date}}</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Contractor :- <span style="padding-left: 10px;">{{data?.contract_name}}</span></td>
+                        <td colspan="4">Date Of Testing :- <span style="padding-left: 10px;">{{data?.testing_date}}</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span></td>
+                        <td colspan="4">Source :-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">IS-Sieve Size mm</td>
+                        <td rowspan="2">Total Weight of Aggregate taken(g)</td>
+                        <td rowspan="2">Weight of Aggregate retained on Thickness gauge (g)</td>
+                        <td rowspan="2">
+                            Weight of Aggregate passing through Thickness gauge(g)
+                        </td>
+                        <td rowspan="2">
+                            Weight of Aggregate retained on Length gauge after retained on Thickness
+                            gauge(g)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Passing</td>
+                        <td>Retained</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken50}}</td>
+                        <td>{{data?.aggregate_retained50}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght50}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken40}}</td>
+                        <td>{{data?.aggregate_retained40}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght40}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken315}}</td>
+                        <td>{{data?.aggregate_retained315}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght315}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken25}}</td>
+                        <td>{{data?.aggregate_retained25}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght25}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken20}}</td>
+                        <td>{{data?.aggregate_retained20}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght20}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken16}}</td>
+                        <td>{{data?.aggregate_retained16}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght16}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken125}}</td>
+                        <td>{{data?.aggregate_retained125}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght125}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken10}}</td>
+                        <td>{{data?.aggregate_retained10}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght10}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{data?.aggregate_taken63}}</td>
+                        <td>{{data?.aggregate_retained63}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{data?.aggregate_lenght63}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total(gm)</td>
+                        <td></td>
+                        <td>A= {{data?.total_a}}</td>
+                        <td>B= {{data?.total_b}}</td>
+                        <td>C= {{data?.total_c}}</td>
+                        <td>D= {{data?.total_d}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Flakiness Index(C/A)= {{data?.flakiness}}</td>
+                        <td colspan="3">Elongation Index(D/B)= {{data?.elongation}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            Combined Flakiness and Elongation Indices = ((C/A) + D/B))*100 = {{data?.indices}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Remarks:- {{data?.form18_remarks}}</td>
+                    </tr>
+                </table>
+            </div>
+        }
+        @if(!areaPlotForm.length) {
+            <div class="table-container">
+                <table class="mt-4">
+                    <tr>
+                        <td colspan="7" class="center">
+                            <h2>FLAKINESS INDEX AND ELONGATION INDEX</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="center">
+                            <h2>(IS:2386 PART-I)</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Sr No.:</td>
+                        <td colspan="4" class="right">Date: </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Name Of Work :-</td>
+                        <td colspan="4">Date Of Sampling :-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Contractor :-</td>
+                        <td colspan="4">Date Of Testing :-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Bond No. :-</td>
+                        <td colspan="4">Source :-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">IS-Sieve Size mm</td>
+                        <td rowspan="2">Total Weight of Aggregate taken(g)</td>
+                        <td rowspan="2">Weight of Aggregate retained on Thickness gauge (g)</td>
+                        <td rowspan="2">
+                            Weight of Aggregate passing through Thickness gauge(g)
+                        </td>
+                        <td rowspan="2">
+                            Weight of Aggregate retained on Length gauge after retained on Thickness
+                            gauge(g)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Passing</td>
+                        <td>Retained</td>
+                    </tr>
+                    <tr>
+                        <td>63</td>
+                        <td>50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>40</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>31.5</td>
+                        <td>25</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>20</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>16</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>12.5</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>12.5</td>
+                        <td>10</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>6.3</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Total(gm)</td>
+                        <td></td>
+                        <td>A=</td>
+                        <td>B=</td>
+                        <td>C=</td>
+                        <td>D=</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Flakiness Index(C/A)=</td>
+                        <td colspan="3">Elongation Index(D/B)=</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            Combined Flakiness and Elongation Indices = ((C/A) + D/B))*100 =
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">Remarks:-</td>
+                    </tr>
+                </table>
+            </div>
+        }
     } @else if (showForm(20)) {
     <table class="mt-4">
         <tr>
@@ -3581,89 +4253,180 @@
         <!-- Repeat the empty row 19 more times -->
     </table>
     } @else if (showForm(21)) {
-    <table class="mt-4">
-        <tr>
-            <td colspan="7" class="center">
-                <h2>LOK NIRMAN VIBHAG</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
-            <td colspan="3">Name Of Work :-</td>
-            <td colspan="4">Date Of Sampling :-</td>
-        </tr>
-        <tr>
-            <td colspan="3">Contractor :-</td>
-            <td colspan="4">Date Of Testing :-</td>
-        </tr>
-        <tr>
-            <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
-        </tr>
-        <tr>
-            <td colspan="7" class="center">
-                <h2>TEST RESULT OF BITUMEN</h2>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 8%">Sr No.</td>
-            <td style="width: 32%">Characteristics</td>
-            <td colspan="3" style="width: 30%">Test Results</td>
-            <td style="width: 10%">Avg.</td>
-            <td style="width: 20%">Limit as per IS:73:1992</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>solubility of trichloroethylene</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>99%(min)</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Flash Point (min)</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>220°C</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Penetration at 5 sec. 1/10mm (min)</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>VG10,VG20,VG20,VG0,80,60mm,45,35</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Softning Point °C (min)</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>40,45°C,47,50</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Testin Residue From RTFDT Ductivity at 25°C (min)</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>75cm,50,40,25</td>
-        </tr>
-        <tr>
-            <td colspan="7">Remarks:-</td>
-        </tr>
-    </table>
+        @for(data of areaPlotForm; track data) {
+            <div class="table-container">
+                <table class="mt-4">
+                    <tr>
+                        <td colspan="7" class="center">
+                            <h2>LOK NIRMAN VIBHAG</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Sr No.:</td>
+                        <td colspan="4" class="right">Date: </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Name Of Work :- <span style="padding-left: 10px;">{{data?.work_name}}</span> </td>
+                        <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px;">{{data?.sampling_date}}</span> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Contractor :- <span style="padding-left: 10px;">{{data?.contract_name}}</span> </td>
+                        <td colspan="4">Date Of Testing :- <span style="padding-left: 10px;">{{data?.testing_date}}</span> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span> </td>
+                        <td colspan="4">Source :-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="center">
+                            <h2>TEST RESULT OF BITUMEN</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 8%">Sr No.</td>
+                        <td style="width: 32%">Characteristics</td>
+                        <td colspan="3" style="width: 30%">Test Results</td>
+                        <td style="width: 10%">Avg.</td>
+                        <td style="width: 20%">Limit as per IS:73:1992</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>solubility of trichloroethylene</td>
+                        <td>{{data?.s1}}</td>
+                        <td>{{data?.s2}}</td>
+                        <td>{{data?.s3}}</td>
+                        <td>{{data?.s4}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Flash Point (min)</td>
+                        <td>{{data?.flash_point_1}}</td>
+                        <td>{{data?.flash_point_2}}</td>
+                        <td>{{data?.flash_point_3}}</td>
+                        <td>{{data?.flash_point_4}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Penetration at 5 sec. 1/10mm (min)</td>
+                        <td>{{data.p1}}</td>
+                        <td>{{data.p2}}</td>
+                        <td>{{data.p3}}</td>
+                        <td>{{data.p4}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Softning Point °C (min)</td>
+                        <td>{{data?.softining1}}</td>
+                        <td>{{data?.softining2}}</td>
+                        <td>{{data?.softining3}}</td>
+                        <td>{{data?.softining4}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Testin Residue From RTFDT Ductivity at 25°C (min)</td>
+                        <td>{{data?.test1}}</td>
+                        <td>{{data?.test2}}</td>
+                        <td>{{data?.test3}}</td>
+                        <td>{{data?.test4}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">Remarks:- <span style="padding-left: 10px;">{{data?.form21_remarks}}</span> </td>
+                    </tr>
+                </table>
+            </div>   
+        }
+    @if(areaPlotForm.lenght) {
+        <div class="table-contanier">
+            <table class="mt-4">
+                <tr>
+                    <td colspan="7" class="center">
+                        <h2>LOK NIRMAN VIBHAG</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">Sr No.:</td>
+                    <td colspan="4" class="right">Date: </td>
+                </tr>
+                <tr>
+                    <td colspan="3">Name Of Work :-</td>
+                    <td colspan="4">Date Of Sampling :-</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Contractor :-</td>
+                    <td colspan="4">Date Of Testing :-</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Bond No. :-</td>
+                    <td colspan="4">Source :-</td>
+                </tr>
+                <tr>
+                    <td colspan="7" class="center">
+                        <h2>TEST RESULT OF BITUMEN</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 8%">Sr No.</td>
+                    <td style="width: 32%">Characteristics</td>
+                    <td colspan="3" style="width: 30%">Test Results</td>
+                    <td style="width: 10%">Avg.</td>
+                    <td style="width: 20%">Limit as per IS:73:1992</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>solubility of trichloroethylene</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>99%(min)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Flash Point (min)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>220°C</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Penetration at 5 sec. 1/10mm (min)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>VG10,VG20,VG20,VG0,80,60mm,45,35</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Softning Point °C (min)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>40,45°C,47,50</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Testin Residue From RTFDT Ductivity at 25°C (min)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>75cm,50,40,25</td>
+                </tr>
+                <tr>
+                    <td colspan="7">Remarks:-</td>
+                </tr>
+            </table>
+        </div>
+    } 
     } @else if (showForm(22)) {
     <table class="mt-4">
         <tr>
@@ -3894,7 +4657,8 @@
             <td></td>
         </tr>
     </table>
-    } @else if (showForm(25)) { @if(!isLoading) { @for(data of areaPlotForm; track
+    } @else if (showForm(25)) { @if(!isLoading) {
+         @for(data of areaPlotForm; track
     data; let i = $index) {
     <table class="mt-4">
         <h3>Form 25</h3>

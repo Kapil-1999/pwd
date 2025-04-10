@@ -38,7 +38,7 @@ export class AreaPlotFormComponent {
   }
 
   isFormAvailable(): boolean {
-    const availableForms = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 24, 25];
+    const availableForms = [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 24, 25];
     return availableForms.includes(parseInt(this.formCode));
   }
 
@@ -60,6 +60,9 @@ export class AreaPlotFormComponent {
         break;
       case '03':
         service = this.dashboardService.form3Data(data);
+        break;
+      case '05':
+        service = this.dashboardService.form5Data(data);
         break;
       case '06':
         service = this.dashboardService.form6Data(data);
@@ -94,22 +97,22 @@ export class AreaPlotFormComponent {
       case '16':
         service = this.dashboardService.form16Data(data);
         break;
-        case '17':
+      case '17':
         service = this.dashboardService.form17Data(data);
         break;
-        case '18':
+      case '18':
         service = this.dashboardService.form18Data(data);
         break;
-        case '19' :
+      case '19':
         service = this.dashboardService.form19Data(data);
         break;
-        case '20':
+      case '20':
         service = this.dashboardService.form20Data(data);
         break;
-        case '21':
+      case '21':
         service = this.dashboardService.form21Data(data);
         break;
-        case '22':
+      case '22':
         service = this.dashboardService.form22Data(data);
         break;
       case '24':
