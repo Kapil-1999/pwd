@@ -4428,148 +4428,383 @@
         </div>
     } 
     } @else if (showForm(22)) {
-    <table class="mt-4">
-        <tr>
-            <td colspan="8" class="center">
-                <h2>GRADATION AGGREGATE FACTORS BINDER CONTENT PAVING</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="8" class="center">
-                <h2>MIXTURES CENTRIFUGE METHOD BC/DBM/BM</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="8" class="center">
-                <h2>(IRC:SP:11)</h2>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
-            <td colspan="4">Name Of Work :-</td>
-            <td colspan="4">Date Of Sampling :-</td>
-        </tr>
-        <tr>
-            <td colspan="4">Contractor :-</td>
-            <td colspan="4">Date Of Testing :-</td>
-        </tr>
-        <tr>
-            <td colspan="4">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
-        </tr>
-        <tr>
-            <td colspan="8" class="center">
-                <h3>BINDER CONTENT TEST</h3>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 10%">S No.</td>
-            <td style="width: 35%">Details</td>
-            <td style="width: 15%">Symbol</td>
-            <td colspan="2" style="width: 40%">Sample No.</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>1</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Weight of Mix</td>
-            <td>W1g</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Initial weight of filter paper</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Weight of Aggregate after extraction</td>
-            <td>W2g</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Weight of filter paper after extraction with fine materials</td>
-            <td>W3g</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Increased weight of filter</td>
-            <td>W4g</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Weight of Binder W1-(W2=W4)</td>
-            <td>W5g</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Binder Content (BC)=W5/W1*100</td>
-            <td>BC%</td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-    <table class="mt-4">
-        <tr>
-            <td colspan="8" class="center">
-                <h3>GRADIATION OF AGGREGATE FRACTION(BC-MoRT&H TABLE 500-18),</h3>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="8" class="center">
-                <h3>(DBM - BC-MoRT&H TABLE 500-10)&(BC-MoRT&H TABLE 500-4)</h3>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 15%">Sieve size (mm)</td>
-            <td style="width: 15%">Wt. retained (g)</td>
-            <td style="width: 15%">Cumulative Wt. retained(g)</td>
-            <td style="width: 15%">% Retained</td>
-            <td style="width: 15%">% Passing</td>
-            <td style="width: 15%">JMF LIMITS</td>
-            <td style="width: 20%">Grading 1</td>
-            <td style="width: 20%">Grading 2</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Nominal size Aggregate=</td>
-            <td>Nominal size Aggregate=</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Layer thickness =</td>
-            <td>Layer thickness =</td>
-        </tr>
-    </table>
+        @if(!isLoading){
+            {{areaPlotForm | json}}
+            @for(data of areaPlotForm ;track data; let i = $index) { 
+                <table class="mt-4">
+                    <tr>
+                        <td colspan="8" class="center">
+                            <h2>GRADATION AGGREGATE FACTORS BINDER CONTENT PAVING</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" class="center">
+                            <h2>MIXTURES CENTRIFUGE METHOD BC/DBM/BM</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" class="center">
+                            <h2>(IRC:SP:11)</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Sr No.: <span class="data">{{ i + 1 }}</span></td>
+                        <td colspan="4" class="right">Date: </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Name Of Work :-
+                            <span style="padding-left: 10px">{{ data?.work_name }}</span>
+                        </td>
+                        <td colspan="4">Date Of Sampling :-
+                            <span style="padding-left: 10px">{{ data?.sampling_date }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Contractor :-
+                            <span style="padding-left: 10px">{{ data?.contract_name }}</span>
+                        </td>
+                        <td colspan="4">Date Of Testing :-
+                            <span style="padding-left: 10px">{{ data?.testing_date }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Bond No. :-
+                            <span style="padding-left: 10px">{{ data?.contract_bond_no }}</span>
+                        </td>
+                        <td colspan="4">Source :-
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" class="center">
+                            <h3>BINDER CONTENT TEST</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%">S No.</td>
+                        <td style="width: 35%">Details</td>
+                        <td style="width: 15%">Symbol</td>
+                        <td colspan="2" style="width: 40%">Sample No.</td>
+                    </tr>
+                   
+                    <tr>
+                        <td>1</td>
+                        <td>Weight of Mix</td>
+                        <td>W1g</td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w1_a }}</span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w1_b }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Initial weight of filter paper</td>
+                        <td></td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.filter_paper_a }}</span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.filter_paper_b }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Weight of Aggregate after extraction</td>
+                        <td>W2g</td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w2_a }}</span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w2_b }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Weight of filter paper after extraction with fine materials</td>
+                        <td>W3g</td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w3_a }}</span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w3_b }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Increased weight of filter</td>
+                        <td>W4g</td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w4_a }}</span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w4_b }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Weight of Binder W1-(W2=W4)</td>
+                        <td>W5g</td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w5_a }}</span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.w5_b }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Binder Content (BC)=W5/W1*100</td>
+                        <td>BC%</td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.bc_a }}</span>
+                        </td>
+                        <td>
+                            <span style="padding-left: 10px">{{ data?.bc_b }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="11">
+                            <table class="mt-4">
+                                <tr>
+                                    <td colspan="8" class="center">
+                                        <h3>GRADIATION OF AGGREGATE FRACTION(BC-MoRT&H TABLE 500-18),</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8" class="center">
+                                        <h3>(DBM - BC-MoRT&H TABLE 500-10)&(BC-MoRT&H TABLE 500-4)</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 15%">Sieve size (mm)</td>
+                                    <td style="width: 15%">Wt. retained (g)</td>
+                                    <td style="width: 15%">Cumulative Wt. retained(g)</td>
+                                    <td style="width: 15%">% Retained</td>
+                                    <td style="width: 15%">% Passing</td>
+                                    <td style="width: 15%">JMF LIMITS</td>
+                                    <td style="width: 20%">Grading 1</td>
+                                    <td style="width: 20%">Grading 2</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.sieve_size1 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.wt_retained1 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.cumulative1 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.retained1 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.passing1 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.jmf1 }}</span>
+                                    </td>
+                                    <td>Nominal size Aggregate=
+                                        <span style="padding-left: 10px">{{ data?.grading1_a }}</span>
+                                    </td>
+                                    <td>Nominal size Aggregate=
+                                        <span style="padding-left: 10px">{{ data?.grading2_a }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.sieve_size2 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.wt_retained2 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.cumulative2 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.retained2 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.passing2 }}</span>
+                                    </td>
+                                    <td>
+                                        <span style="padding-left: 10px">{{ data?.jmf2 }}</span>
+                                    </td>
+                                    <td>Layer thickness =
+                                        <span style="padding-left: 10px">{{ data?.grading1_b }}</span>
+                                    </td>
+                                    <td>Layer thickness =
+                                        <span style="padding-left: 10px">{{ data?.grading2_b }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>                      
+                    </tr>
+                    <tr>
+                        <td colspan="11">
+                            Remarks : - <span style="padding-left: 10px">{{ data?.form22_remarks }}</span>
+                        </td>
+                    </tr>
+                </table>
+                
+            }
+        }
+        @if(!areaPlotForm?.length) {
+            <table class="mt-4">
+                <tr>
+                    <td colspan="8" class="center">
+                        <h2>GRADATION AGGREGATE FACTORS BINDER CONTENT PAVING</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="center">
+                        <h2>MIXTURES CENTRIFUGE METHOD BC/DBM/BM</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="center">
+                        <h2>(IRC:SP:11)</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">Sr No.: </td>
+                    <td colspan="4" class="right">Date: </td>
+                </tr>
+                <tr>
+                    <td colspan="4">Name Of Work :-
+                    </td>
+                    <td colspan="4">Date Of Sampling :-
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">Contractor :-
+                    </td>
+                    <td colspan="4">Date Of Testing :-
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">Bond No. :-
+                    </td>
+                    <td colspan="4">Source :-
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="center">
+                        <h3>BINDER CONTENT TEST</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 10%">S No.</td>
+                    <td style="width: 35%">Details</td>
+                    <td style="width: 15%">Symbol</td>
+                    <td colspan="2" style="width: 40%">Sample No.</td>
+                </tr>
+               
+                <tr>
+                    <td>1</td>
+                    <td>Weight of Mix</td>
+                    <td>W1g</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Initial weight of filter paper</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Weight of Aggregate after extraction</td>
+                    <td>W2g</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Weight of filter paper after extraction with fine materials</td>
+                    <td>W3g</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Increased weight of filter</td>
+                    <td>W4g</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Weight of Binder W1-(W2=W4)</td>
+                    <td>W5g</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Binder Content (BC)=W5/W1*100</td>
+                    <td>BC%</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="11">
+                        <table class="mt-4">
+                            <tr>
+                                <td colspan="8" class="center">
+                                    <h3>GRADIATION OF AGGREGATE FRACTION(BC-MoRT&H TABLE 500-18),</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="center">
+                                    <h3>(DBM - BC-MoRT&H TABLE 500-10)&(BC-MoRT&H TABLE 500-4)</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 15%">Sieve size (mm)</td>
+                                <td style="width: 15%">Wt. retained (g)</td>
+                                <td style="width: 15%">Cumulative Wt. retained(g)</td>
+                                <td style="width: 15%">% Retained</td>
+                                <td style="width: 15%">% Passing</td>
+                                <td style="width: 15%">JMF LIMITS</td>
+                                <td style="width: 20%">Grading 1</td>
+                                <td style="width: 20%">Grading 2</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Nominal size Aggregate=</td>
+                                <td>Nominal size Aggregate=</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Layer thickness =</td>
+                                <td>Layer thickness =</td>
+                            </tr>
+                        </table>
+                    </td>                      
+                </tr>
+                <tr>
+                    <td colspan="11">
+                        Remarks : -
+                    </td>
+                </tr>
+            </table>
+        }
     } @else if (showForm(24)) {
     <table class="mt-4">
         <h3>Form 24</h3>
