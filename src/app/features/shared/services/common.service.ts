@@ -235,6 +235,13 @@ export class CommonService {
     );
   }
 
+  commonWork() :Observable<any> {
+    let url = API_CONSTANTS.commonWork;
+    return this.apiService.get(url).pipe(
+      catchError((error: HttpErrorResponse) => of(error))
+    );
+  }
+
   addressApi(address:any): Observable<any> {
     let url = API_CONSTANTS.addressApi.replace("{lat}", address.lat).replace("{lng}", address.lng).replace("{api_key}", environment.Api_Key);
     return this.http.get(url)

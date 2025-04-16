@@ -148,7 +148,7 @@ export class CreateAreaComponent {
   }
 
   getWorkList() {
-    this.commonService.commonArea().subscribe((res:any) => {
+    this.commonService.commonWork().subscribe((res:any) => {
       this.workNameList = res?.body?.result || [];
         if (this.areaById) {
         let workId = this.workNameList.find((val: any) => val.value == this.areaById?.work_id);        
