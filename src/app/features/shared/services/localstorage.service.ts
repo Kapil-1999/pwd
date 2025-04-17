@@ -29,8 +29,7 @@ export class LocalStorageService {
   //**getitem from localstorage */
   getItem(key: string): string | null {
     if (this.isLocalStorageAvailable()) {
-      const currentTabId = localStorage.getItem('current-tab');      
-      return localStorage.getItem(`${key}-login-${currentTabId}`);
+      return localStorage.getItem(`pwd-${key}`);
     } else {
       return null;
     }
@@ -56,15 +55,9 @@ export class LocalStorageService {
   // }
 
   clear(): void {
-    let currentTabId = localStorage.getItem('current-tab');
-    if (currentTabId) {
-      this.cookieService.delete(`token-login-${currentTabId}`, '/');
-      localStorage.removeItem(`menu-login-${currentTabId}`);
-      localStorage.removeItem(`user-login-${currentTabId}`);
-      localStorage.removeItem(`tab-id-${currentTabId}`);
-      localStorage.setItem('logout-event', currentTabId + '-' + new Date().getTime());  
-      localStorage.removeItem('current-tab');
-    }
+    this.cookieService.delete(`pwd-token`, '/');
+    localStorage.removeItem(`pwd-user`);
+    localStorage.removeItem(`pwd-menu`);
   }
 
   // getToken(): string | null {
@@ -72,15 +65,11 @@ export class LocalStorageService {
   // }
 
   isLoggedIn() {
-    const currentTabId = localStorage.getItem('current-tab');
-    const loginEvent = localStorage.getItem(`login-event-${currentTabId}`);
-    const logoutEvent = localStorage.getItem('logout-event');
     const token = this.getToken();
-    return loginEvent && (!logoutEvent || loginEvent > logoutEvent) && token !== null;
+    return  token !== null;
   }
 
   getToken(): string {
-    const currentTabId = localStorage.getItem('current-tab');        
-    return this.cookieService.get(`token-login-${currentTabId}`);
+    return this.cookieService.get(`pwd-token`);
   }
 }

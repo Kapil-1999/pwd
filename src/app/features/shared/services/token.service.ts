@@ -38,13 +38,11 @@ export class TokenService {
 
   //**gettoken from localstorage */
   getToken() {
-    const currentTabId = localStorage.getItem('current-tab');
-    return this.cookieService.get(`token-login-${currentTabId}`);
+    return this.cookieService.get(`pwd-token`);
   }
 
   //**check condition for token available in localstorage */
   hasToken() {
-    const currentTabId = localStorage.getItem('current-tab');
-    return this.cookieService.get(`token-login-${currentTabId}`) !== null;
+    return this.cookieService.get(`pwd-token`) !== null;
   }
 }

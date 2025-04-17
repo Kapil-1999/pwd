@@ -22,24 +22,17 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private tokenService: TokenService,
-    private localStorageService : LocalStorageService,
     private http : HttpClient,
     private notificationService : NotificationService,
     private cookieService: CookieService,
+    private localStorageService :LocalStorageService
 
   ) {
-    const currentTabId = localStorage.getItem('current-tab');
-    if (currentTabId) {
-      const sessionData = localStorage.getItem(`logout-event-${currentTabId}`);
-      if (sessionData) {
-        localStorage.removeItem('logout-event');
-        this.router.navigate(['/login']);
-      } else {
-        this.router.navigate(['/admin/dashboard/home']);
-      }
-    } else {
-      localStorage.removeItem('logout-event');
+    let sessionData = this.localStorageService.isLoggedIn();    
+    if (!sessionData) {
       this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/admin/dashboard/home']);
     }
    }
 
@@ -84,17 +77,14 @@ export class LoginComponent {
         if (userDetail?.statusCode == 200) {
           let userData = userDetail?.result;
           let menuData = userDetail?.moduleList;
-          const tabId = `${userData?.user_id}_${new Date().getTime()}`;
-          localStorage.setItem('current-tab', tabId);
-          localStorage.setItem(`tab-id-${tabId}`, tabId);
-          this.cookieService.set(`token-login-${tabId}`, userDetail?.jwtToken, {
+          this.cookieService.set(`pwd-token`, userDetail?.jwtToken, {
             path: '/',
             secure: false,
             sameSite: 'Lax',
             expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24)
           });
-          this.localStorageService.setItem(`user-login-${tabId}`, JSON.stringify(userData));
-          this.localStorageService.setItem(`menu-login-${tabId}`, JSON.stringify(menuData));
+          this.localStorageService.setItem(`pwd-user`, JSON.stringify(userData));
+          this.localStorageService.setItem(`pwd-menu`, JSON.stringify(menuData));
           this.notificationService.successAlert('Login Successfully');
           setTimeout(() => {
             this.router.navigate(['/admin/dashboard/home']);
