@@ -27,11 +27,16 @@ export class LiveTrackingService {
     if (data.districtId !== undefined) {
       params.push(`districtId=${data.districtId}`);
     }
-  
+
     const url = `${API_CONSTANTS.liveTracking.split('?')[0]}?${params.join('&')}`;
-  
+
     return this.apiService
       .get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  liveTrackByUser(data: any): Observable<any> {
+    let url = API_CONSTANTS.liveTrackByUser.replace('{userId}', data.user_id).replace('{selectedDesigId}', data.selectedDesigId)
+    return this.apiService.get(url).pipe(catchError((error: HttpErrorResponse) => of(error)))
   }
 }

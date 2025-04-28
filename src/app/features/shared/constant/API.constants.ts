@@ -94,6 +94,7 @@ export const API_CONSTANTS = {
     form23Data: 'Task/GetForm23?taskId={taskId}&taskDetId={taskDetId}',
     form24Data: 'Task/GetForm24?taskId={taskId}&taskDetId={taskDetId}',
     form25Data: 'Task/GetForm25?taskId={taskId}&taskDetId={taskDetId}',
-    commonWork : 'Common/GetWorkList'
+    commonWork : 'Common/GetWorkList',
+    liveTrackByUser : 'LiveTracking/GetLiveTrackingByUser?userId={userId}&selectedDesigId={selectedDesigId}'
 
 }
