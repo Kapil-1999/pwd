@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
 import { allvehicleData, setSelectedUser, setUserCountData } from '../../../../../core/app.selector';
 import { selectedUser, selectedUserArea, selectedVehicleData, setShowUserList } from '../../../../../core/app.action';
+import { NotificationService } from '../../../../shared/services/notification.service';
 
 @Component({
   selector: 'user-in-map',
@@ -45,8 +46,9 @@ export class UserInMapComponent {
     private commonService: CommonService,
     private fb: FormBuilder,
     private store: Store<AppState>,
-    private cdRef: ChangeDetectorRef
-  ) {
+    private cdRef: ChangeDetectorRef,
+    private notificationService : NotificationService
+    ) {
     this.newVehicle$ = this.store.select(allvehicleData)
     this.newVehicle$.subscribe({
       next: (user) => {
