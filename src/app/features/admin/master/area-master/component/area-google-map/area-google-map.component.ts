@@ -183,8 +183,8 @@ export class AreaGoogleMapComponent {
       });
       bounds.union(this.circle.getBounds()!);
     } else if (this.markerData?.shape === '2') {
-      const coordinates = JSON.parse(this.markerData.geofanceText);
-      const path = coordinates.map((coord: [number, number]) => ({
+      const coordinates = this.markerData?.geofanceText ? JSON.parse(this.markerData?.geofanceText) : [];
+      const path = coordinates?.map((coord: [number, number]) => ({
         lat: coord[1],
         lng: coord[0],
       }));
@@ -198,7 +198,7 @@ export class AreaGoogleMapComponent {
       });
       this.polyline.setMap(this.map);
   
-      path.forEach((point: google.maps.LatLngLiteral) => bounds.extend(point));
+      path?.forEach((point: google.maps.LatLngLiteral) => bounds.extend(point));
     }
 
     if (!bounds.isEmpty()) {
@@ -209,7 +209,7 @@ export class AreaGoogleMapComponent {
   updateShapeDetails(layer: any, type: string, action: string) {
     if (type === 'circle') {
       let center = layer.getCenter();
-      const radius = layer.getRadius();
+      const radius = Math.round(layer.getRadius());
       center = {
         lat : center.lat(),
         lng : center.lng()

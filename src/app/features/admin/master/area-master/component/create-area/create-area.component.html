@@ -45,16 +45,16 @@
                                 Polygon
                             </label>
                         </div>
-                        <div *ngIf="errorMessages?.shape" class="text-danger">
+                        <!-- <div *ngIf="errorMessages?.shape" class="text-danger">
                             {{ errorMessages?.shape }}
-                        </div>
+                        </div> -->
                         <span *ngIf="areaForm?.get('shape_type')?.invalid &&
                         (areaForm?.get('shape_type')?.dirty || areaForm?.get('shape_type')?.touched)" class="text-danger mt-2">
                         Shape is Required
                     </span>
                     </div>
                     <div class="col-md-6 mb-2">
-                        <label class="form-label">Radius</label>
+                        <label class="form-label">Radius(m)</label>
                         <div class="input-group mb-2">
                             <input type="number" class="form-control" placeholder="Enter Radius"
                                 aria-describedby="button-addon2" formControlName="radius" />
@@ -73,9 +73,9 @@
                             <input type="number" class="form-control" placeholder="Enter Latitude"
                                 formControlName="source_lat" aria-describedby="button-addon2" />
                         </div>
-                        <div *ngIf="errorMessages?.sourceLat" class="text-danger">
+                        <!-- <div *ngIf="errorMessages?.sourceLat" class="text-danger">
                             {{ errorMessages.sourceLat }}
-                        </div>
+                        </div> -->
                         <span *ngIf="areaForm?.get('source_lat')?.invalid &&
                             (areaForm?.get('source_lat')?.dirty || areaForm?.get('source_lat')?.touched)" class="text-danger mt-2">
                             Source Latitude is Required
@@ -89,9 +89,9 @@
                                 formControlName="source_lon" aria-describedby="button-addon2" />
                         </div>
 
-                        <div *ngIf="errorMessages?.sourceLon" class="text-danger">
+                        <!-- <div *ngIf="errorMessages?.sourceLon" class="text-danger">
                             {{ errorMessages?.sourceLon }}
-                        </div>
+                        </div> -->
 
                         <span *ngIf="areaForm?.get('source_lon')?.invalid &&
                         (areaForm?.get('source_lon')?.dirty || areaForm?.get('source_lon')?.touched)" class="text-danger mt-2">
@@ -104,9 +104,9 @@
                             <input type="number" class="form-control" placeholder="Enter Latitude"
                                 formControlName="destination_lat" aria-describedby="button-addon2" />
                         </div>
-                        <div *ngIf="errorMessages?.destinationLat" class="text-danger">
+                        <!-- <div *ngIf="errorMessages?.destinationLat" class="text-danger">
                             {{ errorMessages?.destinationLat }}
-                        </div>
+                        </div> -->
                         <span *ngIf="areaForm?.get('destination_lat')?.invalid &&
                             (areaForm?.get('destination_lat')?.dirty || areaForm?.get('destination_lat')?.touched)" class="text-danger mt-2">
                             Destination Latitude is Required
@@ -118,9 +118,9 @@
                             <input type="number" class="form-control" placeholder="Enter Longitude"
                                 formControlName="destination_lon" aria-describedby="button-addon2" />
                         </div>
-                        <div *ngIf="errorMessages?.destinationLon" class="text-danger">
+                        <!-- <div *ngIf="errorMessages?.destinationLon" class="text-danger">
                             {{ errorMessages?.destinationLon }}
-                        </div>
+                        </div> -->
                         <span *ngIf="areaForm?.get('destination_lon')?.invalid &&
                         (areaForm?.get('destination_lon')?.dirty || areaForm?.get('destination_lon')?.touched)" class="text-danger mt-2">
                         Destination Longitude is Required

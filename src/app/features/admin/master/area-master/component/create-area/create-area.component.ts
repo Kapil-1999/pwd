@@ -182,6 +182,18 @@ export class CreateAreaComponent {
           destination_lon: sourceLon,
         });
       }
+    } else if (value === '2') {
+      const sourceLat = this.areaForm.get('source_lat')?.value;
+      const sourceLon = this.areaForm.get('source_lon')?.value;
+      const destinationLat = this.areaForm.get('destination_lat')?.value;
+      const destinationLon = this.areaForm.get('destination_lon')?.value;
+
+      if (sourceLat === destinationLat && sourceLon === destinationLon) {
+        this.areaForm.patchValue({
+          destination_lat: null,
+          destination_lon: null,
+        });
+      }
     }
   }
 
@@ -222,7 +234,7 @@ export class CreateAreaComponent {
       colour: this.areaForm.get('color_code')?.value
     }
   }
-
+  
   onCreateShape() {
     const sourceLat = this.areaForm.get('source_lat')?.value;
     const sourceLon = this.areaForm.get('source_lon')?.value;
@@ -231,55 +243,24 @@ export class CreateAreaComponent {
     const shape = this.areaForm.get('shape_type')?.value;
     const colour = this.areaForm.get('color_code')?.value;
     const radius = this.areaForm.get('radius')?.value;
-    const geofanceText = this.areaById?.geofence_text
-    console.log(radius);
+    const geofanceText = this.areaById?.geofence_text;
+
+    this.areaForm.get('source_lat')?.markAsTouched();
+    this.areaForm.get('source_lon')?.markAsTouched();
+    this.areaForm.get('destination_lat')?.markAsTouched();
+    this.areaForm.get('destination_lon')?.markAsTouched();
+    this.areaForm.get('shape_type')?.markAsTouched();
     
-
-    this.errorMessages = {
-      sourceLat: null,
-      sourceLon: null,
-      destinationLat: null,
-      destinationLon: null,
-      shape: null,
-      radius: null,
-    };
-
-    let hasError = false;
-
-    if (!sourceLat && !sourceLon && !destinationLat && !destinationLon && !shape) {
-      this.notificationService.showError('Please provide the necessary details to create a shape.');
-      this.errorMessages.sourceLat = 'Source Latitude is required.';
-      this.errorMessages.sourceLon = 'Source Longitude is required.';
-      this.errorMessages.destinationLat = 'Destination Latitude is required.';
-      this.errorMessages.destinationLon = 'Destination Longitude is required.';
-      this.errorMessages.shape = 'Please select a shape type to create the shape.';
-      this.errorMessages.radius = 'Radius is required.';
-      hasError = true;
+    if (shape === '1') {
+      this.areaForm.get('radius')?.markAsTouched();
+      if (!radius || radius <= 0) {
+        this.notificationService.showError('Radius is required and must be greater than 0 for circle shape.');
+        return;
+      }
     }
 
-    if (sourceLat && !sourceLon) {
-      hasError = true;
-      this.errorMessages.sourceLon = 'Source Longitude is required.';
-    } else if (!sourceLat && sourceLon) {
-      this.errorMessages.sourceLat = 'Source Latitude is required.';
-      hasError = true;
-    }
-
-    if (!destinationLat && destinationLon) {
-      this.errorMessages.destinationLat = 'Destination Latitude is required.';
-      hasError = true;
-    } else if (destinationLat && !destinationLon) {
-      this.errorMessages.destinationLon = 'Destination Longitude is required.';
-      hasError = true;
-    }
-
-    if (!shape) {
-      this.errorMessages.shape = 'Please select a shape type to create the shape.';
-      hasError = true;
-    }
-
-
-    if (hasError) {
+    if (!sourceLat || !sourceLon || !destinationLat || !destinationLon || !shape) {
+      this.notificationService.showError('Please fill in all required fields.');
       return;
     }
 
@@ -292,7 +273,8 @@ export class CreateAreaComponent {
       colour,
       radius,
       geofanceText
-    };    
+    };
+    
     this.markerData = shapeData;
     this.notificationService.showSuccess('Shape created successfully!');
   }
