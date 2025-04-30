@@ -35,6 +35,7 @@ export class CreateAreaComponent {
   editData: any
   areaById: any;
   userData: any;
+  geofanceText:any = null;
 
   constructor(
     private modalService: BsModalService,
@@ -74,6 +75,7 @@ export class CreateAreaComponent {
       "district_id": [null, [Validators.required]],
       "work_id": [null, [Validators.required]],
       "is_active": [1, [Validators.required]],
+      "segment_id" : [1, [Validators.required]]
     });
     this.areaForm.get('shape_type')?.valueChanges.subscribe((value) => this.onShapeChange(value));
     this.areaForm.get('shape_type')?.valueChanges.subscribe((shapeType) => {
@@ -137,7 +139,8 @@ export class CreateAreaComponent {
           "source_lon": this.areaById?.source_lon,
           "destination_lat": this.areaById?.destination_lat,
           "destination_lon": this.areaById?.destination_lon,
-          "is_active": this.areaById?.is_active
+          "is_active": this.areaById?.is_active,
+          "segment_id" : this.areaById?.segment_id
         })
       }
       this.getWorkList();
@@ -188,12 +191,12 @@ export class CreateAreaComponent {
       const destinationLat = this.areaForm.get('destination_lat')?.value;
       const destinationLon = this.areaForm.get('destination_lon')?.value;
 
-      if (sourceLat === destinationLat && sourceLon === destinationLon) {
-        this.areaForm.patchValue({
-          destination_lat: null,
-          destination_lon: null,
-        });
-      }
+      // if (sourceLat === destinationLat && sourceLon === destinationLon) {
+      //   this.areaForm.patchValue({
+      //     destination_lat: null,
+      //     destination_lon: null,
+      //   });
+      // }
     }
   }
 
@@ -235,7 +238,7 @@ export class CreateAreaComponent {
     }
   }
   
-  onCreateShape() {
+  onCreateShape() {    
     const sourceLat = this.areaForm.get('source_lat')?.value;
     const sourceLon = this.areaForm.get('source_lon')?.value;
     const destinationLat = this.areaForm.get('destination_lat')?.value;
@@ -297,14 +300,18 @@ export class CreateAreaComponent {
       "source_lon": formvalue?.source_lon,
       "destination_lat": formvalue?.destination_lat,
       "destination_lon": formvalue?.destination_lon,
-      "geofence_text": null,
+      "geofence_text":this.geofanceText ? JSON.stringify(this.geofanceText) : null,
       "district_id": formvalue?.district_id ? Number(formvalue?.district_id.value) : null,
       "district_name": formvalue?.district_id ? formvalue?.district_id.text : null,
       "work_id": formvalue?.work_id ? formvalue?.work_id.value : null,
       "work_name": formvalue?.work_id ? formvalue?.work_id.text : null,
       "is_active": formvalue?.is_active,
-      "created_by": user?.user_id
+      "created_by": user?.user_id,
+      "segment_id" : formvalue.segment_id
     }
+
+    console.log(payload);
+    
     let service = this.areaService.addArea(payload);
     if (this.areaById) {
       payload['area_id'] = this.areaById?.area_id;
@@ -319,6 +326,7 @@ export class CreateAreaComponent {
         this.notificationService.errorAlert(res?.title);
       }
     })
+  
 
   }
 
@@ -328,6 +336,7 @@ export class CreateAreaComponent {
 
   confirm(event: any) {
     const { circle, radius, shapeType } = event;
+    this.geofanceText = null
     if (shapeType == 1) {
       this.areaForm.patchValue({
         source_lat: circle.lat,
@@ -340,8 +349,8 @@ export class CreateAreaComponent {
     } else if (shapeType == 2) {
       const sourceLat = circle[0][0];
       const sourceLon = circle[0][1];
-      const destinationLat = circle[circle.length - 2][0];
-      const destinationLon = circle[circle.length - 2][1];
+      const destinationLat = circle[0][0];
+      const destinationLon = circle[0][1];
       this.areaForm.patchValue({
         source_lat: sourceLat,
         source_lon: sourceLon,
@@ -350,6 +359,10 @@ export class CreateAreaComponent {
         radius: radius,
         shape_type: shapeType.toString()
       });
+      this.geofanceText = circle?.map((coord: any[]) => [coord[1], coord[0], 0.0]); 
+      if (this.geofanceText?.length) {
+        this.geofanceText.push([...this.geofanceText[0]]);
+      }           
     }
   }
 }

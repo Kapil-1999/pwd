@@ -58,6 +58,7 @@ export class CreatePoiComponent {
     })
 
     if(this.editData) {
+      this.label = 'Update'
       this.getPoiById(this.editData?.poi_alloc_id)
 
     } else {
@@ -116,7 +117,7 @@ export class CreatePoiComponent {
   getAreaList() {
       this.commonService.commonArea().subscribe((res:any) => {
         this.areaData = res?.body?.result || [];
-        let circleValue = this.getPoiByIdData?.work_id;
+        let circleValue = this.getPoiByIdData?.area_id;
         
         if (circleValue) {
           let matchingCE;
@@ -159,8 +160,8 @@ export class CreatePoiComponent {
       "user_id": formvalue?.user ? Number(formvalue?.user?.value) : null,
       "user_name": formvalue?.user ? formvalue?.user?.text : null,
       "allocated_date": formvalue?.date,
-      "work_id": areaData.value,
-      "work_text": "",
+      "area_id": areaData.value,
+      "area_text": "",
       "remarks": formvalue?.remark,
       "is_active": formvalue?.status,
       "created_by": user?.user_id

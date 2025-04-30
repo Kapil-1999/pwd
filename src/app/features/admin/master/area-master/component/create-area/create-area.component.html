@@ -166,6 +166,18 @@
                     </span>
                     </div>
                     <div class="col-md-6 mb-2">
+                        <label class="form-label">Segment</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" placeholder="Enter Segment Id"
+                                aria-describedby="button-addon2" formControlName="segment_id" />
+                        </div>
+                        <span *ngIf="areaForm?.get('segment_id')?.invalid &&
+                        (areaForm?.get('segment_id')?.dirty || areaForm?.get('segment_id')?.touched)" class="text-danger mt-2">
+                        Segment Id is Required
+                    </span>
+
+                    </div>
+                    <div class="col-md-6 mb-2">
                         <label class="form-label">Status</label>
                         <select class="form-control" formControlName="is_active">
                             <option *ngFor="let value of status" [ngValue]="value.id">{{ value.value }}</option>
