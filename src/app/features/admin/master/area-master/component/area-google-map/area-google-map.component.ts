@@ -61,7 +61,10 @@ export class AreaGoogleMapComponent {
       drawingControl: true,
       drawingControlOptions: {
         position: google.maps.ControlPosition.TOP_LEFT,
-        drawingModes: [google.maps.drawing.OverlayType.CIRCLE, google.maps.drawing.OverlayType.POLYGON],
+        drawingModes: [
+          google.maps.drawing.OverlayType.CIRCLE,
+          google.maps.drawing.OverlayType.POLYLINE
+        ],
       },
       circleOptions: {
         fillColor: '#FF0000',
@@ -71,10 +74,9 @@ export class AreaGoogleMapComponent {
         editable: true,
         zIndex: 1,
       },
-      polygonOptions: {
-        fillColor: '#00FF00',
-        fillOpacity: 0.2,
-        strokeWeight: 2,
+      polylineOptions: {
+        strokeColor: '#000000',
+        strokeWeight: 5,
         clickable: false,
         editable: true,
         zIndex: 1,
@@ -88,17 +90,17 @@ export class AreaGoogleMapComponent {
       if (event.type === 'circle') {
         this.circle = event.overlay;
         this.updateShapeDetails(this.circle, 'circle', 'Add');
-      } else if (event.type === 'polygon') {
-        this.polygon = event.overlay;
-        this.updateShapeDetails(this.polygon, 'polygon', 'Add');
+      } else if (event.type === 'polyline') {
+        this.polyline = event.overlay;
+        this.updateShapeDetails(this.polyline, 'polyline', 'Add');
       }
     });
 
     google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event: any) => {
       if (event.type === 'circle') {
         this.updateShapeDetails(event.overlay, 'circle', 'Update');
-      } else if (event.type === 'polygon') {
-        this.updateShapeDetails(event.overlay, 'polygon', 'Update');
+      } else if (event.type === 'polyline') {
+        this.updateShapeDetails(event.overlay, 'polyline', 'Update');
       }
     });
   }
@@ -106,7 +108,7 @@ export class AreaGoogleMapComponent {
   handleRemovedLayer(layer: any): void {
     if (layer instanceof google.maps.Circle) {
       this.mapAddress.emit({ circle: '', radius: '', shapeType: 1 });
-    } else if (layer instanceof google.maps.Polygon) {
+    } else if (layer instanceof google.maps.Polyline) {
       this.mapAddress.emit({ circle: '', radius: '', shapeType: 2 });
     }
   }
@@ -125,6 +127,11 @@ export class AreaGoogleMapComponent {
     if (this.polygon) {
       this.polygon.setMap(null);
       this.polygon = null;
+    }
+
+    if (this.polyline) {
+      this.polyline.setMap(null);
+      this.polyline = null;
     }
   }
 
@@ -183,22 +190,39 @@ export class AreaGoogleMapComponent {
       });
       bounds.union(this.circle.getBounds()!);
     } else if (this.markerData?.shape === '2') {
-      const coordinates = this.markerData?.geofanceText ? JSON.parse(this.markerData?.geofanceText) : [];
-      const path = coordinates?.map((coord: [number, number]) => ({
-        lat: coord[1],
-        lng: coord[0],
-      }));
-  
-      this.polyline = new google.maps.Polyline({
-        path: path,
-        geodesic: true,
-        strokeColor: this.markerData.colour || 'green',
-        strokeOpacity: 0.8,
-        strokeWeight: 5,
-      });
-      this.polyline.setMap(this.map);
-  
-      path?.forEach((point: google.maps.LatLngLiteral) => bounds.extend(point));
+      if(this.markerData?.geofanceText) {
+        const coordinates = this.markerData?.geofanceText ? JSON.parse(this.markerData?.geofanceText) : [];
+        const path = coordinates?.map((coord: [number, number]) => ({
+          lat: coord[1],
+          lng: coord[0],
+        }));
+    
+        this.polyline = new google.maps.Polyline({
+          path: path,
+          geodesic: true,
+          strokeColor: this.markerData.colour || 'black',
+          strokeOpacity: 0.8,
+          strokeWeight: 5,
+        });
+        this.polyline.setMap(this.map);    
+        path?.forEach((point: google.maps.LatLngLiteral) => bounds.extend(point));
+      } else {
+        const path = [
+          { lat: this.markerData.sourceLat, lng: this.markerData.sourceLon },
+          { lat: this.markerData.destinationLat, lng: this.markerData.destinationLon }
+        ];
+
+        this.polyline = new google.maps.Polyline({
+          path: path,
+          geodesic: true,
+          strokeColor: this.markerData.colour || 'black',
+          strokeOpacity: 0.8,
+          strokeWeight: 5,
+        });
+        this.polyline.setMap(this.map);
+        
+        path.forEach((point: google.maps.LatLngLiteral) => bounds.extend(point));
+      }
     }
 
     if (!bounds.isEmpty()) {
@@ -211,12 +235,12 @@ export class AreaGoogleMapComponent {
       let center = layer.getCenter();
       const radius = Math.round(layer.getRadius());
       center = {
-        lat : center.lat(),
-        lng : center.lng()
+        lat: center.lat(),
+        lng: center.lng()
       }      
       this.mapAddress.emit({ circle: center, radius: radius, shapeType: 1 });
-    } else if (type === 'polygon') {
-      const path = layer.getPath().getArray();
+    } else if (type === 'polyline') {            
+      const path = layer.getPath().getArray();                  
       const coordinates = path.map((latLng: google.maps.LatLng) => [latLng.lat(), latLng.lng()]);
       this.mapAddress.emit({ circle: coordinates, radius: 0, shapeType: 2 });
     }

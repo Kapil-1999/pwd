@@ -4,6 +4,7 @@ import { MainLayoutComponent } from './features/shared/layout/main-layout/main-l
 import { LoginComponent } from './features/shared/login/login/login.component';
 import { AuthguardGuard } from './features/shared/services/authguard.guard';
 import { AreaPlotFormComponent } from './features/admin/admin-dashboard-manage/components/area-plot-form/area-plot-form.component';
+import { PageNotFoundComponent } from './features/shared/component/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -27,9 +28,8 @@ const routes: Routes = [
     path : 'admin/dashboard/area-plot-form/:formCode' , component : AreaPlotFormComponent
   },
   {
-    path: '**',
-    redirectTo: '',
-  },
+    path: '**', component : PageNotFoundComponent
+  }
 ];
 
 @NgModule({

@@ -200,7 +200,6 @@
         <div class="col-md-7">
             @if(this.userData?.is_gmap_enabled === 0) {
             <area-map [markerData]="markerData" (mapAddress)="confirm($event)"></area-map>
-
               } @else if (this.userData?.is_gmap_enabled === 1){ 
                 <app-area-google-map [markerData]="markerData" (mapAddress)="confirm($event)"></app-area-google-map>
               }

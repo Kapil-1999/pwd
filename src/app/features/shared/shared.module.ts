@@ -30,6 +30,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { AddressPipe } from './pipe/address.pipe';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AddressPipe } from './pipe/address.pipe';
     ProfileComponent,
     LoaderComponent,
     AddressPipe,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
