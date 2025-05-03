@@ -63,174 +63,174 @@ export class DashboardService {
   }
 
   form1Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form1Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form1Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form2Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form2Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form2Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form3Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form3Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form3Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form4Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form4Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form4Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form5Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form5Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form5Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form6Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form6Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form6Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
   form7Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form7Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form7Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form8Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form8Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form8Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form9Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form9Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form9Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form10Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form10Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form10Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
    .get(url)
    .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form11Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form11Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form11Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
    .get(url)
    .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form12Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form12Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form12Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
    .get(url)
    .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form13Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form13Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form13Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form14Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form14Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form14Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form15Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form15Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form15Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form16Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form16Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form16Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form17Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form17Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form17Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form18Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form18Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form18Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form19Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form19Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form19Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form20Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form20Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form20Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form21Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form21Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form21Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form22Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form22Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form22Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form23Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form23Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form23Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form24Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form24Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form24Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   }
 
   form25Data(data:any): Observable<any> {
-    let url = API_CONSTANTS.form25Data.replace('{taskId}', data?.taskId).replace('{taskDetId}', data?.taskDetId)
+    let url = API_CONSTANTS.form25Data.replace('{taskId}', data?.taskId).replace('{catId}', data?.catId).replace('{subCatId}', data?.subCatId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));

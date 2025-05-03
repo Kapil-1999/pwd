@@ -46,8 +46,9 @@ export class AreaPlotFormComponent {
   getFormData() {
     this.isLoading = true;
     const data = {
-      taskId: this.catId,
-      taskDetId: this.taskDetId
+      taskId: this.taskDetId, 
+      catId:  this.catId, 
+      subCatId: this.subCat
     };
 
     let service: any;

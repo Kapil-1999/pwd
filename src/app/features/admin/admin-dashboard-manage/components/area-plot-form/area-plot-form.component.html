@@ -612,7 +612,7 @@
             <tr>
                 <td>5)</td>
                 <td>Cement Concrete Pavement</td>
-                <td>{{data?.compaction_density}}</td>
+                <td>{{data?.pavement}}</td>
             </tr>
             <tr>
                 <td colspan="3" class="pt-3">
@@ -862,65 +862,20 @@
             </tr>
             <tr>
                 <td></td>
-                <td>{{ data?.wt_retained_75 }}</td>
-                <td>{{ data?.percent_retained_wt_75 }}</td>
-                <td>{{ data?.cumulative_retained_wt_75 }}</td>
-                <td>{{ data?.passing_wt_75 }}</td>
-                <td>{{ data?.aggregates_100 }}</td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td></td>
                 <td>{{ data?.wt_retained_53 }}</td>
                 <td>{{ data?.percent_retained_wt_53 }}</td>
                 <td>{{ data?.cumulative_retained_wt_53 }}</td>
                 <td>{{ data?.passing_wt_53 }}</td>
-                <td>{{ data?.aggregates_53 }}</td>
+                <td></td>
                 <td colspan="3"></td>
             </tr>
             <tr>
                 <td></td>
-                <td>{{ data?.wt_retained_265 }}</td>
-                <td>{{ data?.percent_retained_wt_265 }}</td>
-                <td>{{ data?.cumulative_retained_wt_265 }}</td>
-                <td>{{ data?.passing_wt_265 }}</td>
-                <td>{{ data?.aggregates_265 }}</td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
+                <td>{{ data?.wt_retained_75 }}</td>
+                <td>{{ data?.percent_retained_wt_75 }}</td>
+                <td>{{ data?.cumulative_retained_wt_75 }}</td>
+                <td>{{ data?.passing_wt_75 }}</td>
                 <td></td>
-                <td>{{ data?.wt_retained_95 }}</td>
-                <td>{{ data?.percent_retained_wt_95 }}</td>
-                <td>{{ data?.cumulative_retained_wt_95 }}</td>
-                <td>{{ data?.passing_wt_95 }}</td>
-                <td>{{ data?.aggregates_95 }}</td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ data?.wt_retained_475 }}</td>
-                <td>{{ data?.percent_retained_wt_475 }}</td>
-                <td>{{ data?.cumulative_retained_wt_475 }}</td>
-                <td>{{ data?.passing_wt_475 }}</td>
-                <td>{{ data?.aggregates_475 }}</td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ data?.wt_retained_236 }}</td>
-                <td>{{ data?.percent_retained_wt_236 }}</td>
-                <td>{{ data?.cumulative_retained_wt_236 }}</td>
-                <td>{{ data?.passing_wt_236 }}</td>
-                <td>{{ data?.aggregates_236 }}</td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ data?.wt_retained_0425 }}</td>
-                <td>{{ data?.percent_retained_wt_0425 }}</td>
-                <td>{{ data?.cumulative_retained_wt_0425 }}</td>
-                <td>{{ data?.passing_wt_0425 }}</td>
-                <td>{{ data?.aggregates_0425 }}</td>
                 <td colspan="3"></td>
             </tr>
             <tr>
@@ -929,9 +884,54 @@
                 <td>{{ data?.percent_retained_wt_0075 }}</td>
                 <td>{{ data?.cumulative_retained_wt_0075 }}</td>
                 <td>{{ data?.passing_wt_0075 }}</td>
-                <td>{{ data?.aggregates_0075 }}</td>
+                <td></td>
                 <td colspan="3"></td>
             </tr>
+            <tr>
+                <td></td>
+                <td>{{ data?.wt_retained_95 }}</td>
+                <td>{{ data?.percent_retained_wt_95 }}</td>
+                <td>{{ data?.cumulative_retained_wt_95 }}</td>
+                <td>{{ data?.passing_wt_95 }}</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>   
+            <tr>
+                <td></td>
+                <td>{{ data?.wt_retained_236 }}</td>
+                <td>{{ data?.percent_retained_wt_236 }}</td>
+                <td>{{ data?.cumulative_retained_wt_236 }}</td>
+                <td>{{ data?.passing_wt_236 }}</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>      
+            <tr>
+                <td></td>
+                <td>{{ data?.wt_retained_265 }}</td>
+                <td>{{ data?.percent_retained_wt_265 }}</td>
+                <td>{{ data?.cumulative_retained_wt_265 }}</td>
+                <td>{{ data?.passing_wt_265 }}</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>   
+            <tr>
+                <td></td>
+                <td>{{ data?.wt_retained_0425 }}</td>
+                <td>{{ data?.percent_retained_wt_0425 }}</td>
+                <td>{{ data?.cumulative_retained_wt_0425 }}</td>
+                <td>{{ data?.passing_wt_0425 }}</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>        
+            <tr>
+                <td></td>
+                <td>{{ data?.wt_retained_475 }}</td>
+                <td>{{ data?.percent_retained_wt_475 }}</td>
+                <td>{{ data?.cumulative_retained_wt_475 }}</td>
+                <td>{{ data?.passing_wt_475 }}</td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>   
             <tr>
                 <td colspan="11">Remark: {{ data?.form03_remarks }}</td>
             </tr>
@@ -2413,9 +2413,8 @@
             <td colspan="4"></td>
         </tr>
         <tr>
-            <td style="width: 10%">SR.</td>
-            <td style="width: 15%">IS Seive</td>
-            <td style="width: 15%">Wt. Retained GMS.</td>
+            <td style="width: 20%">IS Seive</td>
+            <td style="width: 20%">Wt. Retained GMS.</td>
             <td style="width: 20%">Cum. Wt. Retained GMS.</td>
             <td style="width: 15%">% Of Wt. Retained</td>
             <td style="width: 15%">% Passing</td>
@@ -2428,19 +2427,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -2455,19 +2443,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -2482,30 +2459,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-    <table class="mt-2">
-        <tr>
-            <td style="width: 10%">SR.</td>
-            <td style="width: 15%">IS Seive</td>
-            <td style="width: 15%">Wt. Retained GMS.</td>
-            <td style="width: 20%">Cum. Wt. Retained GMS.</td>
-            <td style="width: 15%">% Of Wt. Retained</td>
-            <td style="width: 15%">% Passing</td>
-            <td style="width: 10%">Sp. Limit(%)</td>
-        </tr>
-        <tr>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -2520,55 +2475,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -2700,89 +2608,6 @@
             <td></td>
         </tr>
     </table>
-    <table class="mt-2">
-        <tr>
-            <td style="width: 10%">SR.</td>
-            <td style="width: 15%">IS Seive</td>
-            <td style="width: 15%">Wt. Retained GMS.</td>
-            <td style="width: 20%">Cum. Wt. Retained GMS.</td>
-            <td style="width: 15%">% Of Wt. Retained</td>
-            <td style="width: 15%">% Passing</td>
-            <td style="width: 10%">Sp. Limit(%)</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
     }
     }
     } @else if (showForm(10)) { @if(!isLoading) { @for(data of areaPlotForm;track
@@ -2799,20 +2624,20 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
+            <td colspan="3">Sr No.: </td>
             <td colspan="4" class="right">Date: </td>
         </tr>
         <tr>
-            <td colspan="3">Name Of Work :-</td>
-            <td colspan="4">Date Of Sampling :-</td>
+            <td colspan="3">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
+            <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
         <tr>
-            <td colspan="3">Contractor :-</td>
-            <td colspan="4">Date Of Testing :-</td>
+            <td colspan="3">Contractor :- <span style="padding-left: 20px;">{{data?.contract_name}}</span></td>
+            <td colspan="4">Date Of Testing :- <span style="padding-left: 20px;">{{data?.testing_date}}</span></td>
         </tr>
         <tr>
-            <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
+            <td colspan="4">Source :- </td>
         </tr>
         <tr>
             <td colspan="7">
@@ -2829,43 +2654,43 @@
         </tr>
         <tr>
             <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.cement1}}</td>
+            <td>{{data?.water1}}</td>
+            <td>{{data?.plunger1}}</td>
+            <td>{{data?.time1}}</td>
+            <td>{{data?.consistency1}}</td>
         </tr>
         <tr>
             <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.cement2}}</td>
+            <td>{{data?.water2}}</td>
+            <td>{{data?.plunger2}}</td>
+            <td>{{data?.time2}}</td>
+            <td>{{data?.consistency2}}</td>
         </tr>
         <tr>
             <td>3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.cement3}}</td>
+            <td>{{data?.water3}}</td>
+            <td>{{data?.plunger3}}</td>
+            <td>{{data?.time3}}</td>
+            <td>{{data?.consistency3}}</td>
         </tr>
         <tr>
             <td>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.cement4}}</td>
+            <td>{{data?.water4}}</td>
+            <td>{{data?.plunger4}}</td>
+            <td>{{data?.time4}}</td>
+            <td>{{data?.consistency4}}</td>
         </tr>
         <tr>
             <td>5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.cement5}}</td>
+            <td>{{data?.water5}}</td>
+            <td>{{data?.plunger5}}</td>
+            <td>{{data?.time5}}</td>
+            <td>{{data?.consistency5}}</td>
         </tr>
         <tr>
             <td colspan="6">Remarks:-</td>
@@ -2976,16 +2801,16 @@
             <td colspan="4" class="right">Date: </td>
         </tr>
         <tr>
-            <td colspan="4">Name Of Work :-</td>
-            <td colspan="4">Date Of Sampling :-</td>
+            <td colspan="4">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span> </td>
+            <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
         <tr>
-            <td colspan="4">Contractor :-</td>
-            <td colspan="4">Date Of Testing :-</td>
+            <td colspan="4">Contractor :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
+            <td colspan="4">Date Of Testing :- <span style="padding-left: 20px;">{{data?.testing_date}}</span></td>
         </tr>
         <tr>
-            <td colspan="4">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
+            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.contract_name}}</span></td>
         </tr>
         <tr>
             <td colspan="4">
@@ -3007,60 +2832,60 @@
         </tr>
         <tr>
             <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_a1}}</td>
+            <td>{{data?.needle_a1}}</td>
+            <td>{{data?.time_a1}}</td>
             <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_b1}}</td>
+            <td>{{data?.needle_b1}}</td>
+            <td>{{data?.time_b1}}</td>
         </tr>
         <tr>
             <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_a2}}</td>
+            <td>{{data?.needle_a2}}</td>
+            <td>{{data?.time_a2}}</td>
             <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_b2}}</td>
+            <td>{{data?.needle_b2}}</td>
+            <td>{{data?.time_b2}}</td>
         </tr>
         <tr>
             <td>3</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_a3}}</td>
+            <td>{{data?.needle_a3}}</td>
+            <td>{{data?.time_a3}}</td>
             <td>3</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_b3}}</td>
+            <td>{{data?.needle_b3}}</td>
+            <td>{{data?.time_b3}}</td>
         </tr>
         <tr>
             <td>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_a4}}</td>
+            <td>{{data?.needle_a4}}</td>
+            <td>{{data?.time_a4}}</td>
             <td>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_b4}}</td>
+            <td>{{data?.needle_b4}}</td>
+            <td>{{data?.time_b4}}</td>
         </tr>
         <tr>
             <td>5</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_a5}}</td>
+            <td>{{data?.needle_a5}}</td>
+            <td>{{data?.time_a5}}</td>
             <td>5</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data?.time_b5}}</td>
+            <td>{{data?.needle_b5}}</td>
+            <td>{{data?.time_b5}}</td>
         </tr>
         <tr>
-            <td colspan="4">Initial Setting Time:</td>
-            <td colspan="4">Final Setting Time:</td>
+            <td colspan="4">Initial Setting Time: {{data?.initial_time}}</td>
+            <td colspan="4">Final Setting Time: {{data?.final_time}}</td>
         </tr>
         <tr>
-            <td colspan="8">Remarks:-</td>
+            <td colspan="8">Remarks:- <span style="padding-left: 20px;">{{data?.form11_remarks}}</span> </td>
         </tr>
     </table>
     }
@@ -3343,6 +3168,7 @@
             <td colspan="5">Source :-</td>
         </tr>
         <tr>
+            <td>S No.</td>
             <td style="width: 10%">Vo1. of Sample</td>
             <td style="width: 10%">Weight of Sample</td>
             <td style="width: 10%">Container No.</td>
