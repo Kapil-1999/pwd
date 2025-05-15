@@ -69,17 +69,17 @@
     <div class="border-t mt-2 pt-2 flex justify-between">
       <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
         <i class="fas fa-battery-full"></i>
-        <span>Battery : 15%</span>
+        <span>Battery : {{user?.charging_per}} %</span>
       </p>
 
       <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
         <i class="fas fa-road"></i>
-        <span>Distance : 5Km</span>
+        <span>Distance : {{user?.day_distance}} Km</span>
       </p>
 
       <p class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
         <i class="fas fa-map-marker-alt"></i>
-        <span>GPS : On</span>
+       <span>GPS : {{ user?.gps_status == 0 ? 'Off' : 'On' }}</span>
       </p>
     </div>
   </div>
