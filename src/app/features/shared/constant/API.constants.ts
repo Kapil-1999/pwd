@@ -62,7 +62,7 @@ export const API_CONSTANTS = {
     userDetails : 'Dashboard/GetUserDetailsWithLoc?userId={userId}&userDesigId={desiId}&locId={locId}',
     liveTracking : 'LiveTracking?selectedDesigId={selectedDesigId}&zoneId={zoneId}&circleId={circleId}&districtId={districtId}',
     poiArea : 'Common/GetAreaList',
-    workAreaList :'Dashboard/GetWorkAreaListByUser?workId={workId}',
+    workAreaList :'Dashboard/GetWorkAreaListByUser?userId={userId}&workId={workId}',
     categoryListByArea: 'Dashboard/GetCategoryListByArea?taskId={taskId}',
     subCategoryListByCat: 'Dashboard/GetSubCategoryListByCat?taskId={taskId}&categoryId={categoryId}',
     commonArea : 'Common/GetAreaList',

@@ -112,6 +112,7 @@ export class JeDetailsComponent {
 
   poiWorkList(workid:any){
     let payload = {
+      userId : Number(this.id),
       workId : workid
     }
     this.dashboardService.workAreaList(payload).subscribe((res:any) => {

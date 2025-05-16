@@ -28,7 +28,7 @@ export class DashboardService {
   }
 
   workAreaList(data: any): Observable<any> {
-    let url = API_CONSTANTS.workAreaList.replace('{workId}', data.workId)
+    let url = API_CONSTANTS.workAreaList.replace('{userId}', data.userId).replace('{workId}', data.workId)
     return this.apiService
     .get(url)
     .pipe(catchError((error: HttpErrorResponse) => of(error)));

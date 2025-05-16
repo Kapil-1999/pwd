@@ -63,7 +63,7 @@ export class CreatePoiComponent {
 
     } else {
       this.getDesignationList();
-      this.getAreaList()
+      this.getWorkList()
     }
   }
 
@@ -85,7 +85,7 @@ export class CreatePoiComponent {
         remark : this.getPoiByIdData?.remarks
       })
       this.getDesignationList();
-      this.getAreaList()
+      this.getWorkList()
     })
   }
 
@@ -114,8 +114,8 @@ export class CreatePoiComponent {
     })
   }
 
-  getAreaList() {
-      this.commonService.commonArea().subscribe((res:any) => {
+  getWorkList() {
+      this.commonService.commonWork().subscribe((res:any) => {
         this.areaData = res?.body?.result || [];
         let circleValue = this.getPoiByIdData?.area_id;
         
