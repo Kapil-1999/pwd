@@ -117,7 +117,7 @@ export class CreatePoiComponent {
   getWorkList() {
       this.commonService.commonWork().subscribe((res:any) => {
         this.areaData = res?.body?.result || [];
-        let circleValue = this.getPoiByIdData?.area_id;
+        let circleValue = this.getPoiByIdData?.work_id;
         
         if (circleValue) {
           let matchingCE;
