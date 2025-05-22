@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { selectedUser, selectedUserArea, selectedVehicleData, setShowUserList, setTypeUser, setUserCountData, setvehicleData } from "./app.action";
+import { selectedUser, selectedUserArea, selectedVehicleData, selectHistoryData, setShowUserList, setTypeUser, setUserCountData, setvehicleData } from "./app.action";
 
 export interface AppState {
   vehicleData: any;
@@ -8,7 +8,8 @@ export interface AppState {
   userCountData: any;
   showUserList: any;
   selectedUser: any;
-  selectedUserArea :any
+  selectedUserArea :any;
+  historyData :any
 }
 
 export const initialState: AppState = {
@@ -18,7 +19,8 @@ export const initialState: AppState = {
   userCountData: [],
   showUserList: true,
   selectedUser: null,
-  selectedUserArea : null
+  selectedUserArea : null,
+  historyData : []
 }
 
 export const appReducer = createReducer(
@@ -53,5 +55,10 @@ export const appReducer = createReducer(
     on(selectedUserArea,(state, { selectedUserArea }) => ({
      ...state,
       selectedUserArea,
-    }))
+    })),
+    on(selectHistoryData ,(state, { historyData }) => ({
+    ...state,
+      historyData,
+    }),
+  )
 )

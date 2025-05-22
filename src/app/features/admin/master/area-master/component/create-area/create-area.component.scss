@@ -1,0 +1,44 @@
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.select-selected {
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.select-items {
+    position: absolute;
+    background-color: white;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 4px 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.select-hide {
+    display: none;
+}
+
+.select-items div {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.select-items div:hover {
+    opacity: 0.8;
+}
+
+.color-box{
+    width: 32px;
+    height: 8px;
+    border-radius: 10%;
+    display: inline-block;
+}

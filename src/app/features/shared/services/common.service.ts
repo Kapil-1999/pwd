@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../../http-services/api.service';
 import { API_CONSTANTS } from '../constant/API.constants';
@@ -246,6 +246,19 @@ export class CommonService {
     let url = API_CONSTANTS.addressApi.replace("{lat}", address.lat).replace("{lng}", address.lng).replace("{api_key}", environment.Api_Key);
     return this.http.get(url)
       .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
+
+  getAddressInfoDetail(address: any): Observable<any> {
+    if (!address?.lat || !address?.lng) {
+      return of(null);
+    }
+    return this.addressApi(address).pipe(
+      map((res: any) => {
+         const loc = res?.results[0]?.formatted_address
+        return loc
+      }),
+      
+    );
   }
 
 

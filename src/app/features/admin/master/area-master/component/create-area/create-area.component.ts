@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { WorkService } from '../../../work-master/services/work.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -36,6 +36,14 @@ export class CreateAreaComponent {
   areaById: any;
   userData: any;
   geofanceText: any = null;
+  roadOptions = [
+    { value: '#ffff00', label: 'National Highway' },
+    { value: '#008000', label: 'State Highway' },
+    { value: '#FFA500', label: 'Major District' },
+    { value: '#FFC0CB', label: 'Other District' },
+    { value: '#00008b', label: 'Village Road' },
+    { value: '#000000', label: 'Other' }
+  ];
 
   constructor(
     private modalService: BsModalService,
@@ -64,7 +72,7 @@ export class CreateAreaComponent {
       "area_name": [null, [Validators.required]],
       "shape_type": ['2', [Validators.required]],
       "travel_mode": ['Driving', [Validators.required]],
-      "color_code": ['black', [Validators.required]],
+      "color_code": ['#000000', [Validators.required]],
       "radius": [0],
       "speed_limit": [0],
       "source_lat": [null, [Validators.required]],
@@ -127,7 +135,6 @@ export class CreateAreaComponent {
   getAreaById(id: any) {
     this.areaService.getAreaById(id).subscribe((res: any) => {
       this.areaById = res?.body?.result;
-      console.log("area", this.areaById);
       if (this.areaById) {
         this.areaForm.patchValue({
           "area_name": this.areaById?.area_name,
@@ -150,6 +157,14 @@ export class CreateAreaComponent {
       this.getCityList()
       this.onShapeChange(this.areaById?.shape_type.toString())
       this.onCreateShape();
+      const colorValue = this.roadOptions.find((val: any) => val.value === this.areaById?.color_code);
+
+      this.selectedOption = colorValue ? colorValue : {
+        "value": "#000000",
+        "label": "Other"
+      };
+
+
     })
   }
 
@@ -217,7 +232,6 @@ export class CreateAreaComponent {
       DestinationLat: this.areaForm.get('destination_lat')?.value,
       DestinationLon: this.areaForm.get('destination_lon')?.value,
       shape: this.areaForm.get('shape_type')?.value,
-      colour: this.areaForm.get('color_code')?.value
     }
   }
 
@@ -236,7 +250,6 @@ export class CreateAreaComponent {
       DestinationLat: this.areaForm.get('destination_lat')?.value,
       DestinationLon: this.areaForm.get('destination_lon')?.value,
       shape: this.areaForm.get('shape_type')?.value,
-      colour: this.areaForm.get('color_code')?.value
     }
   }
 
@@ -246,7 +259,6 @@ export class CreateAreaComponent {
     const destinationLat = this.areaForm.get('destination_lat')?.value;
     const destinationLon = this.areaForm.get('destination_lon')?.value;
     const shape = this.areaForm.get('shape_type')?.value;
-    const colour = this.areaForm.get('color_code')?.value;
     const radius = this.areaForm.get('radius')?.value;
     const geofanceText = this.areaById?.geofence_text;
 
@@ -273,7 +285,6 @@ export class CreateAreaComponent {
       destinationLat,
       destinationLon,
       shape,
-      colour,
       radius,
       geofanceText
     };
@@ -294,9 +305,9 @@ export class CreateAreaComponent {
           [formvalue?.destination_lon, formvalue?.destination_lat, 0.0]
         ];
       }
-      const distance = this.calculateDistance(formvalue?.source_lat, formvalue?.source_lon, formvalue?.destination_lat, formvalue?.destination_lon);      
+      const distance = this.calculateDistance(formvalue?.source_lat, formvalue?.source_lon, formvalue?.destination_lat, formvalue?.destination_lon);
       this.areaForm.patchValue({
-        road_length_geo: Number(distance.toFixed(2)) 
+        road_length_geo: Number(distance.toFixed(2))
       });
     }
     let user = this.commonService.getUserDetails()
@@ -368,7 +379,7 @@ export class CreateAreaComponent {
         destination_lat: destinationLat,
         destination_lon: destinationLon,
         shape_type: shapeType.toString(),
-        road_length_geo: Number(distance.toFixed(2))  
+        road_length_geo: Number(distance.toFixed(2))
       });
       this.geofanceText = circle?.map((coord: any[]) => [coord[1], coord[0], 0.0]);
     }
@@ -389,4 +400,29 @@ export class CreateAreaComponent {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
+
+  isDropdownOpen = false;
+  selectedOption: any = {
+    "value": "#000000",
+    "label": "Other"
+  };
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  selectOption(option: any) {
+    this.selectedOption = option;
+    this.areaForm.get('color_code')?.setValue(option.value);
+    this.isDropdownOpen = false;
+
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    if (!event.target.closest('.custom-select')) {
+      this.isDropdownOpen = false;
+    }
+  }
 }
+

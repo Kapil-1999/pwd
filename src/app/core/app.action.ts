@@ -7,3 +7,4 @@ export const setUserCountData = createAction('[vehicle] setuserCountData', props
 export const setShowUserList = createAction('[vehicle] showUserList', props<{showUserList: any}>());
 export const selectedUser = createAction('[vehicle] selectedUser', props<{selectedUser: any}>());
 export const selectedUserArea = createAction('[vehicle] selectedUserArea', props<{selectedUserArea: any}>());
+export const selectHistoryData = createAction('[vehicle] historyData', props<{historyData: any}>());

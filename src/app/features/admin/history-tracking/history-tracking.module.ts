@@ -6,13 +6,15 @@ import { ManageHistoryComponent } from './pages/manage-history/manage-history.co
 import { HistoryMapComponent } from './component/history-map/history-map.component';
 import { SharedModule } from '../../shared/shared.module';
 import { HistoryFilterComponent } from './component/history-filter/history-filter.component';
+import { HistoryListComponent } from './component/history-list/history-list.component';
 
 
 @NgModule({
   declarations: [
     ManageHistoryComponent,
     HistoryMapComponent,
-    HistoryFilterComponent
+    HistoryFilterComponent,
+    HistoryListComponent
   ],
   imports: [
     CommonModule,

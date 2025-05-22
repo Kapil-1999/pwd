@@ -4,8 +4,20 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="11" class="center">
-                    <h2>DETERMINATION OF DRY DENSITY OF SOIL IN PLACE</h2>
+                <td colspan="11">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">DETERMINATION OF DRY DENSITY OF SOIL IN PLACE</h2>
+                        </div>
+
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -561,9 +573,38 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="3" class="center">
-                    <h2>Table 900-1: Tolerances in Surface Levels</h2>
+                <td colspan="3">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">Table 900-1: Tolerances in Surface Levels</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
+
                 </td>
+            </tr>
+            <tr>
+                <td colspan="2">Name of Work: <span style="padding-left: 10px">{{data?.work_name}}</span></td>
+                <td colspan="2">Chainage: <span style="padding-left: 10px">{{data?.chainage}}</span></td>
+            </tr>
+            <tr>
+                <td colspan="2">Name of Contract: <span style="padding-left: 10px">{{data?.contract_name}}</span></td>
+                <td colspan="2">Date of Sampling: <span style="padding-left: 10px">{{data?.sampling_date}}</span></td>
+            </tr>
+            <tr>
+                <td colspan="2">Contract Bond: <span style="padding-left: 10px">{{data?.contract_bond_no}}</span></td>
+                <td colspan="2">Date of Testing: <span style="padding-left: 10px">{{data?.testing_date}}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>S No.</th>
+                <th>Excutive work</th>
+                <th>Found & Actual Test</th>
             </tr>
             <tr>
                 <td style="width: 10%">1)</td>
@@ -666,6 +707,24 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">Name of Work: <span style="padding-left: 10px"></span></td>
+                <td colspan="2">Chainage: <span style="padding-left: 10px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2">Name of Contract: <span style="padding-left: 10px"></span></td>
+                <td colspan="2">Date of Sampling: <span style="padding-left: 10px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2">Contract Bond: <span style="padding-left: 10px"></span></td>
+                <td colspan="2">Date of Testing: <span style="padding-left: 10px"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>S No.</th>
+                <th>Excutive work</th>
+                <th>Found & Actual Test</th>
+            </tr>
+            <tr>
                 <td style="width: 10%">1)</td>
                 <td style="width: 30%">Subgrade</td>
                 <td style="width: 60%"></td>
@@ -763,8 +822,18 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="11" class="center">
-                    <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                <td colspan="11">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -877,7 +946,7 @@
                 <td>{{ data?.passing_wt_53 }}</td>
                 <td>80-100</td>
                 <td>{{data?.aggregates_80}}</td>
-            </tr> 
+            </tr>
             <tr>
                 <td>26.5</td>
                 <td>{{ data?.wt_retained_265 }}</td>
@@ -886,7 +955,7 @@
                 <td>{{ data?.passing_wt_265 }}</td>
                 <td>55-90</td>
                 <td>{{data?.aggregates_55}}</td>
-            </tr>  
+            </tr>
             <tr>
                 <td>9.5</td>
                 <td>{{ data?.wt_retained_95 }}</td>
@@ -895,7 +964,7 @@
                 <td>{{ data?.passing_wt_95 }}</td>
                 <td>35-65</td>
                 <td>{{data?.aggregates_35}}</td>
-            </tr> 
+            </tr>
             <tr>
                 <td>4.75</td>
                 <td>{{ data?.wt_retained_475 }}</td>
@@ -904,7 +973,7 @@
                 <td>{{ data?.passing_wt_475 }}</td>
                 <td>25-55</td>
                 <td>{{data?.aggregates_25}}</td>
-            </tr>    
+            </tr>
             <tr>
                 <td>2.36</td>
                 <td>{{ data?.wt_retained_236 }}</td>
@@ -913,7 +982,7 @@
                 <td>{{ data?.passing_wt_236 }}</td>
                 <td>20-40</td>
                 <td>{{data?.aggregates_20}}</td>
-            </tr>  
+            </tr>
             <tr>
                 <td>0.425</td>
                 <td>{{ data?.wt_retained_0425 }}</td>
@@ -922,7 +991,7 @@
                 <td>{{ data?.passing_wt_0425 }}</td>
                 <td>10-15</td>
                 <td>{{data?.aggregates_10}}</td>
-            </tr> 
+            </tr>
             <tr>
                 <td>0.075</td>
                 <td>{{ data?.wt_retained_0075 }}</td>
@@ -1047,7 +1116,7 @@
                 <td></td>
                 <td></td>
                 <td>100</td>
-                <td ></td>
+                <td></td>
             </tr>
             <tr>
                 <td>53</td>
@@ -1133,8 +1202,18 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="11" class="center">
-                    <h2>SIEVE ANALYSIS OF FINE AGGREGATE</h2>
+                <td colspan="11">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">SIEVE ANALYSIS OF FINE AGGREGATE</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -1372,8 +1451,18 @@
     <div class="table-containere">
         <table class="mt-4">
             <tr>
-                <td colspan="11" class="center">
-                    <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                <td colspan="11">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -1902,8 +1991,18 @@
     areaPlotForm;track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>SPECIFIC GRAVITY & WATER ABSORPTION OF</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">SPECIFIC GRAVITY & WATER ABSORPTION OF</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -1917,7 +2016,9 @@
             </td>
         </tr>
         <tr>
-            <th colspan="3"><h4 class="text-2xl">PROJECT</h4></th>
+            <th colspan="3">
+                <h4 class="text-2xl">PROJECT</h4>
+            </th>
             <td colspan="4">{{ data?.work_name }}</td>
         </tr>
         <tr>
@@ -1946,7 +2047,9 @@
             </td>
         </tr>
         <tr>
-            <th colspan="4" style="width: 40%"><h4 class="text-2xl">Before Soaking</h4></th>
+            <th colspan="4" style="width: 40%">
+                <h4 class="text-2xl">Before Soaking</h4>
+            </th>
             <td style="width: 20%"></td>
             <td style="width: 20%"></td>
             <td style="width: 20%"></td>
@@ -1970,7 +2073,9 @@
             <td>{{ data?.before_volume3 }}</td>
         </tr>
         <tr>
-            <td colspan="4">After Soaking</td>
+            <th colspan="4" style="width: 40%">
+                <h4 class="text-2xl">After Soaking</h4>
+            </th>
             <td></td>
             <td></td>
             <td></td>
@@ -2070,7 +2175,9 @@
             </td>
         </tr>
         <tr>
-            <th colspan="3"><h4 class="text-2xl">PROJECT</h4></th>
+            <th colspan="3">
+                <h4 class="text-2xl">PROJECT</h4>
+            </th>
             <td colspan="4"></td>
         </tr>
         <tr>
@@ -2099,7 +2206,9 @@
             </td>
         </tr>
         <tr>
-            <th colspan="4" style="width: 40%"><h4 class="text-2xl">Before Soaking</h4></th>
+            <th colspan="4" style="width: 40%">
+                <h4 class="text-2xl">Before Soaking</h4>
+            </th>
             <td style="width: 20%"></td>
             <td style="width: 20%"></td>
             <td style="width: 20%"></td>
@@ -2123,7 +2232,9 @@
             <td></td>
         </tr>
         <tr>
-            <td colspan="4">After Soaking</td>
+            <th colspan="4" style="width: 40%">
+                <h4 class="text-2xl">After Soaking</h4>
+            </th>
             <td></td>
             <td></td>
             <td></td>
@@ -2210,8 +2321,18 @@
     areaPlotForm;track data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>SPECIFIC GRAVITY & WATER ABSORPTION OF FINE AGGREGATES</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">SPECIFIC GRAVITY & WATER ABSORPTION OF FINE AGGREGATES</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -2427,8 +2548,18 @@
     areaPlotForm;track data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>SPECIFIC GRAVITY OF CEMENT</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">SPECIFIC GRAVITY OF CEMENT</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -2628,8 +2759,18 @@
     data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>SOUNDNESS OF CEMENT BY LE-CHATELIER METHOD</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">SOUNDNESS OF CEMENT BY LE-CHATELIER METHOD</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -2800,8 +2941,18 @@
     data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>NORMAL CONSISTENCY OF CEMENT</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">NORMAL CONSISTENCY OF CEMENT</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -2973,8 +3124,18 @@
     areaPlotForm;track data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="8" class="center">
-                <h2>INITIAL AND FINAL SETTING TIME OF CEMENT</h2>
+            <td colspan="8">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">INITIAL AND FINAL SETTING TIME OF CEMENT</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -3185,8 +3346,18 @@
     areaPlotForm;track data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>FINENESS OF CEMENT</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">FINENESS OF CEMENT</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -3336,8 +3507,18 @@
     ;track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="10" class="center">
-                <h2>UNCONFINED COMPRESSIVE STRENGTH</h2>
+            <td colspan="10">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">UNCONFINED COMPRESSIVE STRENGTH</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -3505,14 +3686,14 @@
             <th colspan="2">Sample 3</th>
         </tr>
         @for(datarow of rows; track datarow) {
-            <tr>
-                <td>{{datarow}}</td>
-                <td>{{ (datarow - 1) * 0.2 | number:'1.1-1' }}</td>
-                <td colspan="3"></td>
-                <td colspan="3"></td>
-                <td colspan="2"></td>
-            </tr>
-            }
+        <tr>
+            <td>{{datarow}}</td>
+            <td>{{ (datarow - 1) * 0.2 | number:'1.1-1' }}</td>
+            <td colspan="3"></td>
+            <td colspan="3"></td>
+            <td colspan="2"></td>
+        </tr>
+        }
         <tr>
             <td colspan="10">Remarks:-</td>
         </tr>
@@ -3524,8 +3705,18 @@
     ;track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>CONCRETE COMPRESSIVE STRENGTH TEST</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">CONCRETE COMPRESSIVE STRENGTH TEST</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -3705,8 +3896,18 @@
     ;track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>Concrete Slum Test</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">Concrete Slum Test</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -3857,8 +4058,18 @@
     @for(data of areaPlotForm ;track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>AGGREGATE IMPACT VALUE</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">AGGREGATE IMPACT VALUE</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -4051,8 +4262,18 @@
     @for(data of areaPlotForm ;track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>G2/G3 Aggregate /Screening</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">G2/G3 Aggregate /Screening</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -4349,8 +4570,18 @@
     <div class="table-conatiner">
         <table class="mt-4">
             <tr>
-                <td colspan="7" class="center">
-                    <h2>FLAKINESS INDEX AND ELONGATION INDEX</h2>
+                <td colspan="7">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">FLAKINESS INDEX AND ELONGATION INDEX</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -4430,7 +4661,7 @@
                 <td>{{data?.aggregate_retained25}}</td>
                 <td>{{data?.aggregate_passing25}}</td>
                 <td>{{data?.aggregate_lenght25}}</td>
-            </tr> 
+            </tr>
             <tr>
                 <td>20</td>
                 <td>16</td>
@@ -4633,8 +4864,18 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="8" class="center">
-                    <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                <td colspan="8">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -4925,8 +5166,18 @@
     @for(data of areaPlotForm;track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="14" class="center">
-                <h2>DENSITY TEST</h2>
+            <td colspan="14">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">DENSITY TEST</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -5032,8 +5283,18 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="7" class="center">
-                    <h2>LOK NIRMAN VIBHAG</h2>
+                <td colspan="7">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">LOK NIRMAN VIBHAG</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -5209,8 +5470,18 @@
     @for(data of areaPlotForm ;track data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="8" class="center">
-                <h2>GRADATION AGGREGATE FACTORS BINDER CONTENT PAVING</h2>
+            <td colspan="8">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">GRADATION AGGREGATE FACTORS BINDER CONTENT PAVING</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -5623,8 +5894,18 @@
     @for(data of areaPlotForm; track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>LOK NIRMAN VIBHAG</h2>
+            <td colspan="8">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">LOK NIRMAN VIBHAG</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -5688,7 +5969,7 @@
                         <td>{{data?.cumulative_retained_wt_265}}</td>
                         <td>{{data?.passing_wt_265}}</td>
                         <td>63-93</td>
-                    </tr>                  
+                    </tr>
                     <tr>
                         <td>13.2</td>
                         <td>{{data?.wt_retained_132}}</td>
@@ -5890,7 +6171,7 @@
                         <td></td>
                         <td>63-93</td>
                     </tr>
-                    
+
                     <tr>
                         <td>13.2</td>
                         <td></td>
@@ -6030,8 +6311,18 @@
     @for(data of areaPlotForm ; track data) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+            <td colspan="7">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -6207,8 +6498,18 @@
     data; let i = $index) {
     <table class="mt-4">
         <tr>
-            <td colspan="9" class="center">
-                <h2>INDIVIDUAL GRADATION OF COARSE AGGREGATE</h2>
+            <td colspan="9">
+                <div class="grid grid-cols-12 items-center gap-4">
+                    <div class="col-span-2">
+                        <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                        <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                    </div>
+                    <div class="col-span-8">
+                        <h2 class="text-center mb-0">INDIVIDUAL GRADATION OF COARSE AGGREGATE</h2>
+                    </div>
+                    <div class="col-span-2">
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
@@ -6480,7 +6781,204 @@
         </tr>
     </table>
     }
-    } } @if(!isFormAvailable()) {
+    } }
+    @else if(showForm(26)) {
+    @if(!isLoading) {
+    @if(areaPlotForm && areaPlotForm.length > 0) {
+    @for(data of areaPlotForm; track data.id) {
+    <div class="table-container">
+        <table class="mt-4">
+            <tr>
+                <td colspan="10">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">S&P INFRASTRUCTURE DEVELOPERS PVT. LTD.</h2>
+                            <h2 class="text-center mb-0">&</h2>
+                            <h2 class="text-center mb-0">BHARDWAJ UNIBUILD PVT. LTD. (JV)</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="text-sm">
+                    Project:- Improvement and Up-gradation to Two Lane with paved shoulder configuration from existing
+                    km.90.00 to km.130.00(Design length 39.15) of NH- 227A (Sikriganj to Barhalganj) in the State of
+                    Uttar Pradesh on Engineering, Procurement & Construction (EPC) basis contract.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    CLIENT:- Public Works Department, NH, Govt of Uttar Pradesh.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="center">
+                    <h3>Concrete Pour Card</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">Name of Structure:</td>
+                <td colspan="3"><span style="padding-left: 10px">{{ data?.name_of_structure }}</span></td>
+                <td colspan="2">Date:</td>
+                <td colspan="2"><span style="padding-left: 10px">{{ data?.date }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="3">Location:</td>
+                <td colspan="7"><span style="padding-left: 10px">{{ data?.location }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="3">Parts of Structure:</td>
+                <td colspan="3"><span style="padding-left: 10px">{{ data?.parts_of_structure }}</span></td>
+                <td colspan="2">Concrete Grade:</td>
+                <td colspan="2"><span style="padding-left: 10px">{{ data?.concrete_grade }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="3">W/C Ratio:</td>
+                <td colspan="7"><span style="padding-left: 10px">{{ data?.wc_ratio }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="center">
+                    <h4>At RMC Plant</h4>
+                </td>
+                <td colspan="5" class="center">
+                    <h4>At Site</h4>
+                </td>
+            </tr>
+            <tr>
+                <th>Sl No.</th>
+                <th>TM No.</th>
+                <th>Dispatch Time</th>
+                <th>Concrete Qty (m³)</th>
+                <th>Cumulative Concrete Qty</th>
+                <th>Slump (MM)</th>
+                <th colspan="2">Pouring Time</th>
+                <th>No. of Cube Casted</th>
+                <th>Ambient Temp.(°C)</th>
+                <th>Remarks</th>
+            </tr>
+            <!-- Dynamic rows -->
+            @for(item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; track item) {
+            <tr>
+                <td>{{ item }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            }
+            <tr>
+                <td colspan="5">For Contractor</td>
+                <td colspan="5">For Client/Consultant</td>
+            </tr>
+        </table>
+    </div>
+    }
+    } @else {
+    <div class="table-container">
+        <table class="mt-4">
+            <tr>
+                <td colspan="10" class="center">
+                    <h2>S&P INFRASTRUCTURE DEVELOPERS PVT. LTD.</h2>
+                    <h2>&</h2>
+                    <h2>BHARDWAJ UNIBUILD PVT. LTD. (JV)</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="text-sm">
+                    Project:- Improvement and Up-gradation to Two Lane with paved shoulder configuration from existing
+                    km.90.00 to km.130.00(Design length 39.15) of NH- 227A (Sikriganj to Barhalganj) in the State of
+                    Uttar Pradesh on Engineering, Procurement & Construction (EPC) basis contract.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    CLIENT:- Public Works Department, NH, Govt of Uttar Pradesh.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="center">
+                    <h3>Concrete Pour Card</h3>
+                </td>
+            </tr>
+            <!-- Empty fields -->
+            <tr>
+                <td colspan="3">Name of Structure:</td>
+                <td colspan="3"><span style="padding-left: 10px"></span></td>
+                <td colspan="2">Date:</td>
+                <td colspan="2"><span style="padding-left: 10px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="3">Location:</td>
+                <td colspan="7"><span style="padding-left: 10px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="3">Parts of Structure:</td>
+                <td colspan="3"><span style="padding-left: 10px"></span></td>
+                <td colspan="2">Concrete Grade:</td>
+                <td colspan="2"><span style="padding-left: 10px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="3">W/C Ratio:</td>
+                <td colspan="7"><span style="padding-left: 10px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="center">
+                    <h4>At RMC Plant</h4>
+                </td>
+                <td colspan="5" class="center">
+                    <h4>At Site</h4>
+                </td>
+            </tr>
+            <tr>
+                <th>Sl No.</th>
+                <th>TM No.</th>
+                <th>Dispatch Time</th>
+                <th>Concrete Qty (m³)</th>
+                <th>Cumulative Concrete Qty</th>
+                <th>Slump (MM)</th>
+                <th colspan="2">Pouring Time</th>
+                <th>No. of Cube Casted</th>
+                <th>Ambient Temp.(°C)</th>
+                <th>Remarks</th>
+            </tr>
+            <!-- Empty rows -->
+            @for(item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; track item) {
+            <tr>
+                <td>{{ item }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            }
+            <tr>
+                <td colspan="5">For Contractor</td>
+                <td colspan="5">For Client/Consultant</td>
+            </tr>
+        </table>
+    </div>
+    }
+    }
+    }
+    @if(!isFormAvailable()) {
     <div class="card mt-4">
         <div class="card-body text-center">
             <h3>Form Not Available</h3>

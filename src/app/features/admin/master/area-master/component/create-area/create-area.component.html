@@ -128,12 +128,19 @@
                     </div>                 
                     <div class="col-md-6 mb-2">
                         <label class="form-label">Route Colour</label>
-                        <div class="input-group mb-2">
-                            <input type="color" class="form-control" formControlName="color_code"
-                                aria-describedby="button-addon2" />
+                        <div class="custom-select">
+                            <div class="select-selected" (click)="toggleDropdown()" [class.is-invalid]="areaForm.get('color_code')?.invalid && 
+                                (areaForm.get('color_code')?.dirty || areaForm.get('color_code')?.touched)">
+                                {{selectedOption?.label || 'Select Route Color'}}
+                            </div>
+                            <div class="select-items" [class.select-hide]="!isDropdownOpen">
+                                <div *ngFor="let option of roadOptions"
+                                     (click)="selectOption(option)">
+                                   <span class="color-box" [style.background-color]="option.value"></span> {{option.label}}
+                                </div>
+                            </div>
                         </div>
-                        <span *ngIf="areaForm?.get('color_code')?.invalid &&
-                        (areaForm?.get('color_code')?.dirty || areaForm?.get('color_code')?.touched)" class="text-danger mt-2">
+                        <span *ngIf="areaForm?.get('color_code')?.value == ''" class="text-danger mt-2">
                         Colour is Required
                     </span>
                     </div>
@@ -201,7 +208,7 @@
             @if(this.userData?.is_gmap_enabled === 0) {
             <area-map [markerData]="markerData" (mapAddress)="confirm($event)"></area-map>
               } @else if (this.userData?.is_gmap_enabled === 1){ 
-                <app-area-google-map [markerData]="markerData" (mapAddress)="confirm($event)"></app-area-google-map>
+                <app-area-google-map [markerData]="markerData" [colour]="this.areaForm.get('color_code')?.value" (mapAddress)="confirm($event)"></app-area-google-map>
               }
         </div>
     </div>

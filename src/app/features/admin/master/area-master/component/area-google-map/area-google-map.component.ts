@@ -11,6 +11,7 @@ import { MapService } from '../../services/map.service';
 })
 export class AreaGoogleMapComponent {
   @Output() mapAddress = new EventEmitter();
+  @Input() colour:any
   map!: google.maps.Map;
   sourceMarker: google.maps.Marker | null = null;
   destinationMarker: google.maps.Marker | null = null;
@@ -30,7 +31,7 @@ export class AreaGoogleMapComponent {
     private mapService: MapService
   ) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit() {    
     if (isPlatformBrowser(this.platformId)) {
       this.initializeMap().then(() => {
         if (this.mapType == 'show on Map') {
@@ -67,7 +68,7 @@ export class AreaGoogleMapComponent {
         ],
       },
       circleOptions: {
-        fillColor: '#FF0000',
+        fillColor: this.colour || 'blue',
         fillOpacity: 0.2,
         strokeWeight: 2,
         clickable: false,
@@ -75,7 +76,7 @@ export class AreaGoogleMapComponent {
         zIndex: 1,
       },
       polylineOptions: {
-        strokeColor: '#000000',
+        strokeColor: this.colour || 'black',
         strokeWeight: 5,
         clickable: false,
         editable: true,
@@ -116,6 +117,38 @@ export class AreaGoogleMapComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['markerData'] && this.markerData) {
       this.updateMarkersAndFitBounds();
+    }
+    if (changes['colour'] && this.colour) {
+      // Update drawing manager options with new color
+      if (this.drawingManager) {
+        const circleOptions = {
+          ...this.drawingManager.get('circleOptions'),
+          fillColor: this.colour,
+          strokeColor: this.colour
+        };
+        const polylineOptions = {
+          ...this.drawingManager.get('polylineOptions'),
+          strokeColor: this.colour
+        };
+        
+        this.drawingManager.setOptions({
+          circleOptions: circleOptions,
+          polylineOptions: polylineOptions
+        });
+      }
+      
+      // Update existing shapes with new color
+      if (this.circle) {
+        this.circle.setOptions({
+          strokeColor: this.colour,
+          fillColor: this.colour
+        });
+      }
+      if (this.polyline) {
+        this.polyline.setOptions({
+          strokeColor: this.colour
+        });
+      }
     }
   }
 
@@ -182,10 +215,10 @@ export class AreaGoogleMapComponent {
         map: this.map,
         center: { lat: this.markerData.sourceLat, lng: this.markerData.sourceLon },
         radius: +this.markerData.radius,
-        strokeColor: this.markerData.colour || 'blue',
+        strokeColor: this.markerData.colour || this.colour || 'blue',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: this.markerData.colour || 'blue',
+        fillColor: this.markerData.colour || this.colour || 'blue',
         fillOpacity: 0.2,
       });
       bounds.union(this.circle.getBounds()!);
@@ -200,7 +233,7 @@ export class AreaGoogleMapComponent {
         this.polyline = new google.maps.Polyline({
           path: path,
           geodesic: true,
-          strokeColor: this.markerData.colour || 'black',
+          strokeColor: this.markerData.colour || this.colour || 'black',
           strokeOpacity: 0.8,
           strokeWeight: 5,
         });
@@ -215,7 +248,7 @@ export class AreaGoogleMapComponent {
         this.polyline = new google.maps.Polyline({
           path: path,
           geodesic: true,
-          strokeColor: this.markerData.colour || 'black',
+          strokeColor: this.colour || 'black',
           strokeOpacity: 0.8,
           strokeWeight: 5,
         });

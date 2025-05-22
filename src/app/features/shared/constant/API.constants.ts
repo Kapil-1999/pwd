@@ -94,7 +94,11 @@ export const API_CONSTANTS = {
     form23Data: 'Task/GetForm23?taskId={taskId}&catId={catId}&subCatId={subCatId}',
     form24Data: 'Task/GetForm24?taskId={taskId}&catId={catId}&subCatId={subCatId}',
     form25Data: 'Task/GetForm25?taskId={taskId}&catId={catId}&subCatId={subCatId}',
+    form26Data: 'Task/GetForm26?taskId={taskId}&catId={catId}&subCatId={subCatId}',
+    form27Data: 'Task/GetForm27?taskId={taskId}&catId={catId}&subCatId={subCatId}',
     commonWork : 'Common/GetWorkList',
-    liveTrackByUser : 'LiveTracking/GetLiveTrackingByUser?userId={userId}&selectedDesigId={selectedDesigId}'
+    liveTrackByUser : 'LiveTracking/GetLiveTrackingByUser?userId={userId}&selectedDesigId={selectedDesigId}',
+    historyData : 'HistoryPlayback?userIds={userId}&fromDate={fromDate}&toDate={toDate}',
+    historyDataByUser:'HistoryPlayback/GetHistoryDataByUser?userId={userId}&fromDate={fromDate}&toDate={toDate}'
 
 }

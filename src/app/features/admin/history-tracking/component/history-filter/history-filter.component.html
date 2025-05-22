@@ -1,49 +1,65 @@
-<div class="card">
-    <div class="card-header">
-        History Track
-    </div>
-    <div class="card-body">
-        <form [formGroup]="historyForm">
-            <div class="row">
-                <div class="col-md-6 mb-2">
-                    <label class="form-label">Designation</label>
-                    <ngx-select-dropdown [config]="config" [options]="desigantionList" formControlName="designation"
-                        (change)="onChangeDesi($event)">
-                    </ngx-select-dropdown>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label class="form-label">User</label>
-                    <ngx-select-dropdown [config]="config" [options]="userList" formControlName="user">
-                    </ngx-select-dropdown>
-                </div>
-                <div class="col-md-12 mb-2">
-                    <label class="form-label">Time Format</label>
-                    <select class="form-control" formControlName="timeformat" (change)="timecheck($event)" >
-                        <option *ngFor="let item of selectDate" [value]="item.id">{{ item.dateValue }}</option>
-                    </select>
-                </div>
-                <ng-container *ngIf="customDate">
-                    <div class="col-md-6 mb-2">
-                        <label for="exampleInputEmail1" class="form-label">From Date</label>
-                        <div class="input-group mb-2">
-                            <input type="datetime-local" class="form-control"  formControlName="fromDate"
-                                placeholder="dd/MM/yyy" aria-describedby="button-addon2" />
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <label for="exampleInputEmail1" class="form-label">To Date</label>
-                        <input type="datetime-local" class="form-control"  formControlName="toDate"
-                        placeholder="dd/MM/yyy" aria-describedby="button-addon2" />
-                    </div>
-                </ng-container>
-        
-                <div class="col-md-6">
-                    <button class="btn btn-success" style="width: 100%;" type="submit">Submit</button>
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-danger" style="width: 100%;" type="button">Cancel</button>
-                </div>
+<form [formGroup]="historyForm" (ngSubmit)="historySubmit($event, historyForm.value)">
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-2">
+            <label class="block text-sm font-medium text-gray-700">Designation</label>
+            <ngx-select-dropdown [config]="config" [options]="desigantionList" formControlName="designation"
+                (change)="onChangeDesi($event)" class="w-full">
+            </ngx-select-dropdown>
+            <span *ngIf="historyForm?.get('designation')?.invalid &&
+                        (historyForm?.get('designation')?.dirty || historyForm?.get('designation')?.touched)"
+                class="text-danger mt-2">
+                Designation is Required
+            </span>
+        </div>
+        <div class="col-span-2">
+            <label class="block text-sm font-medium text-gray-700">User</label>
+            <ngx-select-dropdown [config]="config" [options]="userList" formControlName="user" [multiple]="true" class="w-full">
+            </ngx-select-dropdown>
+            <span *ngIf="historyForm?.get('user')?.invalid &&
+                        (historyForm?.get('user')?.dirty || historyForm?.get('user')?.touched)"
+                class="text-danger mt-2">
+                User is Required
+            </span>
+        </div>
+        <div class="col-span-2">
+            <label class="block text-sm font-medium text-gray-700">Time Format</label>
+            <select class="form-control" formControlName="timeformat" (change)="timecheck($event)">
+                <option *ngFor="let item of selectDate" [value]="item.id">{{ item.dateValue }}</option>
+            </select>
+            <span *ngIf="historyForm?.get('timeformat')?.invalid &&
+            (historyForm?.get('timeformat')?.dirty || historyForm?.get('timeformat')?.touched)" class="text-danger mt-2">
+                Timeformat is Required
+            </span>
+        </div>
+        <ng-container *ngIf="customDate">
+            <div class="col-span-2">
+                <label class="block text-sm font-medium text-gray-700">From Date</label>
+                <input type="datetime-local" class="form-control" formControlName="fromDate" placeholder="dd/MM/yyy" />
+                <span *ngIf="historyForm?.get('fromDate')?.invalid && customDate &&
+                            (historyForm?.get('fromDate')?.dirty || historyForm?.get('fromDate')?.touched)"
+                    class="text-danger mt-2">
+                    From Date is Required
+                </span>
             </div>
-        </form>
+            <div class="col-span-2">
+                <label class="block text-sm font-medium text-gray-700">To Date</label>
+                <input type="datetime-local" class="form-control" formControlName="toDate" placeholder="dd/MM/yyy" />
+                <span *ngIf="historyForm?.get('toDate')?.invalid && customDate &&
+                            (historyForm?.get('toDate')?.dirty || historyForm?.get('toDate')?.touched)"
+                    class="text-danger mt-2">
+                    To Date is Required
+                </span>
+            </div>
+        </ng-container>
+        <div class="col-span-1">
+            <label class="block text-sm font-medium text-transparent">Action</label>
+            <button class="w-full bg-green-500 text-white rounded-md px-4 py-2 hover:bg-green-600"
+                type="submit">Submit</button>
+        </div>
+        <div class="col-span-1">
+            <label class="block text-sm font-medium text-transparent">Action</label>
+            <button class="w-full bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600"
+                type="button">Cancel</button>
+        </div>
     </div>
-</div>
+</form>
