@@ -31,7 +31,7 @@
                           <input type="range" min="1" [max]="historylist?.length - 1" [value]="sliderValue" (change)="sliderChange($event)" class="slider" id="myRange">
                         </div>
                         <div class="speed-value" style="margin-left: 13px;">
-                          <select  (change)="onSpeedChange($event)" [(ngModel)]="selectedSpeed">
+                          <select class="border border-gray-800 outline-none"  (change)="onSpeedChange($event)" [(ngModel)]="selectedSpeed">
                             <option *ngFor="let speedValue of speed"  [value]="speedValue.id">{{speedValue.value}}</option>
                            </select>
                         </div>

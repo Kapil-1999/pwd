@@ -181,4 +181,10 @@ export class HistoryFilterComponent {
       this.historyService.updateHistoryData(this.historyList);
     })
   }
+
+  cancel() {
+    this.historyForm.reset();
+    this.historyForm.get('timeformat')?.setValue('Today');
+    this.historyService.updateHistoryData([]);
+  }
 }
