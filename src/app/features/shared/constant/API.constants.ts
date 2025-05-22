@@ -99,6 +99,7 @@ export const API_CONSTANTS = {
     commonWork : 'Common/GetWorkList',
     liveTrackByUser : 'LiveTracking/GetLiveTrackingByUser?userId={userId}&selectedDesigId={selectedDesigId}',
     historyData : 'HistoryPlayback?userIds={userId}&fromDate={fromDate}&toDate={toDate}',
-    historyDataByUser:'HistoryPlayback/GetHistoryDataByUser?userId={userId}&fromDate={fromDate}&toDate={toDate}'
+    historyDataByUser:'HistoryPlayback/GetHistoryDataByUser?userId={userId}&fromDate={fromDate}&toDate={toDate}',
+    profilePicUpload : 'User/ProfilePicUpload'
 
 }

@@ -33,15 +33,16 @@ export class HistoryListComponent {
 
   setInitialTable() {
     this.columns = [
-      {key: 'department_name', title: 'Department', width: '10%'},
-      {key: 'designation_name', title: 'Designation', width: '10%'},
-      {key: 'user_name', title: 'User', width: '10%'},
-      {key: 'Date', title: 'Date', width: '10%'},
-      {key: 'In Time', title: 'In Time', width: '10%'},
-      {key: 'Out Time', title: 'Out Time', width: '10%'},
-      {key: 'In Address', title: 'In Address', width: '15%'},
-      {key: 'Out Address', title: 'Out Address', width: '15%'},
-      {key: 'Play back', title: 'Play back', width: '10%'}
+      {key: 'department_name', title: 'Department', width: '8%'},
+      {key: 'user_name', title: 'User', width: '8%'},
+      {key: 'Date', title: 'Date', width: '8%'},
+      {key: 'In Time', title: 'In Time', width: '8%'},
+      {key: 'Out Time', title: 'Out Time', width: '8%'},
+      {key: 'Out Time', title: 'Duration', width: '8%'},
+      {key: 'Out Time', title: 'Distance', width: '8%'},
+      {key: 'In Address', title: 'In Address', width: '18%'},
+      {key: 'Out Address', title: 'Out Address', width: '18%'},
+      {key: 'Play back', title: 'Play back', width: '8%'}
     ]
   }
 

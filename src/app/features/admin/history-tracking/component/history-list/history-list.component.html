@@ -25,11 +25,13 @@
                                 <tr
                                     *ngFor="let item of historyList | searchFilter: searchKeyword; let index = index">
                                     <td>{{item?.department_name}}</td>
-                                    <td>{{item?.designation_name}}</td>
+                                    <!-- <td>{{item?.designation_name}}</td> -->
                                     <td>{{item?.full_name}}</td>
                                     <td>{{item?.att_date | date:'dd-MM-yyyy'}}</td>
                                     <td>{{ item?.in_time }}</td>
                                     <td>{{item?.out_time}}</td>
+                                    <td>{{item?.total_hrs}}</td>
+                                    <td>{{item?.distance_km ? item?.distance_km + ' Km'  : ''}}</td>
                                    <td>{{item?.in_address}}</td>
                                    <td>{{item?.out_address}}</td>
                                    <td>
