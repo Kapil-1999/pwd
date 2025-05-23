@@ -6,6 +6,9 @@ import { LocalStorageService } from '../../services/localstorage.service';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../services/notification.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core/app.reducer';
+import { selectProfile } from '../../../../core/app.action';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +28,8 @@ export class LoginComponent {
     private http : HttpClient,
     private notificationService : NotificationService,
     private cookieService: CookieService,
-    private localStorageService :LocalStorageService
+    private localStorageService :LocalStorageService,
+    private store : Store<AppState>
 
   ) {
     let sessionData = this.localStorageService.isLoggedIn();    
@@ -84,6 +88,7 @@ export class LoginComponent {
             expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24)
           });
           this.localStorageService.setItem(`pwd-user`, JSON.stringify(userData));
+          this.store.dispatch(selectProfile({selectProfile : userData?.img_path}))
           this.localStorageService.setItem(`pwd-menu`, JSON.stringify(menuData));
           this.notificationService.successAlert('Login Successfully');
           setTimeout(() => {

@@ -1,9 +1,22 @@
 <div class="profile-part">
     <div class="login bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="d-flex items-center justify-center">
+      <div class="d-flex items-center justify-center relative">
         <img
           class="w-32 h-32 rounded-full border-4 border-white mt-2"
-          [src]="imgUrl + userDetails?.img_path" alt="Profile Picture" />
+          [src]="imgUrl + profilePic" alt="Profile Picture" />
+          <div class="absolute -bottom-8">
+            <input 
+              type="file" 
+              #fileInput 
+              (change)="onFileSelected($event)"      
+              accept="image/*" 
+              class="hidden" />
+            <button 
+              (click)="fileInput.click()" 
+              class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded-full shadow-md">
+              Change Picture
+            </button>
+          </div>
       </div>
       <div class="text-center p-6 mt-4">
         <h1 class="text-xl font-semibold text-gray-800">{{userDetails?.full_name}}</h1>

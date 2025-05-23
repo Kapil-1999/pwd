@@ -54,8 +54,8 @@ export class HistoryFilterComponent {
     todayEnd.setHours(23, 59, 59);
 
     this.historyForm = this.fb.group({
-      designation: [null, [Validators.required]],
-      user: [null, [Validators.required]],
+      designation: [null],
+      user: [null],
       timeformat: ['Today', [Validators.required]],
       fromDate: [this.formatDateForInput(todayStart)],
       toDate: [this.formatDateForInput(todayEnd)],
@@ -168,9 +168,9 @@ export class HistoryFilterComponent {
       this.historyForm.markAllAsTouched();
       return;
     }
-    let userData = formvalue?.user ? this.getSelectedValues(formvalue?.user) : { value: null, text: null };
+    let userData = formvalue?.user ? this.getSelectedValues(formvalue?.user) : { value: null, text: null };    
     let payload = {
-      "userId": userData?.value,
+      "userId": userData?.value ? userData?.value : null,
       "fromDate": formvalue?.fromDate,
       "toDate": formvalue?.toDate
     }

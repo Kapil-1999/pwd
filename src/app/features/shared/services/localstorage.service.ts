@@ -58,6 +58,7 @@ export class LocalStorageService {
     this.cookieService.delete(`pwd-token`, '/');
     localStorage.removeItem(`pwd-user`);
     localStorage.removeItem(`pwd-menu`);
+    localStorage.removeItem(`pwd-profile`);
   }
 
   // getToken(): string | null {

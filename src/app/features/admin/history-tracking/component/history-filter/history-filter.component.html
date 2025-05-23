@@ -5,21 +5,21 @@
             <ngx-select-dropdown [config]="config" [options]="desigantionList" formControlName="designation"
                 (change)="onChangeDesi($event)" class="w-full">
             </ngx-select-dropdown>
-            <span *ngIf="historyForm?.get('designation')?.invalid &&
+            <!-- <span *ngIf="historyForm?.get('designation')?.invalid &&
                         (historyForm?.get('designation')?.dirty || historyForm?.get('designation')?.touched)"
                 class="text-danger mt-2">
                 Designation is Required
-            </span>
+            </span> -->
         </div>
         <div class="col-span-2">
             <label class="block text-sm font-medium text-gray-700">User</label>
             <ngx-select-dropdown [config]="config" [options]="userList" formControlName="user" [multiple]="true" class="w-full">
             </ngx-select-dropdown>
-            <span *ngIf="historyForm?.get('user')?.invalid &&
+            <!-- <span *ngIf="historyForm?.get('user')?.invalid &&
                         (historyForm?.get('user')?.dirty || historyForm?.get('user')?.touched)"
                 class="text-danger mt-2">
                 User is Required
-            </span>
+            </span> -->
         </div>
         <div class="col-span-2">
             <label class="block text-sm font-medium text-gray-700">Time Format</label>

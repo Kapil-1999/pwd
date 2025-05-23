@@ -8,5 +8,5 @@ export const  setUserCountData = createSelector(selectAppstate,(state) => state.
 export const  setIsShowUserList = createSelector(selectAppstate,(state) => state.showUserList);
 export const  setSelectedUser = createSelector(selectAppstate,(state) => state.selectedUser);
 export const setSelectedUserArea = createSelector(selectAppstate,(state) => state.selectedUserArea);
-export const setHistoryData = createSelector(selectAppstate,(state) => state.historyData);
+export const setSelectedProfile = createSelector(selectAppstate,(state) => state.selectProfile);
 

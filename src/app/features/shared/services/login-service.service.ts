@@ -29,4 +29,11 @@ export class LoginServiceService {
   //     .get(url)
   //     .pipe(catchError((error: HttpErrorResponse) => of(error)));
   // }
+
+  profilePicUpload(payload:any): Observable<any> {
+    let url = API_CONSTANTS.profilePicUpload
+    return this.apiService
+    .post(url,payload)
+    .pipe(catchError((error: HttpErrorResponse) => of(error)));
+  }
 }

@@ -3,6 +3,9 @@ import { LocalStorageService } from '../../services/localstorage.service';
 import { NotificationService } from '../../services/notification.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { ADMIN_MENU, IMG_URL } from '../../constant/menu/menu';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core/app.reducer';
+import { setSelectedProfile } from '../../../../core/app.selector';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,25 +17,27 @@ export class HeaderComponent {
   userDetails: any;
   showMobileMenu: boolean = false;
   imgUrl = IMG_URL;
+  profilePic: any;
 
   constructor(
-    private renderer: Renderer2,
-    private elRef: ElementRef,
     private localStorageService: LocalStorageService,
-    private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>,
   ) {
     this.getMenuList();
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateActiveMenu(this.router.url);
       }
     });
+    this.store.select(setSelectedProfile).subscribe((res: any) => {
+      let image: any = res;
+      this.profilePic = (image);
+    })
   }
 
   updateActiveMenu(currentPath: string) {
-    this.menuListData?.forEach((menu: any) => {      
+    this.menuListData?.forEach((menu: any) => {
       menu.isActive = menu.url === currentPath;
       if (menu.menuList) {
         menu.menuList.forEach((subMenu: any) => {
@@ -50,8 +55,8 @@ export class HeaderComponent {
   }
 
   getMenuList() {
-    let menu:any = this.localStorageService.getItem('menu');
-    this.menuListData = JSON.parse(menu);    
+    let menu: any = this.localStorageService.getItem('menu');
+    this.menuListData = JSON.parse(menu);
   }
 
   getUserDetails() {
@@ -71,7 +76,7 @@ export class HeaderComponent {
     }
   }
 
-  toggleDropdown(item: any, event: MouseEvent): void {    
+  toggleDropdown(item: any, event: MouseEvent): void {
     this.closeAllMenus(this.menuListData, item);
     this.showPopup = false;
     if (item.menuList?.length > 0) {
@@ -83,7 +88,8 @@ export class HeaderComponent {
   private closeAllMenus(menuList: any[], exception?: any): void {
     menuList.forEach((menu: any) => {
       if (menu !== exception) {
-        menu.is_open = false;      }
+        menu.is_open = false;
+      }
       if (menu.menuList?.length) {
         this.closeAllMenus(menu.menuList, exception);
       }

@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { selectedUser, selectedUserArea, selectedVehicleData, selectHistoryData, setShowUserList, setTypeUser, setUserCountData, setvehicleData } from "./app.action";
+import { selectedUser, selectedUserArea, selectedVehicleData, selectProfile, setShowUserList, setTypeUser, setUserCountData, setvehicleData } from "./app.action";
 
 export interface AppState {
   vehicleData: any;
@@ -9,7 +9,7 @@ export interface AppState {
   showUserList: any;
   selectedUser: any;
   selectedUserArea :any;
-  historyData :any
+  selectProfile :any
 }
 
 export const initialState: AppState = {
@@ -20,7 +20,7 @@ export const initialState: AppState = {
   showUserList: true,
   selectedUser: null,
   selectedUserArea : null,
-  historyData : []
+  selectProfile : (localStorage.getItem('pwd-profile') || 'null')
 }
 
 export const appReducer = createReducer(
@@ -56,9 +56,12 @@ export const appReducer = createReducer(
      ...state,
       selectedUserArea,
     })),
-    on(selectHistoryData ,(state, { historyData }) => ({
-    ...state,
-      historyData,
-    }),
+    on(selectProfile ,(state, { selectProfile }) => {
+      localStorage.setItem('pwd-profile', (selectProfile))
+      return {
+        ...state,
+        selectProfile,
+      }
+    },
   )
 )
