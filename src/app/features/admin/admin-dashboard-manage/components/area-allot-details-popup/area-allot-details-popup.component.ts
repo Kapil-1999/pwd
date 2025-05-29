@@ -38,8 +38,8 @@ export class AreaAllotDetailsPopupComponent {
       categoryId : this.editData?.category_id
     }
     this.dashboardService.subCategoryListByCat(data).subscribe((res:any) => {
-      this.accordionItems = res?.body?.result;
-      this.accordionItems =this.accordionItems.map((val:any) => (
+      this.accordionItems = res?.body?.result || [];
+      this.accordionItems =this.accordionItems?.map((val:any) => (
         {
           ...val, isOpen : false
         }

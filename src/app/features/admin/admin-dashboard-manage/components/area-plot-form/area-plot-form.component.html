@@ -2974,7 +2974,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- </td>
+            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="7">
@@ -3030,7 +3030,7 @@
             <td>{{data?.consistency5}}</td>
         </tr>
         <tr>
-            <td colspan="6">Remarks:-</td>
+            <td colspan="6">Remarks:- <span style="padding-left: 20px;">{{data?.form10_remarks}}</span></td>
         </tr>
     </table>
     }
@@ -3157,7 +3157,7 @@
         </tr>
         <tr>
             <td colspan="4">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.contract_name}}</span></td>
+            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="4">
@@ -3181,51 +3181,51 @@
             <td>1</td>
             <td>{{data?.time_a1}}</td>
             <td>{{data?.needle_a1}}</td>
-            <td>{{data?.time_a1}}</td>
+            <td>{{data?.initial_a1}}</td>
             <td>1</td>
             <td>{{data?.time_b1}}</td>
             <td>{{data?.needle_b1}}</td>
-            <td>{{data?.time_b1}}</td>
+            <td>{{data?.final_b1}}</td>
         </tr>
         <tr>
             <td>2</td>
             <td>{{data?.time_a2}}</td>
             <td>{{data?.needle_a2}}</td>
-            <td>{{data?.time_a2}}</td>
+            <td>{{data?.initial_a2}}</td>
             <td>2</td>
             <td>{{data?.time_b2}}</td>
             <td>{{data?.needle_b2}}</td>
-            <td>{{data?.time_b2}}</td>
+            <td>{{data?.final_b2}}</td>
         </tr>
         <tr>
             <td>3</td>
             <td>{{data?.time_a3}}</td>
             <td>{{data?.needle_a3}}</td>
-            <td>{{data?.time_a3}}</td>
+            <td>{{data?.initial_a3}}</td>
             <td>3</td>
             <td>{{data?.time_b3}}</td>
             <td>{{data?.needle_b3}}</td>
-            <td>{{data?.time_b3}}</td>
+            <td>{{data?.final_b3}}</td>
         </tr>
         <tr>
             <td>4</td>
             <td>{{data?.time_a4}}</td>
             <td>{{data?.needle_a4}}</td>
-            <td>{{data?.time_a4}}</td>
+            <td>{{data?.initial_a4}}</td>
             <td>4</td>
             <td>{{data?.time_b4}}</td>
             <td>{{data?.needle_b4}}</td>
-            <td>{{data?.time_b4}}</td>
+            <td>{{data?.final_b4}}</td>
         </tr>
         <tr>
             <td>5</td>
             <td>{{data?.time_a5}}</td>
             <td>{{data?.needle_a5}}</td>
-            <td>{{data?.time_a5}}</td>
+            <td>{{data?.initial_a5}}</td>
             <td>5</td>
             <td>{{data?.time_b5}}</td>
             <td>{{data?.needle_b5}}</td>
-            <td>{{data?.time_b5}}</td>
+            <td>{{data?.final_b5}}</td>
         </tr>
         <tr>
             <td colspan="4">Initial Setting Time: {{data?.initial_time}}</td>
@@ -3379,7 +3379,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="7">
@@ -3540,7 +3540,7 @@
         </tr>
         <tr>
             <td colspan="5">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="5">Source :-</td>
+            <td colspan="5">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th style="width: 10%">Sample No.</th>
@@ -3608,7 +3608,7 @@
         </tr>
         }
         <tr>
-            <td colspan="10">Remarks:-</td>
+            <td colspan="10">Remarks:- {{data?.form13_remarks}}</td>
         </tr>
     </table>
     }
@@ -3733,7 +3733,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th style="width: 10%; border-bottom: none">SI no.</th>
@@ -3918,11 +3918,11 @@
             <td colspan="7">NAME OF WORK :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
         </tr>
         <tr>
-            <td colspan="7">NAME OF CONTRACTOR :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
+            <td colspan="7">NAME OF CONTRACTOR :- <span style="padding-left: 20px;">{{data?.contract_name}}</span></td>
         </tr>
         <tr>
-            <td colspan="3">CONTRACT BOND NO. :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
-            <td colspan="4">Chainage :-</td>
+            <td colspan="3">CONTRACT BOND NO. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="3">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
@@ -3981,6 +3981,9 @@
             <td>{{data?.slump1}}</td>
             <td>{{data?.slump2}}</td>
             <td>{{data?.slump3}}</td>
+        </tr>
+        <tr>
+            <td colspan="7">Remarks:- <span style="padding-left: 20px;">{{data?.form15_remarks}}</span></td>
         </tr>
     </table>
     }
@@ -4051,6 +4054,9 @@
             <td>Slump (mm)</td>
             <td colspan="5"></td>
         </tr>
+        <tr>
+            <td colspan="7">Remarks:- </td>
+        </tr>
     </table>
     }
     }
@@ -4091,7 +4097,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 10px">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Source :- <span style="padding-left: 10px">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th style="width: 45%;border-bottom:none">Description</th>
@@ -4282,7 +4288,8 @@
                     style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
         </tr>
         <tr>
-            <td colspan="4">Date of Inspection : </td>
+            <td colspan="4">Date of Inspection : <span
+                style="padding-left: 20px;">{{data?.testing_date}}</span></td>
             <td colspan="4">Pit Size :</td>
 
         </tr>
@@ -4604,7 +4611,7 @@
             </tr>
             <tr>
                 <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span></td>
-                <td colspan="4">Source :-</td>
+                <td colspan="4">Source :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
             </tr>
             <tr>
                 <td colspan="2">IS-Sieve Size mm</td>
@@ -5223,6 +5230,9 @@
             <td>{{data?.variation_density}}</td>
             <td>{{data?.form20_remarks}}</td>
         </tr>
+        <tr>
+            <td colspan="14">Remarks:- <span style="padding-left: 20px">{{data?.form20_remarks}}</span></td>
+        </tr>
     </table>
     }
     @if(!areaPlotForm.length) {
@@ -5274,6 +5284,9 @@
             <td></td>
             <td></td>
         </tr>
+        <tr>
+            <td colspan="14">Remarks:- </td>
+        </tr>
     </table>
     }
     }
@@ -5312,7 +5325,7 @@
             </tr>
             <tr>
                 <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span> </td>
-                <td colspan="4">Source :-</td>
+                <td colspan="4">Source :- <span style="padding-left: 10px;">{{data?.chainage}}</span></td>
             </tr>
             <tr>
                 <td colspan="7" class="center">
@@ -5518,9 +5531,7 @@
             <td colspan="4">Bond No. :-
                 <span style="padding-left: 10px">{{ data?.contract_bond_no }}</span>
             </td>
-            <td colspan="4">Source :-
-
-            </td>
+            <td colspan="4">Source :- <span style="padding-left: 10px">{{ data?.chainage }}</span></td>
         </tr>
         <tr>
             <td colspan="8" class="center">
@@ -5922,7 +5933,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Source :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -6096,7 +6107,6 @@
                 </table>
             </td>
         </tr>
-
         <tr>
             <td colspan="7">Remarks:- <span style="padding-left: 10px;">{{data?.form23_remarks}}</span></td>
         </tr>
@@ -6349,7 +6359,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -6402,6 +6412,9 @@
             <td>{{data?.density1}}</td>
             <td>{{data?.density2}}</td>
             <td>{{data?.density3}}</td>
+        </tr>
+        <tr>
+            <td colspan="7">Remarks:- <span style="padding-left: 10px;">{{data?.form24_remarks}}</span></td>
         </tr>
     </table>
     }
@@ -6490,6 +6503,9 @@
             <td></td>
             <td></td>
         </tr>
+        <tr>
+            <td colspan="7">Remarks:-</td>
+        </tr>
     </table>
     }
     }
@@ -6533,7 +6549,7 @@
         </tr>
         <tr>
             <td colspan="4">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="5">Source :-</td>
+            <td colspan="5">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th rowspan="2" style="width: 12%">Sieve size (mm)</th>
