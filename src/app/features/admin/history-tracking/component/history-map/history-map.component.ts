@@ -1,4 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import * as L from 'leaflet';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -40,7 +40,8 @@ export class HistoryMapComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     private bsmodService: BsModalService,
     private historyService: HistoryService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private dateService : DatePipe
   ) { }
 
   ngOnInit() {
@@ -247,7 +248,7 @@ export class HistoryMapComponent {
                           </div>
                         <div class="row mb-2">
                           <div class="col-md-12">
-                          <span> <strong>Date:</strong> ${(data.time_stamp)}
+                          <span> <strong>Date:</strong> ${this.dateService.transform(data.time_stamp, 'dd-MM-yyyy HH:mm:ss')}
                           </div>
                          
                         </div>
