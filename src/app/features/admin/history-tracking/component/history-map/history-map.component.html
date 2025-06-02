@@ -1,5 +1,5 @@
 <div class="modal-header text-center">
-  <h5>{{editData?.full_name}}'s {{editData?.in_time}} to {{editData?.out_time}} History Tracking</h5>
+  <h5>{{editData?.full_name}}'s {{editData?.att_date | date : 'dd-MM-yyy'}} {{editData?.in_time}} to {{editData?.att_date | date : 'dd-MM-yyy'}} {{editData?.out_time}} History Tracking</h5>
   @if(!historylist?.length && !isLoading) {
     <div class="alert alert-info mb-0" role="alert">
       No history tracking data available for this time period
