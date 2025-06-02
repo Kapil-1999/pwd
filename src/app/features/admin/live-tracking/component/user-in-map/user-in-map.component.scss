@@ -67,12 +67,18 @@
             cursor: pointer;
             width: 20px;
             height: 20px;
-            background-image: url('/assets/icons/down-new.png');
-            /* Replace 'down-arrow.png' with your arrow image */
+            background-image: url('/assets/images/down-new.png');
             background-size: contain;
             background-repeat: no-repeat;
+            transition: transform 0.3s ease;
+
+            &.rotate {
+                transform: rotate(180deg);
+            }
         }
     }
+
+
 
 
     .searcharea {

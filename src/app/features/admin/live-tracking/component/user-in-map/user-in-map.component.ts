@@ -285,4 +285,9 @@ export class UserInMapComponent {
       this.onSelectuser(selected);
     }
   }
+
+  showContent: boolean = true;
+  toggleContent() {
+    this.showContent = !this.showContent;
+  }
 }
