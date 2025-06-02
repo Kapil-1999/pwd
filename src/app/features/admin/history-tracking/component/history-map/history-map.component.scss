@@ -69,3 +69,19 @@
         transition: opacity .2s;
     }
 }
+
+:host ::ng-deep {
+  .leaflet-popup {
+    min-width: 400px;
+    
+    .leaflet-popup-content {
+      width: 380px !important;  
+      margin: 13px 15px;
+    }
+    
+    .leaflet-popup-content-wrapper {
+      padding: 5px;
+      border-radius: 8px;
+    }
+  }
+}

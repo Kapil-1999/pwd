@@ -13,10 +13,6 @@ import { catchError, map, Observable, of } from 'rxjs';
   styleUrl: './history-map.component.scss'
 })
 export class HistoryMapComponent {
-  breadcrumbs = [
-    { label: 'Home', path: '/admin/dashboard/home' },
-    { label: 'History', path: '/admin/history/play-back' },
-  ];
   editData: any;
   historylist: any;
   isPlaying: boolean = false;
@@ -37,16 +33,8 @@ export class HistoryMapComponent {
   moveInterval: number = 1000;
   stepsInSegment: number = 50;
   selectedSpeed: number = 1;
-
-  onSpeedChange(event: any) {
-    const speedMultiplier = Number(event.target.value);
-    this.moveInterval = 1000 / speedMultiplier;
-    if (this.isPlaying) {
-      this.pause();
-      this.play();
-    }
-  }
   animatedMarker: L.Marker | any = null;
+  isLoading : boolean = false;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -116,7 +104,7 @@ export class HistoryMapComponent {
   }
 
   getHistoryData() {
-    console.log(this.editData);
+    this.isLoading = true;
     let fromDate: any;
     let toDate: any;
     if (this.editData?.att_date && this.editData?.in_time && this.editData?.out_time) {
@@ -130,8 +118,9 @@ export class HistoryMapComponent {
     }
 
     this.historyService.historyDataByUser(payload).subscribe((res: any) => {
+      this.isLoading = false;
       this.historylist = res?.body?.result || [];
-      this.updatePolyline();
+      // this.updatePolyline();
     })
   }
 
@@ -227,7 +216,7 @@ export class HistoryMapComponent {
   private lastKnownAddress: string = '';
   generateInfoWindowContent(data: any, address: string) {
     const truncateLongWords = (text: string, maxLength: number) => {
-      if (!text) return ''; 
+      if (!text) return '';
       return text
         .split(' ')
         .map((word) => (word.length > maxLength ? word.substring(0, maxLength) + '...' : word))
@@ -276,86 +265,93 @@ export class HistoryMapComponent {
   animateMarker(startIndex: number) {
     const path = this.historylist.map((bus: any) => [bus.latitude, bus.longitude]);
     this.routeCoordinates = path;
-
     if (path.length === 0) return;
-
+    if (path.length > 0) {
+      this.map.setView(path[startIndex], 17);
+    };
     if (this.animatedMarker) {
       this.map.removeLayer(this.animatedMarker);
-    }
-
-    const vehicleIcon = L.divIcon({
-      html: `<img src="${this.onCheckVehicleDevice()}" style="width: 30px; height: 30px; transform: rotate(0deg);" class="vehicle-icon"/>`,
-      className: 'vehicle-marker',
-      iconSize: [30, 30],
-      iconAnchor: [15, 15]
-    });
-
-    this.animatedMarker = L.marker(path[startIndex], {
-      icon: vehicleIcon
-    }).addTo(this.map);
-
+    };
+    if (this.polyline) {
+      this.map.removeLayer(this.polyline);
+      this.polyline = null;
+    };
+    let popupOpened = true;
     let currentIndex = startIndex;
     const steps = path.length - 1;
-
+    const initialLatLng = path[startIndex];
+    const vehicleIcon = L.divIcon({
+      html: `<img src="${this.onCheckVehicleDevice()}" style="width: 30px; height: 30px;" class="vehicle-icon" />`,
+      className: 'vehicle-marker',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+    });
+    this.animatedMarker = L.marker(initialLatLng, { icon: vehicleIcon }).addTo(this.map);
+    const content = this.generateInfoWindowContent(this.historylist[startIndex], 'Address is Loading...');
+    this.animatedMarker.bindPopup(content).openPopup();
+    this.animatedMarker.on('popupclose', () => {
+      popupOpened = false;
+    });
+    this.animatedMarker.on('click', () => {
+      popupOpened = true;
+      const currentLatLng = this.animatedMarker.getLatLng();
+      const address = { lat: currentLatLng.lat, lng: currentLatLng.lng };
+      const idx = this.currentIndex ?? currentIndex;
+      this.animatedMarker.openPopup();
+      this.animatedMarker.getPopup().setContent(
+        this.generateInfoWindowContent(this.historylist[idx], 'Address is Loading...')
+      );
+      this.getLiveAddressLocation(address)
+        .pipe(
+          map((addressValue) =>
+            this.generateInfoWindowContent(
+              this.historylist[idx],
+              addressValue || 'Address not available'
+            )
+          ),
+          catchError(() =>
+            of(this.generateInfoWindowContent(this.historylist[idx], 'Address not available'))
+          )
+        )
+        .subscribe((content) => this.animatedMarker.getPopup().setContent(content));
+    });
     const animateStep = () => {
       if (!this.isPlaying) return;
-
       if (currentIndex < path.length - 1) {
         const start = path[currentIndex];
         const end = path[currentIndex + 1];
-
         const deltaLat = end[0] - start[0];
         const deltaLng = end[1] - start[1];
         const heading = Math.atan2(deltaLng, deltaLat) * (180 / Math.PI);
-
         let stepIndex = 0;
         const moveMarker = () => {
           if (!this.isPlaying) return;
-
           if (stepIndex <= this.stepsInSegment) {
             const lat = start[0] + (end[0] - start[0]) * (stepIndex / this.stepsInSegment);
             const lng = start[1] + (end[1] - start[1]) * (stepIndex / this.stepsInSegment);
-
             this.animatedMarker.setLatLng([lat, lng]);
+            const iconElement = this.animatedMarker.getElement()?.querySelector('img');
+            if (iconElement) {
+              (iconElement as HTMLImageElement).style.transform = `rotate(${heading}deg)`;
+            };
+            const polylinePath = [
+              ...path.slice(0, currentIndex + 1),
+              [lat, lng]
+            ];
+            if (this.polyline) {
+              this.map.removeLayer(this.polyline);
+            };
+            this.polyline = L.polyline(polylinePath, {
+              color: 'blue',
+              weight: 2,
+              opacity: 2.0,
+            }).addTo(this.map);
+            if (stepIndex === 0 && popupOpened) {
+              const address = { lat, lng };
 
-            const rotatedIcon = L.divIcon({
-              html: `<img src="${this.onCheckVehicleDevice()}" style="width: 30px; height: 30px; transform: rotate(${heading}deg);" class="vehicle-icon"/>`,
-              className: 'vehicle-marker',
-              iconSize: [30, 30],
-              iconAnchor: [15, 15]
-            });
-            this.animatedMarker.setIcon(rotatedIcon);
-
-            
-            // this.animatedMarker
-            //   .bindPopup(this.generateInfoWindowContent(currentData, ''))
-            //   .openPopup();
-
-            // this.getLiveAddressLocation(address)
-            //   .subscribe({
-            //     next: (addressValue) => {
-            //       if (this.animatedMarker && this.animatedMarker.getPopup()) {
-            //         const address = addressValue?.display_name || 'Address not available'; // Extract display_name from response
-            //         this.animatedMarker.getPopup().setContent(
-            //           this.generateInfoWindowContent(currentData, address)
-            //         );
-            //       }
-            //     },
-            //     error: () => {
-            //       if (this.animatedMarker && this.animatedMarker.getPopup()) {
-            //         this.animatedMarker.getPopup().setContent(
-            //           this.generateInfoWindowContent(currentData, 'Address not available')
-            //         );
-            //       }
-            //     }
-            //   });
-
-            if (stepIndex === 0) {
-              const address = { lat: lat, lng: lng };
-              this.animatedMarker
-                .bindPopup(this.generateInfoWindowContent(this.historylist[currentIndex], 'Address is Loading...'))
-                .openPopup();
-
+              this.animatedMarker.getPopup().setContent(
+                this.generateInfoWindowContent(this.historylist[currentIndex], 'Address is Loading...')
+              );
               this.getLiveAddressLocation(address)
                 .pipe(
                   map((addressValue) =>
@@ -369,13 +365,11 @@ export class HistoryMapComponent {
                   )
                 )
                 .subscribe((content) => this.animatedMarker.getPopup().setContent(content));
-            }
-
+            };
             this.map.panTo([lat, lng], {
               animate: true,
               duration: 0.5
             });
-
             this.sliderValue = currentIndex;
             stepIndex++;
             this.timeoutId = setTimeout(moveMarker, this.moveInterval / this.stepsInSegment);
@@ -387,15 +381,13 @@ export class HistoryMapComponent {
               this.sliderValue = currentIndex;
               this.isPlaying = false;
               return;
-            }
+            };
             animateStep();
           }
         };
-
         moveMarker();
       }
     };
-
     animateStep();
   }
 
@@ -403,22 +395,16 @@ export class HistoryMapComponent {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
-
-    // Reset animation state
     this.isPlaying = false;
-
-    // Update slider value
     const newValue = Number(event.target.value);
     if (newValue >= 0 && newValue < this.historylist.length) {
       this.sliderValue = newValue;
       this.currentIndex = newValue;
 
-      // Update marker position without animation
       const path = this.historylist.map((bus: any) => [bus.latitude, bus.longitude]);
       if (this.animatedMarker && path[newValue]) {
         this.animatedMarker.setLatLng(path[newValue]);
 
-        // Center map on new position
         this.map.panTo(path[newValue], {
           animate: true,
           duration: 0.5
@@ -440,6 +426,15 @@ export class HistoryMapComponent {
         this.currentIndex = 0;
       }
       this.animateMarker(this.currentIndex);
+    }
+  }
+
+  onSpeedChange(event: any) {
+    const speedMultiplier = Number(event.target.value);
+    this.moveInterval = 1000 / speedMultiplier;
+    if (this.isPlaying) {
+      this.pause();
+      this.play();
     }
   }
 }

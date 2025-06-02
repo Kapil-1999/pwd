@@ -77,6 +77,7 @@ export class LoginComponent {
     
     this.tokenService.generateToken(formvalue, this.ipAddress).subscribe({
       next: (res: any) => {
+        this.isloading = false;
         const userDetail = res.body;
         if (userDetail?.statusCode == 200) {
           let userData = userDetail?.result;
@@ -103,7 +104,6 @@ export class LoginComponent {
         this.notificationService.errorAlert('Login failed');
       },
       complete: () => {
-        this.isloading = false;
       }
     });
   }
