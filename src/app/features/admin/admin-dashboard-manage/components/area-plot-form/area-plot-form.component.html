@@ -6918,7 +6918,7 @@
             }
             <tr>
                 <td colspan="12">
-                     Remarks:- <span style="padding-left: 10px">{{ data?.form26_remarks }}</span>
+                    Remarks:- <span style="padding-left: 10px">{{ data?.form26_remarks }}</span>
                 </td>
             </tr>
         </table>
@@ -7015,7 +7015,223 @@
             </tr>
             <tr>
                 <td colspan="12">
-                     Remarks:- <span style="padding-left: 10px"></span>
+                    Remarks:- <span style="padding-left: 10px"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    }
+    }
+    } @else if(showForm(27)) {
+    @if(!isLoading) {
+    @if(areaPlotForm && areaPlotForm.length > 0) {
+    @for(data of areaPlotForm; track data) {
+    <div class="table-container">
+        <table class="mt-4">
+            <tr>
+                <td colspan="12">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
+                            <span class="font-bold">Created On: {{ data?.created_on }}</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">S&P INFRASTRUCTURE DEVELOPERS PVT. LTD.</h2>
+                            <h2 class="text-center mb-0">&</h2>
+                            <h2 class="text-center mb-0">BHARDWAJ UNIBUILD PVT. LTD. (JV)</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <strong>Project:</strong> Improvement and Up-gradation to Two Lane with paved shoulder configuration
+                    from existing km.90.000 to km.130.000 (Design length 39.15) of NH-227A (Sikriganj to Barhalganj) in
+                    the State of Uttar Pradesh on Engineering, Procurement & Construction (EPC) basis contract.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" style="text-align: center;">
+                    <h3>CLIENT: Public Works Department, NH, Govt of Uttar Pradesh.</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" style="text-align: center;">
+                    <h3>CONCRETE POUR CARD</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right: none"><strong>Concrete Grade</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Location</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Shift</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+                <td colspan="2" style="border-left: none;border-right: none;"><strong>RFI NO</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right: none"><strong>Design Mix No.</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Structure</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Starting Time</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+                <td colspan="2" style="border-left: none;border-right: none;"><strong>Date</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right: none"><strong>Type of Placing</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Lift No.</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Finishing Time</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+                <td colspan="2" style="border-left: none;border-right: none;"><strong>Total Volume</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+            </tr>
+            <tr>
+                <th colspan="1">SL.No.</th>
+                <th colspan="1">TM No./Truck No.</th>
+                <th colspan="1">Mix No</th>
+                <th colspan="1">Volume (m³)</th>
+                <th colspan="1">Cumm. Volume (m³)</th>
+                <th colspan="1">Arrival Time on Site</th>
+                <th colspan="1">Slump (mm)</th>
+                <th colspan="1">Concrete Temp.(°C)</th>
+                <th colspan="1">Ambient Temp.(°C)</th>
+                <th colspan="1">Start Time of Placing</th>
+                <th colspan="1">Finish Time of Placing</th>
+                <th colspan="1">Remarks/Cube Records</th>
+            </tr>
+            @for(item of [1,2,3,4,5,6]; track item) {
+                <tr>
+                    <td colspan="1">{{ data['si_no' + item] }}</td>
+                    <td colspan="1">{{data['tm_no' + item]}}</td>
+                    <td colspan="1">{{data['mix_no' + item]}}</td>
+                    <td colspan="1">{{data['volume' + item]}}</td>
+                    <td colspan="1">{{data['cumm_volume' + item]}}</td>
+                    <td colspan="1">{{data['arrival' + item]}}</td>
+                    <td colspan="1">{{data['slump' + item]}}</td>
+                    <td colspan="1">{{data['concrete' + item]}}</td>
+                    <td colspan="1">{{data['ambient' + item]}}</td>
+                    <td colspan="1">{{data['start_time' + item]}}</td>
+                    <td colspan="1">{{data['finish_time' + item]}}</td>
+                    <td colspan="1">{{data['remark' + item]}}</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="12">
+                    Remarks:- <span style="padding-left: 10px">{{data?.form27_remarks}}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    }
+    }@else {
+    <div class="table-container">
+        <table class="mt-4">
+            <tr>
+                <td colspan="12">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. </span><br>
+                            <span class="font-bold">Created On: </span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">S&P INFRASTRUCTURE DEVELOPERS PVT. LTD.</h2>
+                            <h2 class="text-center mb-0">&</h2>
+                            <h2 class="text-center mb-0">BHARDWAJ UNIBUILD PVT. LTD. (JV)</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <strong>Project:</strong> Improvement and Up-gradation to Two Lane with paved shoulder configuration
+                    from existing km.90.000 to km.130.000 (Design length 39.15) of NH-227A (Sikriganj to Barhalganj) in
+                    the State of Uttar Pradesh on Engineering, Procurement & Construction (EPC) basis contract.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" style="text-align: center;">
+                    <h3>CLIENT: Public Works Department, NH, Govt of Uttar Pradesh.</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" style="text-align: center;">
+                    <h3>CONCRETE POUR CARD</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right: none"><strong>Concrete Grade</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Location</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Shift</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+                <td colspan="2" style="border-left: none;border-right: none;"><strong>RFI NO</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right: none"><strong>Design Mix No.</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Structure</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Starting Time</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+                <td colspan="2" style="border-left: none;border-right: none;"><strong>Date</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right: none"><strong>Type of Placing</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Lift No.</strong></td>
+                <td colspan="1" style="border-right: none;border-left: none;"></td>
+                <td colspan="2" style="border-right: none;"><strong>Finishing Time</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+                <td colspan="2" style="border-left: none;border-right: none;"><strong>Total Volume</strong></td>
+                <td colspan="1" style="border-left: none;"></td>
+            </tr>
+            <tr>
+                <th colspan="1">SL.No.</th>
+                <th colspan="1">TM No./Truck No.</th>
+                <th colspan="1">Mix No</th>
+                <th colspan="1">Volume (m³)</th>
+                <th colspan="1">Cumm. Volume (m³)</th>
+                <th colspan="1">Arrival Time on Site</th>
+                <th colspan="1">Slump (mm)</th>
+                <th colspan="1">Concrete Temp.(°C)</th>
+                <th colspan="1">Ambient Temp.(°C)</th>
+                <th colspan="1">Start Time of Placing</th>
+                <th colspan="1">Finish Time of Placing</th>
+                <th colspan="1">Remarks/Cube Records</th>
+            </tr>
+            @for(item of [1,2,3,4,5,6]; track item) {
+                <tr>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                </tr>
+            }
+            <tr>
+                <td colspan="12">
+                    Remarks:- <span style="padding-left: 10px"></span>
                 </td>
             </tr>
         </table>
