@@ -38,11 +38,13 @@ export class AddCategoryComponent {
       this.label = 'Update'
       this.cateForm = this.fb.group({
         name: [this.editData?.category_name, [Validators.required]],
+        order : [this.editData?.order_no , [Validators.required]],
         status: [this.editData?.is_active, [Validators.required]]
       })
     } else {
       this.cateForm = this.fb.group({
         name: ['', [Validators.required]],
+        order : [null, [Validators.required]],
         status: [1, [Validators.required]]
       })
     }
@@ -57,6 +59,7 @@ export class AddCategoryComponent {
     let payload = {
       "category_id": 0,
       "category_name": formvalue?.name,
+      "order_no" : formvalue?.order,
       "is_active": formvalue?.status,
       "created_by": user?.user_id
     }

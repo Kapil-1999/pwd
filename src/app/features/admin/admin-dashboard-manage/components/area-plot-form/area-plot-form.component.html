@@ -3921,7 +3921,8 @@
             <td colspan="7">NAME OF CONTRACTOR :- <span style="padding-left: 20px;">{{data?.contract_name}}</span></td>
         </tr>
         <tr>
-            <td colspan="3">CONTRACT BOND NO. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
+            <td colspan="3">CONTRACT BOND NO. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span>
+            </td>
             <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
@@ -4288,8 +4289,7 @@
                     style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
         </tr>
         <tr>
-            <td colspan="4">Date of Inspection : <span
-                style="padding-left: 20px;">{{data?.testing_date}}</span></td>
+            <td colspan="4">Date of Inspection : <span style="padding-left: 20px;">{{data?.testing_date}}</span></td>
             <td colspan="4">Pit Size :</td>
 
         </tr>
@@ -6649,7 +6649,7 @@
             <td>{{data?.wt_retained236}}</td>
             <td>{{data?.cumulative236}}</td>
             <td>{{data?.percentage_cumulative236}}</td>
-            <td>{{data?.passing236}}</td>           
+            <td>{{data?.passing236}}</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
@@ -6786,7 +6786,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>           
+            <td></td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
@@ -6804,8 +6804,22 @@
     @for(data of areaPlotForm; track data.id) {
     <div class="table-container">
         <table class="mt-4">
+            <colgroup>
+                <col style="width: 5%">
+                <col style="width: 10%"> <!-- TM No. -->
+                <col style="width: 10%"> <!-- Dispatch Time -->
+                <col style="width: 10%"> <!-- Concrete Qty -->
+                <col style="width: 10%"> <!-- Cumulative Qty -->
+                <col style="width: 7%"> <!-- Slump -->
+                <col style="width: 7%"> <!-- Pearing Start -->
+                <col style="width: 7%"> <!-- Pearing End -->
+                <col style="width: 7%"> <!-- Sjump -->
+                <col style="width: 10%"> <!-- No. of Cubes -->
+                <col style="width: 7%"> <!-- Ambient Temp -->
+                <col style="width: 10%"> <!-- Remarks -->
+            </colgroup>
             <tr>
-                <td colspan="10">
+                <td colspan="12">
                     <div class="grid grid-cols-12 items-center gap-4">
                         <div class="col-span-2">
                             <span class="font-bold">S.No. {{data?.sr_no}}</span><br>
@@ -6822,172 +6836,187 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="10" class="text-sm">
+                <td colspan="12" style="font-size: 0.9em;">
                     Project:- Improvement and Up-gradation to Two Lane with paved shoulder configuration from existing
-                    km.90.00 to km.130.00(Design length 39.15) of NH- 227A (Sikriganj to Barhalganj) in the State of
+                    km.90.000 to km.130.000(Design length 39.15) of NH-227A (Sikriganj to Barhaiganj) in the State of
                     Uttar Pradesh on Engineering, Procurement & Construction (EPC) basis contract.
                 </td>
             </tr>
             <tr>
-                <td colspan="10">
-                    CLIENT:- Public Works Department, NH, Govt of Uttar Pradesh.
+                <td colspan="12" style="text-align: center;">
+                    <strong>CLIENT:- Public Works Department, NH, Govt of Uttar Pradesh.</strong>
                 </td>
             </tr>
             <tr>
-                <td colspan="10" class="center">
+                <td colspan="12"
+                    style="text-align: center; border-top: 1px solid black; border-bottom: 1px solid black;">
                     <h3>Concrete Pour Card</h3>
                 </td>
             </tr>
             <tr>
-                <td colspan="3">Name of Structure:</td>
-                <td colspan="3"><span style="padding-left: 10px">{{ data?.name_of_structure }}</span></td>
-                <td colspan="2">Date:</td>
-                <td colspan="2"><span style="padding-left: 10px">{{ data?.date }}</span></td>
+                <td colspan="6">Name of Structure: <span style="padding-left: 10px">{{ data?.work_name }}</span></td>
+                <td colspan="6">Date: <span style="padding-left: 10px">{{ data?.testing_date }}</span></td>
             </tr>
             <tr>
-                <td colspan="3">Location:</td>
-                <td colspan="7"><span style="padding-left: 10px">{{ data?.location }}</span></td>
+                <td colspan="6">Location:</td>
+                <td colspan="6">Concrete Grade:</td>
             </tr>
             <tr>
-                <td colspan="3">Parts of Structure:</td>
-                <td colspan="3"><span style="padding-left: 10px">{{ data?.parts_of_structure }}</span></td>
-                <td colspan="2">Concrete Grade:</td>
-                <td colspan="2"><span style="padding-left: 10px">{{ data?.concrete_grade }}</span></td>
+                <td colspan="6">Parts of Structure:</td>
+                <td colspan="6">W/C Ratio:</td>
             </tr>
             <tr>
-                <td colspan="3">W/C Ratio:</td>
-                <td colspan="7"><span style="padding-left: 10px">{{ data?.wc_ratio }}</span></td>
-            </tr>
-            <tr>
-                <td colspan="5" class="center">
+                <td colspan="6" style="text-align: center; padding-top: 10px;">
                     <h4>At RMC Plant</h4>
                 </td>
-                <td colspan="5" class="center">
+                <td colspan="6" style="text-align: center; padding-top: 10px;">
                     <h4>At Site</h4>
                 </td>
             </tr>
             <tr>
-                <th>Sl No.</th>
-                <th>TM No.</th>
-                <th>Dispatch Time</th>
-                <th>Concrete Qty (m³)</th>
-                <th>Cumulative Concrete Qty</th>
-                <th>Slump (MM)</th>
-                <th colspan="2">Pouring Time</th>
-                <th>No. of Cube Casted</th>
-                <th>Ambient Temp.(°C)</th>
-                <th>Remarks</th>
+                <th style="border-bottom: none;">SI No.</th>
+                <th style="border-bottom: none;">TM No.</th>
+                <th style="border-bottom: none;">Dispatch Time</th>
+                <th style="border-bottom: none;">Concrete Qty. (m³)</th>
+                <th style="border-bottom: none;">Cumulative Concrete Qty</th>
+                <th style="border-bottom: none;">Slump (MM)</th>
+                <th colspan="2">Pearing Time</th>
+                <th style="border-bottom: none;">Slump</th>
+                <th style="border-bottom: none;">No. of Cube Casted</th>
+                <th style="border-bottom: none;">Ambient Temp. (°c)</th>
+                <th style="border-bottom: none;">Remarks</th>
             </tr>
-            <!-- Dynamic rows -->
-            @for(item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; track item) {
             <tr>
-                <td>{{ item }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td>Starting</td>
+                <td>Ending</td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+            </tr>
+            @for(item of [1,2,3,4,5,6]; track item) {
+            <tr>
+                <td>{{ data['si_no' + item] }}</td>
+                <td>{{data['tm_no' + item]}}</td>
+                <td>{{data['dispatch_time' + item]}}</td>
+                <td>{{data['concrete_qty' + item]}}</td>
+                <td>{{data['cumulative' + item]}}</td>
+                <td>{{data['slump_mm' + item]}}</td>
+                <td>{{data['starting'+item]}}</td>
+                <td>{{data['ending'+item]}}</td>
+                <td>{{data['slump'+item]}}</td>
+                <td>{{data['casted' + item]}}</td>
+                <td>{{data['abient' + item]}}</td>
+                <td>{{data['remark' + item]}}</td>
             </tr>
             }
             <tr>
-                <td colspan="5">For Contractor</td>
-                <td colspan="5">For Client/Consultant</td>
+                <td colspan="12">
+                     Remarks:- <span style="padding-left: 10px">{{ data?.form26_remarks }}</span>
+                </td>
             </tr>
         </table>
     </div>
     }
     } @else {
     <div class="table-container">
-        <table class="mt-4">
+        <table>
+            <colgroup>
+                <col style="width: 5%">
+                <col style="width: 10%"> <!-- TM No. -->
+                <col style="width: 10%"> <!-- Dispatch Time -->
+                <col style="width: 10%"> <!-- Concrete Qty -->
+                <col style="width: 10%"> <!-- Cumulative Qty -->
+                <col style="width: 7%"> <!-- Slump -->
+                <col style="width: 7%"> <!-- Pearing Start -->
+                <col style="width: 7%"> <!-- Pearing End -->
+                <col style="width: 7%"> <!-- Sjump -->
+                <col style="width: 10%"> <!-- No. of Cubes -->
+                <col style="width: 7%"> <!-- Ambient Temp -->
+                <col style="width: 10%"> <!-- Remarks -->
+            </colgroup>
             <tr>
-                <td colspan="10" class="center">
+                <td colspan="12" style="text-align: center; border-bottom: 1px solid black;">
                     <h2>S&P INFRASTRUCTURE DEVELOPERS PVT. LTD.</h2>
-                    <h2>&</h2>
-                    <h2>BHARDWAJ UNIBUILD PVT. LTD. (JV)</h2>
+                    <h3>&</h3>
+                    <h3>BHARDWAJ UNIBUILD PVT. LTD. (JV)</h3>
                 </td>
             </tr>
             <tr>
-                <td colspan="10" class="text-sm">
+                <td colspan="12" style="font-size: 0.9em;">
                     Project:- Improvement and Up-gradation to Two Lane with paved shoulder configuration from existing
-                    km.90.00 to km.130.00(Design length 39.15) of NH- 227A (Sikriganj to Barhalganj) in the State of
+                    km.90.000 to km.130.000(Design length 39.15) of NH-227A (Sikriganj to Barhaiganj) in the State of
                     Uttar Pradesh on Engineering, Procurement & Construction (EPC) basis contract.
                 </td>
             </tr>
             <tr>
-                <td colspan="10">
-                    CLIENT:- Public Works Department, NH, Govt of Uttar Pradesh.
+                <td colspan="12">
+                    <strong>CLIENT:- Public Works Department, NH, Govt of Uttar Pradesh.</strong>
                 </td>
             </tr>
             <tr>
-                <td colspan="10" class="center">
+                <td colspan="12"
+                    style="text-align: center; border-top: 1px solid black; border-bottom: 1px solid black;">
                     <h3>Concrete Pour Card</h3>
                 </td>
             </tr>
-            <!-- Empty fields -->
             <tr>
-                <td colspan="3">Name of Structure:</td>
-                <td colspan="3"><span style="padding-left: 10px"></span></td>
-                <td colspan="2">Date:</td>
-                <td colspan="2"><span style="padding-left: 10px"></span></td>
+                <td colspan="6">Name of Structure:</td>
+                <td colspan="6">Date:</td>
             </tr>
             <tr>
-                <td colspan="3">Location:</td>
-                <td colspan="7"><span style="padding-left: 10px"></span></td>
+                <td colspan="6">Location:</td>
+                <td colspan="6">Concrete Grade:</td>
             </tr>
             <tr>
-                <td colspan="3">Parts of Structure:</td>
-                <td colspan="3"><span style="padding-left: 10px"></span></td>
-                <td colspan="2">Concrete Grade:</td>
-                <td colspan="2"><span style="padding-left: 10px"></span></td>
+                <td colspan="6">Parts of Structure:</td>
+                <td colspan="6">W/C Ratio:</td>
             </tr>
             <tr>
-                <td colspan="3">W/C Ratio:</td>
-                <td colspan="7"><span style="padding-left: 10px"></span></td>
-            </tr>
-            <tr>
-                <td colspan="5" class="center">
+                <td colspan="6" style="text-align: center; padding-top: 10px;">
                     <h4>At RMC Plant</h4>
                 </td>
-                <td colspan="5" class="center">
+                <td colspan="6" style="text-align: center; padding-top: 10px;">
                     <h4>At Site</h4>
                 </td>
             </tr>
             <tr>
-                <th>Sl No.</th>
-                <th>TM No.</th>
-                <th>Dispatch Time</th>
-                <th>Concrete Qty (m³)</th>
-                <th>Cumulative Concrete Qty</th>
-                <th>Slump (MM)</th>
-                <th colspan="2">Pouring Time</th>
-                <th>No. of Cube Casted</th>
-                <th>Ambient Temp.(°C)</th>
-                <th>Remarks</th>
+                <th style="border-bottom: none;">SI No.</th>
+                <th style="border-bottom: none;">TM No.</th>
+                <th style="border-bottom: none;">Dispatch Time</th>
+                <th style="border-bottom: none;">Concrete Qty. (m³)</th>
+                <th style="border-bottom: none;">Cumulative Concrete Qty</th>
+                <th style="border-bottom: none;">Slump (MM)</th>
+                <th colspan="2">Pearing Time</th>
+                <th style="border-bottom: none;">Slump</th>
+                <th style="border-bottom: none;">No. of Cube Casted</th>
+                <th style="border-bottom: none;">Ambient Temp. (°c)</th>
+                <th style="border-bottom: none;">Remarks</th>
             </tr>
-            <!-- Empty rows -->
-            @for(item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; track item) {
             <tr>
-                <td>{{ item }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td>Starting</td>
+                <td>Ending</td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
+                <td style="border-top: none;"></td>
             </tr>
-            }
             <tr>
-                <td colspan="5">For Contractor</td>
-                <td colspan="5">For Client/Consultant</td>
+                <td colspan="12">
+                     Remarks:- <span style="padding-left: 10px"></span>
+                </td>
             </tr>
         </table>
     </div>

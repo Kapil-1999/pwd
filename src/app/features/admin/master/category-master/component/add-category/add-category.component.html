@@ -21,6 +21,18 @@
                              Name is Required
                         </span>
                     </div>
+                     <div class="col-md-6 mb-2">
+                        <label class="form-label">Order No.</label>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control"  formControlName="order"
+                                placeholder="Enter Order No." aria-describedby="button-addon2" />
+                        </div>
+                        <span *ngIf="cateForm?.get('order')?.invalid &&
+                                    (cateForm?.get('order')?.dirty || cateForm?.get('order')?.touched)"
+                            class="text-danger">
+                             Order No. is Required
+                        </span>
+                    </div>
                     <div class="col-md-6 mb-2">
                         <label class="form-label">Status</label>
                         <select class="form-control" formControlName="status">
