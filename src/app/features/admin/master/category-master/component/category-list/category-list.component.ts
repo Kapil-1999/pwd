@@ -58,6 +58,7 @@ export class CategoryListComponent {
     this.columns = [
       { key: 'S No.', title: 'S No.', width: "5%" },
       { key: 'Category Name', title: 'Category Name' },
+      { key : 'order_no', title : 'Order'},
       { key: 'Status', title: 'Status', width: "5%" },
       { key: 'Action', title: 'Action', width: "10%" },
     ];

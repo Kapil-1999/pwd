@@ -70,6 +70,7 @@ export class CreateSubcategoryComponent {
       catId: [null, [Validators.required]],
       subcateName: ['', [Validators.required]],
       formCode : ['', [Validators.required]],
+      order : [null, [Validators.required]],
       status: [1, [Validators.required]]
     })
     if(this.editData) {
@@ -86,7 +87,8 @@ export class CreateSubcategoryComponent {
      this.selectedSub = res?.body?.result;
      this.subcateForm.patchValue({
       subcateName:this.selectedSub?.sub_category_name,
-      status: this.editData?.is_active
+      status: this.editData?.is_active,
+      order : this.editData?.order_no
     })
     this.getCateGory();
     this.getFormCodeList()
@@ -117,6 +119,7 @@ export class CreateSubcategoryComponent {
       "category_id": formvalue?.catId?.category_id,
       "category_name": formvalue?.catId?.category_name,
       "form_code": formvalue?.formCode ? Number(formvalue?.formCode?.value) : null,
+      "order_no" : formvalue?.order,
       "form_code_text":formvalue?.formCode ? formvalue?.formCode?.text : null,
       "is_active": formvalue?.status,
       "created_by": user?.user_id

@@ -60,6 +60,7 @@ export class SubcategoryListComponent {
       { key: 'Category Name', title: 'Category Name' },
       { key: 'Category Name', title: 'Subcategory Name' },
       {key:'Form Code', title: 'Form Code'},
+      { key : 'order_no', title : 'Order'},
       { key: 'Status', title: 'Status', width: "5%" },
       { key: 'Action', title: 'Action', width: "10%" },
     ];
