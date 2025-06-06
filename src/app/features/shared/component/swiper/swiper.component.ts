@@ -63,11 +63,11 @@ export class SwiperComponent {
       }
     });
 
-    this.store.select(setTypeUserOnMap).subscribe((res: any) => {
+    this.store.select(setTypeUserOnMap).subscribe((res: any) => {      
       if(res) {
         this.selectedAlert = res;
-      }
-      
+        this.formatUserData()
+      };      
      })
   }
 
@@ -80,14 +80,6 @@ export class SwiperComponent {
     this.JECount = this.vehicleStauts?.filter((res: any) => res?.designation_id == 6);
 
     this.status = [
-      // {
-      //   src: "/assets/icons/feather-alert-octagon.svg",
-      //   label: this.vehicleStauts?.length,
-      //   class: '#696969',
-      //   color: '#696969',
-      //   status: 'All',
-      //   data: this.vehicleStauts
-      // },
       {
         src: "/assets/icons/awesome-gas-pump.svg",
         label: this.CECount?.length,
