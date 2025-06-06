@@ -40,7 +40,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="11">Material Source Details:</td>
+                <td colspan="11" style="text-align: center;"><h3>Material Source Details:</h3></td>
             </tr>
             <tr>
                 <td colspan="6">
@@ -277,14 +277,6 @@
                 <td colspan="5">{{ data?.sd }}</td>
             </tr>
             <tr>
-                <td>6</td>
-                <td colspan="6">
-                    Acceptance Criteria (Mean > Required Compaction + [1.65-(1.65/(No. Of
-                    Samples)^0.5)]*SD)
-                </td>
-                <td colspan="5"></td>
-            </tr>
-            <tr>
                 <td colspan="11">
                     Remarks:
                     <span style="padding-left: 10px">{{ data?.form01_remarks }}</span>
@@ -318,7 +310,7 @@
                 <td colspan="5">Date: <span style="padding-left: 10px"></span></td>
             </tr>
             <tr>
-                <td colspan="11">Material Source Details:</td>
+                <td colspan="11" style="text-align: center;"><h3>Material Source Details:</h3></td>
             </tr>
             <tr>
                 <td colspan="6">
@@ -550,14 +542,6 @@
             <tr>
                 <td>5</td>
                 <td colspan="6">Standard Deviation, SD</td>
-                <td colspan="5"></td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td colspan="6">
-                    Acceptance Criteria (Mean > Required Compaction + [1.65-(1.65/(No. Of
-                    Samples)^0.5)]*SD)
-                </td>
                 <td colspan="5"></td>
             </tr>
             <tr>
@@ -847,30 +831,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
-                    Serial No.:
-                    <span style="padding-left: 10px">{{ data?.task_id }}</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Name Of Work:
-                    <span style="padding-left: 10px">{{ data?.work_name }}</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Name Of Contractor:
-                    <span style="padding-left: 10px">{{ data?.contract_name }}</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Contract Bond NO.:
-                    <span style="padding-left: 10px">{{ data?.contract_bond_no }}</span>
-                </td>
-            </tr>
-            <tr>
                 <td colspan="11" class="center">
                     <h2>Gradation Of Granular Sub Base</h2>
                 </td>
@@ -881,32 +841,34 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4">Source Of Material:</td>
-                <td colspan="7">
+                <td colspan="5">
+                    Serial No.:
+                    <span style="padding-left: 10px">{{ data?.task_id }}</span>
+                </td>
+                <td colspan="6">
+                    Name Of Work:
+                    <span style="padding-left: 10px">{{ data?.work_name }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    Name Of Contractor:
+                    <span style="padding-left: 10px">{{ data?.contract_name }}</span>
+                </td>
+                <td colspan="6">
+                    Contract Bond NO.:
+                    <span style="padding-left: 10px">{{ data?.contract_bond_no }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
                     Date Of Sampling:
                     <span style="padding-left: 10px">{{ data?.sampling_date }}</span>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    Sampling Location:
-                    <span style="padding-left: 10px">{{ data?.sampling_location }}</span>
-                </td>
-                <td colspan="7">
+                <td colspan="6">
                     Date Of Testing:
                     <span style="padding-left: 10px">{{ data?.testing_date }}</span>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="4">Sample Description:</td>
-                <td colspan="7">
-                    Date Of Result:
-                    <span style="padding-left: 10px">{{ data?.date_of_result }}</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">Sampled By:</td>
-                <td colspan="7">Thickness Of Layer:</td>
             </tr>
             <tr>
                 <td colspan="11">Total Wt.of Sample: {{ data?.sample_wt }}</td>
@@ -1002,15 +964,6 @@
                 <td>{{data?.aggregates_0}}</td>
             </tr>
             <tr>
-                <td>PAN</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
                 <td colspan="11">Remark: {{ data?.form03_remarks }}</td>
             </tr>
         </table>
@@ -1020,8 +973,18 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="11" class="center">
-                    <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                <td colspan="11">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. </span><br>
+                            <span class="font-bold">Created On: </span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -1035,26 +998,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
-                    Serial No.: <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Name Of Work: <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Name Of Contractor: <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Contract Bond NO.: <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
                 <td colspan="11" class="center">
                     <h2>Gradation Of Granular Sub Base</h2>
                 </td>
@@ -1065,31 +1008,37 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4">Source Of Material:</td>
-                <td colspan="7">
-                    Date Of Sampling: <span style="padding-left: 10px"></span>
+                <td colspan="5">
+                    Serial No.:
+                    <span style="padding-left: 10px"></span>
+                </td>
+                <td colspan="6">
+                    Name Of Work:
+                    <span style="padding-left: 10px"></span>
                 </td>
             </tr>
             <tr>
-                <td colspan="4">
-                    Sampling Location: <span style="padding-left: 10px"></span>
+                <td colspan="5">
+                    Name Of Contractor:
+                    <span style="padding-left: 10px"></span>
                 </td>
-                <td colspan="7">
-                    Date Of Testing: <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">Sample Description:</td>
-                <td colspan="7">
-                    Date Of Result: <span style="padding-left: 10px"></span>
+                <td colspan="6">
+                    Contract Bond NO.:
+                    <span style="padding-left: 10px"></span>
                 </td>
             </tr>
             <tr>
-                <td colspan="4">Sampled By:</td>
-                <td colspan="7">Thickness Of Layer:</td>
+                <td colspan="5">
+                    Date Of Sampling:
+                    <span style="padding-left: 10px"></span>
+                </td>
+                <td colspan="6">
+                    Date Of Testing:
+                    <span style="padding-left: 10px"></span>
+                </td>
             </tr>
             <tr>
-                <td colspan="11">Total Wt.of Sample:</td>
+                <td colspan="11">Total Wt.of Sample: </td>
             </tr>
             <tr>
                 <td colspan="11" class="center">
@@ -1182,15 +1131,6 @@
                 <td></td>
             </tr>
             <tr>
-                <td>PAN</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
                 <td colspan="11">Remark:</td>
             </tr>
         </table>
@@ -1217,16 +1157,21 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4">Location of Lab:</td>
-                <td colspan="7">Date of Sampling: <span style="padding-left: 10px">{{data?.sampling_date}}</span></td>
+                <td colspan="4">Name Of Work: <span style="padding-left: 10px">{{data?.work_name}}</span></td>
+                <td colspan="7">Chainage: <span style="padding-left: 10px">{{data?.chainage}}</span></td>
             </tr>
             <tr>
-                <td colspan="4">Location/Chainage: <span style="padding-left: 10px">{{data?.chainage}}</span></td>
-                <td colspan="7">Source of Material: <span style="padding-left: 10px"></span></td>
+                <td colspan="4">Name of Contractor: <span style="padding-left: 10px">{{data?.contract_name}}</span></td>
+                <td colspan="7">Contract Bond No.: <span style="padding-left: 10px">{{data?.contract_bond_no}}</span>
+                </td>
+
             </tr>
             <tr>
                 <td colspan="4">Date of Testing: <span style="padding-left: 10px">{{data?.testing_date}}</span></td>
-                <td colspan="7">Total wt. of sample (g): <span style="padding-left: 10px">{{data?.sample_wt}}</span>
+                <td colspan="7">Date of Sampling: <span style="padding-left: 10px">{{data?.sampling_date}}</span></td>
+            </tr>
+            <tr>
+                <td colspan="11">Total wt. of sample (g): <span style="padding-left: 10px">{{data?.sample_wt}}</span>
                 </td>
             </tr>
             <tr>
@@ -1318,9 +1263,6 @@
                 <td>0-10</td>
             </tr>
             <tr>
-                <td colspan="8">FINENESS MODULUS: </td>
-            </tr>
-            <tr>
                 <td colspan="8">Remarks: {{data?.form04_remarks}}</td>
             </tr>
         </table>
@@ -1330,21 +1272,36 @@
     <div class="table-container">
         <table class="mt-4">
             <tr>
-                <td colspan="11" class="center">
-                    <h2>SIEVE ANALYSIS OF FINE AGGREGATE</h2>
+                <td colspan="11">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. </span><br>
+                            <span class="font-bold">Created On: </span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">SIEVE ANALYSIS OF FINE AGGREGATE</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
-                <td colspan="4">Location of Lab:</td>
-                <td colspan="7">Date of Sampling:</td>
+                <td colspan="4">Name Of Work: <span style="padding-left: 10px"></span></td>
+                <td colspan="7">Chainage: <span style="padding-left: 10px"></span></td>
             </tr>
             <tr>
-                <td colspan="4">Location/Chainage:</td>
-                <td colspan="7">Source of Material:</td>
+                <td colspan="4">Name of Contractor: <span style="padding-left: 10px"></span></td>
+                <td colspan="7">Contract Bond No.: <span style="padding-left: 10px"></span></td>
+
             </tr>
             <tr>
-                <td colspan="4">Date of Testing:</td>
-                <td colspan="7">Total wt. of sample (g):</td>
+                <td colspan="4">Date of Testing: <span style="padding-left: 10px"></span></td>
+                <td colspan="7">Date of Sampling: <span style="padding-left: 10px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="11">Total wt. of sample (g): <span style="padding-left: 10px"></span>
+                </td>
             </tr>
             <tr>
                 <th style="width: 15%">IS Sieve Size (mm)</th>
@@ -1435,9 +1392,6 @@
                 <td>0-10</td>
             </tr>
             <tr>
-                <td colspan="8">FINENESS MODULUS:</td>
-            </tr>
-            <tr>
                 <td colspan="8">Remarks:</td>
             </tr>
         </table>
@@ -1476,26 +1430,29 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
-                    Serial No.:
-                    <span style="padding-left: 10px"></span>
+                <td colspan="4">Name of Work: <span style="padding-left: 10px">{{data?.work_name}}</span></td>
+                <td colspan="7">
+                    Chainage:
+                    <span style="padding-left: 10px">{{data?.chainage}}</span>
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
-                    Name Of Work:
-                    <span style="padding-left: 10px">{{data?.work_name}}</span>
+                <td colspan="4">
+                    Date Of Sampling:
+                    <span style="padding-left: 10px">{{data?.sampling_date}}</span>
+                </td>
+                <td colspan="7">
+                    Date Of Testing:
+                    <span style="padding-left: 10px">{{data?.testing_date}}</span>
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
+                <td colspan="4">
                     Name Of Contractor:
                     <span style="padding-left: 10px">{{data?.contract_name}}</span>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Contract Bond NO.:
+                <td colspan="7">
+                    Contract Bond No.:
                     <span style="padding-left: 10px">{{data?.contract_bond_no}}</span>
                 </td>
             </tr>
@@ -1509,33 +1466,7 @@
                     <h2>(IS:2720(Part V))</h2>
                 </td>
             </tr>
-            <tr>
-                <td colspan="4">Type Of Material:</td>
-                <td colspan="7">
-                    Date Of Sampling:
-                    <span style="padding-left: 10px">{{data?.sampling_date}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    Sampling Location:
-                    <span style="padding-left: 10px"></span>
-                </td>
-                <td colspan="7">
-                    Date Of Testing:
-                    <span style="padding-left: 10px">{{data?.testing_date}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">Sample Description:</td>
-                <td colspan="7">
-                    Date Of Result:
-                    <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">Sampled By:</td>
-            </tr>
+
             <tr>
                 <td colspan="11" class="text-center">
                     <h3>Determination of Liquid Limit(LL)</h3>
@@ -1727,8 +1658,18 @@
     <div class="table-containere">
         <table class="mt-4">
             <tr>
-                <td colspan="11" class="center">
-                    <h2>UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                <td colspan="11">
+                    <div class="grid grid-cols-12 items-center gap-4">
+                        <div class="col-span-2">
+                            <span class="font-bold">S.No. </span><br>
+                            <span class="font-bold">Created On:</span>
+                        </div>
+                        <div class="col-span-8">
+                            <h2 class="text-center mb-0">UTTAR PRADESH PUBLIC WORK DEPARTMENT</h2>
+                        </div>
+                        <div class="col-span-2">
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -1742,26 +1683,29 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
-                    Serial No.:
+                <td colspan="4">Name of Work: <span style="padding-left: 10px"></span></td>
+                <td colspan="7">
+                    Chainage:
                     <span style="padding-left: 10px"></span>
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
-                    Name Of Work:
+                <td colspan="4">
+                    Date Of Sampling:
+                    <span style="padding-left: 10px"></span>
+                </td>
+                <td colspan="7">
+                    Date Of Testing:
                     <span style="padding-left: 10px"></span>
                 </td>
             </tr>
             <tr>
-                <td colspan="11">
+                <td colspan="4">
                     Name Of Contractor:
                     <span style="padding-left: 10px"></span>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    Contract Bond NO.:
+                <td colspan="7">
+                    Contract Bond No.:
                     <span style="padding-left: 10px"></span>
                 </td>
             </tr>
@@ -1775,32 +1719,11 @@
                     <h2>(IS:2720(Part V))</h2>
                 </td>
             </tr>
+
             <tr>
-                <td colspan="4">Type Of Material:</td>
-                <td colspan="7">
-                    Date Of Sampling:
-                    <span style="padding-left: 10px"></span>
+                <td colspan="11" class="text-center">
+                    <h3>Determination of Liquid Limit(LL)</h3>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    Sampling Location:
-                    <span style="padding-left: 10px"></span>
-                </td>
-                <td colspan="7">
-                    Date Of Testing:
-                    <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">Sample Description:</td>
-                <td colspan="7">
-                    Date Of Result:
-                    <span style="padding-left: 10px"></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="11">Sampled By:</td>
             </tr>
             <tr>
                 <td colspan="11">
@@ -2016,30 +1939,28 @@
             </td>
         </tr>
         <tr>
-            <th colspan="3">
-                <h4 class="text-2xl">PROJECT</h4>
-            </th>
-            <td colspan="4">{{ data?.work_name }}</td>
+            <td colspan="3">
+                Name of Work : <span style="padding-left: 10px;">{{data?.work_name}}</span>
+            </td>
+            <td colspan="4">
+                Chainage : <span style="padding-left: 10px;">{{data?.chainage}}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Type Of Sample</td>
-            <td colspan="4">(Rock sample/Aggregate)</td>
+            <td colspan="3">
+                Name of Contractor : <span style="padding-left: 10px;">{{data?.contract_name}}</span>
+            </td>
+            <td colspan="4">
+                Contract Bond no. : <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Sample Location</td>
-            <td colspan="4"></td>
-        </tr>
-        <tr>
-            <td colspan="3">Co-ordinate Chainage</td>
-            <td colspan="4">{{ data?.chainage }}</td>
-        </tr>
-        <tr>
-            <td colspan="3">Date Of Sampling</td>
-            <td colspan="4">{{ data?.sampling_date }}</td>
-        </tr>
-        <tr>
-            <td colspan="3">Date Of Testing</td>
-            <td colspan="4">{{ data?.testing_date }}</td>
+            <td colspan="3">
+                Date Of Sampling : <span style="padding-left: 10px;">{{data?.testing_date}}</span>
+            </td>
+            <td colspan="4">
+                Date Of Testing : <span style="padding-left: 10px;">{{data?.sampling_date}}</span>
+            </td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -2175,30 +2096,28 @@
             </td>
         </tr>
         <tr>
-            <th colspan="3">
-                <h4 class="text-2xl">PROJECT</h4>
-            </th>
-            <td colspan="4"></td>
+            <td colspan="3">
+                Name of Work : <span style="padding-left: 10px;"></span>
+            </td>
+            <td colspan="4">
+                Chainage : <span style="padding-left: 10px;"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Type Of Sample</td>
-            <td colspan="4">(Rock Sample/Aggregate)</td>
+            <td colspan="3">
+                Name of Contractor : <span style="padding-left: 10px;"></span>
+            </td>
+            <td colspan="4">
+                Contract Bond no. : <span style="padding-left: 10px;"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Sample Location</td>
-            <td colspan="4"></td>
-        </tr>
-        <tr>
-            <td colspan="3">Co-ordinate Chainage</td>
-            <td colspan="4"></td>
-        </tr>
-        <tr>
-            <td colspan="3">Date Of Sampling</td>
-            <td colspan="4"></td>
-        </tr>
-        <tr>
-            <td colspan="3">Date Of Testing</td>
-            <td colspan="4"></td>
+            <td colspan="3">
+                Date Of Sampling : <span style="padding-left: 10px;"></span>
+            </td>
+            <td colspan="4">
+                Date Of Testing : <span style="padding-left: 10px;"></span>
+            </td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -2341,14 +2260,19 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7">
-                Sr No.: <span class="data">{{ i + 1 }}</span>
+            <td colspan="3">
+                Name of Work: <span class="data">{{ data?.work_name}}</span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data">{{data?.chainage}}</span>
             </td>
         </tr>
         <tr>
-            <td colspan="3">Section/Location of Lab:</td>
-            <td colspan="4">
+            <td colspan="3">
                 Date Of Sampling: <span class="data">{{ data?.sampling_date }}</span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data">{{ data?.testing_date }}</span>
             </td>
         </tr>
         <tr>
@@ -2356,11 +2280,6 @@
                 Contractor Name: <span class="data">{{ data?.contract_name }}</span>
             </td>
             <td colspan="4">
-                Date Of Testing: <span class="data">{{ data?.testing_date }}</span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="7">
                 Contract Bond No.:
                 <span class="data">{{ data?.contract_bond_no }}</span>
             </td>
@@ -2455,19 +2374,29 @@
             </td>
         </tr>
         <tr>
-            <td colspan="5">Sr No.: 1</td>
-            <td colspan="2" class="center">Date:</td>
+            <td colspan="3">
+                Name of Work: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Section/Location of Lab:</td>
-            <td colspan="4">Date Of Sampling:</td>
+            <td colspan="3">
+                Date Of Sampling: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Contractor Name:</td>
-            <td colspan="4">Date Of Testing:</td>
-        </tr>
-        <tr>
-            <td colspan="7">Contract Bond No.:</td>
+            <td colspan="3">
+                Contractor Name: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data"></span>
+            </td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -2568,19 +2497,16 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7">
-                Sr No.: <span class="data">{{ i + 1 }}</span>
+            <td colspan="3">
+                Name of Work: <span class="data">{{ data?.work_name}}</span>
             </td>
-        </tr>
-        <tr>
-            <td colspan="3">Section/Location of Lab:</td>
             <td colspan="4">
-                Date Of Sampling: <span class="data">{{ data?.sampling_date }}</span>
+                Chainage: <span class="data">{{data?.chainage}}</span>
             </td>
         </tr>
         <tr>
             <td colspan="3">
-                Contractor Name: <span class="data">{{ data?.contract_name }}</span>
+                Date Of Sampling: <span class="data">{{ data?.sampling_date }}</span>
             </td>
             <td colspan="4">
                 Date Of Testing: <span class="data">{{ data?.testing_date }}</span>
@@ -2588,10 +2514,12 @@
         </tr>
         <tr>
             <td colspan="3">
+                Contractor Name: <span class="data">{{ data?.contract_name }}</span>
+            </td>
+            <td colspan="4">
                 Contract Bond No.:
                 <span class="data">{{ data?.contract_bond_no }}</span>
             </td>
-            <td colspan="4"></td>
         </tr>
         <tr>
             <th colspan="3" style="border-bottom: none; width: 60%">Determination</th>
@@ -2673,20 +2601,29 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date:</td>
+            <td colspan="3">
+                Name of Work: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Section/Location of Lab:</td>
-            <td colspan="4">Date Of Sampling:</td>
+            <td colspan="3">
+                Date Of Sampling: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Contractor Name:</td>
-            <td colspan="4">Date Of Testing:</td>
-        </tr>
-        <tr>
-            <td colspan="3">Contract Bond No.:</td>
-            <td colspan="4"></td>
+            <td colspan="3">
+                Contractor Name: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data"></span>
+            </td>
         </tr>
         <tr>
             <th colspan="3" style="border-bottom: none; width: 60%">Determination</th>
@@ -2779,24 +2716,37 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7">Section/Location of Lab:</td>
+            <td colspan="3">
+                Name of Work: <span class="data">{{ data?.work_name}}</span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data">{{data?.chainage}}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Description of cement :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
-            <td colspan="4">Sample Code :-</td>
+            <td colspan="3">
+                Date Of Sampling: <span class="data">{{ data?.sampling_date }}</span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data">{{ data?.testing_date }}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Week No. :- </td>
-            <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
+            <td colspan="3">
+                Contractor Name: <span class="data">{{ data?.contract_name }}</span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data">{{ data?.contract_bond_no }}</span>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Temperature (°C). :- <span style="padding-left: 20px;">{{data?.temperature}}</span></td>
-            <td colspan="4">Date Of Testing :- <span style="padding-left: 20px;">{{data?.testing_date}}</span></td>
+            <td colspan="4">Quantity of Water Added (0.78*Standard Consistency) :- <span
+                    style="padding-left: 20px;">{{data?.quantity_water}}</span></td>
         </tr>
         <tr>
-            <td colspan="3">Quantity of Water Added (0.78*Standard Consistency) :- <span
-                    style="padding-left: 20px;">{{data?.quantity_water}}</span></td>
-            <td colspan="4">Quantity of Cement Added :- <span
+            <td colspan="7">Quantity of Cement Added :- <span
                     style="padding-left: 20px;">{{data?.quantity_cement}}</span> </td>
         </tr>
         <tr>
@@ -2865,23 +2815,37 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7">Section/Location of Lab:</td>
+            <td colspan="3">
+                Name of Work: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Description of cement :- <span style="padding-left: 20px;"></span></td>
-            <td colspan="4">Sample Code :-</td>
+            <td colspan="3">
+                Date Of Sampling: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Week No. :- <span style="padding-left: 20px;"></span></td>
-            <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;"></span></td>
+            <td colspan="3">
+                Contractor Name: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data"></span>
+            </td>
         </tr>
         <tr>
             <td colspan="3">Temperature (°C). :- <span style="padding-left: 20px;"></span></td>
-            <td colspan="4">Date Of Testing :- <span style="padding-left: 20px;"></span></td>
+            <td colspan="4">Quantity of Water Added (0.78*Standard Consistency) :- <span
+                    style="padding-left: 20px;"></span></td>
         </tr>
         <tr>
-            <td colspan="3">Quantity of Water Added (0.78*Standard Consistency) :-</td>
-            <td colspan="4">Quantity of Cement Added :-</td>
+            <td colspan="7">Quantity of Cement Added :- <span style="padding-left: 20px;"></span> </td>
         </tr>
         <tr>
             <td colspan="7">
@@ -2961,10 +2925,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.: </td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
@@ -2974,7 +2934,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="7">
@@ -2982,12 +2942,12 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 10%">S.No.</td>
-            <td style="width: 20%">Weight of Cement taken(g)</td>
-            <td style="width: 20%">Weight of Water taken(g)</td>
-            <td style="width: 20%">Plunger penetration from bottom of Mould(mm)</td>
-            <td style="width: 20%">Time taken from adding of water to Cement(min)</td>
-            <td style="width: 10%">Consistency of Cement(%)</td>
+            <th style="width: 10%">S.No.</th>
+            <th style="width: 20%">Weight of Cement taken(g)</th>
+            <th style="width: 20%">Weight of Water taken(g)</th>
+            <th style="width: 20%">Plunger penetration from bottom of Mould(mm)</th>
+            <th style="width: 20%">Time taken from adding of water to Cement(min)</th>
+            <th style="width: 10%">Consistency of Cement(%)</th>
         </tr>
         <tr>
             <td>1</td>
@@ -3047,10 +3007,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :-</td>
             <td colspan="4">Date Of Sampling :-</td>
         </tr>
@@ -3060,7 +3016,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Chainage :-</td>
         </tr>
         <tr>
             <td colspan="7">
@@ -3068,12 +3024,12 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 10%">S.No.</td>
-            <td style="width: 20%">Weight of Cement taken(g)</td>
-            <td style="width: 20%">Weight of Water taken(g)</td>
-            <td style="width: 20%">Plunger penetration from bottom of Mould(mm)</td>
-            <td style="width: 20%">Time taken from adding of water to Cement(min)</td>
-            <td style="width: 10%">Consistency of Cement(%)</td>
+            <th style="width: 10%">S.No.</th>
+            <th style="width: 20%">Weight of Cement taken(g)</th>
+            <th style="width: 20%">Weight of Water taken(g)</th>
+            <th style="width: 20%">Plunger penetration from bottom of Mould(mm)</th>
+            <th style="width: 20%">Time taken from adding of water to Cement(min)</th>
+            <th style="width: 10%">Consistency of Cement(%)</th>
         </tr>
         <tr>
             <td>1</td>
@@ -3144,20 +3100,16 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="4">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span> </td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
         <tr>
-            <td colspan="4">Contractor :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
+            <td colspan="4">Contractor :- <span style="padding-left: 20px;">{{data?.contract_name}}</span></td>
             <td colspan="4">Date Of Testing :- <span style="padding-left: 20px;">{{data?.testing_date}}</span></td>
         </tr>
         <tr>
             <td colspan="4">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="4">
@@ -3249,10 +3201,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="4">Name Of Work :-</td>
             <td colspan="4">Date Of Sampling :-</td>
         </tr>
@@ -3262,7 +3210,7 @@
         </tr>
         <tr>
             <td colspan="4">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Chainage :-</td>
         </tr>
         <tr>
             <td colspan="4">
@@ -3366,10 +3314,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.: 1</td>
-            <td colspan="4" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
@@ -3379,7 +3323,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="7">
@@ -3440,10 +3384,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.: 1</td>
-            <td colspan="4" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :-</td>
             <td colspan="4">Date Of Sampling :-</td>
         </tr>
@@ -3453,7 +3393,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Chainage :-</td>
         </tr>
         <tr>
             <td colspan="7">
@@ -3527,10 +3467,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="5">Sr No.:</td>
-            <td colspan="5" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="5">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span> </td>
             <td colspan="5">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
@@ -3540,7 +3476,7 @@
         </tr>
         <tr>
             <td colspan="5">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="5">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="5">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th style="width: 10%">Sample No.</th>
@@ -3625,10 +3561,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="5">Sr No.:</td>
-            <td colspan="5" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="5">Name Of Work :-</td>
             <td colspan="5">Date Of Sampling :-</td>
         </tr>
@@ -3638,7 +3570,7 @@
         </tr>
         <tr>
             <td colspan="5">Bond No. :-</td>
-            <td colspan="5">Source :-</td>
+            <td colspan="5">Chainage :-</td>
         </tr>
         <tr>
             <th style="width: 10%">Sample No.</th>
@@ -3720,10 +3652,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
@@ -3733,7 +3661,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th style="width: 10%; border-bottom: none">SI no.</th>
@@ -3809,10 +3737,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :-</td>
             <td colspan="4">Date Of Sampling :-</td>
         </tr>
@@ -3822,7 +3746,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Chainage :-</td>
         </tr>
         <tr>
             <th style="width: 10%; border-bottom: none">SI no.</th>
@@ -3911,28 +3835,34 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date:</td>
-        </tr>
-        <tr>
-            <td colspan="7">NAME OF WORK :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
-        </tr>
-        <tr>
-            <td colspan="7">NAME OF CONTRACTOR :- <span style="padding-left: 20px;">{{data?.contract_name}}</span></td>
-        </tr>
-        <tr>
-            <td colspan="3">CONTRACT BOND NO. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span>
+            <td colspan="3">
+                Name of Work: <span class="data">{{ data?.work_name}}</span>
             </td>
-            <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="4">
+                Chainage: <span class="data">{{data?.chainage}}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
-            <td colspan="4">Date Of Testing :- <span style="padding-left: 20px;">{{data?.testing_date}}</span></td>
+            <td colspan="3">
+                Date Of Sampling: <span class="data">{{ data?.sampling_date }}</span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data">{{ data?.testing_date }}</span>
+            </td>
         </tr>
         <tr>
-            <td style="width: 10%">SI. No.</td>
-            <td style="width: 45%">Particulars</td>
-            <td colspan="5" style="width: 45%">Test</td>
+            <td colspan="3">
+                Contractor Name: <span class="data">{{ data?.contract_name }}</span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data">{{ data?.contract_bond_no }}</span>
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 10%">SI. No.</th>
+            <th style="width: 45%">Particulars</th>
+            <th colspan="5" style="width: 45%">Test</th>
         </tr>
         <tr>
             <td style="width: 10%; border-top: none"></td>
@@ -3996,27 +3926,34 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date:</td>
+            <td colspan="3">
+                Name of Work: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="7">NAME OF WORK :-</td>
+            <td colspan="3">
+                Date Of Sampling: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="7">NAME OF CONTRACTOR :-</td>
+            <td colspan="3">
+                Contractor Name: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">CONTRACT BOND NO. :-</td>
-            <td colspan="4">Chainage :-</td>
-        </tr>
-        <tr>
-            <td colspan="3">Date Of Sampling :-</td>
-            <td colspan="4">Date Of Testing :-</td>
-        </tr>
-        <tr>
-            <td style="width: 10%">SI. No.</td>
-            <td style="width: 45%">Particulars</td>
-            <td colspan="5" style="width: 45%">Test</td>
+            <th style="width: 10%">SI. No.</th>
+            <th style="width: 45%">Particulars</th>
+            <th colspan="5" style="width: 45%">Test</th>
         </tr>
         <tr>
             <td style="width: 10%; border-top: none"></td>
@@ -4085,10 +4022,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :- <span style="padding-left: 10px">{{data?.work_name}}</span></td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px">{{data?.sampling_date}}</span></td>
         </tr>
@@ -4098,7 +4031,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 10px">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 10px">{{data?.chainage}}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 10px">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th style="width: 45%;border-bottom:none">Description</th>
@@ -4183,10 +4116,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :-</td>
             <td colspan="4">Date Of Sampling :-</td>
         </tr>
@@ -4196,7 +4125,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Chainage :-</td>
         </tr>
         <tr>
             <th style="width: 45%;border-bottom:none">Description</th>
@@ -4284,27 +4213,41 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Name of Work: <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
-            <td colspan="4" class="right">Contract Bond No.: <span
-                    style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
+            <td colspan="3">
+                Name of Work: <span class="data">{{ data?.work_name}}</span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data">{{data?.chainage}}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="4">Date of Inspection : <span style="padding-left: 20px;">{{data?.testing_date}}</span></td>
-            <td colspan="4">Pit Size :</td>
-
+            <td colspan="3">
+                Date Of Sampling: <span class="data">{{ data?.sampling_date }}</span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data">{{ data?.testing_date }}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Thickness :</td>
-            <td colspan="4">Total wt. of Sample : <span style="padding-left: 20px;">{{data?.sample_wt}}</span></td>
+            <td colspan="3">
+                Contractor Name: <span class="data">{{ data?.contract_name }}</span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data">{{ data?.contract_bond_no }}</span>
+            </td>
         </tr>
         <tr>
-            <td style="width: 10%;">Sr. No.</td>
-            <td style="width: 10%;">IS Sieve Designation</td>
-            <td style="width: 15% ;">Wt. of Sample Retained(gm)</td>
-            <td style="width: 15%">% of wt. retained</td>
-            <td style="width: 15%">Cummulative % of wt. retained</td>
-            <td style="width: 15%">% of wt. passing</td>
-            <td style="width: 15%">perscribed Limit(%)</td>
+            <td colspan="7">Total wt. of Sample : <span style="padding-left: 20px;">{{data?.sample_wt}}</span></td>
+        </tr>
+        <tr>
+            <th style="width: 10%;">Sr. No.</th>
+            <th style="width: 10%;">IS Sieve Designation</th>
+            <th style="width: 15% ;">Wt. of Sample Retained(gm)</th>
+            <th style="width: 15%">% of wt. retained</th>
+            <th style="width: 15%">Cummulative % of wt. retained</th>
+            <th style="width: 15%">% of wt. passing</th>
+            <th style="width: 15%">perscribed Limit(%)</th>
         </tr>
         <tr>
             <td>1</td>
@@ -4352,16 +4295,6 @@
             <td>0-5</td>
         </tr>
         <tr>
-            <td></td>
-            <td>Total</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-        </tr>
-        <tr>
             <td colspan="11" class="center">
                 <h4>Screeing (Type-B)</h4>
             </td>
@@ -4370,13 +4303,13 @@
             <td colspan="11">
                 <table>
                     <tr>
-                        <td style="width: 10%;">Sr. No.</td>
-                        <td style="width: 10%;">IS Sieve Designation</td>
-                        <td style="width: 15% ;">Wt. of Sample Retained(gm)</td>
-                        <td style="width: 15%">% of wt. retained</td>
-                        <td style="width: 15%">Cummulative % of wt. retained</td>
-                        <td style="width: 15%">% of wt. passing</td>
-                        <td style="width: 15%">perscribed Limit(%)</td>
+                        <th style="width: 10%;">Sr. No.</th>
+                        <th style="width: 10%;">IS Sieve Designation</th>
+                        <th style="width: 15% ;">Wt. of Sample Retained(gm)</th>
+                        <th style="width: 15%">% of wt. retained</th>
+                        <th style="width: 15%">Cummulative % of wt. retained</th>
+                        <th style="width: 15%">% of wt. passing</th>
+                        <th style="width: 15%">perscribed Limit(%)</th>
                     </tr>
                     <tr>
                         <td>1</td>
@@ -4405,15 +4338,6 @@
                         <td>{{data?.passing_wt_180}}</td>
                         <td>15-35</td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td>Total</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                 </table>
             </td>
         </tr>
@@ -4425,34 +4349,46 @@
     @if(!areaPlotForm?.length) {
     <table class="mt-4">
         <tr>
-            <td colspan="7" class="center">
-                <h2>G2/G3 Aggregate /Screening</h2>
+            <td colspan="7">
+                <h2 class="text-center mb-0">G2/G3 Aggregate /Screening</h2>
             </td>
         </tr>
         <tr>
-            <td colspan="3">Name of Road:</td>
-            <td colspan="4" class="right">Contract Bond No.:</td>
+            <td colspan="3">
+                Name of Work: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Chainage: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="4">Date of Inspection :</td>
-            <td colspan="4">Pit Size :</td>
-
+            <td colspan="3">
+                Date Of Sampling: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Date Of Testing: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="7">CONTRACT BOND NO. :</td>
+            <td colspan="3">
+                Contractor Name: <span class="data"></span>
+            </td>
+            <td colspan="4">
+                Contract Bond No.:
+                <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="3">Thickness :</td>
-            <td colspan="4">Total wt. of Sample :</td>
+            <td colspan="7">Total wt. of Sample : <span style="padding-left: 20px;"></span></td>
         </tr>
         <tr>
-            <td style="width: 10%;">Sr. No.</td>
-            <td style="width: 10%;">IS Sieve Designation</td>
-            <td style="width: 15% ;">Wt. of Sample Retained(gm)</td>
-            <td style="width: 15%">% of wt. retained</td>
-            <td style="width: 15%">Cummulative % of wt. retained</td>
-            <td style="width: 15%">% of wt. passing</td>
-            <td style="width: 15%">perscribed Limit(%)</td>
+            <th style="width: 10%;">Sr. No.</th>
+            <th style="width: 10%;">IS Sieve Designation</th>
+            <th style="width: 15% ;">Wt. of Sample Retained(gm)</th>
+            <th style="width: 15%">% of wt. retained</th>
+            <th style="width: 15%">Cummulative % of wt. retained</th>
+            <th style="width: 15%">% of wt. passing</th>
+            <th style="width: 15%">perscribed Limit(%)</th>
         </tr>
         <tr>
             <td>1</td>
@@ -4518,13 +4454,13 @@
             <td colspan="11">
                 <table>
                     <tr>
-                        <td style="width: 10%;">Sr. No.</td>
-                        <td style="width: 10%;">IS Sieve Designation</td>
-                        <td style="width: 15% ;">Wt. of Sample Retained(gm)</td>
-                        <td style="width: 15%">% of wt. retained</td>
-                        <td style="width: 15%">Cummulative % of wt. retained</td>
-                        <td style="width: 15%">% of wt. passing</td>
-                        <td style="width: 15%">perscribed Limit(%)</td>
+                        <th style="width: 10%;">Sr. No.</th>
+                        <th style="width: 10%;">IS Sieve Designation</th>
+                        <th style="width: 15% ;">Wt. of Sample Retained(gm)</th>
+                        <th style="width: 15%">% of wt. retained</th>
+                        <th style="width: 15%">Cummulative % of wt. retained</th>
+                        <th style="width: 15%">% of wt. passing</th>
+                        <th style="width: 15%">perscribed Limit(%)</th>
                     </tr>
                     <tr>
                         <td>1</td>
@@ -4597,10 +4533,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">Sr No.:</td>
-                <td colspan="4" class="right">Date: </td>
-            </tr>
-            <tr>
                 <td colspan="3">Name Of Work :- <span style="padding-left: 10px;">{{data?.work_name}}</span></td>
                 <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px;">{{data?.sampling_date}}</span>
                 </td>
@@ -4611,7 +4543,7 @@
             </tr>
             <tr>
                 <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span></td>
-                <td colspan="4">Source :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
+                <td colspan="4">Chainage :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
             </tr>
             <tr>
                 <td colspan="2">IS-Sieve Size mm</td>
@@ -4738,10 +4670,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">Sr No.:</td>
-                <td colspan="4" class="right">Date: </td>
-            </tr>
-            <tr>
                 <td colspan="3">Name Of Work :-</td>
                 <td colspan="4">Date Of Sampling :-</td>
             </tr>
@@ -4751,7 +4679,7 @@
             </tr>
             <tr>
                 <td colspan="3">Bond No. :-</td>
-                <td colspan="4">Source :-</td>
+                <td colspan="4">Chainage :-</td>
             </tr>
             <tr>
                 <td colspan="2">IS-Sieve Size mm</td>
@@ -4896,10 +4824,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4">Sr No.: <span style="padding-left: 10px">{{data?.sr_no}}</span></td>
-                <td colspan="4" class="right">Date: <span style="padding-left: 10px">{{data?.date}}</span></td>
-            </tr>
-            <tr>
                 <td colspan="4">Name Of Work :- <span style="padding-left: 10px">{{data?.work_name}}</span></td>
                 <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px">{{data?.sampling_date}}</span></td>
             </tr>
@@ -4909,7 +4833,7 @@
             </tr>
             <tr>
                 <td colspan="4">Bond No. :- <span style="padding-left: 10px">{{data?.contract_bond_no}}</span></td>
-                <td colspan="4">Source :- <span style="padding-left: 10px">{{data?.source}}</span></td>
+                <td colspan="4">Chainage :- <span style="padding-left: 10px">{{data?.chainage}}</span></td>
             </tr>
             <tr>
                 <td colspan="8" class="center">
@@ -5041,10 +4965,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4">Sr No.: <span style="padding-left: 10px"></span></td>
-                <td colspan="4" class="right">Date: <span style="padding-left: 10px"></span></td>
-            </tr>
-            <tr>
                 <td colspan="4">Name Of Work :- <span style="padding-left: 10px"></span></td>
                 <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px"></span></td>
             </tr>
@@ -5054,7 +4974,7 @@
             </tr>
             <tr>
                 <td colspan="4">Bond No. :- <span style="padding-left: 10px"></span></td>
-                <td colspan="4">Source :- <span style="padding-left: 10px"></span></td>
+                <td colspan="4">Chainage :- <span style="padding-left: 10px"></span></td>
             </tr>
             <tr>
                 <td colspan="8" class="center">
@@ -5188,18 +5108,31 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7">Sr No.:</td>
-            <td colspan="7" class="right">Date: </td>
+            <td colspan="7">
+                Name of Work: <span class="data">{{ data?.work_name}}</span>
+            </td>
+            <td colspan="7">
+                Chainage: <span class="data">{{data?.chainage}}</span>
+            </td>
         </tr>
         <tr>
-            <td colspan="7">No. of Contractor: <span style="padding-left: 10px;">{{data?.contract_name}}</span></td>
-            <td colspan="7">C.B. No. & Date: <span style="padding-left: 10px;">{{data?.contract_bond_no}} ,
-                    {{data?.sampling_date}}</span></td>
+            <td colspan="7">
+                Date Of Sampling: <span class="data">{{ data?.sampling_date }}</span>
+            </td>
+            <td colspan="7">
+                Date Of Testing: <span class="data">{{ data?.testing_date }}</span>
+            </td>
         </tr>
         <tr>
-            <td style="width: 5%">Sr.No.</td>
-            <td style="width: 7%">Date</td>
-            <td style="width: 7%">Chainage</td>
+            <td colspan="7">
+                Contractor Name: <span class="data">{{ data?.contract_name }}</span>
+            </td>
+            <td colspan="7">
+                Contract Bond No.:
+                <span class="data">{{ data?.contract_bond_no }}</span>
+            </td>
+        </tr>
+        <tr>
             <td style="width: 10%">Weight of Cylinder and Innore sand</td>
             <td style="width: 8%">Wt.of mix in the hole</td>
             <td style="width: 10%">
@@ -5212,12 +5145,8 @@
             <td style="width: 7%">Density of mix 5/10</td>
             <td style="width: 8%">Density of mix as per job Mix Formula</td>
             <td style="width: 4%">Variation % density</td>
-            <td style="width: 4%">Remark</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td>{{data?.sampling_date}}</td>
-            <td>{{data?.chainage}}</td>
             <td>{{data?.weight1}}</td>
             <td>{{data?.weight2}}</td>
             <td>{{data?.weight3}}</td>
@@ -5228,7 +5157,6 @@
             <td>{{data?.mix_density}}</td>
             <td>{{data?.formula_density}}</td>
             <td>{{data?.variation_density}}</td>
-            <td>{{data?.form20_remarks}}</td>
         </tr>
         <tr>
             <td colspan="14">Remarks:- <span style="padding-left: 20px">{{data?.form20_remarks}}</span></td>
@@ -5243,17 +5171,31 @@
             </td>
         </tr>
         <tr>
-            <td colspan="7">Sr No.:</td>
-            <td colspan="7" class="right">Date: </td>
+            <td colspan="7">
+                Name of Work: <span class="data"></span>
+            </td>
+            <td colspan="7">
+                Chainage: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td colspan="7">No. of Contractor:</td>
-            <td colspan="7">C.B. No. & Date:</td>
+            <td colspan="7">
+                Date Of Sampling: <span class="data"></span>
+            </td>
+            <td colspan="7">
+                Date Of Testing: <span class="data"></span>
+            </td>
         </tr>
         <tr>
-            <td style="width: 5%">Sr.No.</td>
-            <td style="width: 7%">Date</td>
-            <td style="width: 7%">Chainage</td>
+            <td colspan="7">
+                Contractor Name: <span class="data"></span>
+            </td>
+            <td colspan="7">
+                Contract Bond No.:
+                <span class="data"></span>
+            </td>
+        </tr>
+        <tr>
             <td style="width: 10%">Weight of Cylinder and Innore sand</td>
             <td style="width: 8%">Wt.of mix in the hole</td>
             <td style="width: 10%">
@@ -5266,13 +5208,8 @@
             <td style="width: 7%">Density of mix 5/10</td>
             <td style="width: 8%">Density of mix as per job Mix Formula</td>
             <td style="width: 4%">Variation % density</td>
-            <td style="width: 4%">Remark</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -5285,7 +5222,7 @@
             <td></td>
         </tr>
         <tr>
-            <td colspan="14">Remarks:- </td>
+            <td colspan="14">Remarks:- <span style="padding-left: 20px"></span></td>
         </tr>
     </table>
     }
@@ -5311,10 +5248,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">Sr No.:</td>
-                <td colspan="4" class="right">Date: </td>
-            </tr>
-            <tr>
                 <td colspan="3">Name Of Work :- <span style="padding-left: 10px;">{{data?.work_name}}</span> </td>
                 <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px;">{{data?.sampling_date}}</span>
                 </td>
@@ -5325,7 +5258,7 @@
             </tr>
             <tr>
                 <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span> </td>
-                <td colspan="4">Source :- <span style="padding-left: 10px;">{{data?.chainage}}</span></td>
+                <td colspan="4">Chainage :- <span style="padding-left: 10px;">{{data?.chainage}}</span></td>
             </tr>
             <tr>
                 <td colspan="7" class="center">
@@ -5333,11 +5266,11 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 8%">Sr No.</td>
-                <td style="width: 32%">Characteristics</td>
-                <td colspan="3" style="width: 30%">Test Results</td>
-                <td style="width: 10%">Avg.</td>
-                <td style="width: 20%">Limit as per IS:73:1992</td>
+                <th style="width: 8%">Sr No.</th>
+                <th style="width: 32%">Characteristics</th>
+                <th colspan="3" style="width: 30%;text-align: center;">Test Results</th>
+                <th style="width: 10%">Avg.</th>
+                <th style="width: 20%">Limit as per IS:73:1992</th>
             </tr>
             <tr>
                 <td>1</td>
@@ -5399,10 +5332,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">Sr No.:</td>
-                <td colspan="4" class="right">Date: </td>
-            </tr>
-            <tr>
                 <td colspan="3">Name Of Work :-</td>
                 <td colspan="4">Date Of Sampling :-</td>
             </tr>
@@ -5412,7 +5341,7 @@
             </tr>
             <tr>
                 <td colspan="3">Bond No. :-</td>
-                <td colspan="4">Source :-</td>
+                <td colspan="4">Chainage :-</td>
             </tr>
             <tr>
                 <td colspan="7" class="center">
@@ -5420,11 +5349,11 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 8%">Sr No.</td>
-                <td style="width: 32%">Characteristics</td>
-                <td colspan="3" style="width: 30%">Test Results</td>
-                <td style="width: 10%">Avg.</td>
-                <td style="width: 20%">Limit as per IS:73:1992</td>
+                <th style="width: 8%">Sr No.</th>
+                <th style="width: 32%">Characteristics</th>
+                <th colspan="3" style="width: 30%;text-align: center;">Test Results</th>
+                <th style="width: 10%">Avg.</th>
+                <th style="width: 20%">Limit as per IS:73:1992</th>
             </tr>
             <tr>
                 <td>1</td>
@@ -5508,10 +5437,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">Sr No.: <span class="data">{{ i + 1 }}</span></td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="4">Name Of Work :-
                 <span style="padding-left: 10px">{{ data?.work_name }}</span>
             </td>
@@ -5531,7 +5456,7 @@
             <td colspan="4">Bond No. :-
                 <span style="padding-left: 10px">{{ data?.contract_bond_no }}</span>
             </td>
-            <td colspan="4">Source :- <span style="padding-left: 10px">{{ data?.chainage }}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 10px">{{ data?.chainage }}</span></td>
         </tr>
         <tr>
             <td colspan="8" class="center">
@@ -5752,10 +5677,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">Sr No.: </td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="4">Name Of Work :-
             </td>
             <td colspan="4">Date Of Sampling :-
@@ -5770,7 +5691,7 @@
         <tr>
             <td colspan="4">Bond No. :-
             </td>
-            <td colspan="4">Source :-
+            <td colspan="4">Chainage :-
 
             </td>
         </tr>
@@ -5920,10 +5841,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.: <span style="padding-left: 10px;">{{data?.sr_no}}</span></td>
-            <td colspan="4" class="right">Date: <span style="padding-left: 10px;">{{data?.date}}</span></td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :- <span style="padding-left: 10px;">{{data?.work_name}}</span></td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px;">{{data?.sampling_date}}</span></td>
         </tr>
@@ -5933,7 +5850,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
+            <td colspan="4">Chainage :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -5946,16 +5863,16 @@
                 <table>
                     <tr>
                         <td colspan="7" class="center">
-                            <h2>(BC-I)</h2>
+                            <h2>(DBM-I)</h2>
                         </td>
                     </tr>
                     <tr>
-                        <th style="width: 15%">Sieve size (mm)</th>
-                        <th style="width: 15%">Wt. Retained Gms.</th>
-                        <th style="width: 15%">Cum.Wt. Retained Gms.</th>
-                        <th style="width: 15%">% Cum.Wt. Retained</th>
-                        <th style="width: 15%">% Passing</th>
-                        <th style="width: 15%">Sp. Limit</th>
+                        <th style="width: 15%">I.S. Sieve Designation (mm)</th>
+                        <th style="width: 15%">Wt. Of Sample Retained (g)</th>
+                        <th style="width: 15%">Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Cumulative Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Percentage of Wt. Passing(%)</th>
+                        <th style="width: 15%">Grading Requirements of Aggregates as per MOPT & H table No.400-1(%)</th>
                     </tr>
                     <tr>
                         <td>45</td>
@@ -6029,16 +5946,16 @@
                 <table>
                     <tr>
                         <td colspan="7" class="center">
-                            <h2>(BC-II)</h2>
+                            <h2>(DBM-2)</h2>
                         </td>
                     </tr>
                     <tr>
-                        <th style="width: 15%">Sieve size (mm)</th>
-                        <th style="width: 15%">Wt. Retained Gms.</th>
-                        <th style="width: 15%">Cum.Wt. Retained Gms.</th>
-                        <th style="width: 15%">% Cum.Wt. Retained</th>
-                        <th style="width: 15%">% Passing</th>
-                        <th style="width: 15%">Sp. Limit</th>
+                        <th style="width: 15%">I.S. Sieve Designation (mm)</th>
+                        <th style="width: 15%">Wt. Of Sample Retained (g)</th>
+                        <th style="width: 15%">Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Cumulative Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Percentage of Wt. Passing(%)</th>
+                        <th style="width: 15%">Grading Requirements of Aggregates as per MOPT & H table No.400-1(%)</th>
                     </tr>
                     <tr>
                         <td>37.5</td>
@@ -6120,10 +6037,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.: <span style="padding-left: 10px;"></span></td>
-            <td colspan="4" class="right">Date: <span style="padding-left: 10px;"></span></td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :- <span style="padding-left: 10px;"></span></td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 10px;"></span></td>
         </tr>
@@ -6133,7 +6046,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 10px;"></span></td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Chainage :-</td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -6146,16 +6059,16 @@
                 <table>
                     <tr>
                         <td colspan="7" class="center">
-                            <h2>(BC-I)</h2>
+                            <h2>(DBM-I)</h2>
                         </td>
                     </tr>
-                    <tr>
-                        <th style="width: 15%">Sieve size (mm)</th>
-                        <th style="width: 15%">Wt. Retained Gms.</th>
-                        <th style="width: 15%">Cum.Wt. Retained Gms.</th>
-                        <th style="width: 15%">% Cum.Wt. Retained</th>
-                        <th style="width: 15%">% Passing</th>
-                        <th style="width: 15%">Sp. Limit</th>
+                   <tr>
+                        <th style="width: 15%">I.S. Sieve Designation (mm)</th>
+                        <th style="width: 15%">Wt. Of Sample Retained (g)</th>
+                        <th style="width: 15%">Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Cumulative Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Percentage of Wt. Passing(%)</th>
+                        <th style="width: 15%">Grading Requirements of Aggregates as per MOPT & H table No.400-1(%)</th>
                     </tr>
                     <tr>
                         <td>45</td>
@@ -6230,16 +6143,16 @@
                 <table>
                     <tr>
                         <td colspan="7" class="center">
-                            <h2>(BC-II)</h2>
+                            <h2>(DBM-II)</h2>
                         </td>
                     </tr>
                     <tr>
-                        <th style="width: 15%">Sieve size (mm)</th>
-                        <th style="width: 15%">Wt. Retained Gms.</th>
-                        <th style="width: 15%">Cum.Wt. Retained Gms.</th>
-                        <th style="width: 15%">% Cum.Wt. Retained</th>
-                        <th style="width: 15%">% Passing</th>
-                        <th style="width: 15%">Sp. Limit</th>
+                        <th style="width: 15%">I.S. Sieve Designation (mm)</th>
+                        <th style="width: 15%">Wt. Of Sample Retained (g)</th>
+                        <th style="width: 15%">Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Cumulative Percent of Wt. Retained(%)</th>
+                        <th style="width: 15%">Percentage of Wt. Passing(%)</th>
+                        <th style="width: 15%">Grading Requirements of Aggregates as per MOPT & H table No.400-1(%)</th>
                     </tr>
                     <tr>
                         <td>37.5</td>
@@ -6346,10 +6259,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span> </td>
             <td colspan="4">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
@@ -6359,7 +6268,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="4">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="4">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -6372,10 +6281,10 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 40%">Description</td>
-            <td style="width: 20%">Sample 1</td>
-            <td style="width: 20%">Sample 2</td>
-            <td style="width: 20%">Sample 3</td>
+            <th style="width: 40%">Description</th>
+            <th style="width: 20%">Sample 1</th>
+            <th style="width: 20%">Sample 2</th>
+            <th style="width: 20%">Sample 3</th>
         </tr>
         <tr>
             <td>Density as per JBF........=...</td>
@@ -6436,10 +6345,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">Sr No.:</td>
-            <td colspan="4" class="right">Date: </td>
-        </tr>
-        <tr>
             <td colspan="3">Name Of Work :-</td>
             <td colspan="4">Date Of Sampling :-</td>
         </tr>
@@ -6449,7 +6354,7 @@
         </tr>
         <tr>
             <td colspan="3">Bond No. :-</td>
-            <td colspan="4">Source :-</td>
+            <td colspan="4">Chainage :-</td>
         </tr>
         <tr>
             <td colspan="7" class="center">
@@ -6462,10 +6367,10 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 40%">Description</td>
-            <td style="width: 20%">Sample 1</td>
-            <td style="width: 20%">Sample 2</td>
-            <td style="width: 20%">Sample 3</td>
+            <th style="width: 40%">Description</th>
+            <th style="width: 20%">Sample 1</th>
+            <th style="width: 20%">Sample 2</th>
+            <th style="width: 20%">Sample 3</th>
         </tr>
         <tr>
             <td>Density as per JBF........=...</td>
@@ -6534,12 +6439,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">
-                Sr No.: <span class="data">{{ i + 1 }}</span>
-            </td>
-            <td colspan="5" class="right">Date: <span class=""></span></td>
-        </tr>
-        <tr>
             <td colspan="4">Name Of Work :- <span style="padding-left: 20px;">{{data?.work_name}}</span></td>
             <td colspan="5">Date Of Sampling :- <span style="padding-left: 20px;">{{data?.sampling_date}}</span></td>
         </tr>
@@ -6549,7 +6448,7 @@
         </tr>
         <tr>
             <td colspan="4">Bond No. :- <span style="padding-left: 20px;">{{data?.contract_bond_no}}</span></td>
-            <td colspan="5">Source :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
+            <td colspan="5">Chainage :- <span style="padding-left: 20px;">{{data?.chainage}}</span></td>
         </tr>
         <tr>
             <th rowspan="2" style="width: 12%">Sieve size (mm)</th>
@@ -6673,10 +6572,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">Sr No.:</td>
-            <td colspan="5" class="right">Date:</td>
-        </tr>
-        <tr>
             <td colspan="4">Name Of Work :-</td>
             <td colspan="5">Date Of Sampling :-</td>
         </tr>
@@ -6686,7 +6581,7 @@
         </tr>
         <tr>
             <td colspan="4">Bond No. :-</td>
-            <td colspan="5">Source :-</td>
+            <td colspan="5">Chainage :-</td>
         </tr>
         <tr>
             <th rowspan="2" style="width: 12%">Sieve size (mm)</th>
@@ -7108,20 +7003,20 @@
                 <th colspan="1">Remarks/Cube Records</th>
             </tr>
             @for(item of [1,2,3,4,5,6]; track item) {
-                <tr>
-                    <td colspan="1">{{ data['si_no' + item] }}</td>
-                    <td colspan="1">{{data['tm_no' + item]}}</td>
-                    <td colspan="1">{{data['mix_no' + item]}}</td>
-                    <td colspan="1">{{data['volume' + item]}}</td>
-                    <td colspan="1">{{data['cumm_volume' + item]}}</td>
-                    <td colspan="1">{{data['arrival' + item]}}</td>
-                    <td colspan="1">{{data['slump' + item]}}</td>
-                    <td colspan="1">{{data['concrete' + item]}}</td>
-                    <td colspan="1">{{data['ambient' + item]}}</td>
-                    <td colspan="1">{{data['start_time' + item]}}</td>
-                    <td colspan="1">{{data['finish_time' + item]}}</td>
-                    <td colspan="1">{{data['remark' + item]}}</td>
-                </tr>
+            <tr>
+                <td colspan="1">{{ data['si_no' + item] }}</td>
+                <td colspan="1">{{data['tm_no' + item]}}</td>
+                <td colspan="1">{{data['mix_no' + item]}}</td>
+                <td colspan="1">{{data['volume' + item]}}</td>
+                <td colspan="1">{{data['cumm_volume' + item]}}</td>
+                <td colspan="1">{{data['arrival' + item]}}</td>
+                <td colspan="1">{{data['slump' + item]}}</td>
+                <td colspan="1">{{data['concrete' + item]}}</td>
+                <td colspan="1">{{data['ambient' + item]}}</td>
+                <td colspan="1">{{data['start_time' + item]}}</td>
+                <td colspan="1">{{data['finish_time' + item]}}</td>
+                <td colspan="1">{{data['remark' + item]}}</td>
+            </tr>
             }
             <tr>
                 <td colspan="12">
@@ -7214,20 +7109,20 @@
                 <th colspan="1">Remarks/Cube Records</th>
             </tr>
             @for(item of [1,2,3,4,5,6]; track item) {
-                <tr>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
-                </tr>
+            <tr>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+                <td colspan="1"></td>
+            </tr>
             }
             <tr>
                 <td colspan="12">
