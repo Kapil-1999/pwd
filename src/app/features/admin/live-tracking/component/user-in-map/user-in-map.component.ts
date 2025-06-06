@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { distinctUntilChanged, filter, Observable, scan, take, takeWhile, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../../core/app.reducer';
-import { allvehicleData, setSelectedUser, setUserCountData } from '../../../../../core/app.selector';
-import { selectedUser, selectedUserArea, selectedVehicleData, setShowUserList } from '../../../../../core/app.action';
+import { allvehicleData, setSelectedUser, setTypeUserOnMap, setUserCountData } from '../../../../../core/app.selector';
+import { selectedUser, selectedUserArea, selectedVehicleData, setShowUserList, setTypeUser } from '../../../../../core/app.action';
 import { NotificationService } from '../../../../shared/services/notification.service';
 
 @Component({
@@ -41,14 +41,15 @@ export class UserInMapComponent {
   selectedUserValue: any;
   attempts = 0;
   isDataReceived = false;
+  selectedType :any;
 
   constructor(
     private commonService: CommonService,
     private fb: FormBuilder,
     private store: Store<AppState>,
     private cdRef: ChangeDetectorRef,
-    private notificationService : NotificationService
-    ) {
+    private notificationService: NotificationService
+  ) {
     this.newVehicle$ = this.store.select(allvehicleData)
     this.newVehicle$.subscribe({
       next: (user) => {
@@ -80,6 +81,13 @@ export class UserInMapComponent {
         }, { isDataReceived: false })
       )
       .subscribe();
+
+    this.store.select(setTypeUserOnMap).subscribe((res: any) => {
+      if (res) {
+        this.selectedType = res;
+      }
+
+    })
   }
 
   ngOnInit() {
@@ -263,23 +271,23 @@ export class UserInMapComponent {
     }
   }
 
-  onSelectuser(item: any) {    
+  onSelectuser(item: any) {
     if (!item || (!item?.latitude && !item?.longitude)) {
       this.store.dispatch(setShowUserList({ showUserList: true }));
-      this.store.dispatch(selectedUser({selectedUser: null}))
+      this.store.dispatch(selectedUser({ selectedUser: null }))
       return;
-    }    
+    }
     this.store.dispatch(selectedVehicleData({ selectedVehicle: item }));
     this.store.dispatch(setShowUserList({ showUserList: false }));
   }
 
 
-  getUserData() {    
+  getUserData() {
     if (!this.allUserCountData || !this.selectuser?.user_id) {
       console.log("User data or selected user is missing!");
       return;
     };
-    
+
     let selected: any = this.allUserCountData && this.allUserCountData?.find((res: any) => res?.user_id == this.selectuser?.user_id)
     if (selected) {
       this.onSelectuser(selected);
@@ -287,7 +295,8 @@ export class UserInMapComponent {
   }
 
   showContent: boolean = true;
-  toggleContent() {
+  toggleContent() {    
+    this.store.dispatch(setTypeUser({ typeUser: this.selectedType }));
     this.showContent = !this.showContent;
   }
 }
