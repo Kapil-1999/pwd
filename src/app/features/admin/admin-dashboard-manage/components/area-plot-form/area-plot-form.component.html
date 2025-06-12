@@ -4564,74 +4564,74 @@
             <tr>
                 <td>63</td>
                 <td>50</td>
-                <td>{{data?.aggregate_taken63}}</td>
-                <td>{{data?.aggregate_retained63}}</td>
-                <td>{{data?.aggregate_passing63}}</td>
-                <td>{{data?.aggregate_lenght63}}</td>
-            </tr>
-            <tr>
-                <td>50</td>
-                <td>40</td>
                 <td>{{data?.aggregate_taken50}}</td>
                 <td>{{data?.aggregate_retained50}}</td>
                 <td>{{data?.aggregate_passing50}}</td>
                 <td>{{data?.aggregate_lenght50}}</td>
             </tr>
             <tr>
+                <td>50</td>
                 <td>40</td>
-                <td>31.5</td>
                 <td>{{data?.aggregate_taken40}}</td>
                 <td>{{data?.aggregate_retained40}}</td>
                 <td>{{data?.aggregate_passing40}}</td>
                 <td>{{data?.aggregate_lenght40}}</td>
             </tr>
             <tr>
+                <td>40</td>
                 <td>31.5</td>
-                <td>25</td>
-                <td>{{data?.aggregate_taken315}}</td>
+                 <td>{{data?.aggregate_taken315}}</td>
                 <td>{{data?.aggregate_retained315}}</td>
                 <td>{{data?.aggregate_passing315}}</td>
                 <td>{{data?.aggregate_lenght315}}</td>
             </tr>
             <tr>
+                <td>31.5</td>
                 <td>25</td>
-                <td>20</td>
                 <td>{{data?.aggregate_taken25}}</td>
                 <td>{{data?.aggregate_retained25}}</td>
                 <td>{{data?.aggregate_passing25}}</td>
                 <td>{{data?.aggregate_lenght25}}</td>
             </tr>
             <tr>
+                <td>25</td>
                 <td>20</td>
-                <td>16</td>
                 <td>{{data?.aggregate_taken20}}</td>
                 <td>{{data?.aggregate_retained20}}</td>
                 <td>{{data?.aggregate_passing20}}</td>
                 <td>{{data?.aggregate_lenght20}}</td>
             </tr>
             <tr>
+                <td>20</td>
                 <td>16</td>
-                <td>12.5</td>
                 <td>{{data?.aggregate_taken16}}</td>
                 <td>{{data?.aggregate_retained16}}</td>
                 <td>{{data?.aggregate_passing16}}</td>
                 <td>{{data?.aggregate_lenght16}}</td>
             </tr>
             <tr>
+                <td>16</td>
                 <td>12.5</td>
-                <td>10</td>
                 <td>{{data?.aggregate_taken125}}</td>
                 <td>{{data?.aggregate_retained125}}</td>
                 <td>{{data?.aggregate_passing125}}</td>
                 <td>{{data?.aggregate_lenght125}}</td>
             </tr>
             <tr>
+                <td>12.5</td>
                 <td>10</td>
-                <td>6.3</td>
-                <td>{{data?.aggregate_taken10}}</td>
+                 <td>{{data?.aggregate_taken10}}</td>
                 <td>{{data?.aggregate_retained10}}</td>
                 <td>{{data?.aggregate_passing10}}</td>
                 <td>{{data?.aggregate_lenght10}}</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>6.3</td>
+                 <td>{{data?.aggregate_taken63}}</td>
+                <td>{{data?.aggregate_retained63}}</td>
+                <td>{{data?.aggregate_passing63}}</td>
+                <td>{{data?.aggregate_lenght63}}</td>
             </tr>
             <tr>
                 <td>Total(gm)</td>
@@ -5615,10 +5615,10 @@
                         <td>
                             <span style="padding-left: 10px">{{ data?.jmf1 }}</span>
                         </td>
-                        <td>Nominal size Aggregate=
+                        <td>
                             <span style="padding-left: 10px">{{ data?.grading1_a }}</span>
                         </td>
-                        <td>Nominal size Aggregate=
+                        <td>
                             <span style="padding-left: 10px">{{ data?.grading2_a }}</span>
                         </td>
                     </tr>
@@ -5641,10 +5641,10 @@
                         <td>
                             <span style="padding-left: 10px">{{ data?.jmf2 }}</span>
                         </td>
-                        <td>Layer thickness =
+                        <td>
                             <span style="padding-left: 10px">{{ data?.grading1_b }}</span>
                         </td>
-                        <td>Layer thickness =
+                        <td>
                             <span style="padding-left: 10px">{{ data?.grading2_b }}</span>
                         </td>
                     </tr>
@@ -6749,16 +6749,17 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="6">Name of Structure: <span style="padding-left: 10px">{{ data?.work_name }}</span></td>
-                <td colspan="6">Date: <span style="padding-left: 10px">{{ data?.testing_date }}</span></td>
+                <td colspan="6">Name Of Work :- <span style="padding-left: 10px;">{{data?.work_name}}</span></td>
+                <td colspan="6">Date Of Sampling :- <span style="padding-left: 10px;">{{data?.sampling_date}}</span>
+                </td>
             </tr>
             <tr>
-                <td colspan="6">Location:</td>
-                <td colspan="6">Concrete Grade:</td>
+                <td colspan="6">Contractor :- <span style="padding-left: 10px;">{{data?.contract_name}}</span></td>
+                <td colspan="6">Date Of Testing :- <span style="padding-left: 10px;">{{data?.testing_date}}</span></td>
             </tr>
             <tr>
-                <td colspan="6">Parts of Structure:</td>
-                <td colspan="6">W/C Ratio:</td>
+                <td colspan="6">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span></td>
+                <td colspan="6">Chainage :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
             </tr>
             <tr>
                 <td colspan="6" style="text-align: center; padding-top: 10px;">
@@ -6862,16 +6863,17 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="6">Name of Structure:</td>
-                <td colspan="6">Date:</td>
+                <td colspan="6">Name Of Work :- <span style="padding-left: 10px;"></span></td>
+                <td colspan="6">Date Of Sampling :- <span style="padding-left: 10px;"></span>
+                </td>
             </tr>
             <tr>
-                <td colspan="6">Location:</td>
-                <td colspan="6">Concrete Grade:</td>
+                <td colspan="6">Contractor :- <span style="padding-left: 10px;"></span></td>
+                <td colspan="6">Date Of Testing :- <span style="padding-left: 10px;"></span></td>
             </tr>
             <tr>
-                <td colspan="6">Parts of Structure:</td>
-                <td colspan="6">W/C Ratio:</td>
+                <td colspan="6">Bond No. :- <span style="padding-left: 10px;"></span></td>
+                <td colspan="6">Chainage :- <span style="padding-left: 10px;"></span> </td>
             </tr>
             <tr>
                 <td colspan="6" style="text-align: center; padding-top: 10px;">
@@ -6956,6 +6958,19 @@
                 <td colspan="12" style="text-align: center;">
                     <h3>CONCRETE POUR CARD</h3>
                 </td>
+            </tr>
+             <tr>
+                <td colspan="6">Name Of Work :- <span style="padding-left: 10px;">{{data?.work_name}}</span></td>
+                <td colspan="6">Date Of Sampling :- <span style="padding-left: 10px;">{{data?.sampling_date}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">Contractor :- <span style="padding-left: 10px;">{{data?.contract_name}}</span></td>
+                <td colspan="6">Date Of Testing :- <span style="padding-left: 10px;">{{data?.testing_date}}</span></td>
+            </tr>
+            <tr>
+                <td colspan="6">Bond No. :- <span style="padding-left: 10px;">{{data?.contract_bond_no}}</span></td>
+                <td colspan="6">Chainage :- <span style="padding-left: 10px;">{{data?.chainage}}</span> </td>
             </tr>
             <tr>
                 <td colspan="2" style="border-right: none"><strong>Concrete Grade</strong></td>
@@ -7062,6 +7077,19 @@
                 <td colspan="12" style="text-align: center;">
                     <h3>CONCRETE POUR CARD</h3>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="6">Name Of Work :- <span style="padding-left: 10px;"></span></td>
+                <td colspan="6">Date Of Sampling :- <span style="padding-left: 10px;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">Contractor :- <span style="padding-left: 10px;"></span></td>
+                <td colspan="6">Date Of Testing :- <span style="padding-left: 10px;"></span></td>
+            </tr>
+            <tr>
+                <td colspan="6">Bond No. :- <span style="padding-left: 10px;"></span></td>
+                <td colspan="6">Chainage :- <span style="padding-left: 10px;"></span> </td>
             </tr>
             <tr>
                 <td colspan="2" style="border-right: none"><strong>Concrete Grade</strong></td>
